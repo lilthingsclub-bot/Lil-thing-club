@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lil Things Club | Handmade Cute Gifts & Crafts</title>
+ <meta name="description" content="Shop cute handmade stickers, crochet keychains, stationery, and DIY craft kits at Lil Things Club—tiny treasures made with love.">
+
+  <!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico:wght@300;400;500;600;700&family=Shrikhand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo 2:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ 
+
+
+ <header class="nav-bar scallop">
+  
+  <!-- HAMBURGER BUTTON -->
+  <button id="hamburger" class="hamburger" aria-label="Open menu">☰</button>
+
+  <!-- SLIDE-IN MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-menu">
+
+    <button id="closeMenu" class="close-menu">×</button>
+
+ 
+<a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="sp.html">Shipping Policy</a>
+    
+    
+     <div class="dropdown">
+      <button class="dropbtn">Shop ▼</button>
+      <div class="dropdown-content">
+        <a href="all-product.html">All Products</a>
+        <a href="stickers-land.html">Sticker land</a>
+        <a href="crochet.html">Crochet cuties </a>
+        <a href="stationery.html">Stationery Wonderland</a>
+        <a href="phone-candy.html">Phone Candy</a>
+ 
+      </div>
+    </div>
+  
+  
+  </div>
+
+  <!-- LEFT NAV (desktop only) -->
+  <nav class="left-nav desktop-only">
+    <a href="about-us.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="sp.html">Shipping Policy</a>
+  </nav>
+
+  <!-- LOGO -->
+  <div class="middle-nav">
+    <a class="logo" href="index.html">
+      <img src="asset/logo.png" alt="logo">
+    </a>
+  </div>
+
+  <!-- RIGHT NAV -->
+  <nav class="right-nav">
+
+    <!-- SHOP DROPDOWN -->
+    <div class="dropdown desktop-only">
+      <button class="dropbtn">Shop ▼</button>
+      <div class="dropdown-content">
+        <a href="all-product.html">All Products</a>
+        <a href="stickers-land.html">Sticker land</a>
+        <a href="crochet.html">Crochet cuties </a>
+        <a href="stationery.html">Stationery Wonderland</a>
+        <a href="phone-candy.html">Phone Candy</a>
+ 
+      </div>
+    </div>
+
+ 
+
+    <!-- CART ICON -->
+    <a class="icon-btn" href="cart.html">
+      <img src="asset/cart.png" alt="cart">
+      <span id="cartCount" class="cart-count">0</span>
+    </a>
+
+  </nav>
+</header>
+
+
+
+<section class="cart-section">
+
+<h1 class="cart-title">Cart</h1>
+
+<div id="cartEmpty" class="cart-empty hidden">
+  <p>Your cart is empty 💔</p>
+  <a href="all-product.html" class="continue-btn">Continue Shopping</a>
+</div>
+
+<div id="cartPage" class="cart-page hidden">
+
+  <div class="cart-left">
+    <div class="cart-header">
+      <span>Product</span>
+      <span>Quantity</span>
+      <span>Total</span>
+      <span>Delete</span>
+    </div>
+
+    <div id="cartItems"></div>
+  </div>
+
+  <div class="cart-right">
+    <h2>Order Summary</h2>
+
+    <div class="promo">
+      <input type="promo" placeholder="Enter code">
+      <button>Enter</button>
+    </div>
+
+    <div class="summary-row">
+      <span>Sub total.</span>
+      <span id="subTotal">$0.00</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Discount</span>
+      <span>$0</span>
+    </div>
+
+    <hr>
+
+    <div class="summary-row total">
+      <span>Total.</span>
+      <span id="grandTotal">$0.00</span>
+    </div>
+
+    <p class="note">Coupon,Shipping & taxes <br>calculated at checkout</p>
+
+    <a href="checkout.html"><button class="checkout">Check Out</button>
+  </div></a>
+
+</div>
+
+</section>
+
+
+
+
+
+
+<section class="new-signup">
+
+  <div class="left-sector">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="sp.html">Shipping Policy</a>
+  </div>
+
+  <div class="middle-sector">
+    <h4>All items are handmade and packed with love to comfort your inner child</h4>
+  </div>
+
+  <div class="right-sector">
+    <h2>Let’s Keep In Touch 💌</h2>
+
+    <form id="signup-form" action="https://formsubmit.co/lilthing.club@gmail.com" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+
+    <p id="thanks-message" style="display:none; color: green; font-weight: bold;">
+      Thanks for subscribing!
+    </p>
+  </div>
+
+  <div class="bottom-line">
+    <h2>Tag Us On Social Media</h2>
+
+    <a href="https://www.instagram.com/lilthings.club/" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://tiktok.com/" target="_blank" aria-label="TikTok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://www.youtube.com/@LilThingsClub" target="_blank" aria-label="Youtube">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://www.pinterest.com/lilthingsclub/" target="_blank" aria-label="Pinterest">
+      <i class="fab fa-pinterest"></i>
+    </a>
+  </div>
+
+</section>
+
+<section class="thank-you">
+ <p>
+   Thank you for visiting Lil Things Club. Hope your snail mail brings warmth to your heart 💖<br>
+   ꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆
+ </p>
+</section>
+
+<script src="script.js"></script>
+
+<script src="cart.js"></script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90");
+
+document.getElementById("checkoutBtn").addEventListener("click", async () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const res = await fetch("/.netlify/functions/create-checkout", {
+    method: "POST",
+    body: JSON.stringify({ cart })
+  });
+
+  const data = await res.json();
+  stripe.redirectToCheckout({ sessionId: data.id });
+});
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Lil Things Club</title>
+  <script src="https://js.stripe.com/v3/"></script>
+ <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<main class="checkout-container">
+
+  <h1>Checkout 🧺</h1>
+<div id="cartPage" class="cart-page hidden">
+   <div id="cartItems"></div>
+  </div>
+
+ <div class="promo">
+      <input type="promo" placeholder="Enter code">
+      <button>Enter</button>
+    </div>
+
+  <div class="summary-row">
+    <p>Total: <span id="total">$0.00</span></p>
+  </div>
+
+  <form id="payment-form">
+    <div id="card-element"></div>
+    <button id="pay-btn">Pay Now ✨</button>
+    <p id="error-message"></p>
+  </form>
+
+</main>
+
+<script src="checkout.js"></script>
+</body>
+</html>
+
