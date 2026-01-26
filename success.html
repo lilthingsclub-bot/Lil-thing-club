@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Success | Lil Things Club</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: 2rem auto; padding: 1rem; }
+    h1 { color: #ff69b4; }
+    .order-summary { border: 1px solid #ddd; padding: 1rem; border-radius: 10px; }
+    .summary-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .summary-line { display: flex; justify-content: space-between; font-weight: bold; margin-top: 1rem; }
+    .summary-line.total { font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Thank you for your order!</h1>
+  <p>Your order has been successfully placed. Here’s a summary:</p>
+
+  <section class="order-summary" id="order-summary">
+    <h2>Order Summary</h2>
+    <div id="items"></div>
+
+    <div class="summary-line">
+      <span>Subtotal</span>
+      <span id="subtotal"></span>
+    </div>
+
+    <div class="summary-line">
+      <span>Shipping</span>
+      <span id="shipping"></span>
+    </div>
+
+    <div class="summary-line">
+      <span>Discount</span>
+      <span id="discount"></span>
+    </div>
+
+    <div class="summary-line">
+      <span>Tax</span>
+      <span id="tax"></span>
+    </div>
+
+    <div class="summary-line total">
+      <span>Total</span>
+      <span id="total"></span>
+    </div>
+
+    <div class="summary-line">
+      <span>Shipping Method</span>
+      <span id="shipping-method"></span>
+    </div>
+
+    <div class="summary-line">
+      <span>Destination</span>
+      <span id="destination"></span>
+    </div>
+  </section>
+
+  <script>
+    const order = JSON.parse(localStorage.getItem("lastOrder"));
+
+    if (!order) {
+      document.getElementById("order-summary").innerHTML = "<p>No order found. Please return to the shop.</p>";
+    } else {
+      const itemsEl = document.getElementById("items");
+
+      order.items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "summary-item";
+        div.innerHTML = `
+          <span>${item.name} × ${item.qty}</span>
+          <span>$${(item.price * item.qty).toFixed(2)}</span>
+        `;
+        itemsEl.appendChild(div);
+      });
+
+      document.getElementById("subtotal").textContent = `$${order.subtotal.toFixed(2)}`;
+      document.getElementById("shipping").textContent = order.shipping === 0 ? "FREE 💕" : `$${order.shipping.toFixed(2)}`;
+      document.getElementById("discount").textContent = order.discount ? `-$${order.discount.toFixed(2)}` : "$0.00";
+
+      const tax = order.country === "US" ? order.total - order.subtotal - order.shipping + order.discount : 0;
+      document.getElementById("tax").textContent = `$${tax.toFixed(2)}`;
+
+      document.getElementById("total").textContent = `$${order.total.toFixed(2)}`;
+      document.getElementById("shipping-method").textContent = order.shippingType;
+      document.getElementById("destination").textContent = `${order.state || ""}, ${order.country}`;
+    }
+
+    // Optional: clear cart and lastOrder after viewing
+    // localStorage.removeItem("cart");
+    // localStorage.removeItem("lastOrder");
+  </script>
+
+</body>
+</html>
