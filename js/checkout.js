@@ -64,16 +64,6 @@ cart.forEach(item => {
     const itemTotal = item.price * item.qty;
     subtotal += itemTotal;
 
-    cartItemsEl.innerHTML += `
-      <div class="order-items">
-          <img src="${item.image}">
-          <div>
-            <p>${item.name}</p>
-<small>Option: ${item.option || "Standard"}</small>
-          </div>
-        </div>
-         `;
-
 });
 
 
