@@ -43,135 +43,82 @@ async function initCheckout() {
 
 initCheckout();
 
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
-const itemsEl = document.getElementById("order-items");
-const totalEl = document.getElementById("order-total");
-const shippingEl = document.getElementById("shipping-cost");
-
-let subtotal = 0;
-
-cart.forEach(item => {
-  subtotal += item.price * item.qty;
-
-  const div = document.createElement("div");
-  div.className = "summary-item";
-  div.innerHTML = `
-    <span>${item.name} × ${item.qty}</span>
-    <span>$${(item.price * item.qty).toFixed(2)}</span>
-  `;
-  itemsEl.appendChild(div);
-});
 
 
+function calculateShipping(cart, method, country) {
+  const totalWeight = cart.reduce((sum, item) => sum + item.weight * item.qty, 0);
+  const hasNonSticker = cart.some(item => item.type !== "sticker");
+  const stickerCount = cart.filter(i => i.type === "sticker")
+                            .reduce((s, i) => s + i.qty, 0);
 
-
-const hasCrochet = cart.some(item =>
-  item.category?.includes("crochet")
-);
-
-const shipping = hasCrochet ? 6.0 : 1.5;
-shippingEl.textContent = `$${shipping.toFixed(2)}`;
-
-const total = subtotal + shipping;
-totalEl.textContent = `$${total.toFixed(2)}`;
-
-
-
-
-
-
-const appearance = {
-  theme: "flat",
-  variables: {
-    colorPrimary: "#ff66c4",
-    colorBackground: "#fff7fb",
-    colorText: "#5a2a42",
-    borderRadius: "12px",
-    fontFamily: "Nunito, sans-serif"
+  if (country !== "US") {
+    return 12.00; // placeholder international
   }
-};
 
-elements = stripe.elements({ appearance, clientSecret });
+  if (!hasNonSticker && stickerCount <= 4 && totalWeight < 1) {
+    if (method === "untracked") return 0.78;
+  }
 
+  // Tracked USPS-style tiers
+  if (totalWeight <= 4) return method === "expedited" ? 8.50 : 4.00;
+  if (totalWeight <= 8) return method === "expedited" ? 10.50 : 6.00;
 
-
-
-
-function getCartWeight(cart) {
-  return cart.reduce((sum, item) => {
-    return sum + (item.weight * item.qty);
-  }, 0);
+  return 12.00;
 }
 
 
-function getTrackedShippingByWeight(weightOz) {
-  if (weightOz <= 4) return 4.5;
-  if (weightOz <= 8) return 5.5;
-  if (weightOz <= 12) return 6.5;
-  return 8.5;
-}
 
 
-const STICKER_CATEGORIES = ["sticker-sheet", "vinyl-sticker"];
 
-const isStickerOnly = cart.every(item =>
-  STICKER_CATEGORIES.includes(item.category)
-);
+let tipAmount = 0;
 
-const totalStickerQty = cart
-  .filter(item => STICKER_CATEGORIES.includes(item.category))
-  .reduce((sum, item) => sum + item.qty, 0);
+document.querySelectorAll(".tip-options button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tip-options button")
+      .forEach(b => b.classList.remove("active"));
 
-const totalWeight = getCartWeight(cart);
+    btn.classList.add("active");
 
-let shippingOptions = [];
-let shippingCost = null;
-
-// Sticker-only logic
-if (isStickerOnly && totalStickerQty <= 4 && totalWeight <= 1) {
-  shippingOptions = [
-    { type: "untracked", label: "Untracked Letter (3–7 days)", cost: 0.78 },
-    { type: "tracked", label: "Tracked USPS First Class", cost: 4.5 }
-  ];
-} else {
-  shippingOptions = [
-    {
-      type: "tracked",
-      label: "Tracked USPS First Class",
-      cost: getTrackedShippingByWeight(totalWeight)
-    }
-  ];
-}
-
-
-const shippingContainer = document.getElementById("shipping-options");
-const payBtn = document.getElementById("payBtn");
-
-shippingOptions.forEach(option => {
-  const label = document.createElement("label");
-
-  label.innerHTML = `
-    <input type="radio" name="shipping" value="${option.cost}">
-    ${option.label} — $${option.cost.toFixed(2)}
-  `;
-
-  shippingContainer.appendChild(label);
-});
-
-
-document.querySelectorAll('input[name="shipping"]').forEach(radio => {
-  radio.addEventListener("change", e => {
-    shippingCost = parseFloat(e.target.value);
-
+    const percent = btn.innerText.replace("%", "");
+    tipAmount = percent === "None" ? 0 : subtotal * (percent / 100);
     updateTotal();
-    payBtn.disabled = false;
-    document.querySelector(".checkout-note").style.display = "none";
   });
 });
 
 
-function updateTotal() {
-  const total = subtotal + shippingCost;
-  totalEl.textContent = `$${total.toFixed(2)}`;
+
+const DISCOUNTS = {
+  "WELCOME10": 0.10,
+  "LILTHINGS": 5.00 // flat
+};
+
+function applyDiscount(code) {
+  if (!DISCOUNTS[code]) return 0;
+
+  return DISCOUNTS[code] < 1
+    ? subtotal * DISCOUNTS[code]
+    : DISCOUNTS[code];
 }
 
+
+let subtotal = 0;
+let shipping = 0;
+let discount = 0;
+let total = 0;
+
+function updateTotals() {
+  subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  total = subtotal - discount + shipping + tipAmount;
+
+  document.querySelector("#subtotal").innerText = subtotal.toFixed(2);
+  document.querySelector("#shipping").innerText = shipping.toFixed(2);
+  document.querySelector("#total").innerText = total.toFixed(2);
+}
+
+document.querySelectorAll("input[name='shipping']").forEach(radio => {
+  radio.addEventListener("change", () => {
+    shipping = calculateShipping(cart, radio.value, country);
+    document.querySelector(".pay-now").classList.add("enabled");
+    updateTotals();
+  });
+});
