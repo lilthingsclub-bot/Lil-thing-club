@@ -1,3 +1,10 @@
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if (cart.length === 0) {
+  window.location.href = "/cart.html";
+}
+
+
 console.log("✅ checkout.js loaded");
 
 const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90"); // your PUBLIC key
@@ -45,80 +52,114 @@ initCheckout();
 
 
 
-function calculateShipping(cart, method, country) {
-  const totalWeight = cart.reduce((sum, item) => sum + item.weight * item.qty, 0);
-  const hasNonSticker = cart.some(item => item.type !== "sticker");
-  const stickerCount = cart.filter(i => i.type === "sticker")
-                            .reduce((s, i) => s + i.qty, 0);
+function renderOrderSummary() {
+  const container = document.getElementById("order-items");
+  container.innerHTML = "";
 
-  if (country !== "US") {
-    return 12.00; // placeholder international
-  }
+  let subtotal = 0;
 
-  if (!hasNonSticker && stickerCount <= 4 && totalWeight < 1) {
-    if (method === "untracked") return 0.78;
-  }
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.qty;
+    subtotal += itemTotal;
 
-  // Tracked USPS-style tiers
-  if (totalWeight <= 4) return method === "expedited" ? 8.50 : 4.00;
-  if (totalWeight <= 8) return method === "expedited" ? 10.50 : 6.00;
+    container.innerHTML += `
+      <div class="order-item">
+        <img src="${item.image}">
+        <div class="info">
+          <p>${item.name}</p>
+          <small>Option: ${item.option || "Standard"}</small>
+          <div class="qty">
+            <span>Qty: ${item.qty}</span>
+          </div>
+        </div>
+        <div class="price">$${itemTotal.toFixed(2)}</div>
+      </div>
+    `;
+  });
 
-  return 12.00;
+  document.getElementById("summary-subtotal").textContent =
+    `$${subtotal.toFixed(2)}`;
+
+  updateTotals();
 }
 
 
+function getSubtotal() {
+  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
 
+
+function calculateShipping(method) {
+  const subtotal = getSubtotal();
+
+  const allStickers = cart.every(item =>
+    item.name.toLowerCase().includes("sticker")
+  );
+
+  if (allStickers) {
+    if (method === "untracked") return 0.78;
+    if (method === "standard") return 4.00;
+  }
+
+  // anything not sticker → tracked
+  if (method === "standard") return 5.50;
+  if (method === "expedited") return 9.50;
+
+  return 0;
+}
 
 
 let tipAmount = 0;
 
-document.querySelectorAll(".tip-options button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tip-options button")
-      .forEach(b => b.classList.remove("active"));
+function setTip(percent) {
+  tipAmount = getSubtotal() * percent;
+  updateTotals();
+}
 
-    btn.classList.add("active");
-
-    const percent = btn.innerText.replace("%", "");
-    tipAmount = percent === "None" ? 0 : subtotal * (percent / 100);
-    updateTotal();
-  });
-});
+function setCustomTip(amount) {
+  tipAmount = Math.max(0, amount);
+  updateTotals();
+}
 
 
-
-const DISCOUNTS = {
-  "WELCOME10": 0.10,
-  "LILTHINGS": 5.00 // flat
-};
+let discount = 0;
 
 function applyDiscount(code) {
-  if (!DISCOUNTS[code]) return 0;
+  const subtotal = getSubtotal();
 
-  return DISCOUNTS[code] < 1
-    ? subtotal * DISCOUNTS[code]
-    : DISCOUNTS[code];
+  if (code === "WELCOME10") {
+    discount = subtotal * 0.10;
+  } else {
+    discount = 0;
+  }
+
+  updateTotals();
 }
 
-
-let subtotal = 0;
-let shipping = 0;
-let discount = 0;
-let total = 0;
 
 function updateTotals() {
-  subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  total = subtotal - discount + shipping + tipAmount;
+  const subtotal = getSubtotal();
+  const shipping = selectedShippingPrice || 0;
 
-  document.querySelector("#subtotal").innerText = subtotal.toFixed(2);
-  document.querySelector("#shipping").innerText = shipping.toFixed(2);
-  document.querySelector("#total").innerText = total.toFixed(2);
+  const total = subtotal + shipping + tipAmount - discount;
+
+  document.getElementById("summary-subtotal").textContent =
+    `$${subtotal.toFixed(2)}`;
+
+  document.getElementById("summary-shipping").textContent =
+    `$${shipping.toFixed(2)}`;
+
+  document.getElementById("summary-tip").textContent =
+    `$${tipAmount.toFixed(2)}`;
+
+  document.getElementById("summary-total").textContent =
+    `$${total.toFixed(2)}`;
 }
 
-document.querySelectorAll("input[name='shipping']").forEach(radio => {
-  radio.addEventListener("change", () => {
-    shipping = calculateShipping(cart, radio.value, country);
-    document.querySelector(".pay-now").classList.add("enabled");
-    updateTotals();
-  });
-});
+
+localStorage.removeItem("cart");
+window.location.href = "/thank-you.html";
+
+
+
+
