@@ -9,6 +9,7 @@ const PRODUCTS = {
     name: "Yummy Fry Egg Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+    weight: 0.3, // ounces
 
     images: [
       "images/22.png",
@@ -33,25 +34,29 @@ planners, laptops, and pen pal letters.
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.50,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.00,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 11.50,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 18.50,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -63,6 +68,7 @@ planners, laptops, and pen pal letters.
     name: "Lucky Charms Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/47.png",
@@ -87,25 +93,29 @@ Kawaii Lucky Charm Sticker Sheet ✨ A pastel sticker sheet featuring four-leaf 
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.79,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.58,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 12.87,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 21.29,
-       stock: 10
+       stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -118,7 +128,7 @@ Kawaii Lucky Charm Sticker Sheet ✨ A pastel sticker sheet featuring four-leaf 
     name: "Cherry Cherry Sweet Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
-
+     weight: 0.3, // ounces
     images: [
       "images/19.png",
       "images/20.png",
@@ -142,25 +152,29 @@ Each sheet is filled with adorable cherries, hearts, bows, and blossom-faced che
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.79,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.58,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 12.87,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 21.29,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -173,6 +187,7 @@ Each sheet is filled with adorable cherries, hearts, bows, and blossom-faced che
     name: "Lucky Day Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/31.png",
@@ -197,25 +212,29 @@ Spread good vibes and sprinkle a little luck on your journal, planner, or letter
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 5.99,
-        stock: 10
+        stock: 10,
+        weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 10.98,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 16.47,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 27.95,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -227,6 +246,7 @@ Spread good vibes and sprinkle a little luck on your journal, planner, or letter
     name: "Apple and Worm Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/36.png",
@@ -252,25 +272,29 @@ Add a touch of quirky cuteness to your day with this original Apple and Worm sti
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 5.99,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 10.98,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 16.47,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 27.95,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -283,6 +307,7 @@ Add a touch of quirky cuteness to your day with this original Apple and Worm sti
     name: "Doodle Paradise Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/34.png",
@@ -308,25 +333,29 @@ Step into a dreamy doodle world! This playful sticker sheet is filled with sweet
         id: "sheet-1",
         label: "Sticker Sheet",
         price: 5.99,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheets",
         price: 10.98,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheets",
         price: 16.47,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 27.95,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -337,6 +366,7 @@ Step into a dreamy doodle world! This playful sticker sheet is filled with sweet
     name: "Pastel Angle Dream Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/1.png",
@@ -363,25 +393,29 @@ Designed with love by Lil Things Club, this sheet is all about gentle colors, co
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.79,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.58,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 12.87,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 21.29,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -392,6 +426,7 @@ Designed with love by Lil Things Club, this sheet is all about gentle colors, co
     name: "Good Luck Charm Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/4.png",
@@ -418,25 +453,29 @@ Designed with love by Lil Things Club, this sheet is all about gentle colors, co
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.79,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.58,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 12.87,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 21.29,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -448,6 +487,7 @@ Designed with love by Lil Things Club, this sheet is all about gentle colors, co
     name: "Sushi🍣, Bento 🍱 Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/24.png",
@@ -474,25 +514,29 @@ Designed with love by Lil Things Club, this sheet is all about gentle colors, co
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.79,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.58,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 12.87,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 21.29,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -503,6 +547,7 @@ Designed with love by Lil Things Club, this sheet is all about gentle colors, co
     name: "Star Decor Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/26.png",
@@ -526,25 +571,29 @@ planners, laptops, and pen pal letters.
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 4.50,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 8.00,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 11.50,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 18.50,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -557,6 +606,7 @@ planners, laptops, and pen pal letters.
     name: "Lil Things Gang Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/39.png",
@@ -579,25 +629,29 @@ Add charm and personality to your journaling, planners, scrapbooks, and gifts wi
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 5.99,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 10.98,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 16.47,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 27.95,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -610,6 +664,7 @@ Add charm and personality to your journaling, planners, scrapbooks, and gifts wi
     name: "Lil Things Stamps Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/43.png",
@@ -633,25 +688,29 @@ Send cuteness in every note, journal page, or planner spread with this Lil Thing
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 5.99,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 10.98,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 16.47,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 27.95,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -664,6 +723,7 @@ Send cuteness in every note, journal page, or planner spread with this Lil Thing
     name: "Desert Paradise Sticker Sheet",
     brand: "Lil Things Club",
     category: "sticker-sheet",
+     weight: 0.3, // ounces
 
     images: [
       "images/45.png",
@@ -686,25 +746,29 @@ Send cuteness in every note, journal page, or planner spread with this Lil Thing
         id: "sheet-1",
         label: "1 Sticker Sheet",
         price: 5.99,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       },
       {
         id: "sheet-2",
         label: "2 Sticker Sheet",
         price: 10.98,
-        stock: 10
+        stock: 10,
+         weight: 0.6 // ounces
       },
       {
         id: "sheet-3",
         label: "3 Sticker Sheet",
         price: 16.47,
-        stock: 10
+        stock: 10,
+         weight: 0.9 // ounces
       },
       {
         id: "sheet-5",
         label: "5 Sticker Sheet",
         price: 27.95,
-        stock: 10
+        stock: 10,
+         weight: 1.5 // ounces
       }
     ]
    },
@@ -717,6 +781,7 @@ Send cuteness in every note, journal page, or planner spread with this Lil Thing
     name: "Oopsie Mystery Bag 🌱 Sticker Surprise Pack",
     brand: "Lil Things Club",
     category: "mystery-bag",
+     weight: 0.3, // ounces
 
     images: [
       "asset/31.jpg"
@@ -745,13 +810,15 @@ A surprise mix of adorable stickers with minor imperfections 💕, such as mispr
         id: "small-bag",
         label: "Small Mystery Bag",
         price: 4.50,
-        stock: 2
+        stock: 2,
+         weight: 1 // ounces
       },
       {
         id: "big-bag",
         label: "Big Mystery Bag",
         price: 7.50,
-        stock: 2
+        stock: 2,
+         weight: 1.5// ounces
       }
     ]
    },
@@ -767,6 +834,7 @@ A surprise mix of adorable stickers with minor imperfections 💕, such as mispr
     name: "Fairy Helper Sticker pack",
     brand: "Lil Things Club",
     category: "sticker-pack",
+   weight: 0.3, // ounces
 
     images: [
       "images/70.png",
@@ -793,7 +861,8 @@ This kawaii angel mini sticker pack features four original pastel characters fro
         id: "sticker-pack",
         label: "Sticker pack",
         price: 5.50,
-        stock: 10
+        stock: 10,
+         weight: 0.3 // ounces
       }
     ]
    },
@@ -811,6 +880,7 @@ This kawaii angel mini sticker pack features four original pastel characters fro
     name: "Onigiri Noodle Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+   weight: 0.2,// ounces
 
     images: [
       "images/60.png"
@@ -835,13 +905,15 @@ This adorable onigiri-inspired sticker brings cozy vibes and cuteness wherever i
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+        weight: 0.2 // ounces
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       }
     ]
    },
@@ -852,6 +924,7 @@ This adorable onigiri-inspired sticker brings cozy vibes and cuteness wherever i
     name: "Best of luck Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+     weight: 0.2, // ounces
 
     images: [
       "images/57.png"
@@ -875,7 +948,8 @@ Send some lucky vibes with this “Best of Luck” frog sticker! 🐸🍀 An ori
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       }
     ]
    },
@@ -886,6 +960,7 @@ Send some lucky vibes with this “Best of Luck” frog sticker! 🐸🍀 An ori
     name: "Dilly Dallying Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+   weight: 0.2, // ounces
 
     images: [
       "images/28.png",
@@ -911,13 +986,15 @@ Meet Dilly Dallying — a soft and sparkly bunny who loves to daydream and take 
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       }
     ]
    },
@@ -928,6 +1005,8 @@ Meet Dilly Dallying — a soft and sparkly bunny who loves to daydream and take 
     name: "Peace was never an option Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+   weight: 0.2, // ounces
+  
 
     images: [
       "images/16.png",
@@ -953,13 +1032,15 @@ A cute and chaotic kawaii chick holding a knife — the perfect sticker for peop
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       }
     ]
    },
@@ -970,6 +1051,7 @@ A cute and chaotic kawaii chick holding a knife — the perfect sticker for peop
     name: "Am that girl sassy Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+   weight: 0.2, // ounces
 
     images: [
       "images/7.png",
@@ -995,13 +1077,15 @@ Am That Girl. Am That Attitude.✨ A perfect sticker for your laptop, water bott
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       }
     ]
    },
@@ -1012,6 +1096,7 @@ Am That Girl. Am That Attitude.✨ A perfect sticker for your laptop, water bott
     name: "I am chalant - Noddle Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+   weight: 0.2, // ounces
 
     images: [
       "images/10.png",
@@ -1037,13 +1122,15 @@ Meet Noodle, the anxious little sweetheart who’s trying their best! 💦✨ Th
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+         weight: 0.2 // ounces
       }
     ]
    },
@@ -1054,6 +1141,7 @@ Meet Noodle, the anxious little sweetheart who’s trying their best! 💦✨ Th
     name: "Yapping 24/7 Vinyl Sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+   weight: 0.2, // ounces
 
     images: [
       "images/13.png",
@@ -1079,13 +1167,15 @@ This chatty little frog is Yapping 24/7! 🐸💬 Perfect for anyone who loves c
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+        weight: 0.2
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+        weight: 0.2
       }
     ]
    },
@@ -1096,6 +1186,7 @@ This chatty little frog is Yapping 24/7! 🐸💬 Perfect for anyone who loves c
     name: "Angle frog Vinyl sticker ",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+  weight: 0.2,
 
     images: [
       "images/55.png",
@@ -1121,13 +1212,15 @@ This kawaii vinyl sticker features Tofu with rosy cheeks, tiny wings, and a glow
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+        weight: 0.2,
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+        weight: 0.2,
       }
     ]
    },
@@ -1138,6 +1231,7 @@ This kawaii vinyl sticker features Tofu with rosy cheeks, tiny wings, and a glow
     name: "Momo lovely day Vinyl sticker",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+  weight: 0.2,
 
     images: [
       "images/58.png",
@@ -1163,7 +1257,8 @@ Bring joy to your world with this adorable Momo lovely day sticker! Featuring Li
         id: "vinyl-3-0",
         label: "3.0in",
         price: 3.99,
-        stock: 10
+        stock: 10,
+        weight: 0.2
 
       }
     ]
@@ -1177,6 +1272,7 @@ Bring joy to your world with this adorable Momo lovely day sticker! Featuring Li
     name: "Wishing you all luck Vinyl sticker ",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+  weight: 0.2,
 
     images: [
       "images/64.png",
@@ -1203,7 +1299,8 @@ Featuring the original artwork by LilThings Club, this matte vinyl sticker says 
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+        weight: 0.2,
       }
     ]
    },
@@ -1214,6 +1311,7 @@ Featuring the original artwork by LilThings Club, this matte vinyl sticker says 
     name: "Organic cherries Vinyl sticker ",
     brand: "Lil Things Club",
     category: "vinyl-sticker",
+  weight: 0.2,
 
     images: [
       "images/61.png",
@@ -1239,25 +1337,29 @@ organic cherries vinyl-sticker
         id: "vinyl-1-5",
         label: "1.5in",
         price: 2.19,
-        stock: 10
+        stock: 10,
+        weight: 0.2
       },
       {
         id: "vinyl-2-5",
         label: "2.5in",
         price: 3.29,
-        stock: 10
+        stock: 10,
+        weight: 0.2
       },
       {
         id: "vinyl-1-5-sticker",
         label: "1.5in + Sticker",
         price: 5.98,
-        stock: 10
+        stock: 10,
+        weight: 0.3
       },
       {
         id: "vinyl-2-5-sticker",
         label: "2.5in + Sticker",
         price: 7.08,
-        stock: 10
+        stock: 10,
+        weight: 0.3
       }
     ]
    },
@@ -1272,6 +1374,7 @@ organic cherries vinyl-sticker
     name: "Cake roll Crochet keychain ",
     brand: "Lil Things Club",
     category: "crochet-keychain",
+  weight: 5,
 
     images: [
       "images/50.png",
@@ -1298,7 +1401,8 @@ Add a soft, handmade touch to your keys, bag, or backpack with this roll cake cr
         id: "crochet",
         label: "Crochet",
         price: 14.49,
-        stock: 10
+        stock: 10,
+        weight: 5
       }
     ]
    },
@@ -1310,6 +1414,7 @@ Add a soft, handmade touch to your keys, bag, or backpack with this roll cake cr
     name: "lucky fish Crochet keychain ",
     brand: "Lil Things Club",
     category: "crochet-keychain",
+  weight: 5,
 
     images: [
       "images/54.png"
@@ -1335,7 +1440,8 @@ Crafted with love using soft textured yarn and securely attached with a metal be
         id: "crochet",
         label: "Crochet",
         price: 14.49,
-        stock: 10
+        stock: 10,
+        weight: 5,
       }
     ]
    },
@@ -1347,6 +1453,7 @@ Crafted with love using soft textured yarn and securely attached with a metal be
     name: "Tomato Lover Crochet keychain ",
     brand: "Lil Things Club",
     category: "crochet-keychain",
+  weight: 5,
 
     images: [
       "images/66.png"
@@ -1372,7 +1479,8 @@ Crafted with love using soft textured yarn and securely attached with a metal be
         id: "crochet",
         label: "Crochet",
         price: 14.49,
-        stock: 10
+        stock: 10,
+        weight: 5
       }
     ]
    },
@@ -1385,7 +1493,7 @@ Crafted with love using soft textured yarn and securely attached with a metal be
     name: "Clover Leaf Crochet keychain ",
     brand: "Lil Things Club",
     category: "crochet-keychain",
-
+weight: 5,
     images: [
       "images/69.png",
       "images/68.png",
@@ -1411,19 +1519,22 @@ This handmade clover leaf crochet keychain is soft, fluffy, and oh-so-cute! Whet
         id: "pink",
         label: "Pink",
         price: 5.00,
-        stock: 10
+        stock: 10,
+        weight: 1
       },
       {
         id: "yellow",
         label: "Yellow",
         price: 5.00,
-        stock: 10
+        stock: 10,
+        weight: 1
      },
      {
         id: "green",
         label: "Green",
         price: 5.00,
-        stock: 10
+        stock: 10,
+       weight: 1
       }
     ]
    
