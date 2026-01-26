@@ -6,6 +6,23 @@ console.log("✅ checkout.js loaded");
 const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90");
 
 // =======================
+// NORMALIZED CATEGORY WEIGHTS (oz)
+// =======================
+const CATEGORY_WEIGHTS = {
+  "sticker": 0.2,
+  "sticker-sheet": 0.3,
+  "art-print": 1.0,
+  "phone-charm": 1.5,
+  "keychain": 2.0,
+  "crochet-keychain": 4.0,
+  "crochet-plush": 10.0
+};
+
+function resolveWeight(item) {
+  return item.weight || CATEGORY_WEIGHTS[item.category] || 1;
+}
+
+// =======================
 // LOAD CART
 // =======================
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -20,10 +37,10 @@ const shippingEl = document.getElementById("shipping-cost");
 let subtotal = 0;
 let totalWeight = 0;
 
-// Render items
+// Render items + calculate weight
 cart.forEach(item => {
   subtotal += item.price * item.qty;
-  totalWeight += (item.weight || 0) * item.qty;
+  totalWeight += resolveWeight(item) * item.qty;
 
   const div = document.createElement("div");
   div.className = "summary-item";
@@ -35,12 +52,35 @@ cart.forEach(item => {
 });
 
 // =======================
-// USPS WEIGHT-BASED SHIPPING
+// SHIPPING LOGIC
 // =======================
-function calculateShipping(weightOz) {
-  if (weightOz <= 1) return 1.50;
-  if (weightOz <= 3) return 2.50;
-  if (weightOz <= 6) return 3.50;
+function getShippingType(cart) {
+  const bulkyCategories = [
+    "crochet-keychain",
+    "crochet-plush",
+    "keychain",
+    "phone-charm"
+  ];
+
+  return cart.some(item => bulkyCategories.includes(item.category))
+    ? "GROUND"
+    : "FLAT_MAIL";
+}
+
+function qualifiesForFreeShipping(cart, weightOz) {
+  const stickerOnly = cart.every(item =>
+    item.category && item.category.includes("sticker")
+  );
+
+  return stickerOnly && weightOz <= 3;
+}
+
+function calculateUSPSDomestic(weightOz, shippingType) {
+  if (shippingType === "FLAT_MAIL") {
+    if (weightOz <= 1) return 1.50;
+    if (weightOz <= 3) return 2.50;
+    if (weightOz <= 6) return 3.50;
+  }
 
   if (weightOz <= 8) return 5.50;
   if (weightOz <= 12) return 6.50;
@@ -50,15 +90,38 @@ function calculateShipping(weightOz) {
   return 10.50;
 }
 
-let shipping = calculateShipping(totalWeight);
-shippingEl.textContent = `$${shipping.toFixed(2)}`;
+function calculateUSPSInternational(weightOz) {
+  if (weightOz <= 4) return 15.00;
+  if (weightOz <= 8) return 18.00;
+  if (weightOz <= 16) return 22.00;
+  return 28.00;
+}
+
+// =======================
+// SHIPPING CALCULATION
+// =======================
+const shippingType = getShippingType(cart);
+const country = "US"; // later connect to delivery form
+
+let shipping = 0;
+
+if (qualifiesForFreeShipping(cart, totalWeight)) {
+  shipping = 0;
+} else if (country === "US") {
+  shipping = calculateUSPSDomestic(totalWeight, shippingType);
+} else {
+  shipping = calculateUSPSInternational(totalWeight);
+}
+
+shippingEl.textContent =
+  shipping === 0 ? "FREE 💕" : `$${shipping.toFixed(2)}`;
 
 // =======================
 // DISCOUNTS
 // =======================
 const DISCOUNTS = {
-  "WELCOME10": 0.10,   // 10%
-  "LILTHINGS": 5.00    // $5 off
+  "WELCOME10": 0.10,
+  "LILTHINGS": 5.00
 };
 
 let discountAmount = 0;
@@ -110,10 +173,7 @@ document.getElementById("apply-discount")?.addEventListener("click", () => {
 async function initCheckout() {
   const amount = JSON.parse(localStorage.getItem("cartTotal"));
 
-  if (!amount) {
-    console.error("❌ No total found for Stripe");
-    return;
-  }
+  if (!amount) return;
 
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
@@ -149,6 +209,3 @@ async function initCheckout() {
 }
 
 initCheckout();
-
-
-
