@@ -74,3 +74,18 @@ shippingEl.textContent = `$${shipping.toFixed(2)}`;
 const total = subtotal + shipping;
 totalEl.textContent = `$${total.toFixed(2)}`;
 
+
+const DISCOUNTS = {
+  "WELCOME10": 0.10,
+  "LILTHINGS": 5.00 // flat
+};
+
+function applyDiscount(code) {
+  if (!DISCOUNTS[code]) return 0;
+
+  return DISCOUNTS[code] < 1
+    ? subtotal * DISCOUNTS[code]
+    : DISCOUNTS[code];
+}
+
+
