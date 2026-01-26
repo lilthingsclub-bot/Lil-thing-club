@@ -56,10 +56,24 @@ cart.forEach(item => {
   const div = document.createElement("div");
   div.className = "summary-item";
   div.innerHTML = `
-    <span>${item.image} × ${item.name} × ${item.qty}</span>
+    <span>$${item.name} × ${item.qty}</span>
     <span>$${(item.price * item.qty).toFixed(2)}</span>
   `;
   itemsEl.appendChild(div);
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.qty;
+    subtotal += itemTotal;
+
+    cartItemsEl.innerHTML += `
+      <div class="order-items">
+          <img src="${item.image}">
+          <div>
+            <p>${item.name}</p>
+<small>Option: ${item.option || "Standard"}</small>
+          </div>
+        </div>
+         `;
+
 });
 
 
