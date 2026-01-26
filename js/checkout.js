@@ -12,136 +12,41 @@ const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi
 async function initCheckout() {
   console.log("🚀 initCheckout running");
 
-  const subtotal = getSubtotal();
-  const totalInCents = Math.round(subtotal * 100);
+  const total = JSON.parse(localStorage.getItem("cartTotal")) || 500;
+  console.log("💰 total:", total);
 
-  const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+  const res = await fetch("/api/create-payment-intent", {
     method: "POST",
-    headers: {
-      Authorization: "Bearer YOUR_SECRET_KEY",
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: new URLSearchParams({
-      mode: "payment",
-      success_url: window.location.origin + "/thank-you.html",
-      cancel_url: window.location.origin + "/checkout.html",
-      "line_items[0][price_data][currency]": "usd",
-      "line_items[0][price_data][product_data][name]": "Lil Things Club Order",
-      "line_items[0][price_data][unit_amount]": totalInCents,
-      "line_items[0][quantity]": 1
-    })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount: total }),
   });
 
-  const session = await res.json();
-  window.location.href = session.url;
-}
+  const data = await res.json();
+  console.log("🔐 clientSecret response:", data);
 
+  const elements = stripe.elements({ clientSecret: data.clientSecret });
+  const paymentElement = elements.create("payment");
+  paymentElement.mount("#payment-element");
 
+  const form = document.getElementById("payment-form");
 
-function renderOrderSummary() {
-  const container = document.getElementById("order-items");
-  container.innerHTML = "";
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    console.log("🟢 Pay Now clicked");
 
-  let subtotal = 0;
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: "/success.html",
+      },
+    });
 
-  cart.forEach((item, index) => {
-    const itemTotal = item.price * item.qty;
-    subtotal += itemTotal;
-
-    container.innerHTML += `
-      <div class="order-item">
-        <img src="${item.image}">
-        <div class="info">
-          <p>${item.name}</p>
-          <small>Option: ${item.option || "Standard"}</small>
-          <div class="qty">
-            <span>Qty: ${item.qty}</span>
-          </div>
-        </div>
-        <div class="price">$${itemTotal.toFixed(2)}</div>
-      </div>
-    `;
+    if (error) {
+      document.getElementById("error-message").textContent = error.message;
+      console.error("❌ Stripe error:", error);
+    }
   });
-
-  document.getElementById("summary-subtotal").textContent =
-    `$${subtotal.toFixed(2)}`;
-
-  updateTotals();
-}
-renderOrderSummary();
-
-
-function getSubtotal() {
-  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 }
 
-
-function calculateShipping(method) {
-  const subtotal = getSubtotal();
-
-  const allStickers = cart.every(item =>
-    item.name.toLowerCase().includes("sticker")
-  );
-
-  if (allStickers) {
-    if (method === "untracked") return 0.78;
-    if (method === "standard") return 4.00;
-  }
-
-  // anything not sticker → tracked
-  if (method === "standard") return 5.50;
-  if (method === "expedited") return 9.50;
-
-  return 0;
-}
-
-
-let tipAmount = 0;
-
-function setTip(percent) {
-  tipAmount = getSubtotal() * percent;
-  updateTotals();
-}
-
-function setCustomTip(amount) {
-  tipAmount = Math.max(0, amount);
-  updateTotals();
-}
-
-
-let discount = 0;
-
-function applyDiscount(code) {
-  const subtotal = getSubtotal();
-
-  if (code === "WELCOME10") {
-    discount = subtotal * 0.10;
-  } else {
-    discount = 0;
-  }
-
-  updateTotals();
-}
-
-
-function updateTotals() {
-  const subtotal = getSubtotal();
-  const shipping = selectedShippingPrice || 0;
-
-  const total = subtotal + shipping + tipAmount - discount;
-
-  document.getElementById("summary-subtotal").textContent =
-    `$${subtotal.toFixed(2)}`;
-
-  document.getElementById("summary-shipping").textContent =
-    `$${shipping.toFixed(2)}`;
-
-  document.getElementById("summary-tip").textContent =
-    `$${tipAmount.toFixed(2)}`;
-
-  document.getElementById("summary-total").textContent =
-    `$${total.toFixed(2)}`;
-}
-
-
+initCheckout();
 
