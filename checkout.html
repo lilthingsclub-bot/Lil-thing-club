@@ -14,18 +14,21 @@
 <main class="checkout-container">
 
   <h1>Checkout 🧺</h1>
-<div id="cartPage" class="cart-page hidden">
-   <div id="cartItems"></div>
+<div class="order-summary">
+  <h3>Your Lil Cart 🛒</h3>
+  <div id="order-items"></div>
+
+  <div class="summary-line">
+    <span>Shipping</span>
+    <span id="shipping-cost">$0.00</span>
   </div>
 
- <div class="promo">
-      <input type="promo" placeholder="Enter code">
-      <button>Enter</button>
-    </div>
-
-  <div class="summary-row">
-    <p>Total: <span id="total">$0.00</span></p>
+  <div class="summary-line total">
+    <span>Total</span>
+    <span id="order-total">$0.00</span>
   </div>
+</div>
+
 
  <form id="payment-form">
   <div id="payment-element"></div>
