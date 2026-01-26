@@ -14,157 +14,28 @@
 <main class="checkout-container">
 
   <h1>Checkout 🧺</h1>
-  
-<section class="checkout">
-
-  <!-- LEFT COLUMN -->
-  <div class="checkout-left">
-
-    <!-- CONTACT -->
-    <section class="checkout-section">
-      <h2>Contact</h2>
-
-      <input type="email" placeholder="Email" required>
-
-      <label class="checkbox">
-        <input type="checkbox">
-        Send me offers & new releases 💌
-      </label>
-    </section>
-
-
-     <!-- DELIVERY -->
-    <section class="checkout-section">
-      <h2>Delivery</h2>
-
-      <select required>
-        <option>Country / Region</option>
-      </select>
-
-      <div class="two-col">
-        <input placeholder="First name">
-        <input placeholder="Last name">
-      </div>
-
-      <input placeholder="Address">
-      <input placeholder="Apartment, suite (optional)">
-      <div class="two-col">
-        <input placeholder="City">
-        <input placeholder="State">
-      </div>
-      <input placeholder="ZIP Code">
-    </section>
-
-
-      <!-- SHIPPING METHOD -->
-    <section class="checkout-section">
-      <h2>Shipping Method</h2>
-
-      <label class="radio">
-        <input type="radio" name="shipping">
-        Untracked (3–7 days) — $0.78
-      </label>
-
-      <label class="radio">
-        <input type="radio" name="shipping">
-        Standard (Tracked, 3–5 days) — Calculated
-      </label>
-
-      <label class="radio">
-        <input type="radio" name="shipping">
-        Expedited (1–3 days) — Calculated
-      </label>
-
-      <p class="note">
-        International shipping calculated at checkout 🌍
-      </p>
-    </section>
- <!-- PAYMENT -->
-    <section class="checkout-section">
-      <h2>Payment</h2>
-      <div id="payment-element"></div>
-    </section>
-
-    <!-- TIP -->
-    <section class="checkout-section">
-      <h2>Add a Tip 💖</h2>
-
-      <div class="tip-options">
-        <button>5%</button>
-        <button>10%</button>
-        <button>15%</button>
-        <button>None</button>
-      </div>
-
-      <div class="custom-tip">
-        <button>-</button>
-        <span>$0.00</span>
-        <button>+</button>
-      </div>
-    </section>
-
-    <!-- PAY -->
-    <button class="pay-now" disabled>
-      Pay Now
-    </button>
-
-  </div>
-
-  <!-- RIGHT COLUMN -->
-  <aside class="checkout-right">
-
-    <h2>Your Order</h2>
-
-    <div class="order-items">
-      <!-- item -->
-      <div class="order-item">
-        <img src="">
-        <div>
-          <p>Item Name</p>
-          <small>Option</small>
-          <div class="qty">
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
-          </div>
-        </div>
-        <span>$5.99</span>
-      </div>
-    </div>
-
-    <!-- DISCOUNT -->
-    <section class="discount">
-      <input placeholder="Discount code">
-      <button>Apply</button>
-    </section>
-
-    <!-- TOTALS -->
-    <div class="summary">
-      <div><span>Subtotal</span><span>$0.00</span></div>
-      <div><span>Shipping</span><span>$0.00</span></div>
-      <div class="total"><span>Total</span><span>$0.00</span></div>
-    </div>
-
-  </aside>
-
-</section>
-
-    
-
-
-    
-  <div class="summary-line total">
-    <span>Total</span>
-    <span id="order-total">$0.00</span>
-  </div>
-</div>
-
 
  <form id="payment-form">
   <div id="payment-element"></div>
   <button id="submit" type="submit">Pay Now</button>
   <p id="error-message"></p>
 </form>
+
+  <div class="order-summary">
+  <h3>Your Lil Cart 🛒</h3>
+  <div id="order-items"></div>
+
+  <div class="summary-line">
+    <span>Shipping</span>
+    <span id="shipping-cost">$0.00</span>
+  </div>
+
+  <div class="summary-line total">
+    <span>Total</span>
+    <span id="order-total">$0.00</span>
+  </div>
+</div>
+
 
 </main>
 
