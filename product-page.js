@@ -135,7 +135,7 @@ if (!slug || !product) {
         image: product.images?.[0] || "",
         option: selectedVariant.label,
         category: product.category,
-       weight: product.weight
+       weight: selectedVariant.weight ?? product.weight
       });
     }
 
