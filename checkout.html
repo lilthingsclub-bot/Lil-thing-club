@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Checkout | Lil Things Club</title>
+   <link rel="stylesheet" href="style.css">
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="js/checkout.js" defer></script>
- <link rel="stylesheet" href="style.css">
+  <script src="/js/checkout.js" defer></script>
 
 </head>
 
@@ -26,11 +26,11 @@
     <p>Total: <span id="total">$0.00</span></p>
   </div>
 
-  <form id="payment-form">
-    <div id="card-element"></div>
-    <button id="pay-btn">Pay Now ✨</button>
-    <p id="error-message"></p>
-  </form>
+ <form id="payment-form">
+  <div id="payment-element"></div>
+  <button id="submit" type="submit">Pay Now</button>
+  <p id="error-message"></p>
+</form>
 
 </main>
 
