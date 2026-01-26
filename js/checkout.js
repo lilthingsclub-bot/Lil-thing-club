@@ -12,43 +12,29 @@ const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi
 async function initCheckout() {
   console.log("🚀 initCheckout running");
 
-  const total = JSON.parse(localStorage.getItem("cartTotal")) || 500;
-  console.log("💰 total:", total);
+  const subtotal = getSubtotal();
+  const totalInCents = Math.round(subtotal * 100);
 
-  const res = await fetch("/api/create-payment-intent", {
+  const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount: total }),
+    headers: {
+      Authorization: "Bearer YOUR_SECRET_KEY",
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams({
+      mode: "payment",
+      success_url: window.location.origin + "/thank-you.html",
+      cancel_url: window.location.origin + "/checkout.html",
+      "line_items[0][price_data][currency]": "usd",
+      "line_items[0][price_data][product_data][name]": "Lil Things Club Order",
+      "line_items[0][price_data][unit_amount]": totalInCents,
+      "line_items[0][quantity]": 1
+    })
   });
 
-  const data = await res.json();
-  console.log("🔐 clientSecret response:", data);
-
-  const elements = stripe.elements({ clientSecret: data.clientSecret });
-  const paymentElement = elements.create("payment");
-  paymentElement.mount("#payment-element");
-
-  const form = document.getElementById("payment-form");
-
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    console.log("🟢 Pay Now clicked");
-
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: "/success.html",
-      },
-    });
-
-    if (error) {
-      document.getElementById("error-message").textContent = error.message;
-      console.error("❌ Stripe error:", error);
-    }
-  });
+  const session = await res.json();
+  window.location.href = session.url;
 }
-
-initCheckout();
 
 
 
@@ -82,6 +68,7 @@ function renderOrderSummary() {
 
   updateTotals();
 }
+renderOrderSummary();
 
 
 function getSubtotal() {
@@ -155,11 +142,6 @@ function updateTotals() {
   document.getElementById("summary-total").textContent =
     `$${total.toFixed(2)}`;
 }
-
-
-localStorage.removeItem("cart");
-window.location.href = "/thank-you.html";
-
 
 
 
