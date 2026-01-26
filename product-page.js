@@ -133,7 +133,9 @@ if (!slug || !product) {
         price: selectedVariant.price,
         qty,
         image: product.images?.[0] || "",
-        option: selectedVariant.label
+        option: selectedVariant.label,
+        category: product.category,
+       weight: product.weight
       });
     }
 
