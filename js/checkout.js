@@ -56,7 +56,7 @@ cart.forEach(item => {
   const div = document.createElement("div");
   div.className = "summary-item";
   div.innerHTML = `
-    <span>${item.name} × ${item.qty}</span>
+    <span>${item.image} × ${item.name} × ${item.qty}</span>
     <span>$${(item.price * item.qty).toFixed(2)}</span>
   `;
   itemsEl.appendChild(div);
