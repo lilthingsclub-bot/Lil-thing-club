@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout | Lil Things Club</title>
    <link rel="stylesheet" href="style.css">
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="/js/checkout.js?v=2" defer></script>
+  <script src="/js/checkout.js" defer></script>
 
 </head>
 
@@ -14,28 +13,24 @@
 <main class="checkout-container">
 
   <h1>Checkout 🧺</h1>
+<div id="cartPage" class="cart-page hidden">
+   <div id="cartItems"></div>
+  </div>
+
+ <div class="promo">
+      <input type="promo" placeholder="Enter code">
+      <button>Enter</button>
+    </div>
+
+  <div class="summary-row">
+    <p>Total: <span id="total">$0.00</span></p>
+  </div>
 
  <form id="payment-form">
   <div id="payment-element"></div>
   <button id="submit" type="submit">Pay Now</button>
   <p id="error-message"></p>
 </form>
-
-  <div class="order-summary">
-  <h3>Your Lil Cart 🛒</h3>
-  <div id="order-items"></div>
-
-  <div class="summary-line">
-    <span>Shipping</span>
-    <span id="shipping-cost">$0.00</span>
-  </div>
-
-  <div class="summary-line total">
-    <span>Total</span>
-    <span id="order-total">$0.00</span>
-  </div>
-</div>
-
 
 </main>
 
