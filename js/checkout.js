@@ -73,6 +73,12 @@ shippingEl.textContent = `$${shipping.toFixed(2)}`;
 
 const total = subtotal + shipping;
 totalEl.textContent = `$${total.toFixed(2)}`;
+const finalTotal = subtotal + shipping;
+totalEl.textContent = `$${finalTotal.toFixed(2)}`;
+
+// SAVE FOR STRIPE (convert to cents)
+localStorage.setItem("cartTotal", Math.round(finalTotal * 100));
+
 
 
 const DISCOUNTS = {
@@ -87,5 +93,26 @@ function applyDiscount(code) {
     ? subtotal * DISCOUNTS[code]
     : DISCOUNTS[code];
 }
+
+document.getElementById("apply-discount").addEventListener("click", () => {
+  const code = document
+    .getElementById("discount-input")
+    .value
+    .trim()
+    .toUpperCase();
+
+  const discount = applyDiscount(code);
+
+  if (!discount) {
+    alert("Invalid discount code 💔");
+    return;
+  }
+
+  const newTotal = Math.max(subtotal + shipping - discount, 0);
+  totalEl.textContent = `$${newTotal.toFixed(2)}`;
+
+  localStorage.setItem("cartTotal", Math.round(newTotal * 100));
+});
+
 
 
