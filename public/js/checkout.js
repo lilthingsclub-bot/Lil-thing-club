@@ -152,6 +152,10 @@ function updateTotal() {
   updateShipping();
 
   const tax = selectedCountry === "US" ? calculateTax(subtotal, state) : 0;
+   // Display tax
+  taxEl.textContent =
+    tax > 0 ? `$${tax.toFixed(2)}` : "$0.00";
+  
   const total = Math.max(subtotal + shipping + tax - discountAmount, 0);
 
   totalEl.textContent = `$${total.toFixed(2)}`;
