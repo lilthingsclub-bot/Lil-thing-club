@@ -135,26 +135,7 @@ function updateShipping() {
       : `${getShippingLabel(shippingType, selectedCountry)} - $${shipping.toFixed(2)}`;
 }
 
-// =======================
-// ADDRESS
-// =======================
 
-function isAddressComplete() {
-  const requiredFields = [
-    "first-name",
-    "last-name",
-    "address-line1",
-    "city",
-    "state",
-    "zip",
-    "country"
-  ];
-
-  return requiredFields.every(id => {
-    const el = document.getElementById(id);
-    return el && el.value.trim() !== "";
-  });
-}
 
 // =======================
 // DISCOUNTS
@@ -280,7 +261,26 @@ async function initCheckout() {
   }
 });
 
+// =======================
+// ADDRESS
+// =======================
 
+function isAddressComplete() {
+  const requiredFields = [
+    "first-name",
+    "last-name",
+    "address-line1",
+    "city",
+    "state",
+    "zip",
+    "country"
+  ];
+
+  return requiredFields.every(id => {
+    const el = document.getElementById(id);
+    return el && el.value.trim() !== "";
+  });
+}
 // =======================
 // INIT
 // =======================
