@@ -280,7 +280,6 @@ async function initCheckout() {
   }
 });
 
-}
 
 // =======================
 // INIT
