@@ -136,6 +136,27 @@ function updateShipping() {
 }
 
 // =======================
+// ADDRESS
+// =======================
+
+function isAddressComplete() {
+  const requiredFields = [
+    "first-name",
+    "last-name",
+    "address-line1",
+    "city",
+    "state",
+    "zip",
+    "country"
+  ];
+
+  return requiredFields.every(id => {
+    const el = document.getElementById(id);
+    return el && el.value.trim() !== "";
+  });
+}
+
+// =======================
 // DISCOUNTS
 // =======================
 const DISCOUNTS = { "WELCOME10": 0.10, "LILTHINGS": 5.00 };
