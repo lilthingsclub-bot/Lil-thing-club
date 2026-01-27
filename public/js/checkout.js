@@ -243,21 +243,43 @@ async function initCheckout() {
 
   const form = document.getElementById("payment-form");
   form.addEventListener("submit", async e => {
-    e.preventDefault();
-    saveOrderSummary();
+  e.preventDefault();
 
-   const { error } = await stripe.confirmPayment({
-  elements,
-  confirmParams: {
-    return_url: `${window.location.origin}/success.html`
+  // 🚫 Block payment if address incomplete
+  if (!isAddressComplete()) {
+    document.getElementById("error-message").textContent =
+      "Please complete your delivery address before paying 💕";
+    return;
+  }
+
+  document.getElementById("error-message").textContent = "";
+
+  updateTotal();
+  saveOrderSummary();
+
+  const amount = JSON.parse(localStorage.getItem("cartTotal"));
+  if (!amount) return;
+
+  const res = await fetch("/api/create-payment-intent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount }),
+  });
+
+  const data = await res.json();
+
+  const { error } = await stripe.confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: `${window.location.origin}/success.html`
+    }
+  });
+
+  if (error) {
+    document.getElementById("error-message").textContent = error.message;
   }
 });
 
-
-    if (error) {
-      document.getElementById("error-message").textContent = error.message;
-    }
-  });
 }
 
 // =======================
