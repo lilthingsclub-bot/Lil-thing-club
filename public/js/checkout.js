@@ -25,6 +25,7 @@ function resolveWeight(item) {
 // =======================
 // TAX RATES
 // =======================
+const taxEl = document.getElementById("tax-amount");
 const TAX_RATES = {
   "CA": 0.075,
   "NY": 0.04,
