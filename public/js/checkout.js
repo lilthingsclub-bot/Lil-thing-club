@@ -220,10 +220,13 @@ async function initCheckout() {
     e.preventDefault();
     saveOrderSummary();
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: { return_url: "/success.html" },
-    });
+   const { error } = await stripe.confirmPayment({
+  elements,
+  confirmParams: {
+    return_url: `${window.location.origin}/success.html`
+  }
+});
+
 
     if (error) {
       document.getElementById("error-message").textContent = error.message;
