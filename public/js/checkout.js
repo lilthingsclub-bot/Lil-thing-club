@@ -251,7 +251,7 @@ async function initCheckout() {
     document.getElementById("error-message").textContent = error.message;
   }
 });
-
+}
 // =======================
 // ADDRESS
 // =======================
