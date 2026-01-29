@@ -238,16 +238,7 @@ async function initCheckout() {
   updateTotal();
   saveOrderSummary();
 
-  const amount = JSON.parse(localStorage.getItem("cartTotal"));
-  if (!amount) return;
 
-  const res = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount }),
-  });
-
-  const data = await res.json();
 
   const { error } = await stripe.confirmPayment({
     elements,
