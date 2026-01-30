@@ -223,10 +223,9 @@ async function initCheckout() {
   paymentElement.mount("#payment-element");
 
   const form = document.getElementById("payment-form");
-  form.addEventListener("submit", async e => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
-  // 🚫 Block payment if address incomplete
   if (!isAddressComplete()) {
     document.getElementById("error-message").textContent =
       "Please complete your delivery address before paying 💕";
@@ -237,8 +236,6 @@ async function initCheckout() {
 
   updateTotal();
   saveOrderSummary();
-
-
 
   const { error } = await stripe.confirmPayment({
     elements,
