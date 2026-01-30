@@ -253,19 +253,21 @@ form.addEventListener("submit", async e => {
 // ADDRESS
 // =======================
 function isAddressComplete() {
-  const fields = [
-    document.getElementById("first-name"),
-    document.getElementById("last-name"),
-    document.getElementById("address-line1"),
-    document.getElementById("city"),
-    stateInput,
-    document.getElementById("zip"),
-    countrySelect
+  const requiredFields = [
+    "first-name",
+    "last-name",
+    "address-line1",
+    "city",
+    "state",
+    "zip",
+    "country"
   ];
 
-  return fields.every(el => el && el.value.trim() !== "");
+  return requiredFields.every(id => {
+    const el = document.getElementById(id);
+    return el && el.value.trim() !== "";
+  });
 }
-
 // =======================
 // INIT
 // =======================
