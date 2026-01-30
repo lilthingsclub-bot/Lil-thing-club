@@ -253,21 +253,25 @@ form.addEventListener("submit", async e => {
 // ADDRESS
 // =======================
 function isAddressComplete() {
-  const requiredFields = [
-    "first-name",
-    "last-name",
-    "address-line1",
-    "city",
-    "state",
-    "zip",
-    "country"
+  const fields = [
+    document.getElementById("first-name"),
+    document.getElementById("last-name"),
+    document.getElementById("address-line1"),
+    document.getElementById("city"),
+    document.getElementById("state"),
+    document.getElementById("zip"),
+    document.getElementById("country")
   ];
 
-  return requiredFields.every(id => {
-    const el = document.getElementById(id);
-    return el && el.value.trim() !== "";
-  });
+  const missing = fields.filter(
+    field => !field || !field.value || !field.value.trim()
+  );
+
+  console.log("❌ Missing address fields:", missing);
+
+  return missing.length === 0;
 }
+
 // =======================
 // INIT
 // =======================
