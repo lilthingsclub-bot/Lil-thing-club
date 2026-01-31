@@ -17,24 +17,28 @@ export default async function handler(req, res) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  if (event.type === "async_payment_succeeded") {
+  if (event.type === "payment_intent.succeeded") {
     const pi = event.data.object;
 
     await fetch(process.env.GOOGLE_SHEET_WEBHOOK, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        orderId: pi.id,
-        email: pi.receipt_email || "",
-        items: pi.metadata.items,
-        subtotal: pi.amount_received / 100,
-        shipping: pi.metadata.shipping,
-        tax: pi.metadata.tax,
-        discount: pi.metadata.discount,
-        total: pi.amount_received / 100,
-        country: pi.metadata.country,
-        state: pi.metadata.state
-      })
+     body: JSON.stringify({
+  orderId: pi.id,
+  email: pi.receipt_email || "",
+  items: pi.metadata.items,
+  subtotal: pi.metadata.subtotal,
+  shipping: pi.metadata.shipping,
+  tax: pi.metadata.tax,
+  discount: pi.metadata.discount,
+  total: pi.amount_received / 100,
+  country: pi.metadata.country,
+  state: pi.metadata.state,
+  address: pi.metadata.address,
+  city: pi.metadata.city,
+  zip: pi.metadata.zip
+})
+
     });
   }
 
