@@ -222,7 +222,7 @@ async function initCheckout() {
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify( payload),
+    body: JSON.stringify({ amount }),
   });
 
   const data = await res.json();
@@ -280,9 +280,6 @@ function isAddressComplete() {
 
   return missing.length === 0;
 }
-
-
-
 // =======================
 // INIT
 // =======================
