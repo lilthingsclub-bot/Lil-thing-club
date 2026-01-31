@@ -210,10 +210,19 @@ async function initCheckout() {
   const amount = JSON.parse(localStorage.getItem("cartTotal"));
   if (!amount) return;
 
+  const payload = {
+  amount,
+  cart,
+  shipping,
+  tax: selectedCountry === "US" ? calculateTax(subtotal, state) : 0,
+  address: getAddressData()
+};
+
+
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount }),
+    body: JSON.stringify( payload),
   });
 
   const data = await res.json();
