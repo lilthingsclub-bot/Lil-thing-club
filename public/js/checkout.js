@@ -235,22 +235,7 @@ form.addEventListener("submit", async e => {
   document.getElementById("error-message").textContent = "";
 
   updateTotal();
-function saveOrderSummary() {
-  const address = getAddressData();
-
-  const orderSummary = {
-    items: cart,
-    subtotal,
-    shipping,
-    tax: selectedCountry === "US" ? calculateTax(subtotal, state) : 0,
-    discount: discountAmount,
-    total: subtotal + shipping - discountAmount + (selectedCountry === "US" ? calculateTax(subtotal, state) : 0),
-    ...address
-  };
-
-  localStorage.setItem("lastOrder", JSON.stringify(orderSummary));
-}
-
+  saveOrderSummary();
 
   const { error } = await stripe.confirmPayment({
     elements,
@@ -287,16 +272,6 @@ function isAddressComplete() {
   return missing.length === 0;
 }
 
-function getAddressData() {
-  return {
-    name: `${document.getElementById("first-name").value} ${document.getElementById("last-name").value}`,
-    address: document.getElementById("address-line1").value,
-    city: document.getElementById("city").value,
-    state: document.getElementById("state").value,
-    zip: document.getElementById("zip").value,
-    country: document.getElementById("country").value
-  };
-}
 
 
 // =======================
