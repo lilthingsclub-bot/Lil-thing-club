@@ -6,11 +6,6 @@ console.log("✅ checkout.js loaded");
 const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90");
 
 // =======================
-// LOAD CART
-// =======================
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-// =======================
 // DOM ELEMENTS
 // =======================
 const itemsEl = document.getElementById("order-items");
@@ -19,6 +14,20 @@ const shippingEl = document.getElementById("shipping-cost");
 const taxEl = document.getElementById("tax-amount");
 const errorEl = document.getElementById("error-message");
 const form = document.getElementById("payment-form");
+
+// Address fields
+const firstName = document.getElementById("first-name");
+const lastName = document.getElementById("last-name");
+const address1 = document.getElementById("address-line1");
+const city = document.getElementById("city");
+const stateInput = document.getElementById("state");
+const zip = document.getElementById("zip");
+const country = document.getElementById("country");
+
+// =======================
+// LOAD CART
+// =======================
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // =======================
 // TAX
@@ -34,9 +43,10 @@ const TAX_RATES = {
 let subtotal = 0;
 let shipping = 0;
 let tax = 0;
+let elements;
 
 // =======================
-// RENDER CART
+// CART RENDER
 // =======================
 function renderCart() {
   itemsEl.innerHTML = "";
@@ -44,7 +54,6 @@ function renderCart() {
 
   cart.forEach(item => {
     subtotal += item.price * item.qty;
-
     itemsEl.innerHTML += `
       <div class="summary-item">
         <span>${item.name} × ${item.qty}</span>
@@ -55,24 +64,10 @@ function renderCart() {
 }
 
 // =======================
-// ADDRESS
+// ADDRESS VALIDATION
 // =======================
-function getAddressData() {
-  return {
-    name: `${firstName.value} ${lastName.value}`,
-    address: address1.value,
-    city: city.value,
-    state: state.value.toUpperCase(),
-    zip: zip.value,
-    country: country.value
-  };
-}
-
 function isAddressComplete() {
-  const fields = [
-    firstName, lastName, address1, city, state, zip, country
-  ];
-
+  const fields = [firstName, lastName, address1, city, stateInput, zip, country];
   return fields.every(f => f && f.value.trim() !== "");
 }
 
@@ -80,9 +75,8 @@ function isAddressComplete() {
 // TOTALS
 // =======================
 function updateTotals() {
-  const stateCode = state.value.toUpperCase();
+  const stateCode = stateInput.value.toUpperCase();
   tax = subtotal * (TAX_RATES[stateCode] ?? TAX_RATES.default);
-
   shipping = subtotal > 0 ? 3.5 : 0;
 
   taxEl.textContent = `$${tax.toFixed(2)}`;
@@ -97,22 +91,14 @@ function updateTotals() {
 // =======================
 // STRIPE SETUP
 // =======================
-let elements;
-
 async function setupStripe() {
-  const amount = JSON.parse(localStorage.getItem("cartTotal"));
+  const amount = Number(localStorage.getItem("cartTotal"));
   if (!amount) return;
 
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount,
-      cart,
-      shipping,
-      tax,
-      address: getAddressData()
-    })
+    body: JSON.stringify({ amount })
   });
 
   const { clientSecret } = await res.json();
