@@ -5,12 +5,10 @@ console.log("✅ checkout.js loaded");
 // =======================
 const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90");
 
-
 // =======================
 // LOAD CART
 // =======================
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
 
 // =======================
 // DOM ELEMENTS
