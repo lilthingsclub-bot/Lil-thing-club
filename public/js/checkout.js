@@ -11,22 +11,6 @@ const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi
 // =======================
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// =======================
-// CATEGORY WEIGHTS (oz)
-// =======================
-const CATEGORY_WEIGHTS = {
-  "sticker": 0.2,
-  "sticker-sheet": 0.3,
-  "art-print": 1.0,
-  "phone-charm": 1.5,
-  "keychain": 2.0,
-  "crochet-keychain": 4.0,
-  "crochet-plush": 10.0
-};
-
-function resolveWeight(item) {
-  return item.weight || CATEGORY_WEIGHTS[item.category] || 1;
-}
 
 // =======================
 // DOM ELEMENTS
