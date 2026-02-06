@@ -98,7 +98,20 @@ async function setupStripe() {
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount })
+    body: JSON.stringify({
+    amount,
+    cart,
+    shipping,
+    tax,
+   address: {
+    name: `${firstName.value} ${lastName.value}`,
+    address: address1.value,
+    city: city.value,
+    state: stateInput.value,
+    zip: zip.value,
+    country: country.value
+  }
+})
   });
 
   const { clientSecret } = await res.json();
