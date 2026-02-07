@@ -10,9 +10,12 @@
 </head>
 
 <body>
-
+  
+<div class="checkout-page">
+  
   <section class="checkout-left">
-
+    
+<!--  contact -->
     <section class="checkout-section">
       <h3>Contact</h3>
        <input type="email" placeholder="Email" required>
@@ -22,6 +25,9 @@
         Send me offers & new releases 💌
       </label>
     </section>
+    
+<!-- Delivery -->
+    
     <section class="checkout-section">
       <h3>Delivery</h3>
 <select id="country" required>
@@ -32,8 +38,7 @@
   <option value="AU">Australia</option>
   <option value="OTHER">Other</option>
 </select>
-
-      <input id="first-name" placeholder="First name" required>
+ <input id="first-name" placeholder="First name" required>
 <input id="last-name" placeholder="Last name" required>
 
 <input id="address-line1" placeholder="Address" required>
@@ -47,12 +52,24 @@
 <input id="zip" placeholder="zip Code" required>
 
     </section>
-    </section>
+
+<main class="checkout-container">
+  
+ <form id="payment-form">
+  <div id="payment-element"></div>
+  <button id="submit" type="submit">Pay Now</button>
+  <p id="error-message"></p>
+</form>
+
+</main>
+    
+
 
     
   </section>
   
 <section class="checkout-right"> 
+  
 <div class="order-summary">
   <h3>Order Summary</h3>
   <div id="order-items"></div>
@@ -79,17 +96,10 @@
     <span id="order-total">$0.00</span>
   </div>
 </div>
+  
 </section> 
 
-<main class="checkout-container">
-  
- <form id="payment-form">
-  <div id="payment-element"></div>
-  <button id="submit" type="submit">Pay Now</button>
-  <p id="error-message"></p>
-</form>
 
-</main>
   
 </body>
 </html>
