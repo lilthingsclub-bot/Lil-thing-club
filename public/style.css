@@ -2546,8 +2546,8 @@ width: 85%;
    background: linear-gradient(
     90deg,
     #eaf4ff 0%,
-    #eaf4ff 50%,
-    #ffe6f2 50%,
+    #eaf4ff 70%,
+    #ffe6f2 30%,
     #ffe6f2 100%
   );
 }
