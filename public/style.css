@@ -2595,3 +2595,9 @@ width: 85%;
   font-size: 14px;
   outline: none;
 }
+
+.checkout-section input:focus,
+.checkout-section select:focus {
+  border-color: #ff4fa3;
+  background: #fff;
+}
