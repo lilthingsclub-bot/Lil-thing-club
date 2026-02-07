@@ -2654,18 +2654,6 @@ width: 85%;
   margin: 40px auto;
 }
 
-.order-summary {
-  background: #fff;
-  padding: 80px;
-  border-radius: 20px;
-  border: 2px solid #ff9fcf;
-}
-
-.order-summary h3 {
-  margin-bottom: 16px;
-  font-size: 22px;
-  color: #ff4fa3;
-}
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
