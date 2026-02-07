@@ -2684,6 +2684,19 @@ width: 85%;
   margin: 16px 0;
 }
 
+.discount input {
+  flex: 1;
+}
+
+.discount button {
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: none;
+  background: #ff9fcf;
+  color: #fff;
+  cursor: pointer;
+}
+
 
 
 
