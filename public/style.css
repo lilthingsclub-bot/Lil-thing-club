@@ -2608,3 +2608,12 @@ width: 85%;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+
+/* Checkbox */
+.checkbox {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  color: #ff4fa3;
+}
