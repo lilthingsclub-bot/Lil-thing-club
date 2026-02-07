@@ -2611,7 +2611,7 @@ width: 85%;
 
 /* Checkbox */
 .checkbox {
-  display: block;
+  display: inline;
   align-items: center;
   color: #ff4fa3;
 }
