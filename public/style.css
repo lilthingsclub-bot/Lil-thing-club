@@ -2650,7 +2650,7 @@ width: 85%;
 .checkout-right {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1px;
   margin: 40px auto;
 }
 
@@ -2666,4 +2666,13 @@ width: 85%;
   font-size: 22px;
   color: #ff4fa3;
 }
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .checkout-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
