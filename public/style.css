@@ -2615,3 +2615,10 @@ width: 85%;
   align-items: center;
   color: #ff4fa3;
 }
+/* ===== STRIPE PAYMENT ===== */
+#payment-form {
+  background: #fff;
+  padding: 24px;
+  border-radius: 18px;
+  border: 2px solid #ff9fcf;
+}
