@@ -2677,12 +2677,10 @@ width: 85%;
 @media (max-width: 900px) {
   .checkout-page {
     grid-template-columns: 1fr;
-      background: linear-gradient(
-    90deg,
-    #eaf4ff 0%,
-    #eaf4ff 50%,
-    #ffe6f2 50%,
-    #ffe6f2 100%
-  );
+     background: linear-gradient(
+      180deg,
+      #eaf4ff 0%,
+      #ffe6f2 100%
+    );
   }
 }
