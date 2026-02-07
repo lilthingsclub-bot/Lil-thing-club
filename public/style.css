@@ -2670,6 +2670,21 @@ width: 85%;
   outline: none;
 }
 
+.order-summary h3 {
+  margin-bottom: 16px;
+  font-size: 22px;
+  color: #ff4fa3;
+}
+
+/* Order items */
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+
 
 
 /* ===== MOBILE ===== */
