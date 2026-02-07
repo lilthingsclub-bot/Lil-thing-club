@@ -2646,3 +2646,11 @@ width: 85%;
   text-align: center;
 }
 
+/* ===== LEFT COLUMN ===== */
+.checkout-right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 40px auto;
+}
+
