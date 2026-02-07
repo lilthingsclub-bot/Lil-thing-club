@@ -2646,12 +2646,8 @@ width: 85%;
   text-align: center;
 }
 
-/* ===== LEFT COLUMN ===== */
-.checkout-right {
-  position: sticky;
-  top: 24px;
-  margin: 40px auto;
-}
+
+
 
 
 /* ===== MOBILE ===== */
@@ -2660,6 +2656,3 @@ width: 85%;
     grid-template-columns: 1fr;
   }
 }
-
-
-
