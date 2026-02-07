@@ -2656,7 +2656,7 @@ width: 85%;
 
 .order-summary {
   background: #fff;
-  padding: 24px;
+  padding: 80px;
   border-radius: 20px;
   border: 2px solid #ff9fcf;
 }
@@ -2703,7 +2703,7 @@ width: 85%;
 }
 
 .discount button {
-  padding: 12px 16px;
+  padding: 40px 16px;
   border-radius: 14px;
   border: none;
   background: #ff9fcf;
