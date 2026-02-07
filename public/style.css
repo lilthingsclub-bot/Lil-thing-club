@@ -2601,3 +2601,10 @@ width: 85%;
   border-color: #ff4fa3;
   background: #fff;
 }
+
+/* Two-column fields */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
