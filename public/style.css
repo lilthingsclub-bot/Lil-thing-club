@@ -2555,3 +2555,10 @@ width: 85%;
   gap: 40px;
   align-items: start;
 }
+
+/* ===== LEFT COLUMN ===== */
+.checkout-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
