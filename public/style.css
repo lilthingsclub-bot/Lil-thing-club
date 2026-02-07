@@ -2646,7 +2646,7 @@ width: 85%;
   text-align: center;
 }
 
-.checkout-left {
+.checkout-right {
   display: flex;
   flex-direction: column;
   gap: 32px;
