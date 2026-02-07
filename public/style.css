@@ -2696,7 +2696,12 @@ width: 85%;
   color: #fff;
   cursor: pointer;
 }
-
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .checkout-page {
+    grid-template-columns: 1fr;
+  }
+}
 
 
 
