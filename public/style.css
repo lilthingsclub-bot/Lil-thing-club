@@ -2582,3 +2582,16 @@ width: 85%;
   font-size: 20px;
   color: #ff4fa3;
 }
+
+/* ===== INPUT STYLES ===== */
+.checkout-section input,
+.checkout-section select {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  border: 2px solid #ff9fcf;
+  background: #ffe9f4;
+  font-size: 14px;
+  outline: none;
+}
