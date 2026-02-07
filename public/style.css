@@ -2622,3 +2622,27 @@ width: 85%;
   border-radius: 18px;
   border: 2px solid #ff9fcf;
 }
+
+#submit {
+  margin-top: 20px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 18px;
+  border: none;
+  background: #ff4fa3;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#submit:hover {
+  background: #ff2f8c;
+}
+
+#error-message {
+  margin-top: 12px;
+  color: #ff2f8c;
+  font-size: 14px;
+  text-align: center;
+}
+
