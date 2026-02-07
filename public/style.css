@@ -2653,4 +2653,11 @@ width: 85%;
   gap: 32px;
   margin: 40px auto;
 }
+.order-summary {
+  background: #fff9dc;
+  padding: 24px;
+  border-radius: 20px;
+  border: 2px solid #ff9fcf;
+}
+
 
