@@ -2611,8 +2611,7 @@ width: 85%;
 
 /* Checkbox */
 .checkbox {
-  display: flex;
+  display: none;
   align-items: center;
-  font-size: 14px;
   color: #ff4fa3;
 }
