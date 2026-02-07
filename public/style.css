@@ -2654,7 +2654,7 @@ width: 85%;
 }
 
 .order-summary {
-  background: #fff9dc;
+  background: #fff;
   padding: 24px;
   border-radius: 20px;
   border: 2px solid #ff9fcf;
@@ -2677,5 +2677,12 @@ width: 85%;
 @media (max-width: 900px) {
   .checkout-page {
     grid-template-columns: 1fr;
+      background: linear-gradient(
+    90deg,
+    #eaf4ff 0%,
+    #eaf4ff 50%,
+    #ffe6f2 50%,
+    #ffe6f2 100%
+  );
   }
 }
