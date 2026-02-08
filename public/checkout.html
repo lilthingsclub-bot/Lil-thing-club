@@ -25,12 +25,62 @@
 <body>
 
  <header class="nav-bar scallop">
+  
+  <!-- HAMBURGER BUTTON -->
+  <button id="hamburger" class="hamburger" aria-label="Open menu">☰</button>
+
+  <!-- SLIDE-IN MOBILE MENU -->
+  <div id="mobileMenu" class="mobile-menu">
+
+    <button id="closeMenu" class="close-menu">×</button>
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="sp.html">Shipping Policy</a>
+    
+     <div class="dropdown">
+      <button class="dropbtn">Shop ▼</button>
+      <div class="dropdown-content">
+        <a href="all-product.html">All Products</a>
+        <a href="stickers-land.html">Sticker land</a>
+        <a href="crochet.html">Crochet cuties </a>
+        <a href="stationery.html">Stationery Wonderland</a>
+        <a href="phone-candy.html">Phone Candy</a>
+ 
+      </div>
+    </div>
+  </div>
+  <!-- LEFT NAV (desktop only) -->
+  <nav class="left-nav desktop-only">
+    <a href="about-us.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="sp.html">Shipping Policy</a>
+  </nav>
   <!-- LOGO -->
   <div class="middle-nav">
     <a class="logo" href="index.html">
       <img src="asset/logo.png" alt="logo">
     </a>
   </div>
+  <!-- RIGHT NAV -->
+  <nav class="right-nav">
+    <!-- SHOP DROPDOWN -->
+    <div class="dropdown desktop-only">
+      <button class="dropbtn">Shop ▼</button>
+      <div class="dropdown-content">
+        <a href="all-product.html">All Products</a>
+        <a href="stickers-land.html">Sticker land</a>
+        <a href="crochet.html">Crochet cuties </a>
+        <a href="stationery.html">Stationery Wonderland</a>
+        <a href="phone-candy.html">Phone Candy</a>
+      </div>
+    </div>
+    <!-- CART ICON -->
+    <a class="icon-btn" href="cart.html">
+      <img src="asset/cart.png" alt="cart">
+      <span id="cartCount" class="cart-count">0</span>
+    </a>
+  </nav>
 </header>
 
   
