@@ -2549,7 +2549,7 @@ width: 85%;
   gap: 40px;
   align-items: start;
    padding: 0 24px;
-   background: #fff:
+   background: #fff;
      background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
