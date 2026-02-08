@@ -269,4 +269,3 @@ form.addEventListener("submit", async e => {
 // =======================
 renderCart();
 updateTotals();
-setupStripe();
