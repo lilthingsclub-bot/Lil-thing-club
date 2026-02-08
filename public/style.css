@@ -2555,6 +2555,12 @@ width: 85%;
   gap: 40px;
   align-items: start;
    padding: 0 24px;
+   
+     background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+   background-size: 39px 35px; /* Sets the spacing between dots */
+   Background-position:0 0, -19px -19px; 
 }
 
 /* ===== LEFT COLUMN ===== */
@@ -2566,7 +2572,7 @@ width: 85%;
 }
 
 .checkout-section {
-  background: #fff;
+  background: #ffe8f7;
   padding: 24px;
   border-radius: 18px;
   border: 2px solid #ff9fcf;
@@ -2599,7 +2605,7 @@ width: 85%;
 .checkout-section input:focus,
 .checkout-section select:focus {
   border-color: #ff4fa3;
-  background: #fff;
+  background:#ffe8f7;
 }
 
 /* Two-column fields */
@@ -2617,7 +2623,7 @@ width: 85%;
 }
 /* ===== STRIPE PAYMENT ===== */
 #payment-form {
-  background: #fff;
+  background: #ffe8f7;
   padding: 24px;
   border-radius: 18px;
   border: 2px solid #ff9fcf;
@@ -2653,7 +2659,7 @@ width: 85%;
 }
 
 .order-summary {
-  background: #fff;
+  background: #ffe8f7;
   padding: 24px;
   border-radius: 20px;
   border: 2px solid #ff9fcf;
