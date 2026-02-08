@@ -1,5 +1,14 @@
 console.log("✅ checkout.js loaded");
 
+let subtotal = 0;
+let shipping = 0;
+let tax = 0;
+let discount = 0;
+let totalWeight = 0;
+let shippingType = "FLAT_MAIL";
+let elements;
+
+
 // =======================
 // STRIPE INIT
 // =======================
@@ -23,6 +32,27 @@ const city = document.getElementById("city");
 const stateInput = document.getElementById("state");
 const zip = document.getElementById("zip");
 const country = document.getElementById("country");
+
+// =======================
+// CART RENDER
+// =======================
+function renderCart() {
+  itemsEl.innerHTML = "";
+  subtotal = 0;
+  totalWeight = 0;
+
+  cart.forEach(item => {
+    subtotal += item.price * item.qty;
+    totalWeight += resolveWeight(item) * item.qty;
+
+    itemsEl.innerHTML += `
+      <div class="summary-item">
+        <span>${item.name} × ${item.qty}</span>
+        <span>$${(item.price * item.qty).toFixed(2)}</span>
+      </div>
+    `;
+  });
+}
 
 // =======================
 // CATEGORY WEIGHTS (oz)
@@ -80,31 +110,39 @@ function getShippingLabel(shippingType, country) {
 return shippingType === "FLAT_MAIL" ? "USPS First-Class" : "USPS Ground"; 
 } 
 function updateShipping() {
- shippingType = getShippingType(cart);
- if (qualifiesForFreeShipping(cart, totalWeight)) { 
-shipping = 0; 
-} 
-else if (selectedCountry === "US") {
- shipping = calculateUSPSDomestic(totalWeight, shippingType); 
-} 
-else { 
-shipping = calculateUSPSInternational(totalWeight); 
-} shippingEl.textContent = 
-shipping === 0
- ? "FREE 💕"
- : ${getShippingLabel(shippingType, 
-selectedCountry)} - $${shipping.toFixed(2)}; 
+  const selectedCountry = country.value || "US";
+  shippingType = getShippingType(cart);
+
+  if (qualifiesForFreeShipping(cart, totalWeight)) {
+    shipping = 0;
+  } else if (selectedCountry === "US") {
+    shipping = calculateUSPSDomestic(totalWeight, shippingType);
+  } else {
+    shipping = calculateUSPSInternational(totalWeight);
+  }
+
+  shippingEl.textContent =
+    shipping === 0
+      ? "FREE 💕"
+      : `${getShippingLabel(shippingType, selectedCountry)} - $${shipping.toFixed(2)}`;
 }
+
 
 
 // ======================= 
 // DISCOUNTS 
 // ======================= 
 const DISCOUNTS = { "WELCOME10": 0.10, "LILTHINGS": 5.00 }; 
-function applyDiscount(code) { if (!DISCOUNTS[code]) return 0; 
-return DISCOUNTS[code] < 1 ? subtotal * DISCOUNTS[code] : DISCOUNTS[code]; }
+function applyDiscount(code) {
+  if (!DISCOUNTS[code]) return 0;
 
+  discount =
+    DISCOUNTS[code] < 1
+      ? subtotal * DISCOUNTS[code]
+      : DISCOUNTS[code];
 
+  updateTotals();
+}
 
 
 // =======================
@@ -130,25 +168,9 @@ let shipping = 0;
 let tax = 0;
 let elements;
 
-// =======================
-// CART RENDER
-// =======================
-function renderCart() {
-  itemsEl.innerHTML = "";
-  subtotal = 0;
-  totalWeight = 0;
 
-  cart.forEach(item => {
-    subtotal += item.price * item.qty;
-    totalWeight += resolveWeight(item) * itrm.qty;
-    itemsEl.innerHTML += `
-      <div class="summary-item">
-        <span>${item.name} × ${item.qty}</span>
-        <span>$${(item.price * item.qty).toFixed(2)}</span>
-      </div>
-    `;
-  });
-}
+
+
 
 // =======================
 // ADDRESS VALIDATION
@@ -162,18 +184,19 @@ function isAddressComplete() {
 // TOTALS
 // =======================
 function updateTotals() {
+  updateShipping();
+
   const stateCode = stateInput.value.toUpperCase();
   tax = subtotal * (TAX_RATES[stateCode] ?? TAX_RATES.default);
-  shipping = subtotal > 0 ? 3.5 : 0;
+
+  const total = subtotal - discount + tax + shipping;
 
   taxEl.textContent = `$${tax.toFixed(2)}`;
-  shippingEl.textContent = `$${shipping.toFixed(2)}`;
-
-  const total = subtotal + tax + shipping;
   totalEl.textContent = `$${total.toFixed(2)}`;
 
   localStorage.setItem("cartTotal", Math.round(total * 100));
 }
+
 
 // =======================
 // STRIPE SETUP
@@ -190,6 +213,7 @@ async function setupStripe() {
     cart,
     shipping,
     tax,
+    weight: totalWeight,
    address: {
     name: `${firstName.value} ${lastName.value}`,
     address: address1.value,
@@ -201,11 +225,10 @@ async function setupStripe() {
 })
   });
 
-  const { clientSecret } = await res.json();
+ const { clientSecret } = await res.json();
 
   elements = stripe.elements({ clientSecret });
-  const paymentElement = elements.create("payment");
-  paymentElement.mount("#payment-element");
+  elements.create("payment").mount("#payment-element");
 }
 
 // =======================
