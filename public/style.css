@@ -1456,7 +1456,7 @@ Sticker  Products Section
   font-size: 20px;
   color: #ff66c4;
   flex-wrap: wrap;
-   background: #fffee6;
+   background: #fff;
    background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -1523,7 +1523,7 @@ Sticker  Products Section
 
 
 .sticker-products  {
-    background: #fffee6;
+    background: #fff;
    background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -1651,8 +1651,8 @@ font-weight:600px;
 .about-image{
     background: repeating-linear-gradient(
     90deg,          /* Angle of the stripes */
-    #ffffe8,           /* Color 1 */
-    #ffffe8 10px,      /* Color 1 stop position */
+    #fff,           /* Color 1 */
+    #fff 10px,      /* Color 1 stop position */
     #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
     #ffe2f6 20px       /* Color 2 stop position */
   );
@@ -1761,8 +1761,8 @@ font-weight:600px;
   padding: 80px 50px;
   background: repeating-linear-gradient(
     90deg,          /* Angle of the stripes */
-    #ffffe8,           /* Color 1 */
-    #ffffe8 10px,      /* Color 1 stop position */
+    #fff,           /* Color 1 */
+    #fff 10px,      /* Color 1 stop position */
     #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
     #ffe2f6 20px       /* Color 2 stop position */
   );
@@ -1886,8 +1886,8 @@ margin-top: -20px;
 .contact-container {
     background: repeating-linear-gradient(
     90deg,          /* Angle of the stripes */
-    #ffffe8,           /* Color 1 */
-    #ffffe8 10px,      /* Color 1 stop position */
+    #fff,           /* Color 1 */
+    #fff 10px,      /* Color 1 stop position */
     #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
     #ffe2f6 20px       /* Color 2 stop position */
   );      /* soft pink background */
@@ -1898,7 +1898,7 @@ margin-top: -20px;
 }
 
 .contact-form {
-  background: white;
+  background: #ffe2f6;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -2038,7 +2038,7 @@ margin-top: -20px;
    Product one page 
    ========================= */
 .page-one {
- background: #fffee6;
+ background: #fff;
    background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
