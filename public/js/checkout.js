@@ -218,13 +218,14 @@ async function setupStripe() {
     tax,
     weight: totalWeight,
    address: {
-    name: `${firstName.value} ${lastName.value}`,
-    address: address1.value,
-    city: city.value,
-    state: stateInput.value,
-    zip: zip.value,
-    country: country.value
-  }
+  name: `${firstName.value} ${lastName.value}`,
+  line1: address1.value,   // ✅ MUST be line1
+  city: city.value,
+  state: stateInput.value,
+  zip: zip.value,
+  country: country.value
+}
+
 })
   });
 
