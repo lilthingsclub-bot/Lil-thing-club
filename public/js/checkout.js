@@ -252,15 +252,21 @@ form.addEventListener("submit", async e => {
 
   errorEl.textContent = "";
 
-  // ⬅️ CREATE PAYMENT INTENT NOW (address exists)
-  if (!elements) {
-    await setupStripe();
-  }
-
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
-      return_url: `${window.location.origin}/success.html`
+      return_url: `${window.location.origin}/success.html`,
+
+      shipping: {
+        name: `${firstName.value} ${lastName.value}`,
+        address: {
+          line1: address1.value,
+          city: city.value,
+          state: stateInput.value,
+          postal_code: zip.value,
+          country: country.value
+        }
+      }
     }
   });
 
