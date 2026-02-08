@@ -14,25 +14,37 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Amount is required" });
     }
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: "usd",
-      automatic_payment_methods: { enabled: true },
+  const paymentIntent = await stripe.paymentIntents.create({
+  amount,
+  currency: "usd",
 
-      metadata: {
-        items: JSON.stringify(
-          cart.map(i => `${i.name} x${i.qty}`)
-        ),
-        shipping_cost: shipping?.toString() || "0",
-        tax: tax?.toString() || "0",
-        customer_name: address?.name || "",
-        address_line1: address?.address || "",
-        city: address?.city || "",
-        state: address?.state || "",
-        zip: address?.zip || "",
-        country: address?.country || ""
-      }
-    });
+    shipping: {
+  name: address.name,
+  address: {
+    line1: address.line1,
+    city: address.city,
+    state: address.state,
+    postal_code: address.zip,
+    country: address.country
+  }
+},
+    
+  metadata: {
+    customer_name: address.name,
+    address_line1: address.line1,
+    city: address.city,
+    state: address.state,
+    zip: address.zip,
+    country: address.country,
+
+    shipping_cost: shipping,
+    tax: tax,
+
+    items: cart
+      .map(item => `${item.name} x${item.qty}`)
+      .join(", ")
+  }
+});
 
     res.status(200).json({
       clientSecret: paymentIntent.client_secret
