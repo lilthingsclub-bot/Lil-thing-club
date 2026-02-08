@@ -163,12 +163,6 @@ const TAX_RATES = {
   default: 0.05
 };
 
-let subtotal = 0;
-let shipping = 0;
-let tax = 0;
-let elements;
-
-
 
 
 
@@ -180,6 +174,12 @@ function isAddressComplete() {
   return fields.every(f => f && f.value.trim() !== "");
 }
 
+["change", "blur"].forEach(evt => {
+  country.addEventListener(evt, updateTotals);
+  stateInput.addEventListener(evt, updateTotals);
+});
+
+
 // =======================
 // TOTALS
 // =======================
@@ -189,13 +189,16 @@ function updateTotals() {
   const stateCode = stateInput.value.toUpperCase();
   tax = subtotal * (TAX_RATES[stateCode] ?? TAX_RATES.default);
 
-  const total = subtotal - discount + tax + shipping;
-
   taxEl.textContent = `$${tax.toFixed(2)}`;
+  shippingEl.textContent =
+    shipping === 0 ? "FREE 💕" : `$${shipping.toFixed(2)}`;
+
+  const total = subtotal - discount + tax + shipping;
   totalEl.textContent = `$${total.toFixed(2)}`;
 
   localStorage.setItem("cartTotal", Math.round(total * 100));
 }
+
 
 
 // =======================
