@@ -2704,6 +2704,7 @@ width: 85%;
   display: flex;
   gap: 8px;
   margin: 16px 0;
+  border: 2px solid #ff9fcf;
 }
 
 .discount input {
