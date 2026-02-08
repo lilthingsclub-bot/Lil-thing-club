@@ -1011,8 +1011,8 @@ Friends Section
 .meet-my-friends {
     background: repeating-linear-gradient(
     90deg,          /* Angle of the stripes */
-    #ffffe8,           /* Color 1 */
-    #ffffe8 10px,      /* Color 1 stop position */
+    #fff,           /* Color 1 */
+    #fff 10px,      /* Color 1 stop position */
     #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
     #ffe2f6 20px       /* Color 2 stop position */
   );
@@ -1119,8 +1119,8 @@ position: relative;
 .new-signup {
     background: repeating-linear-gradient(
     90deg,          /* Angle of the stripes */
-    #ffffe8,           /* Color 1 */
-    #ffffe8 10px,      /* Color 1 stop position */
+    #fff,           /* Color 1 */
+    #fff 10px,      /* Color 1 stop position */
     #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
     #ffe2f6 20px       /* Color 2 stop position */
   );
@@ -1397,7 +1397,7 @@ Sticker  Products Section
   display: flex;
   justify-content: center;
   padding: 40px 20px;
-  background: #fffee6;
+  background: #fff;
    background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
