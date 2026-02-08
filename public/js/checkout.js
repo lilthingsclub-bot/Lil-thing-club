@@ -24,22 +24,7 @@ const stateInput = document.getElementById("state");
 const zip = document.getElementById("zip");
 const country = document.getElementById("country");
 
-// =======================
-// CATEGORY WEIGHTS (oz)
-// =======================
-const CATEGORY_WEIGHTS = {
-  "sticker": 0.2,
-  "sticker-sheet": 0.3,
-  "art-print": 1.0,
-  "phone-charm": 1.5,
-  "keychain": 2.0,
-  "crochet-keychain": 4.0,
-  "crochet-plush": 10.0
-};
 
-function resolveWeight(item) {
-  return item.weight || CATEGORY_WEIGHTS[item.category] || 1;
-}
 
 
 
