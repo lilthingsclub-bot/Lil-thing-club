@@ -2543,19 +2543,13 @@ width: 85%;
 /* ===== PAGE LAYOUT ===== */
 
 .checkout-page {
-   background: linear-gradient(
-    90deg,
-    #eaf4ff 0%,
-    #eaf4ff 60%,
-    #ffe6f2 40%,
-    #ffe6f2 100%
-  );
+   
     display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
   align-items: start;
    padding: 0 24px;
-   
+   background: #fff:
      background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -2597,7 +2591,7 @@ width: 85%;
   margin-bottom: 12px;
   border-radius: 14px;
   border: 2px solid #ff9fcf;
-  background: #ffe9f4;
+  background: #fff;
   font-size: 14px;
   outline: none;
 }
