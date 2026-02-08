@@ -212,28 +212,32 @@ async function setupStripe() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-    amount,
-    cart,
-    shipping,
-    tax,
-    weight: totalWeight,
-   address: {
-  name: `${firstName.value} ${lastName.value}`,
-  line1: address1.value,   // ✅ MUST be line1
-  city: city.value,
-  state: stateInput.value,
-  zip: zip.value,
-  country: country.value
-}
-
-})
+      amount,
+      cart,
+      shipping,
+      tax,
+      weight: totalWeight,
+      address: {
+        name: `${firstName.value} ${lastName.value}`,
+        line1: address1.value,
+        city: city.value,
+        state: stateInput.value,
+        zip: zip.value,
+        country: country.value
+      }
+    })
   });
 
- const { clientSecret } = await res.json();
+  const { clientSecret } = await res.json();
 
-  elements = stripe.elements({ clientSecret });
-  elements.create("payment").mount("#payment-element");
+  if (!elements) {
+    elements = stripe.elements({ clientSecret });
+    elements.create("payment").mount("#payment-element");
+  } else {
+    elements.update({ clientSecret });
+  }
 }
+
 
 // =======================
 // SUBMIT
