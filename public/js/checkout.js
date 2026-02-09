@@ -238,6 +238,32 @@ async function setupStripe() {
   }
 }
 
+async function setupStripe(amount) {
+  console.log("🧠 setupStripe() called with amount:", amount);
+
+  if (!amount || amount <= 0) {
+    console.error("❌ Invalid amount:", amount);
+    return;
+  }
+
+  const res = await fetch("/api/create-payment-intent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount })
+  });
+
+  const data = await res.json();
+  console.log("💳 PaymentIntent response:", data);
+
+  if (!data.clientSecret) return;
+
+  const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+  const elements = stripe.elements({ clientSecret: data.clientSecret });
+
+  elements.create("payment").mount("#payment-element");
+}
+
+
 async function setupStripe() {
   console.log("🧠 setupStripe() called");
 
