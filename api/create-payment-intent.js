@@ -7,3 +7,8 @@ const paymentIntent = await stripe.paymentIntents.create({
     tax
   }
 });
+
+res.status(200).json({
+  clientSecret: paymentIntent.client_secret,
+  paymentIntentId: paymentIntent.id
+});
