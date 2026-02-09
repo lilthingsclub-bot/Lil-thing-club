@@ -216,13 +216,15 @@ async function setupStripe() {
   const res = await fetch("/api/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount })
+    body: JSON.stringify({
+      amount,
+      cart,
+      shipping,
+      tax
+    })
   });
 
-  const data = await res.json({
-  clientSecret: paymentIntent.client_secret,
-  paymentIntentId: paymentIntent.id
-});
+  const data = await res.json();
   console.log("💳 PaymentIntent response:", data);
 
   if (!data.clientSecret) {
@@ -230,10 +232,12 @@ async function setupStripe() {
     return;
   }
 
+  // ✅ SAVE THIS
+  window.paymentIntentId = data.paymentIntentId;
+
   if (!elements) {
     elements = stripe.elements({ clientSecret: data.clientSecret });
-    const paymentElement = elements.create("payment");
-    paymentElement.mount("#payment-element");
+    elements.create("payment").mount("#payment-element");
     console.log("✅ Stripe mounted");
   }
 }
@@ -262,24 +266,27 @@ form.addEventListener("submit", async e => {
 
   errorEl.textContent = "";
 
+  // Ensure Stripe exists
   await ensureStripeMounted();
-  await fetch("/api/update-shipping", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    paymentIntentId: window.paymentIntentId,
-    address: {
-      name: `${firstName.value} ${lastName.value}`,
-      line1: address1.value,
-      city: city.value,
-      state: stateInput.value,
-      zip: zip.value,
-      country: country.value
-    }
-  })
-});
-await stripe.confirmPayment(...)
 
+  // ✅ Send shipping to Stripe BEFORE payment
+  await fetch("/api/update-shipping", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      paymentIntentId: window.paymentIntentId,
+      address: {
+        name: `${firstName.value} ${lastName.value}`,
+        line1: address1.value,
+        city: city.value,
+        state: stateInput.value,
+        zip: zip.value,
+        country: country.value
+      }
+    })
+  });
+
+  // ✅ Confirm payment
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
