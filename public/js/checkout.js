@@ -146,6 +146,27 @@ function applyDiscount(code) {
 
 
 // =======================
+// DISCOUNT UI HANDLER
+// =======================
+const discountInput = document.getElementById("discount-input");
+const applyDiscountBtn = document.getElementById("apply-discount");
+
+applyDiscountBtn.addEventListener("click", () => {
+  const code = discountInput.value.trim().toUpperCase();
+
+  if (!DISCOUNTS[code]) {
+    errorEl.textContent = "Invalid discount code 💔";
+    return;
+  }
+
+  errorEl.textContent = "";
+  applyDiscount(code);
+});
+
+discountInput.addEventListener("input", () => {
+  errorEl.textContent = "";
+});
+// =======================
 // LOAD CART
 // =======================
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
