@@ -264,34 +264,6 @@ async function setupStripe(amount) {
 }
 
 
-async function setupStripe() {
-  console.log("🧠 setupStripe() called");
-
-  const res = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount: window.orderTotal, // or your total variable
-      shipping: window.shippingData // optional for now
-    })
-  });
-
-  const data = await res.json();
-  console.log("💳 PaymentIntent response:", data);
-
-  if (!data.clientSecret) {
-    console.error("❌ NO clientSecret returned");
-    return;
-  }
-
-  stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-  elements = stripe.elements({ clientSecret: data.clientSecret });
-
-  const paymentElement = elements.create("payment");
-  paymentElement.mount("#payment-element");
-
-  console.log("✅ Stripe mounted");
-}
 
 
 // =======================
