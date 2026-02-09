@@ -252,6 +252,9 @@ form.addEventListener("submit", async e => {
 
   errorEl.textContent = "";
 
+  // ⬅️ Create PaymentIntent AFTER address exists
+  await setupStripe();
+
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
@@ -263,10 +266,9 @@ form.addEventListener("submit", async e => {
 });
 
 
-
 // =======================
 // INIT
 // =======================
 renderCart();
 updateTotals();
-setupStripe(); 
+
