@@ -76,75 +76,151 @@ function resolveWeight(item) {
 // SHIPPING LOGIC 
 // ======================= 
 
-function getShippingType(cart) {
- const bulkyCategories = ["crochet-keychain","crochet-plush","keychain","phone-charm"]; 
-return cart.some(item =>
- bulkyCategories.includes(item.category)) ? "GROUND" : 
-"FLAT_MAIL";
- } 
-function qualifiesForFreeShipping(cart, weightOz) {
- const stickerOnly = cart.every(item => item.category 
-&& item.category.includes("sticker")); 
-return stickerOnly && weightOz <= 3;
- } 
+function isDigitalOnly(cart) {
+  return cart.every(item => item.type === "digital");
+}
+
+function isStickerOnly(cart) {
+  return cart.every(item =>
+    item.category &&
+    (item.category.includes("sticker") || item.category.includes("sticker sheet"))
+  );
+}
+
+function hasBulkyItem(cart) {
+  const bulkyCategories = [
+    "crochet-keychain",
+    "crochet-plush",
+    "keychain",
+    "phone-charm"
+  ];
+  return cart.some(item => bulkyCategories.includes(item.category));
+}
+
+
+function getShippingType(cart, weightOz) {
+  if (isDigitalOnly(cart)) return "DIGITAL";
+
+  if (isStickerOnly(cart) && weightOz <= 3) {
+    return "UNTRACKED";
+  }
+
+  if (hasBulkyItem(cart)) {
+    return "GROUND";
+  }
+
+  return "FIRST_CLASS";
+}
+
+
+function qualifiesForFreeShipping(cart, subtotal) {
+  const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  if (subtotal >= 20) return true;
+  if (itemCount >= 6) return true;
+
+  return false;
+}
+
+
 function calculateUSPSDomestic(weightOz, shippingType) {
- if (shippingType === "FLAT_MAIL") {
-if (weightOz <= 0.2) return .75; 
-   if (weightOz <= 0.3) return .75; 
-if (weightOz <= 1) return 1.50; 
-if (weightOz <= 3) return 2.50; 
-if (weightOz <= 6) return 3.50;
- } 
-if (weightOz <= 8) return 5.50; 
-if (weightOz <= 12) return 6.50; 
-if (weightOz <= 16) return 7.50; 
-if (weightOz <= 32) return 8.50;
- return 10.50;
- }
- function calculateUSPSInternational(weightOz) {
- if (weightOz <= 4) return 15.00;
- if (weightOz <= 8) return 18.00;
- if (weightOz <= 16) return 22.00;
- return 28.00; 
-} 
-function getShippingLabel(shippingType, country) {
- if (country !== "US") return "USPS International"; 
-return shippingType === "FLAT_MAIL" ? "USPS First-Class" : "USPS Ground"; 
-} 
+  if (shippingType === "UNTRACKED") {
+    if (weightOz < 1) return 0.75;
+    if (weightOz <= 1) return 1.50;
+    if (weightOz <= 3) return 2.50;
+    if (weightOz <= 6) return 3.50;
+  }
+
+  // Tracked
+  if (weightOz <= 8) return 5.50;
+  if (weightOz <= 12) return 6.50;
+  if (weightOz <= 16) return 7.50;
+  if (weightOz <= 32) return 8.50;
+
+  return 10.50;
+}
+
+function calculateUSPSInternational(weightOz) {
+  if (weightOz <= 4) return 15.00;
+  if (weightOz <= 8) return 18.00;
+  if (weightOz <= 16) return 22.00;
+  return 28.00;
+}
+
+
+function calculateShipping(cart, weightOz, subtotal, country) {
+  if (isDigitalOnly(cart)) return 0;
+
+  if (qualifiesForFreeShipping(cart, subtotal)) return 0;
+
+  const shippingType = getShippingType(cart, weightOz);
+
+  if (country !== "US") {
+    return calculateUSPSInternational(weightOz);
+  }
+
+  return calculateUSPSDomestic(weightOz, shippingType);
+}
+
+
+
+function getShippingLabel(cart, weightOz, subtotal, country) {
+  if (isDigitalOnly(cart)) return "Digital delivery";
+
+  if (qualifiesForFreeShipping(cart, subtotal)) {
+    return "Free shipping 💕";
+  }
+
+  if (country !== "US") return "USPS International";
+
+  const type = getShippingType(cart, weightOz);
+
+  switch (type) {
+    case "UNTRACKED":
+      return "Untracked mail";
+    case "GROUND":
+      return "USPS Ground";
+    default:
+      return "USPS First-Class";
+  }
+}
+
+
 function updateShipping() {
   const selectedCountry = country.value || "US";
-  shippingType = getShippingType(cart);
 
-  if (qualifiesForFreeShipping(cart, totalWeight)) {
-    shipping = 0;
-  } else if (selectedCountry === "US") {
-    shipping = calculateUSPSDomestic(totalWeight, shippingType);
-  } else {
-    shipping = calculateUSPSInternational(totalWeight);
-  }
+  shipping = calculateShipping(cart, totalWeight, subtotal, selectedCountry);
 
   shippingEl.textContent =
     shipping === 0
       ? "FREE 💕"
-      : `${getShippingLabel(shippingType, selectedCountry)} - $${shipping.toFixed(2)}`;
+      : `${getShippingLabel(cart, totalWeight, subtotal, selectedCountry)} – $${shipping.toFixed(2)}`;
 }
+
+
 
 
 
 // ======================= 
 // DISCOUNTS 
 // ======================= 
-const DISCOUNTS = { "WELCOME10": 0.10, "LILTHINGS": 5.00 }; 
+const DISCOUNTS = {
+  WELCOME10: { type: "percent", value: 0.10 },
+  LIL5: { type: "fixed", value: 5.00 }
+};
 function applyDiscount(code) {
-  if (!DISCOUNTS[code]) return 0;
+  const rule = DISCOUNTS[code];
+  if (!rule) return;
 
-  discount =
-    DISCOUNTS[code] < 1
-      ? subtotal * DISCOUNTS[code]
-      : DISCOUNTS[code];
+  if (rule.type === "percent") {
+    discount = subtotal * rule.value;
+  } else {
+    discount = rule.value;
+  }
 
   updateTotals();
 }
+
 
 
 // =======================
@@ -213,14 +289,24 @@ function updateTotals() {
   tax = subtotal * (TAX_RATES[stateCode] ?? TAX_RATES.default);
 
   taxEl.textContent = `$${tax.toFixed(2)}`;
-  shippingEl.textContent =
-    shipping === 0 ? "FREE 💕" : `$${shipping.toFixed(2)}`;
+
+  // DISCOUNT DISPLAY
+  const discountRow = document.getElementById("discount-row");
+  const discountAmountEl = document.getElementById("discount-amount");
+
+  if (discount > 0) {
+    discountRow.style.display = "flex";
+    discountAmountEl.textContent = `-$${discount.toFixed(2)}`;
+  } else {
+    discountRow.style.display = "none";
+  }
 
   const total = subtotal - discount + tax + shipping;
   totalEl.textContent = `$${total.toFixed(2)}`;
 
   localStorage.setItem("cartTotal", Math.round(total * 100));
 }
+
 
 
 
