@@ -238,10 +238,17 @@ async function setupStripe() {
   }
 }
 
-
 // =======================
 // SUBMIT
 // =======================
+
+async function ensureStripeMounted() {
+  if (elements) return; // already mounted
+
+  await setupStripe();
+}
+
+
 form.addEventListener("submit", async e => {
   e.preventDefault();
 
@@ -252,8 +259,8 @@ form.addEventListener("submit", async e => {
 
   errorEl.textContent = "";
 
-  // ⬅️ Create PaymentIntent AFTER address exists
-  await setupStripe();
+  // ⬅️ Mount Stripe AFTER address exists
+  await ensureStripeMounted();
 
   const { error } = await stripe.confirmPayment({
     elements,
