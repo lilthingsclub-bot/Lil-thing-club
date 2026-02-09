@@ -197,6 +197,11 @@ function updateShipping() {
       : `${getShippingLabel(cart, totalWeight, subtotal, selectedCountry)} – $${shipping.toFixed(2)}`;
 }
 
+function hasPromoFreeShipping(cart, subtotal) {
+  const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  return subtotal >= 20 || itemCount >= 6;
+}
+
 
 
 
@@ -209,17 +214,24 @@ const DISCOUNTS = {
   LIL5: { type: "fixed", value: 5.00 }
 };
 function applyDiscount(code) {
-  const rule = DISCOUNTS[code];
-  if (!rule) return;
-
-  if (rule.type === "percent") {
-    discount = subtotal * rule.value;
-  } else {
-    discount = rule.value;
+  if (hasPromoFreeShipping(cart, subtotal)) {
+    errorEl.textContent =
+      "Discount codes can’t be combined with free shipping promos 💕";
+    discount = 0;
+    updateTotals();
+    return;
   }
 
-  updateTotals();
-}
+  const rule = DISCOUNTS[code];
+  if (!rule) {
+    errorEl.textContent = "Invalid discount code 💔";
+    return;
+  }
+
+  errorEl.textContent = "";
+
+  if (rule.type ===
+
 
 
 
@@ -301,12 +313,24 @@ function updateTotals() {
     discountRow.style.display = "none";
   }
 
+  const freeShippingHint = document.getElementById("free-shipping-hint");
+const hint = getFreeShippingMessage(cart, subtotal);
+
+if (hint) {
+  freeShippingHint.textContent = hint;
+  freeShippingHint.style.display = "block";
+} else {
+  freeShippingHint.style.display = "none";
+}
+
+
   const total = subtotal - discount + tax + shipping;
   totalEl.textContent = `$${total.toFixed(2)}`;
 
   localStorage.setItem("cartTotal", Math.round(total * 100));
 }
 
+  
 
 
 
