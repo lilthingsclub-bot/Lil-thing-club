@@ -203,6 +203,29 @@ function hasPromoFreeShipping(cart, subtotal) {
 }
 
 
+function getFreeShippingMessage(cart, subtotal) {
+  const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  if (subtotal >= 20 || itemCount >= 6) return null;
+
+  const dollarsLeft = Math.max(0, 20 - subtotal).toFixed(2);
+  const itemsLeft = Math.max(0, 6 - itemCount);
+
+  if (dollarsLeft > 0 && itemsLeft > 0) {
+    return `Only $${dollarsLeft} or ${itemsLeft} item(s) away from free shipping 💕`;
+  }
+
+  if (dollarsLeft > 0) {
+    return `Only $${dollarsLeft} more for free shipping 💕`;
+  }
+
+  if (itemsLeft > 0) {
+    return `Add ${itemsLeft} more item(s) for free shipping 💕`;
+  }
+
+  return null;
+}
+
 
 
 
@@ -230,7 +253,15 @@ function applyDiscount(code) {
 
   errorEl.textContent = "";
 
-  if (rule.type ===
+  if (rule.type === "percent") {
+    discount = subtotal * rule.value;
+  } else {
+    discount = rule.value;
+  }
+
+  updateTotals();
+}
+
 
 
 
@@ -312,16 +343,6 @@ function updateTotals() {
   } else {
     discountRow.style.display = "none";
   }
-
-  const freeShippingHint = document.getElementById("free-shipping-hint");
-const hint = getFreeShippingMessage(cart, subtotal);
-
-if (hint) {
-  freeShippingHint.textContent = hint;
-  freeShippingHint.style.display = "block";
-} else {
-  freeShippingHint.style.display = "none";
-}
 
 
   const total = subtotal - discount + tax + shipping;
