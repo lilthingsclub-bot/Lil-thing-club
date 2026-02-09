@@ -219,7 +219,10 @@ async function setupStripe() {
     body: JSON.stringify({ amount })
   });
 
-  const data = await res.json();
+  const data = await res.json({
+  clientSecret: paymentIntent.client_secret,
+  paymentIntentId: paymentIntent.id
+});
   console.log("💳 PaymentIntent response:", data);
 
   if (!data.clientSecret) {
@@ -260,6 +263,22 @@ form.addEventListener("submit", async e => {
   errorEl.textContent = "";
 
   await ensureStripeMounted();
+  await fetch("/api/update-shipping", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    paymentIntentId: window.paymentIntentId,
+    address: {
+      name: `${firstName.value} ${lastName.value}`,
+      line1: address1.value,
+      city: city.value,
+      state: stateInput.value,
+      zip: zip.value,
+      country: country.value
+    }
+  })
+});
+await stripe.confirmPayment(...)
 
   const { error } = await stripe.confirmPayment({
     elements,
