@@ -255,23 +255,13 @@ form.addEventListener("submit", async e => {
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
-      return_url: `${window.location.origin}/success.html`,
-
-      shipping: {
-        name: `${firstName.value} ${lastName.value}`,
-        address: {
-          line1: address1.value,
-          city: city.value,
-          state: stateInput.value,
-          postal_code: zip.value,
-          country: country.value
-        }
-      }
+      return_url: `${window.location.origin}/success.html`
     }
   });
 
   if (error) errorEl.textContent = error.message;
 });
+
 
 
 // =======================
