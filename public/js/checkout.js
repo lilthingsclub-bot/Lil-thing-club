@@ -202,47 +202,14 @@ function updateTotals() {
 
 
 // =======================
-// STRIPE SETUP
+// STRIPE SETUP (ONE ONLY)
 // =======================
 async function setupStripe() {
   const amount = Number(localStorage.getItem("cartTotal"));
-  if (!amount) return;
-
-  const res = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount,
-      cart,
-      shipping,
-      tax,
-      weight: totalWeight,
-      address: {
-        name: `${firstName.value} ${lastName.value}`,
-        line1: address1.value,
-        city: city.value,
-        state: stateInput.value,
-        zip: zip.value,
-        country: country.value
-      }
-    })
-  });
-
-  const { clientSecret } = await res.json();
-
-  if (!elements) {
-    elements = stripe.elements({ clientSecret });
-    elements.create("payment").mount("#payment-element");
-  } else {
-    elements.update({ clientSecret });
-  }
-}
-
-async function setupStripe(amount) {
-  console.log("🧠 setupStripe() called with amount:", amount);
+  console.log("🧠 setupStripe() amount:", amount);
 
   if (!amount || amount <= 0) {
-    console.error("❌ Invalid amount:", amount);
+    console.error("❌ Invalid amount, Stripe not mounted");
     return;
   }
 
@@ -255,12 +222,17 @@ async function setupStripe(amount) {
   const data = await res.json();
   console.log("💳 PaymentIntent response:", data);
 
-  if (!data.clientSecret) return;
+  if (!data.clientSecret) {
+    console.error("❌ No clientSecret returned");
+    return;
+  }
 
-  const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-  const elements = stripe.elements({ clientSecret: data.clientSecret });
-
-  elements.create("payment").mount("#payment-element");
+  if (!elements) {
+    elements = stripe.elements({ clientSecret: data.clientSecret });
+    const paymentElement = elements.create("payment");
+    paymentElement.mount("#payment-element");
+    console.log("✅ Stripe mounted");
+  }
 }
 
 
@@ -287,7 +259,6 @@ form.addEventListener("submit", async e => {
 
   errorEl.textContent = "";
 
-  // ⬅️ Mount Stripe AFTER address exists
   await ensureStripeMounted();
 
   const { error } = await stripe.confirmPayment({
