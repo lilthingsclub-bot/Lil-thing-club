@@ -88,7 +88,9 @@ function qualifiesForFreeShipping(cart, weightOz) {
 return stickerOnly && weightOz <= 3;
  } 
 function calculateUSPSDomestic(weightOz, shippingType) {
- if (shippingType === "FLAT_MAIL") { 
+ if (shippingType === "FLAT_MAIL") {
+if (weightOz <= 0.2) return .75; 
+   if (weightOz <= 0.3) return .75; 
 if (weightOz <= 1) return 1.50; 
 if (weightOz <= 3) return 2.50; 
 if (weightOz <= 6) return 3.50;
