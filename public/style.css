@@ -2720,6 +2720,13 @@ width: 85%;
   cursor: pointer;
 }
 
+.free-shipping-hint {
+  font-size: 0.85rem;
+  color: #ff7ab6;
+  margin-top: 6px;
+}
+
+
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
