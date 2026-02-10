@@ -2745,8 +2745,13 @@ width: 85%;
   .checkout-left,
   .checkout-right {
     width: 100%;
-     
   }
+
+   .checkout-right {
+  gap: 24px;
+  margin: 0;
+
+}
 
   /* Stack sections inside checkout-left */
 
