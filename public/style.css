@@ -2563,6 +2563,7 @@ width: 85%;
   flex-direction: column;
   gap: 32px;
   margin: 40px auto;
+    grid-area: left;
 }
 
 .checkout-section {
@@ -2647,9 +2648,9 @@ width: 85%;
 }
 
 .checkout-right {
- 
   gap: 32px;
   margin: 40px;
+ grid-area: summary;
 }
 
 .order-summary {
@@ -2734,17 +2735,35 @@ width: 85%;
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
- .checkout-page {
-    display: flex;
-    flex-direction: column;
+  .checkout-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left"
+      "summary";
+    gap: 24px;
   }
-   
-   .checkout-left,
+
+  .checkout-left,
   .checkout-right {
     width: 100%;
+    margin: 0;
   }
-   
-   .checkout-left .checkout-section:nth-of-type(1) {
+
+  /* Stack sections inside checkout-left */
+  .checkout-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* PAYMENT LAST */
+  .checkout-container {
+    order: 3;
+  }
+
+  /* CONTACT */
+  .checkout-left .checkout-section:nth-of-type(1) {
     order: 1;
   }
 
@@ -2753,22 +2772,19 @@ width: 85%;
     order: 2;
   }
 
-  /* ORDER SUMMARY */
+  /* SUMMARY AFTER DELIVERY */
   .checkout-right {
     order: 3;
   }
 
-  /* PAYMENT */
+  /* PAYMENT FINAL */
   .checkout-container {
     order: 4;
-  }
-   
-  .checkout-container {
     width: 100%;
-    margin-top: 1.5rem;
   }
 
-  #payment-form button {
+  #submit {
     width: 100%;
   }
 }
+
