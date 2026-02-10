@@ -2738,9 +2738,6 @@ width: 85%;
   .checkout-page {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "left"
-      "summary";
     gap: 24px;
       padding: 0 24px;
   }
@@ -2752,11 +2749,7 @@ width: 85%;
   }
 
   /* Stack sections inside checkout-left */
-  .checkout-left {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
+
 
   /* PAYMENT LAST */
   .checkout-container {
@@ -2770,12 +2763,12 @@ width: 85%;
 
   /* DELIVERY */
   .checkout-left .checkout-section:nth-of-type(2) {
-    order: 2;
+    order: 3;
   }
 
   /* SUMMARY AFTER DELIVERY */
   .checkout-right {
-    order: 3;
+    order: 2;
   }
 
   /* PAYMENT FINAL */
