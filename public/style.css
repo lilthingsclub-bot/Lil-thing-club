@@ -2725,7 +2725,11 @@ width: 85%;
   color: #ff7ab6;
   margin-top: 6px;
 }
-
+.note-text { 
+   font-size: 15px; 
+   font-weight: bold;
+   text-align: center;
+}
 
 
 /* ===== MOBILE ===== */
