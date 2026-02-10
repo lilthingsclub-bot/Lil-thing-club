@@ -23,6 +23,9 @@ const shippingEl = document.getElementById("shipping-cost");
 const taxEl = document.getElementById("tax-amount");
 const errorEl = document.getElementById("error-message");
 const form = document.getElementById("payment-form");
+const promoMessageRow = document.getElementById("promo-message");
+const promoMessageText = promoMessageRow.querySelector(".note-text");
+
 
 // Address fields
 const firstName = document.getElementById("first-name");
@@ -238,11 +241,13 @@ const DISCOUNTS = {
 };
 function applyDiscount(code) {
   if (hasPromoFreeShipping(cart, subtotal)) {
-    errorEl.textContent =
-      "Discount codes can’t be combined with free shipping promos 💕";
-    discount = 0;
-    updateTotals();
-    return;
+  promoMessageText.textContent =
+  "Discount codes can’t be combined with free shipping promos 💕";
+promoMessageRow.style.display = "flex";
+
+discount = 0;
+updateTotals();
+return;
   }
 
   const rule = DISCOUNTS[code];
