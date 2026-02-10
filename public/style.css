@@ -2745,7 +2745,7 @@ width: 85%;
   .checkout-left,
   .checkout-right {
     width: 100%;
-    margin: 0 ;
+    margin: 0 0 24px 0;
      
   }
 
