@@ -2563,7 +2563,7 @@ width: 85%;
   flex-direction: column;
   gap: 32px;
   margin: 40px auto;
-    grid-area: left;
+   
 }
 
 .checkout-section {
@@ -2650,7 +2650,7 @@ width: 85%;
 .checkout-right {
   gap: 32px;
   margin: 40px;
- grid-area: summary;
+
 }
 
 .order-summary {
