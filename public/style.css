@@ -2738,4 +2738,7 @@ width: 85%;
     grid-template-columns: 1fr;
     
   }
+   #payment-form button{
+      width:100%;
+   }
 }
