@@ -2734,9 +2734,9 @@ width: 85%;
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
-  .checkout-page {
-    grid-template-columns: 1fr;
-    
+ .checkout-page {
+    display: flex;
+    flex-direction: column;
   }
    
    .checkout-left,
