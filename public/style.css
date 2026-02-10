@@ -2738,7 +2738,37 @@ width: 85%;
     grid-template-columns: 1fr;
     
   }
-   #payment-form button{
-      width:100%;
-   }
+   
+   .checkout-left,
+  .checkout-right {
+    width: 100%;
+  }
+   
+   .checkout-left .checkout-section:nth-of-type(1) {
+    order: 1;
+  }
+
+  /* DELIVERY */
+  .checkout-left .checkout-section:nth-of-type(2) {
+    order: 2;
+  }
+
+  /* ORDER SUMMARY */
+  .checkout-right {
+    order: 3;
+  }
+
+  /* PAYMENT */
+  .checkout-container {
+    order: 4;
+  }
+   
+  .checkout-container {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  #payment-form button {
+    width: 100%;
+  }
 }
