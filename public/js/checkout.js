@@ -242,7 +242,7 @@ const DISCOUNTS = {
 function applyDiscount(code) {
   if (hasPromoFreeShipping(cart, subtotal)) {
   promoMessageText.textContent =
-  "Discount codes can’t be combined with free shipping promos 💕";
+  "Free shipping applied -- discounts unavailable ";
 promoMessageRow.style.display = "flex";
 
 discount = 0;
