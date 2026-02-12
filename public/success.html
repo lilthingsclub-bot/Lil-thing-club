@@ -36,17 +36,17 @@
   </nav>
 </header>
 
-  <h1>🎉 Thank you for your order!</h1>
-  <p>Your order has been successfully placed. Here’s a summary:</p>
+<section class="success-hero">
+  <h1>Thank you for your order</h1>
+  <p>Your order has been successfully placed.<br>Here is your receipt</p>
+</section>
 
-  <section class="order-summary" id="order-summary">
-    <h2>Order Summary</h2>
+<section class="receipt-wrapper">
+  <div class="receipt-card">
+
+    <h2 class="receipt-title">RECEIPT</h2>
+
     <div id="items"></div>
-
-    <div class="summary-line">
-      <span>Subtotal</span>
-      <span id="subtotal"></span>
-    </div>
 
     <div class="summary-line">
       <span>Shipping</span>
@@ -68,16 +68,33 @@
       <span id="total"></span>
     </div>
 
-    <div class="summary-line">
-      <span>Shipping Method</span>
-      <span id="shipping-method"></span>
+    <div class="shipping-meta">
+      <div>
+        <strong>Shipping Method</strong>
+        <p id="shipping-method"></p>
+      </div>
+
+      <div>
+        <strong>Destination</strong>
+        <p id="destination"></p>
+      </div>
     </div>
 
-    <div class="summary-line">
-      <span>Destination</span>
-      <span id="destination"></span>
+    <button class="btn-outline">DOWNLOAD</button>
+
+    <div class="receipt-actions">
+      <a href="index.html" class="btn-outline small">HOME</a>
+      <a href="shop.html" class="btn-outline small">CONTINUE SHOPPING</a>
     </div>
-  </section>
+
+  </div>
+</section>
+
+<section class="success-footer">
+  Thank you for visiting Lil Things Club.  
+  Hope your snail mail brings warmth to your heart — can’t wait to see you again 💕
+</section>
+
 
   <script>
     const order = JSON.parse(localStorage.getItem("lastOrder"));
