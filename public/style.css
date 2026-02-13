@@ -2893,8 +2893,7 @@ width: 85%;
 
 /* SHIPPING META */
 .shipping-meta {
-display: grid;
-grid-template-columns: 1fr;
+display: block;
   margin-top: 30px;
   text-align: center;
   color: #FF67C2;
