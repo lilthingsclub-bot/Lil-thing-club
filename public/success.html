@@ -80,7 +80,8 @@
       </div>
     </div>
 
-    <button class="btn-outline">DOWNLOAD</button>
+    <button class="btn-outline" id="download-btn">DOWNLOAD</button>
+
 
     <div class="receipt-actions">
       <a href="index.html" class="btn-outline small">HOME</a>
@@ -140,6 +141,35 @@
     document.getElementById("destination").textContent =
       `${order.address || ""} ${order.state || ""}, ${order.country || ""}`;
   }
+  // DOWNLOAD RECEIPT
+document.getElementById("download-btn").addEventListener("click", () => {
+
+  const receipt = document.querySelector(".receipt-card").innerHTML;
+
+  const newWindow = window.open("", "", "width=800,height=600");
+  newWindow.document.write(`
+    <html>
+      <head>
+        <title>Receipt</title>
+        <style>
+          body { font-family: Arial; padding: 40px; }
+          .summary-item, .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+          }
+        </style>
+      </head>
+      <body>
+        ${receipt}
+      </body>
+    </html>
+  `);
+
+  newWindow.document.close();
+  newWindow.print();
+});
+
 </script>
 
 
