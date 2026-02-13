@@ -2826,7 +2826,7 @@ width: 85%;
   display: flex;
   justify-content: center;
   padding: 40px 20px;
-  background: #FFE6F5;
+  background: #ffe2f6;
 }
 
 
@@ -2839,7 +2839,7 @@ width: 85%;
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 50px, #FFE6F5 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 50px, #ffe2f6 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
@@ -2853,7 +2853,7 @@ width: 85%;
   height: 90px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,  #FFE6F5 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,  #ffe2f6 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
@@ -2904,7 +2904,7 @@ width: 85%;
 display: block;
   margin-top: 30px;
   text-align: center;
-  color: #FF67C2;
+  color: #ffe2f6;
 }
 
 .shipping-meta p {
