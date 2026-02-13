@@ -2969,7 +2969,11 @@ display: block;
 }
 
 
-@media (max-width: 900px) {
-   
+@media (max-width: 565px) {
+   .receipt-wrapper.scallop-top::before {
+ 
+  top: 350px;
+ 
+}
 }
 
