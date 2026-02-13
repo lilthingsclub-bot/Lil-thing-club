@@ -14,7 +14,7 @@ body {
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #ff66c4; /* Change if needed */
+  color: #FF67C2; /* Change if needed */
   
 }
 
@@ -23,7 +23,7 @@ h1, h2 {
    font-family: 'Shrikhand' , sans-serif; 
   font-weight: 500;
   text-transform: none; /* remove if you want uppercase */
-  color: #ff66c4; /* You can customize this */
+  color: #FF67C2; /* You can customize this */
 }
 
 h3, h4 {
@@ -32,7 +32,7 @@ font-family: 'Baloo 2', sans-serif;
   font-weight: 600;
   text-transform: none; /* remove if you want uppercase */
   
-  color: #ff66c4; /* You can customize this */
+  color: #FF67C2; /* You can customize this */
 }
 
 /* =========================
