@@ -96,40 +96,52 @@
 </section>
 
 
-  <script>
-    const order = JSON.parse(localStorage.getItem("lastOrder"));
+<script>
+  const order = JSON.parse(localStorage.getItem("lastOrder"));
 
-    if (!order) {
-      document.getElementById("order-summary").innerHTML = "<p>No order found. Please return to the shop.</p>";
-    } else {
-      const itemsEl = document.getElementById("items");
+  if (!order) {
+    document.querySelector(".receipt-card").innerHTML =
+      "<p>No order found. Please return to the shop.</p>";
+  } else {
 
-      order.items.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "summary-item";
-        div.innerHTML = `
-          <span>${item.name} × ${item.qty}</span>
-          <span>$${(item.price * item.qty).toFixed(2)}</span>
-        `;
-        itemsEl.appendChild(div);
-      });
+    const itemsEl = document.getElementById("items");
 
-      document.getElementById("subtotal").textContent = `$${order.subtotal.toFixed(2)}`;
-      document.getElementById("shipping").textContent = order.shipping === 0 ? "FREE 💕" : `$${order.shipping.toFixed(2)}`;
-      document.getElementById("discount").textContent = order.discount ? `-$${order.discount.toFixed(2)}` : "$0.00";
+    order.items.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "summary-item";
+      div.innerHTML = `
+        <span>${item.name} × ${item.qty}</span>
+        <span>$${(item.price * item.qty).toFixed(2)}</span>
+      `;
+      itemsEl.appendChild(div);
+    });
 
-      const tax = order.country === "US" ? order.total - order.subtotal - order.shipping + order.discount : 0;
-      document.getElementById("tax").textContent = `$${tax.toFixed(2)}`;
+    // Shipping
+    document.getElementById("shipping").textContent =
+      order.shipping === 0 ? "FREE 💕" : `$${order.shipping.toFixed(2)}`;
 
-      document.getElementById("total").textContent = `$${order.total.toFixed(2)}`;
-      document.getElementById("shipping-method").textContent = order.shippingType;
-      document.getElementById("destination").textContent = `${order.state || ""}, ${order.country}`;
-    }
+    // Discount
+    document.getElementById("discount").textContent =
+      order.discount ? `-$${order.discount.toFixed(2)}` : "$0.00";
 
-    // Optional: clear cart and lastOrder after viewing
-    // localStorage.removeItem("cart");
-    // localStorage.removeItem("lastOrder");
-  </script>
+    // Tax (simple version — safer)
+    document.getElementById("tax").textContent =
+      `$${order.tax ? order.tax.toFixed(2) : "0.00"}`;
+
+    // Total
+    document.getElementById("total").textContent =
+      `$${order.total.toFixed(2)}`;
+
+    // Shipping type
+    document.getElementById("shipping-method").textContent =
+      order.shippingType || "Standard";
+
+    // Destination
+    document.getElementById("destination").textContent =
+      `${order.address || ""} ${order.state || ""}, ${order.country || ""}`;
+  }
+</script>
+
 
 </body>
 </html>
