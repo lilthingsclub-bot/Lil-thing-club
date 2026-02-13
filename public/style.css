@@ -2856,7 +2856,7 @@ width: 85%;
 .receipt-wrapper.scallop-bottom::after {
   content: "";
   position: absolute;
-  bottom: -257px;
+  bottom: -253px;
   left: 0;
   width: 100%;
   height: 50px;
@@ -2972,12 +2972,12 @@ display: block;
 @media (max-width: 565px) {
    .receipt-wrapper.scallop-top::before {
  
-  top: 390px;
+  top: 397px;
  
 }
    .receipt-wrapper.scallop-bottom::after {
 
-  bottom: -470px;
+  bottom: -477px;
  
 }
 }
