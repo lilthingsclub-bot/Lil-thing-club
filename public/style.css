@@ -2797,7 +2797,7 @@ width: 85%;
 .success-hero {
   text-align: center;
   padding: 60px 20px;
-  background: #f6e4ee;
+  background: #fff;
 }
 
 
@@ -2818,7 +2818,7 @@ width: 85%;
   display: flex;
   justify-content: center;
   padding: 40px 20px;
-  background: #f6e4ee;
+  background: #FFE6F5;
 }
 
 
@@ -2831,7 +2831,7 @@ width: 85%;
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 50px, #e1ffbc 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 50px, #FFE6F5 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
@@ -2845,14 +2845,14 @@ width: 85%;
   height: 90px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,  #e1ffbc 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,  #FFE6F5 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
 /* RECEIPT CARD */
 .receipt-card {
-  background: #fff0f8;
-  border: 3px solid #ff4fa3;
+  background: #FFE6F5;
+  border: 2px solid #FF67C2;
   border-radius: 40px;
   padding: 50px 40px;
   max-width: 700px;
@@ -2864,7 +2864,7 @@ width: 85%;
 .receipt-title {
   text-align: center;
   font-size: 42px;
-  color: #ff4fa3;
+  color: #FF67C2;
   margin-bottom: 40px;
   letter-spacing: 3px;
 }
@@ -2874,7 +2874,7 @@ width: 85%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
-  color: #ff4fa3;
+  color: #FF67C2;
 }
 
 /* LINES */
@@ -2882,7 +2882,7 @@ width: 85%;
   display: flex;
   justify-content: space-between;
   margin-top: 14px;
-  color: #ff4fa3;
+  color:#FF67C2;
 }
 
 .summary-line.total {
@@ -2895,7 +2895,7 @@ width: 85%;
 .shipping-meta {
   margin-top: 30px;
   text-align: center;
-  color: #ff4fa3;
+  color: #FF67C2;
 }
 
 .shipping-meta p {
