@@ -2797,14 +2797,13 @@ width: 85%;
 .success-hero {
   text-align: center;
   padding: 60px 20px;
-   background: #fffee6;
-    background: repeating-linear-gradient(
-    90deg,          /* Angle of the stripes */
-    #fff,           /* Color 1 */
-    #fff 10px,      /* Color 1 stop position */
-    #effff4 10px,      /* Color 2 start position (same as Color 1 stop) */
-    #effff4 20px       /* Color 2 stop position */
-  );
+     background: #fffee6;
+   background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+   background-size: 39px 35px; /* Sets the spacing between dots */
+   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+
 }
 
 
@@ -2948,13 +2947,12 @@ display: block;
   font-size: 18px;
   font-weight: bold;
     background: #fffee6;
-    background: repeating-linear-gradient(
-    90deg,          /* Angle of the stripes */
-    #fff,           /* Color 1 */
-    #fff 10px,      /* Color 1 stop position */
-    #effff4 10px,      /* Color 2 start position (same as Color 1 stop) */
-    #effff4 20px       /* Color 2 stop position */
-  );
+   background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+   background-size: 39px 35px; /* Sets the spacing between dots */
+   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+
 }
 
 
