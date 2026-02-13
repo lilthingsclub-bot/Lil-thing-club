@@ -2972,7 +2972,7 @@ display: block;
 @media (max-width: 565px) {
    .receipt-wrapper.scallop-top::before {
  
-  top: 397px;
+  top: 395px;
  
 }
    .receipt-wrapper.scallop-bottom::after {
