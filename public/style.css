@@ -2851,7 +2851,7 @@ width: 85%;
 }
 /* RECEIPT CARD */
 .receipt-card {
-  background: #FFE6F5;
+  background: #FFF;
   border: 2px solid #FF67C2;
   border-radius: 40px;
   padding: 50px 40px;
@@ -2893,6 +2893,8 @@ width: 85%;
 
 /* SHIPPING META */
 .shipping-meta {
+display: grid;
+grid-template-columns: 1fr;
   margin-top: 30px;
   text-align: center;
   color: #FF67C2;
@@ -2907,7 +2909,7 @@ width: 85%;
   margin-top: 30px;
   padding: 14px 28px;
   border-radius: 40px;
-  border: 2px solid #ff4fa3;
+  border: 1.5px solid #FF67C2;
   background: transparent;
   color: #ff4fa3;
   font-weight: bold;
