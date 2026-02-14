@@ -445,6 +445,25 @@ form.addEventListener("submit", async e => {
     })
   });
 
+
+  // ✅ SAVE ORDER BEFORE REDIRECT
+const finalTotal = subtotal - discount + tax + shipping;
+
+const orderData = {
+  items: cart,
+  subtotal,
+  shipping,
+  tax,
+  discount,
+  total: finalTotal,
+  shippingType: getShippingLabel(cart, totalWeight, subtotal, country.value),
+  address: address1.value,
+  state: stateInput.value,
+  country: country.value
+};
+
+localStorage.setItem("lastOrder", JSON.stringify(orderData));
+
   // ✅ Confirm payment
   const { error } = await stripe.confirmPayment({
     elements,
