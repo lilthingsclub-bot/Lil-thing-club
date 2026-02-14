@@ -417,6 +417,7 @@ async function ensureStripeMounted() {
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
+  console.log("🔥 SUBMIT FIRED");
 
   if (!isAddressComplete()) {
     errorEl.textContent = "Please complete your delivery address 💕";
