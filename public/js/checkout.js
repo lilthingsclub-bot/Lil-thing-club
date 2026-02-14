@@ -425,10 +425,38 @@ form.addEventListener("submit", async e => {
 
   errorEl.textContent = "";
 
-  // Ensure Stripe exists
-  await ensureStripeMounted();
+  // Make sure totals are updated
+  const finalShipping = shipping;
+  const finalTax = tax;
+  const finalDiscount = discount;
+  const finalSubtotal = subtotal;
+  const finalTotal = subtotal - discount + tax + shipping;
+  const finalShippingType = getShippingLabel(cart, totalWeight, subtotal, country.value);
 
-  // ✅ Send shipping to Stripe BEFORE payment
+  // Build order object
+  const orderData = {
+    items: cart,
+    subtotal: finalSubtotal,
+    shipping: finalShipping,
+    discount: finalDiscount,
+    tax: finalTax,
+    total: finalTotal,
+    shippingType: finalShippingType,
+    address: address1.value,
+    city: city.value,
+    state: stateInput.value,
+    zip: zip.value,
+    country: country.value
+  };
+
+  // Save order to localStorage
+  localStorage.setItem("lastOrder", JSON.stringify(orderData));
+  console.log("💾 saved lastOrder:", localStorage.getItem("lastOrder"));
+
+  // Slight delay to ensure save completes
+  await new Promise(resolve => setTimeout(resolve, 200));  // 200ms
+
+  // Send shipping to Stripe 
   await fetch("/api/update-shipping", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -445,35 +473,20 @@ form.addEventListener("submit", async e => {
     })
   });
 
-
-  // ✅ SAVE ORDER BEFORE REDIRECT
-const finalTotal = subtotal - discount + tax + shipping;
-
-const orderData = {
-  items: cart,
-  subtotal,
-  shipping,
-  tax,
-  discount,
-  total: finalTotal,
-  shippingType: getShippingLabel(cart, totalWeight, subtotal, country.value),
-  address: address1.value,
-  state: stateInput.value,
-  country: country.value
-};
-
-localStorage.setItem("lastOrder", JSON.stringify(orderData));
-
-  // ✅ Confirm payment
+  // Now confirm payment and let Stripe redirect
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
-      return_url: "http://localhost:3000/success.html"
+      return_url: `${window.location.origin}/success.html`
     }
   });
 
-  if (error) errorEl.textContent = error.message;
+  if (error) {
+    errorEl.textContent = error.message;
+    console.error(error);
+  }
 });
+
 
 
 // =======================
