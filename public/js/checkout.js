@@ -468,7 +468,7 @@ localStorage.setItem("lastOrder", JSON.stringify(orderData));
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
-      return_url: `${window.location.origin}/success.html`
+      return_url: "http://localhost:3000/success.html"
     }
   });
 
