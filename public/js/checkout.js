@@ -1,5 +1,6 @@
-console.log("✅ checkout.js loaded");
 
+console.log("✅ checkout.js loaded");
+document.addEventListener("DOMContentLoaded", () => {
 let subtotal = 0;
 let shipping = 0;
 let tax = 0;
@@ -496,4 +497,6 @@ form.addEventListener("submit", async e => {
 renderCart();
 updateTotals();
 setupStripe();
+
+});
 
