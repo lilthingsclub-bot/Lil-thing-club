@@ -13,16 +13,17 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Amount is required" });
     }
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: "usd",
-      metadata: {
-        items: cart.map(i => `${i.name} x${i.qty}`).join(", "),
-        shipping_cost: shipping.toFixed(2),
-        tax: tax.toFixed(2)
-      }
-    });
-
+   const paymentIntent = await stripe.paymentIntents.create({
+  amount,
+  currency: "usd",
+  metadata: {
+    items: JSON.stringify(cart),
+    subtotal: subtotal,
+    shipping: shipping,
+    tax: tax,
+    discount: discount
+  }
+});
     res.status(200).json({
       clientSecret: paymentIntent.client_secret,
       paymentIntentId: paymentIntent.id
