@@ -1,36 +1,36 @@
 import Stripe from "stripe";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
   try {
-    const { amount, cart = [], shipping = 0, tax = 0 } = req.body;
+    const {
+      amount,
+      cart,
+      subtotal = 0,
+      shipping = 0,
+      tax = 0,
+      discount = 0
+    } = req.body;
 
-    if (!amount || amount <= 0) {
-      return res.status(400).json({ error: "Amount is required" });
-    }
-
-   const paymentIntent = await stripe.paymentIntents.create({
-  amount,
-  currency: "usd",
-  metadata: {
-    items: JSON.stringify(cart),
-    subtotal: subtotal,
-    shipping: shipping,
-    tax: tax,
-    discount: discount
-  }
-});
-    res.status(200).json({
-      clientSecret: paymentIntent.client_secret,
-      paymentIntentId: paymentIntent.id
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: "usd",
+      metadata: {
+        items: JSON.stringify(cart || []),
+        subtotal: String(subtotal),
+        shipping: String(shipping),
+        tax: String(tax),
+        discount: String(discount)
+      }
     });
 
-  } catch (err) {
-    console.error("❌ Stripe error:", err);
-    res.status(500).json({ error: err.message });
+    res.status(200).json({
+      clientSecret: paymentIntent.client_secret
+    });
+
+  } catch (error) {
+    console.error("❌ Stripe error:", error);
+    res.status(500).json({ error: error.message });
   }
 }
