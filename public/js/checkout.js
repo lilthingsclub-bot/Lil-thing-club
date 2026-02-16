@@ -13,7 +13,7 @@ let elements;
 // =======================
 // STRIPE INIT
 // =======================
-const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90");
+const stripe = Stripe("pk_live_51RlDSnAwiQXA8rArpM7tGeciUvTB9eCuTXQsSARiDt8d0vDE96AfxEAoyQZFnCNVJ67c2IBBH9R0DBRZRCxm7AMr00BulSGmwF");
 
 // =======================
 // DOM ELEMENTS
