@@ -374,15 +374,18 @@ async function setupStripe() {
   }
 
   const res = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount,
-      cart,
-      shipping,
-      tax
-    })
-  });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    amount,
+    cart,
+    subtotal,
+    shipping,
+    tax,
+    discount,
+    customerEmail: email
+  })
+});
 
   const data = await res.json();
   console.log("💳 PaymentIntent response:", data);
