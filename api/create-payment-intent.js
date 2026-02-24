@@ -44,7 +44,15 @@ module.exports = async function handler(req, res) {
         subtotal: String(subtotal),
         shipping: String(shippingNum),
         tax: String(taxNum),
-        discount: String(discountNum)
+        discount: String(discountNum),
+        first_name: firstName,
+        last_name: lastName,
+        address: address,
+        apartment: apartment || "",
+        city: city,
+        state: state,
+       zip: zip,
+       country: country
       }
     });
 
