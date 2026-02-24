@@ -10,8 +10,13 @@ export default async function handler(req, res) {
       subtotal = 0,
       shipping = 0,
       tax = 0,
-      discount = 0
+      discount = 0,
+      customerEmail   // ✅ ADD THIS
     } = req.body;
+
+    if (!amount) {
+      return res.status(400).json({ error: "Amount is required" });
+    }
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
@@ -21,8 +26,8 @@ export default async function handler(req, res) {
         subtotal: String(subtotal),
         shipping: String(shipping),
         tax: String(tax),
-        email: String(customerEmail),
-        discount: String(discount)
+        discount: String(discount),
+        email: customerEmail || ""   // ✅ SAFE
       }
     });
 
