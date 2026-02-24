@@ -379,11 +379,18 @@ async function setupStripe() {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     cart,
-    subtotal,
     shipping,
     tax,
     discount,
-    customerEmail: emailInput?.value || null
+    customerEmail,
+    firstName,
+    lastName,
+    address,
+    apartment,
+    city,
+    state,
+    zip,
+    country
   })
 });
 
