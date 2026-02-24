@@ -428,12 +428,13 @@ async function ensureStripeMounted() {
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
-  await setupStripe();
+ 
 
   if (!isAddressComplete()) {
     errorEl.textContent = "Please complete your delivery address 💕";
     return;
   }
+   await setupStripe();
 
   errorEl.textContent = "";
 
