@@ -382,15 +382,15 @@ async function setupStripe() {
     shipping,
     tax,
     discount,
-    customerEmail,
-    firstName,
-    lastName,
-    address,
-    apartment,
-    city,
-    state,
-    zip,
-    country
+    customerEmail: emailInput.value,
+    firstName: firstName.value,
+    lastName: lastName.value,
+    address: address1.value,
+    apartment: "", // optional for now (add input later if you want)
+    city: city.value,
+    state: stateInput.value,
+    zip: zip.value,
+    country: country.value
   })
 });
 
