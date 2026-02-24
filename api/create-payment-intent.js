@@ -64,9 +64,10 @@ module.exports = async function handler(req, res) {
       }
     });
 
-    res.status(200).json({
-      clientSecret: paymentIntent.client_secret
-    });
+   res.status(200).json({
+  clientSecret: paymentIntent.client_secret,
+  paymentIntentId: paymentIntent.id
+});
 
   } catch (error) {
     console.error("❌ Stripe error:", error);
