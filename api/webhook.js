@@ -49,14 +49,25 @@ module.exports = async function handler(req, res) {
 
     const { error } = await supabase.from("orders").insert([
       {
-        stripe_payment_id: paymentIntent.id,
-        customer_email: paymentIntent.receipt_email || null,
-        items: items,
-        subtotal: Number(paymentIntent.metadata.subtotal || 0),
-        shipping: Number(paymentIntent.metadata.shipping || 0),
-        tax: Number(paymentIntent.metadata.tax || 0),
-        discount: Number(paymentIntent.metadata.discount || 0),
-        total: paymentIntent.amount / 100
+       stripe_payment_id: paymentIntent.id,
+       customer_email: paymentIntent.receipt_email || null,
+
+       first_name: paymentIntent.metadata.first_name || null,
+       last_name: paymentIntent.metadata.last_name || null,
+       address: paymentIntent.metadata.address || null,
+       apartment: paymentIntent.metadata.apartment || null,
+       city: paymentIntent.metadata.city || null,
+       state: paymentIntent.metadata.state || null,
+       zip: paymentIntent.metadata.zip || null,
+       country: paymentIntent.metadata.country || null,
+
+       items: items,
+       subtotal: Number(paymentIntent.metadata.subtotal || 0),
+       shipping: Number(paymentIntent.metadata.shipping || 0),
+       tax: Number(paymentIntent.metadata.tax || 0),
+      discount: Number(paymentIntent.metadata.discount || 0),
+      total: paymentIntent.amount / 100,
+      status: "pending"
       }
     ]);
 
