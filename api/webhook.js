@@ -1,5 +1,5 @@
-import Stripe from "stripe";
-import { createClient } from "@supabase/supabase-js";
+const Stripe = require("stripe");
+const { createClient } = require("@supabase/supabase-js");
 
 export const config = {
   api: {
@@ -14,9 +14,8 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const sig = req.headers["stripe-signature"];
-
   let event;
 
   try {
@@ -38,36 +37,36 @@ export default async function handler(req, res) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // ✅ HANDLE SUCCESSFUL PAYMENT
-if (event.type === "payment_intent.succeeded") {
-  const paymentIntent = event.data.object;
+  if (event.type === "payment_intent.succeeded") {
+    const paymentIntent = event.data.object;
 
-  let items = [];
-  try {
-    items = JSON.parse(paymentIntent.metadata.items || "[]");
-  } catch (err) {
-    console.error("❌ Failed to parse items:", err);
-  }
-
-  const { error } = await supabase.from("orders").insert([
-    {
-      stripe_payment_id: paymentIntent.id,
-      customer_email: paymentIntent.metadata.email || null,
-      items: items,
-      subtotal: Number(paymentIntent.metadata.subtotal || 0),
-      shipping: Number(paymentIntent.metadata.shipping || 0),
-      tax: Number(paymentIntent.metadata.tax || 0),
-      discount: Number(paymentIntent.metadata.discount || 0),
-      total: paymentIntent.amount / 100
+    let items = [];
+    try {
+      items = JSON.parse(paymentIntent.metadata.items || "[]");
+    } catch (err) {
+      console.error("❌ Failed to parse items:", err);
     }
-  ]);
 
-  if (error) {
-    console.error("❌ Supabase insert error:", error);
-    return res.status(500).json({ error });
+    const { error } = await supabase.from("orders").insert([
+      {
+        stripe_payment_id: paymentIntent.id,
+        customer_email: paymentIntent.receipt_email || null,
+        items: items,
+        subtotal: Number(paymentIntent.metadata.subtotal || 0),
+        shipping: Number(paymentIntent.metadata.shipping || 0),
+        tax: Number(paymentIntent.metadata.tax || 0),
+        discount: Number(paymentIntent.metadata.discount || 0),
+        total: paymentIntent.amount / 100
+      }
+    ]);
+
+    if (error) {
+      console.error("❌ Supabase insert error:", error);
+      return res.status(500).json({ error });
+    }
+
+    console.log("✅ Order saved to database");
   }
 
-  console.log("✅ Order saved to database");
-}
-
-res.status(200).json({ received: true });
+  res.status(200).json({ received: true });
+};
