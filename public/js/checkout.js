@@ -403,10 +403,8 @@ async function setupStripe() {
   }
 
   // ✅ SAVE THIS
- res.status(200).json({
-  clientSecret: paymentIntent.client_secret,
-  paymentIntentId: paymentIntent.id
-});
+window.paymentIntentId = data.paymentIntentId;
+
 
   if (!elements) {
     elements = stripe.elements({ clientSecret: data.clientSecret });
