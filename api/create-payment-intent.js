@@ -5,29 +5,41 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   try {
     const {
-      amount,
-      cart,
-      subtotal = 0,
+      cart = [],
       shipping = 0,
       tax = 0,
       discount = 0,
-      customerEmail   // ✅ ADD THIS
+      customerEmail
     } = req.body;
 
-    if (!amount) {
-      return res.status(400).json({ error: "Amount is required" });
+    // ✅ 1. Calculate subtotal from cart (server-side)
+    let subtotal = 0;
+
+    cart.forEach((item) => {
+      subtotal += item.price * item.quantity;
+    });
+
+    // ✅ 2. Calculate final total
+    const finalTotal = subtotal + shipping + tax - discount;
+
+    if (finalTotal <= 0) {
+      return res.status(400).json({ error: "Invalid total amount" });
     }
 
+    // Stripe needs cents
+    const amountInCents = Math.round(finalTotal * 100);
+
+    // ✅ 3. Create payment intent securely
     const paymentIntent = await stripe.paymentIntents.create({
-      amount,
+      amount: amountInCents,
       currency: "usd",
+      receipt_email: customerEmail,
       metadata: {
-        items: JSON.stringify(cart || []),
+        items: JSON.stringify(cart),
         subtotal: String(subtotal),
         shipping: String(shipping),
         tax: String(tax),
-        discount: String(discount),
-        email: customerEmail || ""   // ✅ SAFE
+        discount: String(discount)
       }
     });
 
