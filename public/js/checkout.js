@@ -437,7 +437,7 @@ form.addEventListener("submit", async e => {
   }
   
   errorEl.textContent = "";
- await setupStripe();
+ 
 
   // Make sure totals are updated
   const finalShipping = shipping;
@@ -511,6 +511,7 @@ form.addEventListener("submit", async e => {
 // =======================
 renderCart();
 updateTotals();
+setupStripe();
 
 
 });
