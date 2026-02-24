@@ -510,7 +510,7 @@ form.addEventListener("submit", async e => {
 // =======================
 renderCart();
 updateTotals();
-await setupStripe();
+setupStripe();
 
 
 });
