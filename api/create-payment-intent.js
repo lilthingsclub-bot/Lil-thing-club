@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     let subtotal = 0;
 
     cart.forEach((item) => {
-      subtotal += item.price * item.quantity;
+      subtotal += item.price * item.qty;
     });
 
     // ✅ 2. Calculate final total
