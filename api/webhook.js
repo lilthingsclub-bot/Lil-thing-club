@@ -42,22 +42,32 @@ export default async function handler(req, res) {
 if (event.type === "payment_intent.succeeded") {
   const paymentIntent = event.data.object;
 
+  let items = [];
+  try {
+    items = JSON.parse(paymentIntent.metadata.items || "[]");
+  } catch (err) {
+    console.error("❌ Failed to parse items:", err);
+  }
+
   const { error } = await supabase.from("orders").insert([
     {
       stripe_payment_id: paymentIntent.id,
-      customer_email: paymentIntent.receipt_email,
-      items: JSON.parse(paymentIntent.metadata.items),
-      subtotal: Number(paymentIntent.metadata.subtotal),
-      shipping: Number(paymentIntent.metadata.shipping),
-      tax: Number(paymentIntent.metadata.tax),
-      discount: Number(paymentIntent.metadata.discount),
+      customer_email: paymentIntent.metadata.email || null,
+      items: items,
+      subtotal: Number(paymentIntent.metadata.subtotal || 0),
+      shipping: Number(paymentIntent.metadata.shipping || 0),
+      tax: Number(paymentIntent.metadata.tax || 0),
+      discount: Number(paymentIntent.metadata.discount || 0),
       total: paymentIntent.amount / 100
     }
   ]);
 
   if (error) {
     console.error("❌ Supabase insert error:", error);
-  } else {
-    console.log("✅ Order saved to database");
+    return res.status(500).json({ error });
   }
+
+  console.log("✅ Order saved to database");
 }
+
+res.status(200).json({ received: true });
