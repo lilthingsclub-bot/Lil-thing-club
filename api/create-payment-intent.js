@@ -9,7 +9,15 @@ module.exports = async function handler(req, res) {
       shipping = 0,
       tax = 0,
       discount = 0,
-      customerEmail
+      customerEmail,
+      firstName,
+      lastName,
+      address,
+      apartment,
+      city,
+      state,
+      zip,
+      country
     } = req.body;
 
     // ✅ 1. Calculate subtotal safely
