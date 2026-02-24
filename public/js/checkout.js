@@ -428,6 +428,7 @@ async function ensureStripeMounted() {
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
+  await setupStripe();
 
   if (!isAddressComplete()) {
     errorEl.textContent = "Please complete your delivery address 💕";
@@ -484,7 +485,7 @@ form.addEventListener("submit", async e => {
     })
   });
   
-await setupStripe();
+
   
   // Now confirm payment and let Stripe redirect
   const { error } = await stripe.confirmPayment({
