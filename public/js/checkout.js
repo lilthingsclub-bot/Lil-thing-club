@@ -437,7 +437,8 @@ form.addEventListener("submit", async e => {
   
   errorEl.textContent = "";
  
-
+await setupStripe();
+  
   // Make sure totals are updated
   const finalShipping = shipping;
   const finalTax = tax;
