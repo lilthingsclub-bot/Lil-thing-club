@@ -12,34 +12,39 @@ export default async function handler(req, res) {
       customerEmail
     } = req.body;
 
-    // ✅ 1. Calculate subtotal from cart (server-side)
+    // ✅ 1. Calculate subtotal safely
     let subtotal = 0;
 
     cart.forEach((item) => {
-      subtotal += item.price * item.qty;
+      const price = Number(item.price) || 0;
+      const qty = Number(item.qty) || 0;
+      subtotal += price * qty;
     });
 
-    // ✅ 2. Calculate final total
-    const finalTotal = subtotal + shipping + tax - discount;
+    const shippingNum = Number(shipping) || 0;
+    const taxNum = Number(tax) || 0;
+    const discountNum = Number(discount) || 0;
 
-    if (finalTotal <= 0) {
+    // ✅ 2. Calculate final total
+    const finalTotal = subtotal + shippingNum + taxNum - discountNum;
+
+    if (!finalTotal || finalTotal <= 0) {
       return res.status(400).json({ error: "Invalid total amount" });
     }
 
-    // Stripe needs cents
     const amountInCents = Math.round(finalTotal * 100);
 
-    // ✅ 3. Create payment intent securely
+    // ✅ 3. Create payment intent
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: "usd",
-      receipt_email: customerEmail,
+      receipt_email: customerEmail || undefined,
       metadata: {
         items: JSON.stringify(cart),
         subtotal: String(subtotal),
-        shipping: String(shipping),
-        tax: String(tax),
-        discount: String(discount)
+        shipping: String(shippingNum),
+        tax: String(taxNum),
+        discount: String(discountNum)
       }
     });
 
