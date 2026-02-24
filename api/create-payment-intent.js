@@ -48,19 +48,19 @@ module.exports = async function handler(req, res) {
       currency: "usd",
       receipt_email: customerEmail || undefined,
       metadata: {
-        items: JSON.stringify(cart),
-        subtotal: String(subtotal),
-        shipping: String(shippingNum),
-        tax: String(taxNum),
-        discount: String(discountNum),
-        first_name: firstName,
-        last_name: lastName,
-        address: address,
-        apartment: apartment || "",
-        city: city,
-        state: state,
-       zip: zip,
-       country: country
+       items: JSON.stringify(cart),
+       subtotal: String(subtotal),
+       shipping: String(shippingNum),
+       tax: String(taxNum),
+       discount: String(discountNum),
+       first_name: firstName || "",
+       last_name: lastName || "",
+       address: address || "",
+       apartment: apartment || "",
+       city: city || "",
+       state: state || "",
+       zip: zip || "",
+        country: country || ""
       }
     });
 
