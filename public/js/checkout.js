@@ -483,7 +483,9 @@ form.addEventListener("submit", async e => {
       }
     })
   });
-
+  
+await setupStripe();
+  
   // Now confirm payment and let Stripe redirect
   const { error } = await stripe.confirmPayment({
     elements,
@@ -506,7 +508,7 @@ form.addEventListener("submit", async e => {
 // =======================
 renderCart();
 updateTotals();
-setupStripe();
+
 
 });
 
