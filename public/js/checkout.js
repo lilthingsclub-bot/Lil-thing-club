@@ -437,9 +437,9 @@ form.addEventListener("submit", async e => {
     errorEl.textContent = "Please complete your delivery address 💕";
     return;
   }
-   await setupStripe();
-
+  
   errorEl.textContent = "";
+ await setupStripe();
 
   // Make sure totals are updated
   const finalShipping = shipping;
