@@ -21,6 +21,7 @@ export default async function handler(req, res) {
         subtotal: String(subtotal),
         shipping: String(shipping),
         tax: String(tax),
+        email: String(customerEmail),
         discount: String(discount)
       }
     });
