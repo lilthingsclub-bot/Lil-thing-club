@@ -26,6 +26,7 @@ const errorEl = document.getElementById("error-message");
 const form = document.getElementById("payment-form");
 const promoMessageRow = document.getElementById("promo-message");
 const promoMessageText = promoMessageRow.querySelector(".note-text");
+const emailInput = document.getElementById("email");
 
 
 // Address fields
@@ -377,13 +378,12 @@ async function setupStripe() {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    amount,
     cart,
     subtotal,
     shipping,
     tax,
     discount,
-    customerEmail: email
+    customerEmail: emailInput?.value || null
   })
 });
 
