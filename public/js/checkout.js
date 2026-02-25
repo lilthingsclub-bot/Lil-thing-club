@@ -243,13 +243,15 @@ const DISCOUNTS = {
 };
 function applyDiscount(code) {
   if (hasPromoFreeShipping(cart, subtotal)) {
-  promoMessageText.textContent =
-  "Free shipping applied -- discounts unavailable ";
-promoMessageRow.style.display = "flex";
+    promoMessageText.textContent =
+      "Free shipping applied -- discounts unavailable ";
+    promoMessageRow.style.display = "flex";
 
-discount = 0;
-updateTotals();
-return;
+    discount = 0;
+    updateTotals();
+    elements = null;
+    setupStripe();
+    return;
   }
 
   const rule = DISCOUNTS[code];
@@ -267,6 +269,10 @@ return;
   }
 
   updateTotals();
+
+  // 🔥 THIS IS THE KEY
+  elements = null;
+  setupStripe();
 }
 
 
