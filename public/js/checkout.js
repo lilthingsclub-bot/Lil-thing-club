@@ -510,7 +510,7 @@ await setupStripe();
 // =======================
 renderCart();
 updateTotals();
-
+setupStripe();
 
 
 });
