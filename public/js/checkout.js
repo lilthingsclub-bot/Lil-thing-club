@@ -412,10 +412,12 @@ async function setupStripe() {
 window.paymentIntentId = data.paymentIntentId;
 
 
-  if (!elements) {
-    elements = stripe.elements({ clientSecret: data.clientSecret });
-    elements.create("payment").mount("#payment-element");
-    console.log("✅ Stripe mounted");
+// Always recreate elements cleanly
+const paymentContainer = document.getElementById("payment-element");
+paymentContainer.innerHTML = "";  // clear old element
+
+elements = stripe.elements({ clientSecret: data.clientSecret });
+elements.create("payment").mount("#payment-element");
   }
 }
 
