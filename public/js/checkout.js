@@ -422,7 +422,7 @@ window.paymentIntentId = data.paymentIntentId;
 
 async function ensureStripeMounted() {
   if (elements) return; // already mounted
-
+await setupStripe();
 }
 
 
