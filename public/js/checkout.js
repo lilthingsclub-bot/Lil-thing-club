@@ -436,7 +436,7 @@ form.addEventListener("submit", async e => {
   }
   
   errorEl.textContent = "";
- 
+ elements = null;
 await setupStripe();
   
   // Make sure totals are updated
