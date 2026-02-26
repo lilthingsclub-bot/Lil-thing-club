@@ -418,7 +418,7 @@ paymentContainer.innerHTML = "";  // clear old element
 
 elements = stripe.elements({ clientSecret: data.clientSecret });
 elements.create("payment").mount("#payment-element");
-  }
+  
 }
 
 
