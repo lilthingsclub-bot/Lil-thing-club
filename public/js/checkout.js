@@ -1,19 +1,22 @@
-
 console.log("✅ checkout.js loaded");
-document.addEventListener("DOMContentLoaded", () => {
+
+let stripe;
+let elements;
+let paymentElement;
+let paymentIntentId;
+
 let subtotal = 0;
 let shipping = 0;
 let tax = 0;
 let discount = 0;
 let totalWeight = 0;
-let shippingType = "FLAT_MAIL";
-let elements;
 
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // =======================
 // STRIPE INIT
 // =======================
-const stripe = Stripe("pk_live_51RlDSnAwiQXA8rArpM7tGeciUvTB9eCuTXQsSARiDt8d0vDE96AfxEAoyQZFnCNVJ67c2IBBH9R0DBRZRCxm7AMr00BulSGmwF");
+stripe = Stripe("pk_live_51RlDSnAwiQXA8rArpM7tGeciUvTB9eCuTXQsSARiDt8d0vDE96AfxEAoyQZFnCNVJ67c2IBBH9R0DBRZRCxm7AMr00BulSGmwF");
 
 // =======================
 // DOM ELEMENTS
@@ -38,25 +41,21 @@ const stateInput = document.getElementById("state");
 const zip = document.getElementById("zip");
 const country = document.getElementById("country");
 
+
 // =======================
-// CART RENDER
+// Render Cart + Calculate Totals
 // =======================
-function renderCart() {
-  itemsEl.innerHTML = "";
+
+function calculateTotals() {
+
   subtotal = 0;
   totalWeight = 0;
 
   cart.forEach(item => {
     subtotal += item.price * item.qty;
-    totalWeight += resolveWeight(item) * item.qty;
-
-    itemsEl.innerHTML += `
-      <div class="summary-item">
-        <span>${item.name} × ${item.qty}</span>
-        <span>$${(item.price * item.qty).toFixed(2)}</span>
-      </div>
-    `;
+    totalWeight += (item.weight || 1) * item.qty;
   });
+
 }
 
 // =======================
@@ -77,190 +76,43 @@ function resolveWeight(item) {
 }
 
 
-// ======================= 
-// SHIPPING LOGIC 
-// ======================= 
-
-function isDigitalOnly(cart) {
-  return cart.every(item => item.type === "digital");
-}
-
-function isStickerOnly(cart) {
-  return cart.every(item =>
-    item.category &&
-    (item.category.includes("sticker") || item.category.includes("sticker sheet"))
-  );
-}
-
-function hasBulkyItem(cart) {
-  const bulkyCategories = [
-    "crochet-keychain",
-    "crochet-plush",
-    "keychain",
-    "phone-charm"
-  ];
-  return cart.some(item => bulkyCategories.includes(item.category));
-}
+// =======================
+// shipping logic
+// =======================
 
 
-function getShippingType(cart, weightOz) {
-  if (isDigitalOnly(cart)) return "DIGITAL";
+function calculateShipping(country) {
 
-  if (isStickerOnly(cart) && weightOz <= 3) {
-    return "UNTRACKED";
-  }
-
-  if (hasBulkyItem(cart)) {
-    return "GROUND";
-  }
-
-  return "FIRST_CLASS";
-}
-
-
-function qualifiesForFreeShipping(cart, subtotal) {
-  const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
-  if (subtotal >= 20) return true;
-  if (itemCount >= 6) return true;
-
-  return false;
-}
-
-
-function calculateUSPSDomestic(weightOz, shippingType) {
-  if (shippingType === "UNTRACKED") {
-    if (weightOz < 1) return 0.75;
-    if (weightOz <= 1) return 1.50;
-    if (weightOz <= 3) return 2.50;
-    if (weightOz <= 6) return 3.50;
-  }
-
-  // Tracked
-  if (weightOz <= 8) return 5.50;
-  if (weightOz <= 12) return 6.50;
-  if (weightOz <= 16) return 7.50;
-  if (weightOz <= 32) return 8.50;
-
-  return 10.50;
-}
-
-function calculateUSPSInternational(weightOz) {
-  if (weightOz <= 4) return 15.00;
-  if (weightOz <= 8) return 18.00;
-  if (weightOz <= 16) return 22.00;
-  return 28.00;
-}
-
-
-function calculateShipping(cart, weightOz, subtotal, country) {
-  if (isDigitalOnly(cart)) return 0;
-
-  if (qualifiesForFreeShipping(cart, subtotal)) return 0;
-
-  const shippingType = getShippingType(cart, weightOz);
+  if (subtotal >= 20) return 0;
 
   if (country !== "US") {
-    return calculateUSPSInternational(weightOz);
+    return 15;
   }
 
-  return calculateUSPSDomestic(weightOz, shippingType);
+  if (totalWeight <= 3) return 0.75;
+  if (totalWeight <= 8) return 5.50;
+
+  return 7.50;
 }
 
 
+// =======================
+// discounts
+// =======================
 
-function getShippingLabel(cart, weightOz, subtotal, country) {
-  if (isDigitalOnly(cart)) return "Digital delivery";
-
-  if (qualifiesForFreeShipping(cart, subtotal)) {
-    return "Free shipping 💕";
-  }
-
-  if (country !== "US") return "USPS International";
-
-  const type = getShippingType(cart, weightOz);
-
-  switch (type) {
-    case "UNTRACKED":
-      return "Untracked mail";
-    case "GROUND":
-      return "USPS Ground";
-    default:
-      return "USPS First-Class";
-  }
-}
-
-
-function updateShipping() {
-  const selectedCountry = country.value || "US";
-
-  shipping = calculateShipping(cart, totalWeight, subtotal, selectedCountry);
-
-  shippingEl.textContent =
-    shipping === 0
-      ? "FREE 💕"
-      : `${getShippingLabel(cart, totalWeight, subtotal, selectedCountry)} – $${shipping.toFixed(2)}`;
-}
-
-function hasPromoFreeShipping(cart, subtotal) {
-  const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  return subtotal >= 20 || itemCount >= 6;
-}
-
-
-function getFreeShippingMessage(cart, subtotal) {
-  const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
-  if (subtotal >= 20 || itemCount >= 6) return null;
-
-  const dollarsLeft = Math.max(0, 20 - subtotal).toFixed(2);
-  const itemsLeft = Math.max(0, 6 - itemCount);
-
-  if (dollarsLeft > 0 && itemsLeft > 0) {
-    return `Only $${dollarsLeft} or ${itemsLeft} item(s) away from free shipping 💕`;
-  }
-
-  if (dollarsLeft > 0) {
-    return `Only $${dollarsLeft} more for free shipping 💕`;
-  }
-
-  if (itemsLeft > 0) {
-    return `Add ${itemsLeft} more item(s) for free shipping 💕`;
-  }
-
-  return null;
-}
-
-
-
-
-// ======================= 
-// DISCOUNTS 
-// ======================= 
 const DISCOUNTS = {
   WELCOME10: { type: "percent", value: 0.10 },
-  LIL5: { type: "fixed", value: 5.00 }
+  LIL5: { type: "fixed", value: 5 }
 };
-function applyDiscount(code) {
-  if (hasPromoFreeShipping(cart, subtotal)) {
-    promoMessageText.textContent =
-      "Free shipping applied -- discounts unavailable ";
-    promoMessageRow.style.display = "flex";
 
-    discount = 0;
-    updateTotals();
-    elements = null;
-    setupStripe();
-    return;
-  }
+function applyDiscount(code) {
 
   const rule = DISCOUNTS[code];
+
   if (!rule) {
-    errorEl.textContent = "Invalid discount code 💔";
+    alert("Invalid discount code");
     return;
   }
-
-  errorEl.textContent = "";
 
   if (rule.type === "percent") {
     discount = subtotal * rule.value;
@@ -269,15 +121,9 @@ function applyDiscount(code) {
   }
 
   updateTotals();
+  rebuildStripe();
 
-  // 🔥 THIS IS THE KEY
-  elements = null;
-  setupStripe();
 }
-
-
-
-
 
 // =======================
 // DISCOUNT UI HANDLER
@@ -300,10 +146,7 @@ applyDiscountBtn.addEventListener("click", () => {
 discountInput.addEventListener("input", () => {
   errorEl.textContent = "";
 });
-// =======================
-// LOAD CART
-// =======================
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 
 
 
@@ -336,88 +179,54 @@ function isAddressComplete() {
 
 
 // =======================
-// TOTALS
+// update totals
 // =======================
 function updateTotals() {
-  updateShipping();
 
-  const stateCode = stateInput.value.toUpperCase();
-  tax = subtotal * (TAX_RATES[stateCode] ?? TAX_RATES.default);
+  const country = document.getElementById("country").value || "US";
 
-  taxEl.textContent = `$${tax.toFixed(2)}`;
+  shipping = calculateShipping(country);
 
-  // DISCOUNT DISPLAY
-  const discountRow = document.getElementById("discount-row");
-  const discountAmountEl = document.getElementById("discount-amount");
+  tax = subtotal * 0.05;
 
-  if (discount > 0) {
-    discountRow.style.display = "flex";
-    discountAmountEl.textContent = `-$${discount.toFixed(2)}`;
-  } else {
-    discountRow.style.display = "none";
-  }
-
-
-  const total = subtotal - discount + tax + shipping;
-  totalEl.textContent = `$${total.toFixed(2)}`;
+  const total = subtotal - discount + shipping + tax;
 
   localStorage.setItem("cartTotal", Math.round(total * 100));
+totalEl.textContent = `$${total.toFixed(2)}`;
+shippingEl.textContent = `$${shipping.toFixed(2)}`;
+taxEl.textContent = `$${tax.toFixed(2)}`;
 }
 
-  
 
 
-
-// =======================
-// STRIPE SETUP (ONE ONLY)
-// =======================
-async function setupStripe() {
-  const amount = Number(localStorage.getItem("cartTotal"));
-  console.log("🧠 setupStripe() amount:", amount);
-
-  if (!amount || amount <= 0) {
-    console.error("❌ Invalid amount, Stripe not mounted");
-    return;
-  }
+async function createPaymentIntent() {
 
   const res = await fetch("/api/create-payment-intent", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    cart,
-    shipping,
-    tax,
-    discount,
-    customerEmail: emailInput.value,
-    firstName: firstName.value,
-    lastName: lastName.value,
-    address: address1.value,
-    apartment: "", // optional for now (add input later if you want)
-    city: city.value,
-    state: stateInput.value,
-    zip: zip.value,
-    country: country.value
-  })
-});
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      cart,
+      shipping,
+      tax,
+      discount,
+      customerEmail: emailInput.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      address: address1.value,
+      apartment: "", // optional for now (add input later if you want)
+      city: city.value,
+     state: stateInput.value,
+      zip: zip.value,
+     country: country.value
+    })
+  });
 
   const data = await res.json();
-  console.log("💳 PaymentIntent response:", data);
 
-  if (!data.clientSecret) {
-    console.error("❌ No clientSecret returned");
-    return;
-  }
+  paymentIntentId = data.paymentIntentId;
 
-  // ✅ SAVE THIS
-window.paymentIntentId = data.paymentIntentId;
+  return data.clientSecret;
 
-
-// Always recreate elements cleanly
-const paymentContainer = document.getElementById("payment-element");
-paymentContainer.innerHTML = "";  // clear old element
-
-elements = stripe.elements({ clientSecret: data.clientSecret });
-elements.create("payment").mount("#payment-element");
 }
 
 
@@ -440,9 +249,7 @@ form.addEventListener("submit", async e => {
     return;
   }
   
-  errorEl.textContent = "";
- elements = null;
-await setupStripe();
+  
   
   // Make sure totals are updated
   const finalShipping = shipping;
@@ -509,15 +316,40 @@ await setupStripe();
 });
 
 
+// =======================
+// mount stripe element
+// =======================
 
 
-// =======================
-// INIT
-// =======================
-renderCart();
+
+async function mountStripe() {
+
+  const clientSecret = await createPaymentIntent();
+
+  const container = document.getElementById("payment-element");
+  container.innerHTML = "";
+
+  elements = stripe.elements({ clientSecret });
+
+  paymentElement = elements.create("payment");
+
+  paymentElement.mount("#payment-element");
+
+}
+
+
+async function rebuildStripe() {
+  await mountStripe();
+}
+
+
+
+
+
+
+calculateTotals();
 updateTotals();
-setupStripe();
+mountStripe();
 
 
-});
 
