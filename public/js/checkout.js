@@ -257,7 +257,10 @@ form.addEventListener("submit", async e => {
   const finalDiscount = discount;
   const finalSubtotal = subtotal;
   const finalTotal = subtotal - discount + tax + shipping;
-  const finalShippingType = getShippingLabel(cart, totalWeight, subtotal, country.value);
+ let finalShippingType = "USPS First-Class";
+
+if (shipping === 0) finalShippingType = "Free Shipping";
+if (country.value !== "US") finalShippingType = "USPS International";
 
   // Build order object
   const orderData = {
