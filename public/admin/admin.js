@@ -1,5 +1,5 @@
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "lilthingsclub";
+const ADMIN_USER = "oakin";
+const ADMIN_PASS = "gloverluck12";
 
 const loginForm = document.getElementById("login-form");
 
