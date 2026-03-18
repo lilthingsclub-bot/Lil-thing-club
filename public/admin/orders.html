@@ -21,6 +21,62 @@
 
 
    <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background: #f9fafb;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      background: #ffffff;
+      border-right: 1px solid #eee;
+      padding: 20px;
+      position: fixed;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #333;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      background: #ffe4f1;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: 240px;
+      padding: 30px;
+      width: 100%;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logout {
+      background: #ff8ecf;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
 
      
    </style>
@@ -51,21 +107,23 @@
 </div>
 
       <table border="1">
-  <caption>Employee Schedule</caption>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Role</th>
+      <th>Order id</th>
+      <th>Customer</th>
+       <th>Email</th>
+       <th>Total</th>
+      <th>Status</th>
+        <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Alice</td>
-      <td>Developer</td>
-    </tr>
-    <tr>
-      <td>Bob</td>
-      <td>Designer</td>
+      <td id="order.id"></td>
+      <td id="order.customer_name"></td>
+      <td id="order.customer_email"></td>
+      <td id="order.total"></td>
+       <td id="order.status"></td>
     </tr>
   </tbody>
 </table>
