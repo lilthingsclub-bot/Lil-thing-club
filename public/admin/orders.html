@@ -5,22 +5,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Lil Things Club</title>
-
-  <!-- Fonts -->
+  <title>Orders | Admin</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-  <!-- CSS -->
-
-  <link rel="stylesheet" href="/admin/admin.css">
-
-
-   <style>
+  <style>
     body {
       margin: 0;
       font-family: 'Baloo 2', cursive;
@@ -32,14 +22,10 @@
     .sidebar {
       width: 220px;
       height: 100vh;
-      background: #ffffff;
+      background: white;
       border-right: 1px solid #eee;
       padding: 20px;
       position: fixed;
-    }
-
-    .sidebar h2 {
-      margin-bottom: 30px;
     }
 
     .sidebar a {
@@ -49,7 +35,6 @@
       border-radius: 10px;
       text-decoration: none;
       color: #333;
-      transition: 0.2s;
     }
 
     .sidebar a:hover {
@@ -66,7 +51,6 @@
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
 
     .logout {
@@ -78,58 +62,120 @@
       cursor: pointer;
     }
 
-     
-   </style>
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    tr:hover {
+      background: #fff5fa;
+      cursor: pointer;
+    }
+
+    /* SIDE PANEL */
+    .panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 400px;
+      height: 100vh;
+      background: white;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: 0.3s;
+      overflow-y: auto;
+    }
+
+    .panel.open {
+      right: 0;
+    }
+
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .ship-btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+  </style>
+
 </head>
-  
+
 <body>
 
   <!-- SIDEBAR -->
 
   <div class="sidebar">
     <h2>Admin 💕</h2>
+    <a href="/admin/dashboard.html">Dashboard</a>
+    <a href="/admin/orders.html">Orders</a>
+    <a href="/admin/products.html">Products</a>
+    <a href="/admin/customers.html">Customers</a>
+  </div>
+
+  <!-- MAIN -->
+
+  <div class="main">
+    <div class="header">
+      <h1>Orders</h1>
+      <button class="logout" onclick="logout()">Logout</button>
+    </div>
 
 ```
-<a href="/admin/dashboard.html"><i class="fa fa-chart-line"></i> Dashboard</a>
-<a href="/admin/orders.html"><i class="fa fa-box"></i> Orders</a>
-<a href="/admin/products.html"><i class="fa fa-tag"></i> Products</a>
-<a href="/admin/customers.html"><i class="fa fa-users"></i> Customers</a>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Total</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody id="orders-body"></tbody>
+</table>
 ```
 
   </div>
 
-    <div class="main">
+  <!-- SIDE PANEL -->
+
+  <div id="order-panel" class="panel">
+    <span class="close-btn" onclick="closePanel()">✖</span>
 
 ```
-<div class="header">
-  <h1>Order</h1>
-  <button class="logout" onclick="logout()">Logout</button>
-</div>
+<h2>Order Details</h2>
 
-      <table border="1">
-  <thead>
-    <tr>
-      <th>Order id</th>
-      <th>Customer</th>
-       <th>Email</th>
-       <th>Total</th>
-      <th>Status</th>
-        <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td id="order.id"></td>
-      <td id="order.customer_name"></td>
-      <td id="order.customer_email"></td>
-      <td id="order.total"></td>
-       <td id="order.status"></td>
-    </tr>
-  </tbody>
-</table>
-  
+<div id="order-details"></div>
+
+<button class="ship-btn" onclick="markShipped()">Mark as Shipped</button>
+```
+
+  </div>
+
+  <!-- AUTH -->
+
   <script>
-    // 🔐 Protect page
     if (localStorage.getItem("adminAuth") !== "true") {
       window.location.href = "/admin/login.html";
     }
@@ -140,18 +186,84 @@
     }
   </script>
 
-  <!-- Supabase (make sure you already added this in admin.js or here if needed) -->
+  <!-- Supabase -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  <!-- Your JS -->
+  <!-- JS -->
 
   <script src="/admin/admin.js"></script>
 
   <script>
-    // run dashboard loader
-    loadDashboard();
+    let selectedOrder = null;
+
+    async function loadOrders() {
+      const { data } = await supabase
+        .from("orders")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      const tbody = document.getElementById("orders-body");
+      tbody.innerHTML = "";
+
+      data.forEach(order => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${order.id}</td>
+          <td>${order.customer_email || "N/A"}</td>
+          <td>$${order.total}</td>
+          <td>${order.status || "pending"}</td>
+        `;
+
+        row.onclick = () => openPanel(order);
+
+        tbody.appendChild(row);
+      });
+    }
+
+    function openPanel(order) {
+      selectedOrder = order;
+
+      const details = document.getElementById("order-details");
+
+      details.innerHTML = `
+        <p><strong>Name:</strong> ${order.first_name || ""} ${order.last_name || ""}</p>
+        <p><strong>Email:</strong> ${order.customer_email || ""}</p>
+        <p><strong>Address:</strong> ${order.address || ""}, ${order.city || ""}, ${order.state || ""}, ${order.zip || ""}</p>
+        <p><strong>Country:</strong> ${order.country || ""}</p>
+        <p><strong>Total:</strong> $${order.total}</p>
+
+        <h3>Items:</h3>
+        <ul>
+          ${(order.items || []).map(item => `
+            <li>${item.name} x${item.qty}</li>
+          `).join("")}
+        </ul>
+      `;
+
+      document.getElementById("order-panel").classList.add("open");
+    }
+
+    function closePanel() {
+      document.getElementById("order-panel").classList.remove("open");
+    }
+
+    async function markShipped() {
+      if (!selectedOrder) return;
+
+      await supabase
+        .from("orders")
+        .update({ status: "shipped" })
+        .eq("id", selectedOrder.id);
+
+      closePanel();
+      loadOrders();
+    }
+
+    loadOrders();
   </script>
 
 </body>
 </html>
+
