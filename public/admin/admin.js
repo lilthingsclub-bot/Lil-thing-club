@@ -60,7 +60,10 @@ pending;
 
 }
 
-
+const supabase = window.supabase.createClient(
+  "YOUR_SUPABASE_URL",
+  "YOUR_SUPABASE_ANON_KEY"
+);
 
 
 const tbody = document.getElementById("recent-orders");
