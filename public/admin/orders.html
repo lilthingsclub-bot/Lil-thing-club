@@ -1,44 +1,79 @@
-if(localStorage.getItem("adminAuth") !== "true"){
-  window.location.href="/admin/login.html";
-}
+
 <!DOCTYPE html>
+
 <html lang="en">
-  <head>
-     <meta charset="UTF-8">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lil Things Club | Handmade Cute Gifts & Crafts</title>
- <meta name="description" content="Shop cute handmade stickers, crochet keychains, stationery, and DIY craft kits at Lil Things Club—tiny treasures made with love.">
+  <title>Admin Dashboard | Lil Things Club</title>
 
-  <!-- Fonts & Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico:wght@300;400;500;600;700&family=Shrikhand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
 
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
 
-
-  <link href="https://fonts.googleapis.com/css2?family=Baloo 2:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="style.css">
-  </head>
+
+  <link rel="stylesheet" href="/admin/admin.css">
+
+
+   <style>
+
+     
+   </style>
+</head>
+  
 <body>
 
-<div class="sidebar">
-<a href="/admin/dashboard.html">Dashboard</a>
-<a href="/admin/orders.html">Orders</a>
-<a href="/admin/products.html">Products</a>
-<a href="/admin/customers.html">Customers</a>
+  <!-- SIDEBAR -->
+
+  <div class="sidebar">
+    <h2>Admin 💕</h2>
+
+```
+<a href="/admin/dashboard.html"><i class="fa fa-chart-line"></i> Dashboard</a>
+<a href="/admin/orders.html"><i class="fa fa-box"></i> Orders</a>
+<a href="/admin/products.html"><i class="fa fa-tag"></i> Products</a>
+<a href="/admin/customers.html"><i class="fa fa-users"></i> Customers</a>
+```
+
+  </div>
+
+    <div class="main">
+
+```
+<div class="header">
+  <h1>Order</h1>
+  <button class="logout" onclick="logout()">Logout</button>
 </div>
   
-<h1>Admin Dashboard</h1>
+  <script>
+    // 🔐 Protect page
+    if (localStorage.getItem("adminAuth") !== "true") {
+      window.location.href = "/admin/login.html";
+    }
 
-<div class="stats">
-  <div id="orders-id"></div>
-  <div id="order-customer_email"></div>
-  <div id="order-total"></div>
-  <div id="order-status"></div>
-</div>
+    function logout() {
+      localStorage.removeItem("adminAuth");
+      window.location.href = "/admin/login.html";
+    }
+  </script>
+
+  <!-- Supabase (make sure you already added this in admin.js or here if needed) -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- Your JS -->
+
   <script src="/admin/admin.js"></script>
-    </body>
+
+  <script>
+    // run dashboard loader
+    loadDashboard();
+  </script>
+
+</body>
 </html>
