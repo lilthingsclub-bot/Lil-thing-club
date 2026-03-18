@@ -32,6 +32,7 @@ const promoMessageText = promoMessageRow.querySelector(".note-text");
 const emailInput = document.getElementById("email");
 
 
+
 // Address fields
 const firstName = document.getElementById("first-name");
 const lastName = document.getElementById("last-name");
@@ -201,34 +202,35 @@ taxEl.textContent = `$${tax.toFixed(2)}`;
 
 async function createPaymentIntent() {
 
-  const res = await fetch("/api/create-payment-intent", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    cart,
-    shipping,
-    tax,
-    discount,
-    customerEmail,
+  const customerEmail = emailInput.value; // ✅ FIX HERE
 
-    // ✅ SEND THESE
-    firstName: document.getElementById("firstName").value,
-    lastName: document.getElementById("lastName").value,
-    address: document.getElementById("address").value,
-    apartment: document.getElementById("apartment").value,
-    city: document.getElementById("city").value,
-    state: document.getElementById("state").value,
-    zip: document.getElementById("zip").value,
-    country: document.getElementById("country").value
-  })
-});
+  const res = await fetch("/api/create-payment-intent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      cart,
+      shipping,
+      tax,
+      discount,
+      customerEmail,
+
+      // ✅ FIX FIELD IDS (you had wrong ones too)
+      firstName: firstName.value,
+      lastName: lastName.value,
+      address: address1.value,
+      apartment: document.getElementById("apartment")?.value || "",
+      city: city.value,
+      state: stateInput.value,
+      zip: zip.value,
+      country: country.value
+    })
+  });
 
   const data = await res.json();
 
   paymentIntentId = data.paymentIntentId;
 
   return data.clientSecret;
-
 }
 
 
