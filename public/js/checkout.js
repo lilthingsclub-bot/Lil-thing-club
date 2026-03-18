@@ -202,24 +202,26 @@ taxEl.textContent = `$${tax.toFixed(2)}`;
 async function createPaymentIntent() {
 
   const res = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      cart,
-      shipping,
-      tax,
-      discount,
-      customerEmail: emailInput.value,
-      firstName: firstName.value,
-      lastName: lastName.value,
-      address: address1.value,
-      apartment: "", // optional for now (add input later if you want)
-      city: city.value,
-     state: stateInput.value,
-      zip: zip.value,
-     country: country.value
-    })
-  });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    cart,
+    shipping,
+    tax,
+    discount,
+    customerEmail,
+
+    // ✅ SEND THESE
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    address: document.getElementById("address").value,
+    apartment: document.getElementById("apartment").value,
+    city: document.getElementById("city").value,
+    state: document.getElementById("state").value,
+    zip: document.getElementById("zip").value,
+    country: document.getElementById("country").value
+  })
+});
 
   const data = await res.json();
 
