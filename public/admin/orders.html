@@ -272,7 +272,14 @@
       loadOrders();
     }
 
+   let currentFilter = "all";
+
+function filterOrders(status) {
+  currentFilter = status;
+  loadOrders();
+}
     
+     loadOrders();
 
   </script>
 
