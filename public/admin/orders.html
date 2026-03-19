@@ -274,9 +274,7 @@ if (currentFilter !== "all") {
   query = query.eq("status", currentFilter);
 }
 
-const { data } = await query.order("created_at", { ascending: false }
-    
-    
+
     async function markShipped() {
       if (!selectedOrder) return;
 
