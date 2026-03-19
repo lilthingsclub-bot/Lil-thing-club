@@ -60,15 +60,13 @@ pending;
 
 }
 
-const supabase = window.supabase.createClient(
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
   "https://yqqodiylewlwoemyuzfd.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxcW9kaXlsZXdsd29lbXl1emZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwMTk2NjgsImV4cCI6MjA4NjU5NTY2OH0.nConWK9EWP35QE9J8kktoXWEP6GsAMipkyqRcsmBv4Y"
 );
 
-
-const tbody = document.getElementById("recent-orders");
-
-data.slice(0,5).forEach(order=>{
 
 const row = document.createElement("tr");
 
