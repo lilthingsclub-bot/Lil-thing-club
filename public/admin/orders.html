@@ -256,7 +256,7 @@
     async function markShipped() {
       if (!selectedOrder) return;
 
-      await supabase
+     await supabaseClient
         .from("orders")
         .update({ status: "shipped" })
         .eq("id", selectedOrder.id);
