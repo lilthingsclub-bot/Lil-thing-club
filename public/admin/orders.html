@@ -260,6 +260,14 @@
       document.getElementById("order-panel").classList.remove("open");
     }
 
+    const search = document.getElementById("search").value;
+
+if (search) {
+  query = query.or(
+    `customer_email.ilike.%${search}%,id.ilike.%${search}%`
+  );
+}
+    
     async function markShipped() {
       if (!selectedOrder) return;
 
