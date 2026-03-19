@@ -268,11 +268,7 @@ if (search) {
   );
 }
 
-    let query = supabaseClient.from("orders").select("*");
-
-if (currentFilter !== "all") {
-  query = query.eq("status", currentFilter);
-}
+ 
 
 
     async function markShipped() {
@@ -293,6 +289,14 @@ function filterOrders(status) {
   currentFilter = status;
   loadOrders();
 }
+
+    let query = supabaseClient.from("orders").select("*");
+
+if (currentFilter !== "all") {
+  query = query.eq("status", currentFilter);
+}
+
+const { data } = await query.order("created_at", { ascending: false });
     
      loadOrders();
 
