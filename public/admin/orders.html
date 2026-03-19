@@ -200,34 +200,7 @@
   <script src="/admin/admin.js"></script>
 
   <script>
-  let currentFilter = "all";
 
-function filterOrders(status) {
-  currentFilter = status;
-  loadOrders();
-}
-
-    let query = supabaseClient.from("orders").select("*");
-
-if (currentFilter !== "all") {
-  query = query.eq("status", currentFilter);
-}
-
-const { data } = await query.order("created_at", { ascending: false });
-
-
-    const search = document.getElementById("search").value;
-
-if (search) {
-  query = query.or(
-    `customer_email.ilike.%${search}%,id.ilike.%${search}%`
-  );
-}
-
-
-    
-
-    
     let selectedOrder = null;
 
    async function loadOrders() {
