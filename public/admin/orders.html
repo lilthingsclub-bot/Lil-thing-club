@@ -289,6 +289,8 @@ function filterOrders(status) {
   currentFilter = status;
   loadOrders();
 }
+     loadOrders();
+
 
     let query = supabaseClient.from("orders").select("*");
 
@@ -297,8 +299,6 @@ if (currentFilter !== "all") {
 }
 
 const { data } = await query.order("created_at", { ascending: false });
-    
-     loadOrders();
 
   </script>
 
