@@ -2267,7 +2267,7 @@ margin: 55px;
 .cart-header{
 margin-top:-40px;
  display: grid;
-  grid-template-columns: 450px 200px 200px 50px;
+  grid-template-columns: 470px 200px 200px;
   align-items: center;
  padding: 25px 25px 10px;
  background: #ffe8f7;
@@ -2279,7 +2279,7 @@ width: 100%;
 
 .cart-item {
   display: grid;
-  grid-template-columns: 450px 200px 200px 10px;
+  grid-template-columns: 460px 200px 200px;
   align-items: center;
  background: #ffe8f7;
   border-radius: 25px;
