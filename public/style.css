@@ -2044,7 +2044,6 @@ margin-top: -20px;
     radial-gradient(#ffd5f2 10%, transparent 10%);
    background-size: 39px 35px; /* Sets the spacing between dots */
    Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
-   margin: auto;
 }
 
 
