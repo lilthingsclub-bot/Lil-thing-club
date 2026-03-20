@@ -2092,7 +2092,7 @@ align-items: center;
 .title-row h2{
 font-size: 50px;
 font-weight: 300px;
-line-height: 55px;
+line-height: 50px;
 
 }
 
@@ -2170,10 +2170,8 @@ font: 16px;
   z-index: 1;
 }
 
-
 .might-like h2 { font-size:50px;
 font-weight: 300px;
-
  }
 .carousel1 {
   display: flex;
@@ -2228,7 +2226,14 @@ font-weight: 300px;
 .buy-row { flex-direction: row; }
 
    .shipping {
-width: 50%;
+width: 40%;
+   }
+   .title-row h2{
+font-size: 30px;
+}
+
+   .might-like h2 { font-size:30px;}
+   
 }
 
 
