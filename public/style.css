@@ -2243,7 +2243,7 @@ font-weight: 300px;
    background-size: 39px 35px; /* Sets the spacing between dots */
    Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
 
- padding: 20px 20px;
+ padding: 5px 5px;
   overflow: visible;
   justify-content: center;
   align-items: center;
