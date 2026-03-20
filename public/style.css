@@ -2439,7 +2439,7 @@ width: 85%;
   /* Page layout */
   .cart-page {
     grid-template-columns: 1fr;
-    max-width: 85%;
+  
    
   }
 
