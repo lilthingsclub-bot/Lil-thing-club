@@ -2048,8 +2048,7 @@ margin-top: -20px;
 
 
 .page {
-margin: auto;
-padding: 70px;
+padding: 10px;
 display: grid;
 grid-template-columns: 1fr 1fr;
 gap: 110px;
