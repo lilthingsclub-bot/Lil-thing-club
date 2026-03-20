@@ -54,7 +54,6 @@ function renderCart() {
 
         <div>$${itemTotal.toFixed(2)}</div>
 
-        <div class="delete" onclick="removeItem(${index})">🗑️</div>
       </div>
     `;
   });
