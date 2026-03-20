@@ -2227,12 +2227,13 @@ font-weight: 300px;
 
    .shipping {
 width: 40%;
+      padding: 12px 10px;
    }
    .title-row h2{
-font-size: 30px;
+font-size: 40px;
 }
 
-   .might-like h2 { font-size:30px;}
+   .might-like h2 { font-size:40px;}
    
 }
 
