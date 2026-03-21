@@ -110,6 +110,14 @@ const PRODUCTS_LIST = [
   },
   
 // ==================== Sticker Sheet ====================
+   {
+    slug: "momo-spring-day-sticker-1",
+    name: "Momo Spring Day 1 sticker sheet",
+    price: "$5.99＋",
+    image: "asset/31.png",
+    category: "sticker-sheet",
+    tags: ["wing", "cute"]
+  },
   {
     slug: "lucky-charm-sticker-sheet",
     name: "Lucky charms Sticker Sheet",
