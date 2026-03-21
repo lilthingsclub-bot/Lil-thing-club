@@ -108,15 +108,33 @@ const PRODUCTS_LIST = [
     category: "vinyl-sticker",
     tags: ["luck", "noodle", "poki"]
   },
+  // ==================== post card ====================
+
+   {
+    slug: "momo-spring-day-sticker-1",
+    name: "Momo Spring Day 1 sticker sheet",
+    price: "$5.99＋",
+    image: "asset/36.png",
+    category: "postcard",
+    tags: ["spring", "cute","momo","season","tofu","cheri","noodle"]
+  },
   
 // ==================== Sticker Sheet ====================
    {
     slug: "momo-spring-day-sticker-1",
     name: "Momo Spring Day 1 sticker sheet",
     price: "$5.99＋",
-    image: "asset/31.png",
+    image: "asset/34.png",
     category: "sticker-sheet",
-    tags: ["wing", "cute"]
+    tags: ["spring", "cute","momo","season"]
+  },
+ {
+    slug: "momo-spring-day-sticker-2",
+    name: "Momo Spring Day 2 sticker sheet",
+    price: "$3.00＋",
+    image: "asset/35.png",
+    category: "sticker-sheet",
+    tags: ["spring", "cute","momo","season"]
   },
   {
     slug: "lucky-charm-sticker-sheet",
@@ -132,7 +150,7 @@ const PRODUCTS_LIST = [
     price: "$5.99＋",
     image: "asset/8.png",
     category: "sticker-sheet",
-    tags: ["clover", "cute", "nice", "tofu", "cheri"]
+    tags: ["clover", "cute", "tofu", "cheri"]
   },
   {
     slug: "apple-and-worm-sticker-sheet",
