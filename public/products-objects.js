@@ -111,9 +111,9 @@ const PRODUCTS_LIST = [
   // ==================== post card ====================
 
    {
-    slug: "momo-spring-day-sticker-1",
-    name: "Momo Spring Day 1 sticker sheet",
-    price: "$5.99＋",
+    slug: "lil-thing-spring-postcard",
+    name: "Lil thing spring postcard",
+    price: "$4.00",
     image: "asset/36.png",
     category: "postcard",
     tags: ["spring", "cute","momo","season","tofu","cheri","noodle"]
