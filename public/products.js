@@ -61,6 +61,68 @@ planners, laptops, and pen pal letters.
     ]
    },
 
+  // ==================== Apple and worm ====================
+  "momo-spring-day-sticker-1": {
+    slug: "momo-spring-day-sticker-1",
+    name: "Momo Spring Day 1 sticker sheet",
+    brand: "Lil Things Club",
+    category: "sticker-sheet",
+     weight: 0.3, // ounces
+
+    images: [
+      "images/74.png",
+      "images/75.png",
+      "images/76.png",
+       "images/77.png",
+       "images/78.png"
+    ],
+
+    description: `
+
+ Momo spring day 1 – Sticker Sheet by Lil Things Club 🌸
+Is a dreamy mix of pastel flowers, butterflies, and cut gerden-inspired characters, these matte stickers are perfect for journaling, scrapbooking, pen pal letters, planners, or just making your water bottle look extra sweet (just keep it dry)! Each design is inspired by soft spring moments, tiny blooms, fresh air,and peaceful walks surrounded by nature.
+    `,
+
+    features: [
+      "Size: 3.7in x 6.18in",
+      "Original design by Lil Things Club",
+      "Matte finish (not waterproof)",
+      "Includes a freebie 💕"
+    ],
+
+    variants: [
+      {
+        id: "sheet-1",
+        label: "1 Sticker Sheet",
+        price: 5.99,
+        stock: 10,
+         weight: 0.3 // ounces
+      },
+      {
+        id: "sheet-2",
+        label: "2 Sticker Sheet",
+        price: 10.98,
+        stock: 10,
+         weight: 0.6 // ounces
+      },
+      {
+        id: "sheet-3",
+        label: "3 Sticker Sheet",
+        price: 16.47,
+        stock: 10,
+         weight: 0.9 // ounces
+      },
+      {
+        id: "sheet-5",
+        label: "5 Sticker Sheet",
+        price: 27.95,
+        stock: 10,
+         weight: 1.5 // ounces
+      }
+    ]
+   },
+
+
 
 // ==================== lucky charm  ====================
   "lucky-charm-sticker-sheet": {
