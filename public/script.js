@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "sticker-pack": "Sticker Pack",
     "crochet-keychain": "Crochet Keychain",
     "crochet-phone-charm": "Phone Charm",
-    "crochet-pouch": "Pouch"
+    "crochet-pouch": "Pouch",
+    "postcard": "Postcard"
   };
 
   document.querySelectorAll("[data-sort]").forEach(option => {
