@@ -1,5 +1,45 @@
 
 const PRODUCTS = {
+// ==================== Postcard ====================
+  
+   // ==================== Momo spring day 1 ====================
+  "lil-thing-spring-postcard": {
+    slug: "lil-thing-spring-postcard",
+    name: "Lil thing spring postcard",
+    brand: "Lil Things Club",
+    category: "postcard",
+     weight: 0.3, // ounces
+
+    images: [
+      "images/79.png",
+      "images/80.png",
+      "images/81.png"
+    ],
+
+    description: `
+
+ Lil thing spring postcard – Postcard by Lil Things Club 🌸
+This adorable 6x4 postcard features cute kawaii characters relaxing in a field of pastel flowers, bringing a soft and cozy spring vibe to your mail, room, or collection ✨
+    `,
+
+    features: [
+      "Size: 6in x 4in",
+      "Original design by Lil Things Club",
+      "Matte finish (not waterproof)",
+      "Includes a freebie 💕"
+    ],
+
+    variants: [
+      {
+        id: "sheet-1",
+        label: "postcard",
+        price: 3.00,
+        stock: 10,
+         weight: 0.3 // ounces
+      }
+    ]
+   },
+  
 // ==================== Sticker Sheet ====================
 
 
@@ -61,7 +101,68 @@ planners, laptops, and pen pal letters.
     ]
    },
 
-  // ==================== Apple and worm ====================
+    // ==================== Momo spring day 2 ====================
+  "momo-spring-day-sticker-2": {
+    slug: "momo-spring-day-sticker-2",
+    name: "Momo Spring Day 2 sticker sheet",
+    brand: "Lil Things Club",
+    category: "sticker-sheet",
+     weight: 0.3, // ounces
+
+    images: [
+      "images/82.png",
+      "images/83.png",
+      "images/84.png",
+       "images/85.png",
+       "images/86.png"
+    ],
+
+    description: `
+
+ Momo spring day 2 – Sticker Sheet by Lil Things Club 🌸
+This kawaii sticker sheet features a collection of pastel flower designs and cute characters these matte stickers are perfect for journaling, scrapbooking, pen pal letters, planners, or just making your water bottle look extra sweet (just keep it dry)! Each design is inspired by soft spring moments, tiny blooms, fresh air,and peaceful walks surrounded by nature.
+    `,
+
+    features: [
+      "Size: 2.5in x 4.5in",
+      "Original design by Lil Things Club",
+      "Matte finish (not waterproof)",
+      "Includes a freebie 💕"
+    ],
+
+    variants: [
+      {
+        id: "sheet-1",
+        label: "1 Sticker Sheet",
+        price: 3.00,
+        stock: 10,
+         weight: 0.3 // ounces
+      },
+      {
+        id: "sheet-2",
+        label: "2 Sticker Sheet",
+        price: 5.25,
+        stock: 10,
+         weight: 0.6 // ounces
+      },
+      {
+        id: "sheet-3",
+        label: "3 Sticker Sheet",
+        price: 8.00,
+        stock: 10,
+         weight: 0.9 // ounces
+      },
+      {
+        id: "sheet-5",
+        label: "5 Sticker Sheet",
+        price: 14.25,
+        stock: 10,
+         weight: 1.5 // ounces
+      }
+    ]
+   },
+
+  // ==================== Momo spring day 1 ====================
   "momo-spring-day-sticker-1": {
     slug: "momo-spring-day-sticker-1",
     name: "Momo Spring Day 1 sticker sheet",
