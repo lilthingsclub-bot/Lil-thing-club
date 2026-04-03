@@ -149,7 +149,9 @@
   }
 
   // ======== Filter Products by Category ========
-  let filteredProducts = PRODUCTS_LIST.filter(p => p.categories.includes(category));
+ let filteredProducts = PRODUCTS_LIST.filter(
+  p => Array.isArray(p.categories) && p.categories.includes(category)
+);
 
   const productContainer = document.getElementById("product-list");
   productContainer.innerHTML = "";
