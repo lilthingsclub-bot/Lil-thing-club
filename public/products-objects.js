@@ -12,7 +12,7 @@ const PRODUCTS_LIST = [
     name: "Fairy Helper Sticker Pack",
     price: "$5.50",
     image: "asset/15.png",
-    categories: ["surprise-pack","sticker", "all"],
+    categories: ["sticker-pack","sticker", "all"],
     tags: ["cute", "fantasy", "fairy", "angle"]
   },
 
