@@ -96,7 +96,6 @@
 
   </nav>
 </header>
-  <body>
 
     
 <div id="product-list"></div>
@@ -156,7 +155,7 @@
  </p>
 </section>
 
-<script>
+<script type="module">
 import { products } from "./products-objects.js"; // your product array
 
 // Get category from URL
@@ -180,18 +179,6 @@ filteredProducts.forEach(product => {
   `;
   container.appendChild(div);
 });
-
-const tag = params.get("tag");
-
-let filteredProducts = products;
-
-if (category) {
-  filteredProducts = filteredProducts.filter(p => p.category === category);
-}
-
-if (tag) {
-  filteredProducts = filteredProducts.filter(p => p.tags.includes(tag));
-}
 </script>
 </body>
 </html>
