@@ -119,6 +119,7 @@ font-family: 'Baloo 2', sans-serif;
 .dropbtn {
   background: yellow;
   border: none;
+   border-radius: 10px;
   cursor: pointer;
 color: #ff66c4;
   font-weight: 900;
@@ -127,12 +128,14 @@ color: #ff66c4;
 }
 
 .dropdown-content {
-  display: none;
+  display: flex;
   position: absolute;
   background: #ffebf9;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 40px;
+    padding: 0px 100px 20px;
+   align-items: center;
+   
 }
 
 .dropdown:hover .dropdown-content {
