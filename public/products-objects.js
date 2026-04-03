@@ -113,7 +113,7 @@ const PRODUCTS_LIST = [
     name: "Lil thing spring postcard",
     price: "$4.00",
     image: "asset/36.png",
-    category: "postcard",
+    category: ["postcard", "all"],
     tags: ["spring", "cute","momo","season","tofu","cheri","noodle"]
   },
   
