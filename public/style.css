@@ -234,6 +234,21 @@ color: #ff66c4;
 /* =========================
    Promo Banner
    ========================= */
+.product-nav {
+  background: #fffee6;
+  color: #ff66c4;
+  height: 725px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+  overflow: visible;
+}
+
+
 
 /* ================================
    DESKTOP DEFAULT (BASE STYLES)
