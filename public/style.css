@@ -238,7 +238,7 @@ color: #ff66c4;
   color: #ff66c4;
   display: flex;
   align-items: center;
-  justify-content: center;
+   justify-content: space-between;
   position: relative;
   line-height: 1.5;
   text-align: center;
