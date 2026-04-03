@@ -1,3 +1,35 @@
+const CATEGORY_INFO = {
+  "vinyl-sticker": {
+    title: "Vinyl Sheets",
+    desc: "Explore our cute vinyl sticker, perfect for decorating your Laptop, Water Bottle, or any creative project!"
+  },
+   "sticker-sheet": {
+    title: "Sticker Sheets",
+    desc: "Explore our cute vinyl sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
+  },
+  "sticker": {
+    title: "Stickers",
+    desc: "Our adorable stickers come in many fun designs — collect them all!"
+  },
+  "crochet": {
+    title: "Crochet Cuties",
+    desc: "Handmade crochet keychains and charms — soft, adorable, and full of personality."
+  },
+  "phone-charm": {
+    title: "Phone Charms",
+    desc: "Decorate your phone with our unique handmade charms, perfect for gifts or personal style."
+  },
+  "all": {
+    title: "All Products",
+    desc: "Browse all our handmade items — stickers, crochet keychains, and phone charms, packed with love!"
+  }
+};
+
+
+
+
+
+
 
 
 const PRODUCTS_LIST = [
@@ -6,7 +38,7 @@ const PRODUCTS_LIST = [
     name: "Oopsie Mystery Bag 🌱 Sticker Surprise Pack",
     price: "$4.50＋",
     image: "asset/31.jpg",
-    category: "surprise-pack",
+    category:["surprise-pack","sticker", "all"],
     tags: ["fun"]
   },
   {
