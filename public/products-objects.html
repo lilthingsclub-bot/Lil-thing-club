@@ -181,11 +181,14 @@ const container = document.getElementById("product-list");
 
 filteredProducts.forEach(product => {
   const div = document.createElement("div");
+  div.className = "product-card1"; // match your CSS
+
   div.innerHTML = `
-   <a href="product.html?slug=${product.slug}">
-    <img src="${product.image}" width="200" />
-    <h3>${product.name}</h3>
-    <p>${product.price}</p>
+    <a href="product.html?slug=${product.slug}">
+      <img src="${product.image}" alt="${product.name}" />
+      <p class="product-name1">${product.name}</p>
+      <p class="product-price1">${product.price}</p>
+    </a>
   `;
   container.appendChild(div);
 });
