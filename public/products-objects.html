@@ -192,6 +192,22 @@ filteredProducts.forEach(product => {
   `;
   container.appendChild(div);
 });
+
+  // Get category from URL
+const params = new URLSearchParams(window.location.search);
+let category = params.get("category") || "all"; // default to all
+
+// Update category title and description
+const categoryTitle = document.querySelector(".category-title");
+const categoryDesc = document.querySelector(".category-desc");
+
+if (categoryInfo[category]) {
+  categoryTitle.textContent = categoryInfo[category].title;
+  categoryDesc.textContent = categoryInfo[category].desc;
+} else {
+  categoryTitle.textContent = categoryInfo["all"].title;
+  categoryDesc.textContent = categoryInfo["all"].desc;
+}
 </script>
 
   
