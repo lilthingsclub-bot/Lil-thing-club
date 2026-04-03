@@ -157,30 +157,19 @@
 
 
 <script type="module">
-import { products } from "./products-objects.js";
-
-// Get URL params
-const params = new URLSearchParams(window.location.search);
-const category = params.get("category");
-const tag = params.get("tag");
+const products = [
+  {
+    name: "Test Sticker",
+    price: "$2.00",
+    image: "asset/24.png",
+    category: "vinyl-sticker",
+    tags: ["cute"]
+  }
+];
 
 const container = document.getElementById("product-list");
 
-// Start with all products
-let filteredProducts = products;
-
-// Filter by category
-if (category) {
-  filteredProducts = filteredProducts.filter(p => p.category === category);
-}
-
-// Filter by tag
-if (tag) {
-  filteredProducts = filteredProducts.filter(p => p.tags.includes(tag));
-}
-
-// Display
-filteredProducts.forEach(product => {
+products.forEach(product => {
   const div = document.createElement("div");
   div.innerHTML = `
     <img src="${product.image}" width="200" />
@@ -190,6 +179,6 @@ filteredProducts.forEach(product => {
   container.appendChild(div);
 });
 </script>
-<script src="products-objects.js"></script>
+
 </body>
 </html>
