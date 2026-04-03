@@ -155,21 +155,31 @@
  </p>
 </section>
 
-<script type="module">
-import { products } from "./products-objects.js"; // your product array
 
-// Get category from URL
+<script type="module">
+import { products } from "./products-objects.js";
+
+// Get URL params
 const params = new URLSearchParams(window.location.search);
 const category = params.get("category");
+const tag = params.get("tag");
 
 const container = document.getElementById("product-list");
 
-// Filter products
-const filteredProducts = category
-  ? products.filter(p => p.category === category)
-  : products;
+// Start with all products
+let filteredProducts = products;
 
-// Display products
+// Filter by category
+if (category) {
+  filteredProducts = filteredProducts.filter(p => p.category === category);
+}
+
+// Filter by tag
+if (tag) {
+  filteredProducts = filteredProducts.filter(p => p.tags.includes(tag));
+}
+
+// Display
 filteredProducts.forEach(product => {
   const div = document.createElement("div");
   div.innerHTML = `
