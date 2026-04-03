@@ -117,7 +117,7 @@ font-family: 'Baloo 2', sans-serif;
 }
 
 .dropbtn {
-  background: none;
+  background: yellow;
   border: none;
   cursor: pointer;
 color: #ff66c4;
