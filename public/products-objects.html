@@ -120,6 +120,14 @@
   const CATEGORY_INFO = {
     "vinyl-sticker": {
       title: "Sticker Sheets",
+      desc: "Explore our cute vinyl sticker sheets, perfect for decorating your Laptop, Water Bottle, or any creative project!"
+    },
+     "sticker-sheet": {
+      title: "Sticker Sheets",
+      desc: "Explore our cute vinyl sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
+    },
+     "postcard": {
+      title: "Postcard",
       desc: "Explore our cute vinyl sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
     },
     "sticker": {
@@ -173,6 +181,60 @@
   function toggleDropdown() {
     document.getElementById("sortDropdown").classList.toggle("show");
   }
+// ======== Sort Dropdown Functionality ========
+const sortDropdown = document.getElementById("sortDropdown");
+
+// Listen for clicks on dropdown items
+sortDropdown.querySelectorAll("div").forEach(item => {
+  item.addEventListener("click", () => {
+    const sortType = item.getAttribute("data-sort");
+    
+    // Sort the filteredProducts array
+    filteredProducts.sort((a, b) => {
+      switch(sortType) {
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        case "price-asc":
+          return parseFloat(a.price.replace(/[^0-9.]/g, "")) - parseFloat(b.price.replace(/[^0-9.]/g, ""));
+        case "price-desc":
+          return parseFloat(b.price.replace(/[^0-9.]/g, "")) - parseFloat(a.price.replace(/[^0-9.]/g, ""));
+        default:
+          return 0;
+      }
+    });
+
+    // Re-render the products
+    renderProducts(filteredProducts);
+
+    // Close the dropdown
+    sortDropdown.classList.remove("show");
+  });
+});
+
+// Function to render products (reuse your code)
+function renderProducts(productsArray) {
+  const productContainer = document.getElementById("product-list");
+  productContainer.innerHTML = "";
+
+  productsArray.forEach(product => {
+    const div = document.createElement("div");
+    div.className = "product-card1";
+    div.innerHTML = `
+      <a href="product.html?slug=${product.slug}">
+        <img src="${product.image}" alt="${product.name}" />
+        <p class="product-name1">${product.name}</p>
+        <p class="product-price1">${product.price}</p>
+      </a>
+    `;
+    productContainer.appendChild(div);
+  });
+}
+
+// ======== Initial render ========
+renderProducts(filteredProducts);
+  
 </script>
 </body>
 </html>
