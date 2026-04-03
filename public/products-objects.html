@@ -97,11 +97,29 @@
   </nav>
 </header>
 
-    
-<section class="sticker-products">
-  <h1 class="category-title">All Products</h1>
-  <p class="category-desc">Find all our cute handmade items here — stickers, crochet keychains, and phone charms!</p>
+<!-- Category Header -->
+<section class="category-header">
+  <div class="header-box">
+    <h1 class="category-title">Category Title</h1>
+    <p class="category-desc">Category description goes here.</p>
+  </div>
+</section>
 
+<!-- Filter/Sort Bar (optional) -->
+<section class="filter-sort-bar">
+  <div class="dropdown1">
+    <button class="dropdown-btn1" onclick="toggleDropdown()">Sort ▼</button>
+    <div class="dropdown-content1" id="sortDropdown">
+      <div data-sort="name-asc">Name A-Z</div>
+      <div data-sort="name-desc">Name Z-A</div>
+      <div data-sort="price-asc">Price Low-High</div>
+      <div data-sort="price-desc">Price High-Low</div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Grid -->
+<section class="sticker-products">
   <div class="product-row1" id="product-list"></div>
 </section>
 
@@ -161,55 +179,75 @@
 </section>
 
 
+<!-- JS -->
 <script src="products-objects.js"></script>
 <script>
-const params = new URLSearchParams(window.location.search);
-const category = params.get("category");
-const tag = params.get("tag");
+  // ======== Dynamic Category Titles & Descriptions ========
+  const params = new URLSearchParams(window.location.search);
+  let category = params.get("category") || "all";
 
-let filteredProducts = PRODUCTS_LIST;
+  const categoryTitleEl = document.querySelector(".category-title");
+  const categoryDescEl = document.querySelector(".category-desc");
 
-if (category) {
-  filteredProducts = filteredProducts.filter(p => p.category === category);
-}
+  const CATEGORY_INFO = {
+    "vinyl-sticker": {
+    title: "Vinyl Sheets",
+    desc: "Explore our cute vinyl sticker, perfect for decorating your Laptop, Water Bottle, or any creative project!"
+  },
+   "sticker-sheet": {
+    title: "Sticker Sheets",
+    desc: "Explore our cute vinyl sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
+  },
+  "sticker": {
+    title: "Stickers",
+    desc: "Our adorable stickers come in many fun designs — collect them all!"
+  },
+  "crochet": {
+    title: "Crochet Cuties",
+    desc: "Handmade crochet keychains and charms — soft, adorable, and full of personality."
+  },
+  "phone-charm": {
+    title: "Phone Charms",
+    desc: "Decorate your phone with our unique handmade charms, perfect for gifts or personal style."
+  },
+  "all": {
+    title: "All Products",
+    desc: "Browse all our handmade items — stickers, crochet keychains, and phone charms, packed with love!"
+  }
+};
 
-if (tag) {
-  filteredProducts = filteredProducts.filter(p => p.tags.includes(tag));
-}
+  if (CATEGORY_INFO[category]) {
+    categoryTitleEl.textContent = CATEGORY_INFO[category].title;
+    categoryDescEl.textContent = CATEGORY_INFO[category].desc;
+  } else {
+    categoryTitleEl.textContent = CATEGORY_INFO["all"].title;
+    categoryDescEl.textContent = CATEGORY_INFO["all"].desc;
+  }
 
-const container = document.getElementById("product-list");
+  // ======== Filter Products by Category ========
+  let filteredProducts = PRODUCTS_LIST.filter(p => p.categories.includes(category));
 
-filteredProducts.forEach(product => {
-  const div = document.createElement("div");
-  div.className = "product-card1"; // match your CSS
+  const productContainer = document.getElementById("product-list");
+  productContainer.innerHTML = "";
 
-  div.innerHTML = `
-    <a href="product.html?slug=${product.slug}">
-      <img src="${product.image}" alt="${product.name}" />
-      <p class="product-name1">${product.name}</p>
-      <p class="product-price1">${product.price}</p>
-    </a>
-  `;
-  container.appendChild(div);
-});
+  filteredProducts.forEach(product => {
+    const div = document.createElement("div");
+    div.className = "product-card1";
+    div.innerHTML = `
+      <a href="product.html?slug=${product.slug}">
+        <img src="${product.image}" alt="${product.name}" />
+        <p class="product-name1">${product.name}</p>
+        <p class="product-price1">${product.price}</p>
+      </a>
+    `;
+    productContainer.appendChild(div);
+  });
 
-  // Get category from URL
-const params = new URLSearchParams(window.location.search);
-let category = params.get("category") || "all"; // default to all
-
-// Update category title and description
-const categoryTitle = document.querySelector(".category-title");
-const categoryDesc = document.querySelector(".category-desc");
-
-if (categoryInfo[category]) {
-  categoryTitle.textContent = categoryInfo[category].title;
-  categoryDesc.textContent = categoryInfo[category].desc;
-} else {
-  categoryTitle.textContent = categoryInfo["all"].title;
-  categoryDesc.textContent = categoryInfo["all"].desc;
-}
+  // ======== Dropdown Toggle ========
+  function toggleDropdown() {
+    document.getElementById("sortDropdown").classList.toggle("show");
+  }
 </script>
-
-  
 </body>
 </html>
+What is this?
