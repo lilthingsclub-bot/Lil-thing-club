@@ -109,7 +109,7 @@ font-family: 'Baloo 2', sans-serif;
 
 /* DROPDOWN */
 .dropdown {
-  position: relative;
+  position: absolute;
  z-index: 2000
 
 
@@ -134,7 +134,7 @@ color: #ff66c4;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     padding: 0px 100px 20px;
-   align-items: center;
+   
    
 }
 
