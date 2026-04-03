@@ -128,7 +128,7 @@ color: #ff66c4;
 }
 
 .dropdown-content {
-  display: flex;
+  display: none;
   position: absolute;
   background: #ffebf9;
   border-radius: 10px;
