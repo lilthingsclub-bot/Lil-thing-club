@@ -156,30 +156,24 @@
 </section>
 
 
-<script type="module">
-import { products } from "./products-objects.js";
-
-// Get URL params
+<script src="products-objects.js"></script>
+<script>
 const params = new URLSearchParams(window.location.search);
 const category = params.get("category");
 const tag = params.get("tag");
 
-const container = document.getElementById("product-list");
-
-// Start with all products
 let filteredProducts = PRODUCTS_LIST;
 
-// Filter by category
 if (category) {
   filteredProducts = filteredProducts.filter(p => p.category === category);
 }
 
-// Filter by tag
 if (tag) {
   filteredProducts = filteredProducts.filter(p => p.tags.includes(tag));
 }
 
-// Display
+const container = document.getElementById("product-list");
+
 filteredProducts.forEach(product => {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -191,5 +185,6 @@ filteredProducts.forEach(product => {
 });
 </script>
 
+  
 </body>
 </html>
