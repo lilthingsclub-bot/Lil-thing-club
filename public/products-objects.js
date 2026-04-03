@@ -12,7 +12,7 @@ const PRODUCTS_LIST = [
     name: "Fairy Helper Sticker Pack",
     price: "$5.50",
     image: "asset/15.png",
-    category: "sticker-pack",
+    category: ["surprise-pack","sticker", "all"],
     tags: ["cute", "fantasy", "fairy", "angle"]
   },
 
@@ -23,7 +23,7 @@ const PRODUCTS_LIST = [
     name: "Am That Girl, Am The Attitude Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/24.png",
-    category: "vinyl-sticker",
+    category: ["vinyl-sticker", "sticker", "all"],
     tags: ["cute", "meme", "cheri", "girlboss"]
   },
   {
@@ -31,7 +31,7 @@ const PRODUCTS_LIST = [
     name: "Best of Luck Vinyl Sticker",
     price: "$3.29",
     image: "asset/20.png",
-    category: "vinyl-sticker",
+    category: ["vinyl-sticker", "sticker", "all"],
     tags: ["luck", "clover", "tofu"]
   },
   {
@@ -39,7 +39,7 @@ const PRODUCTS_LIST = [
     name: "I Am Chalant- Noddle Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/25.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["meme", "noddle"]
   },
   {
@@ -47,7 +47,7 @@ const PRODUCTS_LIST = [
     name: "Yapping 24/7 - Tofu Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/26.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["meme", "tofu", "funny"]
   },
   {
@@ -55,7 +55,7 @@ const PRODUCTS_LIST = [
     name: "Peace was never a option Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/23.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["meme", "momo", "funny"]
   },
   {
@@ -63,7 +63,7 @@ const PRODUCTS_LIST = [
     name: "Organic Cherries Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/22.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["food", "fruit", "cherry", "cheri"]
   },
   {
@@ -71,7 +71,7 @@ const PRODUCTS_LIST = [
     name: "Onigiri Noodle Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/16.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["food", "noodle",]
   },
   {
@@ -79,7 +79,7 @@ const PRODUCTS_LIST = [
     name: "Angel Frog Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/19.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["tofu", "cute", "angel"]
   },
   {
@@ -87,7 +87,7 @@ const PRODUCTS_LIST = [
     name: "Dilly Dallying - Chery Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/21.png",
-    category: "vinyl-sticker",
+    category: ["vinyl-sticker", "sticker", "all"],
     tags: ["meme", "cheri", "fun"]
   },
   {
@@ -95,7 +95,7 @@ const PRODUCTS_LIST = [
     name: "Momo Lovely Day Vinyl Sticker",
     price: "$3.99",
     image: "asset/18.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["cute", "nice", "momo"]
   },
   {
@@ -103,7 +103,7 @@ const PRODUCTS_LIST = [
     name: "Wishing You Luck Vinyl Sticker",
     price: "$3.29",
     image: "asset/17.png",
-    category: "vinyl-sticker",
+    category:["vinyl-sticker", "sticker", "all"],
     tags: ["luck", "noodle", "poki"]
   },
   // ==================== post card ====================
@@ -123,7 +123,7 @@ const PRODUCTS_LIST = [
     name: "Momo Spring Day 1 sticker sheet",
     price: "$5.99＋",
     image: "asset/34.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["spring", "cute","momo","season"]
   },
  {
@@ -131,7 +131,7 @@ const PRODUCTS_LIST = [
     name: "Momo Spring Day 2 sticker sheet",
     price: "$3.00＋",
     image: "asset/35.png",
-    category: "sticker-sheet",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["spring", "cute","momo","season"]
   },
   {
@@ -139,7 +139,7 @@ const PRODUCTS_LIST = [
     name: "Lucky charms Sticker Sheet",
     price: "$4.79＋",
     image: "asset/31.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["wing", "cute"]
   },
   {
@@ -147,7 +147,7 @@ const PRODUCTS_LIST = [
     name: "Lucky Day Sticker Sheet",
     price: "$5.99＋",
     image: "asset/8.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["clover", "cute", "tofu", "cheri"]
   },
   {
@@ -155,7 +155,7 @@ const PRODUCTS_LIST = [
     name: "Apple and Worm Sticker Sheet",
     price: "$5.99＋",
     image: "asset/11.png",
-    category: "sticker-sheet ",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["fruit", "apple"]
   },
   {
@@ -163,7 +163,7 @@ const PRODUCTS_LIST = [
     name: "Doodle Paradise Sticker Sheet",
     price: "$5.99＋",
     image: "asset/10.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["cute"]
   },
   {
@@ -171,7 +171,7 @@ const PRODUCTS_LIST = [
     name: "Pastel Angle Dream Sticker Sheet",
     price: "$4.79＋",
     image: "asset/33.png",
-    category: "sticker-sheet",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["cute", "pastel", "angle", "wing"  ]
   },
   {
@@ -179,7 +179,7 @@ const PRODUCTS_LIST = [
     name: "Good Luck Charm Sticker Sheet",
     price: "$4.79＋",
     image: "asset/5.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["luck", "wing", "cute"]
   },
   {
@@ -187,7 +187,7 @@ const PRODUCTS_LIST = [
     name: "Cherry Cherry Sweet Sticker Sheet",
     price: "$4.79＋",
     image: "asset/32.png",
-    category: "sticker-sheet",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["fruit", "food", "cheri"]
   },
   {
@@ -195,7 +195,7 @@ const PRODUCTS_LIST = [
     name: "Yummy Fry Egg Sticker Sheet",
     price: "$4.50＋",
     image: "asset/7.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["food", "egg", "cute"]
   },
   {
@@ -203,7 +203,7 @@ const PRODUCTS_LIST = [
     name: "Sushi 🍣, Bento 🍱 Sticker Sheet",
     price: "$4.79＋",
     image: "asset/6.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["food", "noodle", "sushi", "bento"]
   },
   {
@@ -211,7 +211,7 @@ const PRODUCTS_LIST = [
     name: "Star Sticker Decor Sticker Sheet",
     price: "$4.79＋",
     image: "asset/9.png",
-    category: "sticker-sheet",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["cute", "decor"]
   },
   {
@@ -219,7 +219,7 @@ const PRODUCTS_LIST = [
     name: "Lil Things Gang Sticker Sheet",
     price: "$5.99＋",
     image: "asset/13.png",
-    category: "sticker-sheet",
+    category:["sticker-sheet", "sticker", "all"],
     tags: ["silly", "fun", "cheri", "noodle", "tofu", "momo"]
   },
   {
@@ -227,7 +227,7 @@ const PRODUCTS_LIST = [
     name: "Lil Things Stamps Sticker Sheet",
     price: "$5.99＋",
     image: "asset/12.png",
-    category: "sticker-sheet",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["stamp", "cheri", "noodle", "tofu", "poki", "momo"]
   },
   {
@@ -235,7 +235,7 @@ const PRODUCTS_LIST = [
     name: "Desert Paradise Sticker Sheet",
     price: "$5.99＋",
     image: "asset/14.png",
-    category: "sticker-sheet",
+    category: ["sticker-sheet", "sticker", "all"],
     tags: ["desert", "food", "yum"]
   },
 // ==================== Crochet Keychain ====================
@@ -244,7 +244,7 @@ const PRODUCTS_LIST = [
     name: "Cake Roll Crochet Keychain",
     price: "$14.49",
     image: "asset/27.png",
-    category: "crochet-keychain",
+    category: ["crochet-keychain", "crochet", "all"],
     tags: ["food", "desert", "handmade"]
   },
   {
@@ -252,7 +252,7 @@ const PRODUCTS_LIST = [
     name: "Tomato Lover Crochet Keychain",
     price: "$14.49",
     image: "asset/28.png",
-    category: "crochet-keychain",
+    category: ["crochet-keychain", "crochet", "all"],
     tags: ["tomato", "handmade"]
   },
   {
@@ -260,7 +260,7 @@ const PRODUCTS_LIST = [
     name: "Lucky Fish Crochet Keychain",
     price: "$14.49",
     image: "asset/29.png",
-    category: "crochet-keychain",
+    category: ["crochet-keychain", "crochet", "all"],
     tags: ["sea", "food", "handmade"]
   },
   {
@@ -268,7 +268,7 @@ const PRODUCTS_LIST = [
     name: "Clover Leaf Crochet Keychain",
     price: "$5.00",
     image: "asset/30.png",
-    category: "crochet-keychain ",
+    category: ["crochet-keychain", "crochet", "all"],
     tags: ["clover", "luck"]
   },
 ];
