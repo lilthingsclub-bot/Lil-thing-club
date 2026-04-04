@@ -196,40 +196,12 @@ font-family: 'Baloo 2', sans-serif;
 /* =========================
    Promo Banner
    ========================= */
- /* ===== PRODUCT NAV CONTAINER ===== */
+/* ===== MAKE NAV HOLD POSITION ===== */
 .product-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px;
-  padding: 20px;
-}
-
-/* ===== EACH DROPDOWN ===== */
-.dropdown {
   position: relative;
 }
 
-/* ===== MAIN BUTTON (Sticker, Print, etc) ===== */
-.dropbtn {
-  background: #f4d9f5;
-  border: 2px solid #4da6ff;
-  border-radius: 30px;
-  padding: 10px 22px;
-  font-size: 20px;
-  color: #7b4cff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
-}
-
-/* Hover effect */
-.dropbtn:hover {
-  background: #ffe6fb;
-  transform: translateY(-2px);
-}
-
-* ===== FULL WIDTH DROPDOWN ===== */
+/* ===== FULL WIDTH DROPDOWN ===== */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -244,27 +216,6 @@ font-family: 'Baloo 2', sans-serif;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   z-index: 999;
 }
-/* ===== DROPDOWN ITEMS ===== */
-.dropdown-content a {
-  display: block;
-  padding: 10px;
-  text-align: center;
-  color: #7b4cff;
-  text-decoration: none;
-  border-radius: 15px;
-  transition: 0.2s;
-}
-
-/* Hover for items */
-.dropdown-content a:hover {
-  background: #ffe6fb;
-}
-
-/* ===== SHOW DROPDOWN ON HOVER ===== */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 
 /* ===== CENTER CONTENT INSIDE ===== */
 .dropdown-inner {
