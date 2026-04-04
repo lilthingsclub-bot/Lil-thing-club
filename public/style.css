@@ -229,19 +229,21 @@ font-family: 'Baloo 2', sans-serif;
   transform: translateY(-2px);
 }
 
-/* ===== DROPDOWN MENU ===== */
+* ===== FULL WIDTH DROPDOWN ===== */
 .dropdown-content {
-top: 100%;
+  display: none;
+  position: absolute;
+
+  top: 100%;
   left: 0;
   width: 100vw;   /* FULL SCREEN WIDTH */
-  
-background: #f4d9f5;
+
+  background: #f4d9f5;
   padding: 30px 0;
 
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   z-index: 999;
 }
-
 /* ===== DROPDOWN ITEMS ===== */
 .dropdown-content a {
   display: block;
@@ -261,6 +263,35 @@ background: #f4d9f5;
 /* ===== SHOW DROPDOWN ON HOVER ===== */
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+
+/* ===== CENTER CONTENT INSIDE ===== */
+.dropdown-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* ===== PILLS ===== */
+.dropdown-inner a {
+  padding: 10px 20px;
+  border: 2px solid #4da6ff;
+  border-radius: 25px;
+  background: #e6f4ff;
+  color: #7b4cff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.dropdown-inner a:hover {
+  background: #d6ecff;
+  transform: translateY(-2px);
 }
 
 /* ================================
