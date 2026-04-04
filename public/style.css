@@ -197,6 +197,10 @@ font-family: 'Baloo 2', sans-serif;
    Promo Banner
    ========================= */
 /* ===== PRODUCT NAV CONTAINER ===== */
+
+.annoment-slide{
+ background-color: #fffa8a;
+}
 .product-nav {
 
     background-color: white ;
