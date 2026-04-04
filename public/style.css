@@ -657,8 +657,8 @@ padding:-10px
 
 
 background-image: 
-    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
-    radial-gradient(#ffd5f2 10%, transparent 10%);
+    radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#fff 10%, transparent 10%);
   background-size: 39px 35px; /* Sets the spacing between dots */
   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
  overflow: visible;
@@ -672,7 +672,7 @@ background-image:
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 50px, #fff 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 50px, #fffa8a 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
@@ -686,7 +686,7 @@ background-image:
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,  #fff 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,  #fffa8a 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
