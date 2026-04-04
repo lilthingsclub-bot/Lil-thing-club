@@ -209,35 +209,32 @@ font-family: 'Baloo 2', sans-serif;
 }
 
 .dropbtn {
-  background: #f4d9f5;
-  border: 2px solid #4da6ff;
+  background: white;
+  border: 2px solid #1bacff;
   border-radius: 30px;
   padding: 10px 22px;
   font-size: 20px;
-  color: #7b4cff;
+  color: #8c52ff;
   cursor: pointer;
   transition: all 0.2s ease;
      text-align: center;
 }
 /* Hover effect */
-.dropbtn:hover {
-  background: #ffe6fb;
-  transform: translateY(-2px);
-}
+
 
 /* ===== DROPDOWN MENU ===== */
 .dropdown-content {
   display: none;
   position: absolute;
   top: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-   background: #f4d9f5;
-  border: 2px solid #4da6ff;
+  left: 25%;
+  transform: translateX(-25% -25%);
+   background: white;
+  border: 2px solid #1bacff;
   border-radius: 20px;
   padding: 10px;
   
-  min-width: 180px;
+  min-width: 800px;
   z-index: 100;
 }
 
