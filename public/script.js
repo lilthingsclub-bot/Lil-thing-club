@@ -153,28 +153,3 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 
-const buttons = document.querySelectorAll(".dropbtn");
-
-buttons.forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation();
-
-    const dropdown = btn.nextElementSibling;
-
-    // Close others
-    document.querySelectorAll(".dropdown-content").forEach(d => {
-      if (d !== dropdown) d.style.display = "none";
-    });
-
-    // Toggle current
-    dropdown.style.display =
-      dropdown.style.display === "block" ? "none" : "block";
-  });
-});
-
-// Close on outside click
-document.addEventListener("click", () => {
-  document.querySelectorAll(".dropdown-content").forEach(d => {
-    d.style.display = "none";
-  });
-});
