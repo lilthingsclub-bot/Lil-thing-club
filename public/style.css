@@ -203,20 +203,21 @@ font-family: 'Baloo 2', sans-serif;
 
 
 background:
-  linear-gradient(324deg, #fff 1.5%, transparent 1.5%) -15px 8px,
-    linear-gradient(36deg, #fff 1.5%, transparent 1.5%) 5px 8px,
-    linear-gradient(72deg, #7ccfff 3%, transparent 3%) 5px 8px,
-    linear-gradient(288deg, #7ccfff 3%, transparent 3%) -15px 8px,
-    linear-gradient(216deg, #7ccfff 2.5%, transparent 2.5%) -15px 4px,
-    linear-gradient(144deg, #7ccfff 2.5%, transparent 2.5%) 5px 4px,
+  linear-gradient(324deg, #fff 2%, transparent 2%) -35px 22px,
+    linear-gradient(36deg, #fff 2%, transparent 2%) 15px 22px,
+    linear-gradient(72deg, #7ccfff 4.25%, transparent 4%) 15px 22px,
+    linear-gradient(288deg, #7ccfff 4.25%, transparent 4%) -35px 22px,
+    linear-gradient(216deg, #7ccfff 3.5%, transparent 3.5%) -35px 12px,
+    linear-gradient(144deg, #7ccfff 3.5%, transparent 3.5%) 15px 12px,
 
-    linear-gradient(324deg, #fff 1.5%, transparent 1.5%) -5px 18px,
-    linear-gradient(36deg, #fff 1.5%, transparent 1.5%) 20px 18px,
-    linear-gradient(72deg, #7ccfff 3%, transparent 3%) 20px 18px,
-    linear-gradient(288deg, #7ccfff 3%, transparent 3%) -5px 18px,
-    linear-gradient(216deg, #7ccfff 2.5%, transparent 2.5%) -5px 14px,
-    linear-gradient(144deg, #7ccfff 2.5%, transparent 2.5%) 20px 14px;
-background-size: 80px 80px;
+    linear-gradient(324deg, #fff 2%, transparent 2%) -10px 47px,
+    linear-gradient(36deg, #fff 2%, transparent 2%) 40px 47px,
+    linear-gradient(72deg, #7ccfff 4.25%, transparent 4%) 40px 47px,
+    linear-gradient(288deg, #7ccfff 4.25%, transparent 4%) -10px 47px,
+    linear-gradient(216deg, #7ccfff 3.5%, transparent 3.5%) -10px 37px,
+    linear-gradient(144deg, #7ccfff 3.5%, transparent 3.5%) 40px 37px;
+background-size: 50px 50px;
+
 
 	background-color:#fff ;
    
