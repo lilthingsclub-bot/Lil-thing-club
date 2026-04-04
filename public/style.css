@@ -212,7 +212,7 @@ font-family: 'Baloo 2', sans-serif;
 
 /* ===== MAIN BUTTON (Sticker, Print, etc) ===== */
 .dropbtn {
-  background: #f4d9f5;
+  background: white;
   border: 2px solid #4da6ff;
   border-radius: 30px;
   padding: 10px 22px;
@@ -232,11 +232,11 @@ font-family: 'Baloo 2', sans-serif;
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   
-  background: #f4d9f5;
+  background: white;
   border: 2px solid #4da6ff;
   border-radius: 20px;
   padding: 10px;
