@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
       currency: "usd",
       receipt_email: customerEmail || undefined,
       metadata: {
-       items: JSON.stringify(cart),
+       itemCount: cart.length.toString(),
        subtotal: String(subtotal),
        shipping: String(shippingNum),
        tax: String(taxNum),
