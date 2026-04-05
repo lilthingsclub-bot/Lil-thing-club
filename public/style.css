@@ -200,6 +200,8 @@ font-family: 'Baloo 2', sans-serif;
 
 .annoment-slide{
  background-color: #fffa8a;
+	align-items: left;
+	 padding: 10px;
 }
 .product-nav {
 
