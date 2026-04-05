@@ -49,6 +49,7 @@ module.exports = async function handler(req, res) {
       receipt_email: customerEmail || undefined,
       metadata: {
        itemCount: cart.length.toString(),
+         items: cart.map(item => item.name).join(", ").slice(0, 200),
        subtotal: String(subtotal),
        shipping: String(shippingNum),
        tax: String(taxNum),
