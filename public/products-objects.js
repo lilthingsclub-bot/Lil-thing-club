@@ -1,38 +1,101 @@
 const PRODUCTS_LIST = [
+
+
+   {
+    slug: "momo-spring-day-sticker-1",
+    name: "Momo Spring Day 1 sticker sheet",
+    price: "$5.99＋",
+    image: "asset/34.png",
+    categories:["sticker-sheet", "sticker","featured", "all"],
+    tags: ["spring", "cute","momo","season"]
+  },
+   {
+    slug: "lil-thing-spring-postcard",
+    name: "Lil thing spring postcard",
+    price: "$4.00",
+    image: "asset/36.png",
+    categories: ["postcard", "print","featured", "all"],
+    tags: ["spring", "cute","momo","season","tofu","cheri","noodle"]
+  },
+  {
+    slug: "momo-spring-day-sticker-2",
+    name: "Momo Spring Day 2 sticker sheet",
+    price: "$3.00＋",
+    image: "asset/35.png",
+    categories: ["sticker-sheet", "sticker", "all"],
+    tags: ["spring", "cute","momo","season"]
+  },
   {
     slug: "oopsie-mystery-bag-sticker-surprise-pack",
     name: "Oopsie Mystery Bag 🌱 Sticker Surprise Pack",
     price: "$4.50＋",
     image: "asset/31.jpg",
-    categories:["surprise-pack","sticker", "all"],
+    categories:["surprise-pack","sticker","featured", "all"],
     tags: ["fun"]
   },
-  {
-    slug: "fairy-helper-sticker-pack",
-    name: "Fairy Helper Sticker Pack",
-    price: "$5.50",
-    image: "asset/15.png",
-    categories: ["sticker-pack","sticker", "all"],
-    tags: ["cute", "fantasy", "fairy", "angle"]
-  },
-
-
-// ==================== vinyl stocker ====================
-  {
+   {
     slug: "am-that-girl-sassy-vinyl-sticker",
     name: "Am That Girl, Am The Attitude Vinyl Sticker",
     price: "$2.19＋",
     image: "asset/24.png",
-    categories: ["vinyl-sticker", "sticker", "all"],
+    categories: ["vinyl-sticker", "sticker","featured", "all"],
     tags: ["cute", "meme", "cheri", "girlboss"]
   },
+   {
+    slug: "lucky-charm-sticker-sheet",
+    name: "Lucky charms Sticker Sheet",
+    price: "$4.79＋",
+    image: "asset/31.png",
+    categories:["sticker-sheet", "sticker", "all"],
+    tags: ["wing", "cute"]
+  },
   {
+    slug: "cake-roll-crochet-keychain",
+    name: "Cake Roll Crochet Keychain",
+    price: "$14.49",
+    image: "asset/27.png",
+    categories: ["crochet-keychain", "crochet","featured", "all"],
+    tags: ["food", "desert", "handmade"]
+  },
+{
     slug: "best-of-luck-vinyl-sticker",
     name: "Best of Luck Vinyl Sticker",
     price: "$3.29",
     image: "asset/20.png",
    categories: ["vinyl-sticker", "sticker", "all"],
     tags: ["luck", "clover", "tofu"]
+  },
+  {
+    slug: "fairy-helper-sticker-pack",
+    name: "Fairy Helper Sticker Pack",
+    price: "$5.50",
+    image: "asset/15.png",
+    categories: ["sticker-pack","sticker","featured", "all"],
+    tags: ["cute", "fantasy", "fairy", "angle"]
+  },
+    {
+    slug: "lucky-day-sticker-sheet",
+    name: "Lucky Day Sticker Sheet",
+    price: "$5.99＋",
+    image: "asset/8.png",
+    categories:["sticker-sheet", "sticker", "all"],
+    tags: ["clover", "cute", "tofu", "cheri"]
+  },
+ {
+    slug: "tomato-lover-crochet-keychain",
+    name: "Tomato Lover Crochet Keychain",
+    price: "$14.49",
+    image: "asset/28.png",
+    categories: ["crochet-keychain", "crochet", "all"],
+    tags: ["tomato", "handmade"]
+  },
+   {
+    slug: "apple-and-worm-sticker-sheet",
+    name: "Apple and Worm Sticker Sheet",
+    price: "$5.99＋",
+    image: "asset/11.png",
+    categories: ["sticker-sheet", "sticker", "all"],
+    tags: ["fruit", "apple"]
   },
   {
     slug: "i-am-chalant-sticker",
@@ -42,123 +105,7 @@ const PRODUCTS_LIST = [
     categories:["vinyl-sticker", "sticker", "all"],
     tags: ["meme", "noddle"]
   },
-  {
-    slug: "yapping-24-7-vinyl-sticker",
-    name: "Yapping 24/7 - Tofu Vinyl Sticker",
-    price: "$2.19＋",
-    image: "asset/26.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["meme", "tofu", "funny"]
-  },
-  {
-    slug: "peace-was-never-an-option-vinyl-sticker",
-    name: "Peace was never a option Vinyl Sticker",
-    price: "$2.19＋",
-    image: "asset/23.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["meme", "momo", "funny"]
-  },
-  {
-    slug: "organic-cherries-vinyl-sticker",
-    name: "Organic Cherries Vinyl Sticker",
-    price: "$2.19＋",
-    image: "asset/22.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["food", "fruit", "cherry", "cheri"]
-  },
-  {
-    slug: "onigiri-noodle-vinyl-sticker",
-    name: "Onigiri Noodle Vinyl Sticker",
-    price: "$2.19＋",
-    image: "asset/16.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["food", "noodle",]
-  },
-  {
-    slug: "angle-frog-vinyl-sticker",
-    name: "Angel Frog Vinyl Sticker",
-    price: "$2.19＋",
-    image: "asset/19.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["tofu", "cute", "angel"]
-  },
-  {
-    slug: "dilly-dallying-vinyl-sticker",
-    name: "Dilly Dallying - Chery Vinyl Sticker",
-    price: "$2.19＋",
-    image: "asset/21.png",
-    categories: ["vinyl-sticker", "sticker", "all"],
-    tags: ["meme", "cheri", "fun"]
-  },
-  {
-    slug: "momo-lovely-day-vinyl-sticker",
-    name: "Momo Lovely Day Vinyl Sticker",
-    price: "$3.99",
-    image: "asset/18.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["cute", "nice", "momo"]
-  },
-  {
-    slug: "wishing-you-all-luck-vinyl-sticker",
-    name: "Wishing You Luck Vinyl Sticker",
-    price: "$3.29",
-    image: "asset/17.png",
-    categories:["vinyl-sticker", "sticker", "all"],
-    tags: ["luck", "noodle", "poki"]
-  },
-  // ==================== post card ====================
-
    {
-    slug: "lil-thing-spring-postcard",
-    name: "Lil thing spring postcard",
-    price: "$4.00",
-    image: "asset/36.png",
-    categories: ["postcard", "print", "all"],
-    tags: ["spring", "cute","momo","season","tofu","cheri","noodle"]
-  },
-  
-// ==================== Sticker Sheet ====================
-   {
-    slug: "momo-spring-day-sticker-1",
-    name: "Momo Spring Day 1 sticker sheet",
-    price: "$5.99＋",
-    image: "asset/34.png",
-    categories:["sticker-sheet", "sticker", "all"],
-    tags: ["spring", "cute","momo","season"]
-  },
- {
-    slug: "momo-spring-day-sticker-2",
-    name: "Momo Spring Day 2 sticker sheet",
-    price: "$3.00＋",
-    image: "asset/35.png",
-    categories: ["sticker-sheet", "sticker", "all"],
-    tags: ["spring", "cute","momo","season"]
-  },
-  {
-    slug: "lucky-charm-sticker-sheet",
-    name: "Lucky charms Sticker Sheet",
-    price: "$4.79＋",
-    image: "asset/31.png",
-    categories:["sticker-sheet", "sticker", "all"],
-    tags: ["wing", "cute"]
-  },
-  {
-    slug: "lucky-day-sticker-sheet",
-    name: "Lucky Day Sticker Sheet",
-    price: "$5.99＋",
-    image: "asset/8.png",
-    categories:["sticker-sheet", "sticker", "all"],
-    tags: ["clover", "cute", "tofu", "cheri"]
-  },
-  {
-    slug: "apple-and-worm-sticker-sheet",
-    name: "Apple and Worm Sticker Sheet",
-    price: "$5.99＋",
-    image: "asset/11.png",
-    categories: ["sticker-sheet", "sticker", "all"],
-    tags: ["fruit", "apple"]
-  },
-  {
     slug: "doodle-paradise-sticker-sheet",
     name: "Doodle Paradise Sticker Sheet",
     price: "$5.99＋",
@@ -182,7 +129,32 @@ const PRODUCTS_LIST = [
     categories:["sticker-sheet", "sticker", "all"],
     tags: ["luck", "wing", "cute"]
   },
+   {
+    slug: "yapping-24-7-vinyl-sticker",
+    name: "Yapping 24/7 - Tofu Vinyl Sticker",
+    price: "$2.19＋",
+    image: "asset/26.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["meme", "tofu", "funny"]
+  },
+ 
   {
+    slug: "peace-was-never-an-option-vinyl-sticker",
+    name: "Peace was never a option Vinyl Sticker",
+    price: "$2.19＋",
+    image: "asset/23.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["meme", "momo", "funny"]
+  },
+  {
+    slug: "organic-cherries-vinyl-sticker",
+    name: "Organic Cherries Vinyl Sticker",
+    price: "$2.19＋",
+    image: "asset/22.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["food", "fruit", "cherry", "cheri"]
+  },
+    {
     slug: "cherry-cherry-sweet-sticker-sheet",
     name: "Cherry Cherry Sweet Sticker Sheet",
     price: "$4.79＋",
@@ -190,7 +162,7 @@ const PRODUCTS_LIST = [
     categories: ["sticker-sheet", "sticker", "all"],
     tags: ["fruit", "food", "cheri"]
   },
-  {
+   {
     slug: "yummy-fry-egg-sticker-sheet",
     name: "Yummy Fry Egg Sticker Sheet",
     price: "$4.50＋",
@@ -207,6 +179,30 @@ const PRODUCTS_LIST = [
     tags: ["food", "noodle", "sushi", "bento"]
   },
   {
+    slug: "onigiri-noodle-vinyl-sticker",
+    name: "Onigiri Noodle Vinyl Sticker",
+    price: "$2.19＋",
+    image: "asset/16.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["food", "noodle",]
+  },
+  {
+    slug: "angle-frog-vinyl-sticker",
+    name: "Angel Frog Vinyl Sticker",
+    price: "$2.19＋",
+    image: "asset/19.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["tofu", "cute", "angel"]
+  },
+   {
+    slug: "lucky-fish-crochet-keychain",
+    name: "Lucky Fish Crochet Keychain",
+    price: "$14.49",
+    image: "asset/29.png",
+    categories: ["crochet-keychain", "crochet", "all"],
+    tags: ["sea", "food", "handmade"]
+  },
+   {
     slug: "star-decor-sticker-sheet",
     name: "Star Sticker Decor Sticker Sheet",
     price: "$4.79＋",
@@ -214,6 +210,68 @@ const PRODUCTS_LIST = [
    categories: ["sticker-sheet", "sticker", "all"],
     tags: ["cute", "decor"]
   },
+  {
+    slug: "dilly-dallying-vinyl-sticker",
+    name: "Dilly Dallying - Chery Vinyl Sticker",
+    price: "$2.19＋",
+    image: "asset/21.png",
+    categories: ["vinyl-sticker", "sticker", "all"],
+    tags: ["meme", "cheri", "fun"]
+  },
+  {
+    slug: "lil-thing-gang-sticker-sheet",
+    name: "Lil Things Gang Sticker Sheet",
+    price: "$5.99＋",
+    image: "asset/13.png",
+    categories:["sticker-sheet", "sticker", "all"],
+    tags: ["silly", "fun", "cheri", "noodle", "tofu", "momo"]
+  },
+  {
+    slug: "momo-lovely-day-vinyl-sticker",
+    name: "Momo Lovely Day Vinyl Sticker",
+    price: "$3.99",
+    image: "asset/18.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["cute", "nice", "momo"]
+  },
+   {
+    slug: "desert-paradise-sticker-sheet",
+    name: "Desert Paradise Sticker Sheet",
+    price: "$5.99＋",
+    image: "asset/14.png",
+    categories: ["sticker-sheet", "sticker", "all"],
+    tags: ["desert", "food", "yum"]
+  },
+  {
+    slug: "wishing-you-all-luck-vinyl-sticker",
+    name: "Wishing You Luck Vinyl Sticker",
+    price: "$3.29",
+    image: "asset/17.png",
+    categories:["vinyl-sticker", "sticker", "all"],
+    tags: ["luck", "noodle", "poki"]
+  },
+ 
+
+  
+  
+// ==================== Sticker Sheet ====================
+  
+ 
+  {
+    slug: "clover-leaf-crochet-keychain",
+    name: "Clover Leaf Crochet Keychain",
+    price: "$5.00",
+    image: "asset/30.png",
+    categories: ["crochet-keychain", "crochet", "all"],
+    tags: ["clover", "luck"]
+  },
+
+ 
+ 
+  
+
+ 
+ 
   {
     slug: "lil-thing-gang-sticker-sheet",
     name: "Lil Things Gang Sticker Sheet",
@@ -230,46 +288,11 @@ const PRODUCTS_LIST = [
     categories: ["sticker-sheet", "sticker", "all"],
     tags: ["stamp", "cheri", "noodle", "tofu", "poki", "momo"]
   },
-  {
-    slug: "desert-paradise-sticker-sheet",
-    name: "Desert Paradise Sticker Sheet",
-    price: "$5.99＋",
-    image: "asset/14.png",
-    categories: ["sticker-sheet", "sticker", "all"],
-    tags: ["desert", "food", "yum"]
-  },
+ 
 // ==================== Crochet Keychain ====================
-  {
-    slug: "cake-roll-crochet-keychain",
-    name: "Cake Roll Crochet Keychain",
-    price: "$14.49",
-    image: "asset/27.png",
-    categories: ["crochet-keychain", "crochet", "all"],
-    tags: ["food", "desert", "handmade"]
-  },
-  {
-    slug: "tomato-lover-crochet-keychain",
-    name: "Tomato Lover Crochet Keychain",
-    price: "$14.49",
-    image: "asset/28.png",
-    categories: ["crochet-keychain", "crochet", "all"],
-    tags: ["tomato", "handmade"]
-  },
-  {
-    slug: "lucky-fish-crochet-keychain",
-    name: "Lucky Fish Crochet Keychain",
-    price: "$14.49",
-    image: "asset/29.png",
-    categories: ["crochet-keychain", "crochet", "all"],
-    tags: ["sea", "food", "handmade"]
-  },
-  {
-    slug: "clover-leaf-crochet-keychain",
-    name: "Clover Leaf Crochet Keychain",
-    price: "$5.00",
-    image: "asset/30.png",
-    categories: ["crochet-keychain", "crochet", "all"],
-    tags: ["clover", "luck"]
-  },
+ 
+  
+ 
+ 
 ];
 
