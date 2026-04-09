@@ -1,6 +1,28 @@
 const PRODUCTS_LIST = [
-
-
+   {
+    slug: "spring-memo-pad",
+    name: "Spring Memo pad",
+    price: "$3.00",
+    image: "asset/39.png",
+    categories:["momo-pad", "stationery", "all"],
+    tags: ["spring", "cute","fun"]
+  },
+{
+    slug: "tamagotchi-memo-pad",
+    name: "Tamagotchi Memo pad",
+    price: "$3.00",
+    image: "asset/38.png",
+    categories:["momo-pad", "stationery", "all"],
+    tags: ["game", "cute","tofu"]
+  },
+ {
+    slug: "under-the-sea-memo-pad",
+    name: "Under the sea Memo pad",
+    price: "$3.00",
+    image: "asset/37.png",
+    categories:["momo-pad", "stationery", "all"],
+    tags: ["sea", "cute","fish","tofu"]
+  },
    {
     slug: "momo-spring-day-sticker-1",
     name: "Momo Spring Day 1 sticker sheet",
@@ -30,7 +52,7 @@ const PRODUCTS_LIST = [
     name: "Oopsie Mystery Bag 🌱 Sticker Surprise Pack",
     price: "$4.50＋",
     image: "asset/31.jpg",
-    categories:["surprise-pack","sticker","featured", "all"],
+    categories:["surprise-pack","sticker", "all"],
     tags: ["fun"]
   },
    {
