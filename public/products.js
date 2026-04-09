@@ -1,5 +1,127 @@
 
 const PRODUCTS = {
+// ==================== memo pad ====================
+   // ==================== Momo spring day 1 ====================
+ "spring-memo-pad": {
+    slug: "spring-memo-pad",
+    name: "Spring Memo pad",
+    brand: "Lil Things Club",
+    category: "memo pad",
+     weight: 2.0, // ounces
+
+    images: [
+      "images/91.png",
+      "images/92.png"
+    ],
+
+    description: `
+
+Bring a soft spring vibe to your notes with this adorable floral memo pad 🌷
+Featuring a cozy cloud-shaped writing space and tiny blooming flowers, this 
+design is perfect for adding a peaceful, happy touch to your day. Whether you're planning,
+journaling, or leaving cute notes, this pad makes everything feel a little more special 💕
+    `,
+
+    features: [
+      "Size: 3in x 3in",
+      "50 sheets",
+      "Handmade design",
+      "Smooth writing surface",
+      "Original design by Lil Things Club",
+      "Includes a freebie 💕"
+    ],
+
+    variants: [
+      {
+        id: "1 memopad",
+        label: "memopad",
+        price: 3.00,
+        stock: 10,
+         weight: 2.0 // ounces
+      }
+    ]
+   },
+    // ==================== Momo spring day 1 ====================
+
+   "tamagotchi-memo-pad": {
+    slug: "tamagotchi-memo-pad",
+    name: "Tamagotchi Memopad",
+    brand: "Lil Things Club",
+    category: "memo pad",
+     weight: 2.0, // ounces
+
+    images: [
+      "images/89.png",
+      "images/90.png"
+    ],
+
+    description: `
+
+Add a little nostalgia and cuteness to your everyday notes with this Tamagotchi-inspired memo pad 💫
+Perfect for jotting down reminders, to-do lists, or sweet little messages, this mini notepad brings a playful retro vibe to your desk. Designed with adorable icons and soft pastel colors, it’s made to spark joy every time you use it ✨ 
+    `,
+
+    features: [
+      "Size: 3in x 3in",
+      "50 sheets",
+      "Handmade design",
+      "Smooth writing surface",
+      "Original design by Lil Things Club",
+      "Includes a freebie 💕"
+    ],
+
+    variants: [
+      {
+        id: "1 memopad",
+        label: "memopad",
+        price: 3.00,
+        stock: 10,
+         weight: 2.0 // ounces
+      }
+    ]
+   },
+   // ====================Under the sea Memo pad ====================
+  
+  "under-the-sea-memo-pad": {
+    slug: "under-the-sea-memo-pad",
+    name: "Under the sea Memo pad",
+    brand: "Lil Things Club",
+    category: "memo pad",
+     weight: 2.0, // ounces
+
+    images: [
+      "images/87.png",
+      "images/88.png"
+    ],
+
+    description: `
+
+ Lil thing Under the sea memo padby Lil Things Club 🌸
+This adorable 3in by 3in memopad  features tofu swining under the sea  
+    `,
+
+    features: [
+      "Size: 3in x 3in",
+      "50 sheets",
+      "Handmade design",
+      "Smooth writing surface",
+      "Original design by Lil Things Club",
+      "Includes a freebie 💕"
+    ],
+
+    variants: [
+      {
+        id: "1 memopad",
+        label: "memopad",
+        price: 3.00,
+        stock: 10,
+         weight: 2.0 // ounces
+      }
+    ]
+   },
+
+
+  
 // ==================== Postcard ====================
   
    // ==================== Momo spring day 1 ====================
