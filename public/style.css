@@ -308,7 +308,6 @@ background-size: 100px 100px;
 /* HERO SECTION */
 .hero {
   background: #ffe8f7;
-  padding: 60px 20px;
 }
 
 .hero-container {
@@ -316,10 +315,12 @@ background-size: 100px 100px;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
+	min-height: 420px
 }
 
 .hero-text {
   flex: 1;
+	padding: 60px 40px;
 }
 
 .hero-icon {
@@ -357,10 +358,12 @@ background-size: 100px 100px;
 }
 
 /* RIGHT IMAGE */
-.hero-image img {
-  width: 100%;
-  max-width: 800px;
-  
+.hero-image {
+  flex: 1;
+  background-image: url("images/hero-products.png");
+  background-size: cover;      /* 🔥 fills entire space */
+  background-position: center; /* keeps it centered */
+  background-repeat: no-repeat;
 }
 
 /* MESSAGE SECTION */
