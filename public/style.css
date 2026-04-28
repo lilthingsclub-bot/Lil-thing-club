@@ -361,8 +361,8 @@ background-size: 100px 100px;
 /* RIGHT IMAGE */
 .hero-image img {
   width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
+  max-width: 1100px;
+  
 }
 
 /* MESSAGE SECTION */
