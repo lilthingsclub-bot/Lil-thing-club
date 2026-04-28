@@ -361,7 +361,7 @@ background-size: 100px 100px;
 .hero-image {
   flex: 1;
   background-image: url("images/hero-products.png");
-  background-size:50px;      /* 🔥 fills entire space */
+  background-size:auto;      /* 🔥 fills entire space */
   background-position: center; /* keeps it centered */
   background-repeat: no-repeat;
 }
