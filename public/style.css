@@ -307,7 +307,7 @@ background-size: 100px 100px;
    ================================ */
 /* HERO SECTION */
 .hero {
-  background: #f6d6e0;
+  background: #ffe8f7;
   padding: 60px 20px;
 }
 
@@ -365,14 +365,20 @@ background-size: 100px 100px;
 
 /* MESSAGE SECTION */
 .message-section {
-  background: #f7a9cc;
-  text-align: center;
+  background: #ffb5e4;
+  text-algin:center;
   padding: 40px 20px;
+	background-image: 
+    radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#fff 10%, transparent 10%);
+  background-size: 39px 35px; /* Sets the spacing between dots */
+  Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+ overflow: visible;
 }
 
 .message-section img {
   max-width: 900px;
-  width: 100%;
+  width: 200%;
 }
 
 /* 📱 MOBILE */
