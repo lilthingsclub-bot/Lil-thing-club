@@ -361,7 +361,7 @@ background-size: 100px 100px;
 .hero-image {
   flex: 1;
   background-image: url("images/hero-products.png");
-  background-size: cover;      /* 🔥 fills entire space */
+  background-size: 450px;      /* 🔥 fills entire space */
   background-position: center; /* keeps it centered */
   background-repeat: no-repeat;
 }
@@ -476,18 +476,6 @@ padding:-10px
 }
 
 
-.collections.scallop-top{
-
-	
-
-
-background-image: 
-    radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
-    radial-gradient(#fff 10%, transparent 10%);
-  background-size: 39px 35px; /* Sets the spacing between dots */
-  Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
- overflow: visible;
-}
 .collections.scallop-top::before {
   content: "";
   position: absolute;
