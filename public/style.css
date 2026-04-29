@@ -374,7 +374,7 @@ background-size: 100px 100px;
 
 /* MESSAGE SECTION */
 .message-section {
-  background: #ffb5e4;
+  background: #33A9FF;
   text-algin:center;
 	 align-items: center;
   padding: 10px 10px;
@@ -458,7 +458,7 @@ Colletion
 .collections {
   position: relative;
   text-align: center;
-  background:   #fffa8a;
+  background:   #FFFEED;
   overflow: visible;
  Padding: 50px 10px 10px; 
   z-index: 2;
@@ -536,7 +536,7 @@ padding:-10px
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 50px, #fffa8a 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 50px, #FFFEED 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
@@ -550,7 +550,7 @@ padding:-10px
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,  #fffa8a 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,  #FFFEED 25px, transparent 26px);
  overflow: visible;
   z-index: 1;
 }
