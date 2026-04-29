@@ -375,7 +375,7 @@ background-size: 100px 100px;
 .message-section {
   background: #ffb5e4;
   text-algin:center;
-  padding: 40px 20px;
+  padding: 10px 10px;
 	background-image: 
     radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#fff 10%, transparent 10%);
@@ -385,7 +385,7 @@ background-size: 100px 100px;
 }
 
 .message-section img {
-  max-width: 1100px;
+  max-width: 1200px;
   width: 2000px;
 	 align-items: center;
 }
