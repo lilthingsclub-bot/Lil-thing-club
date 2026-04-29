@@ -332,7 +332,7 @@ background-size: 100px 100px;
 
 .hero-icon {
   width: 500px;
- 
+ margin: -110px 0;
 }
 
 .hero-text h1 {
