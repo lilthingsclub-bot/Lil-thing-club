@@ -315,12 +315,12 @@ background-size: 100px 100px;
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-	min-height: 60px;
+	
 }
 
 .hero-text {
   flex: 1;
-	padding: 60px 40px;
+	
 }
 
 .hero-icon {
@@ -358,12 +358,9 @@ background-size: 100px 100px;
 }
 
 /* RIGHT IMAGE */
-.hero-image {
-  flex: 1;
-  background-image: url("images/hero-products.png");
-  background-size:contain;      /* 🔥 fills entire space */
-  background-position: center; /* keeps it centered */
-  background-repeat: no-repeat;
+.image-content img {
+    max-width: 100%; /* Ensures image is responsive */
+    height: auto;
 }
 
 /* MESSAGE SECTION */
