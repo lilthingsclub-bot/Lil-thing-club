@@ -331,21 +331,21 @@ background-size: 100px 100px;
 }
 
 .hero-icon {
-  width: 110px;
-  margin-bottom: 15px;
+  width: 500px;
+  margin-bottom: 60px;
 }
 
 .hero-text h1 {
-  font-size: 36px;
-  color: #4aa3df;
+  font-size: 50.3px;
+  color: #33a9ff;
   line-height: 1.2;
   font-weight: 800;
 }
 
 .hero-text p {
   margin: 15px 0;
-  font-size: 16px;
-  color: #4aa3df;
+  font-size: 22px;
+  color: #33a9ff;
 }
 
 .hero-btn {
@@ -386,7 +386,7 @@ background-size: 100px 100px;
 
 .message-section img {
   max-width: 900px;
-  width: 800px;
+  width: 2000px;
 }
 
 /* 📱 MOBILE */
