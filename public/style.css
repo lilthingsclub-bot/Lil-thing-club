@@ -367,8 +367,8 @@ background-size: 100px 100px;
 /* RIGHT IMAGE */
   .hero-image img {
     max-width: 100%; /* Ensures image is responsive */
-    height: 550px;
-	  width:550px;
+    height: 650px;
+	  width:650px;
 }
 
 /* MESSAGE SECTION */
@@ -386,7 +386,7 @@ background-size: 100px 100px;
 
 .message-section img {
   max-width: 900px;
-  width: 400%;
+  width: 800px;
 }
 
 /* 📱 MOBILE */
