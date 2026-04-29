@@ -375,6 +375,7 @@ background-size: 100px 100px;
 .message-section {
   background: #ffb5e4;
   text-algin:center;
+	 align-items: center;
   padding: 10px 10px;
 	background-image: 
     radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
@@ -385,9 +386,9 @@ background-size: 100px 100px;
 }
 
 .message-section img {
-  max-width: 1200px;
+  max-width: 1900px;
   width: 2000px;
-	 align-items: center;
+	
 }
 
 /* =========================
@@ -407,6 +408,12 @@ Colletion 767px
   .hero-image img {
     max-width: 100%;
   }
+	.message-section img {
+  max-width: 1200px;
+  width: 2000px;
+	
+}
+	
 }
 
 /* =========================
