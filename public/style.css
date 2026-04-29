@@ -23,7 +23,7 @@ h1, h2 {
    font-family: 'Shrikhand' , sans-serif; 
   font-weight: 500;
   text-transform: none; /* remove if you want uppercase */
-  color: #FF67C2; /* You can customize this */
+  color: #5C3F35; /* You can customize this */
 }
 
 h3, h4 {
@@ -32,7 +32,7 @@ font-family: 'Baloo 2', sans-serif;
   font-weight: 600;
   text-transform: none; /* remove if you want uppercase */
   
-  color: #FF67C2; /* You can customize this */
+  color: #5C3F35; /* You can customize this */
 }
 
 /* =========================
@@ -58,7 +58,7 @@ font-family: 'Baloo 2', sans-serif;
   align-items: center;
   justify-content: space-between;
   padding: 15px 25px;
-  background:  #ffd7f1; /* light pink */
+  background:  #FFFEED; /* light pink */
 }
 
 
@@ -87,7 +87,7 @@ font-family: 'Baloo 2', sans-serif;
   height: 40px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,#ffd7f1 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,#FFFEED 25px, transparent 26px);
   z-index: 2;
 }
 
@@ -142,7 +142,7 @@ font-family: 'Baloo 2', sans-serif;
   left: -260px;
   width: 250px;
   height: 100vh;
-  background: #ffebf9;
+  background: #FFFEED;
   padding: 20px;
   box-shadow: 3px 0 10px rgba(0,0,0,0.1);
   transition: left 0.3s ease;
