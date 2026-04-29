@@ -393,15 +393,17 @@ background-size: 100px 100px;
 /* =========================
 Colletion 767px
 ========================= */
-@media (max-width: 500px) {
-
+@media (max-width: 980px) {
+.hero-icon {
+  width: 300px;
+}
   .hero-container {
     flex-direction: column;
     text-align: center;
   }
 
   .hero-text h1 {
-    font-size: 28px;
+    font-size: 40px;
   }
 
   .hero-image img {
@@ -411,6 +413,35 @@ Colletion 767px
   }
 	.message-section img {
   width: 500px;
+	
+}
+	
+}
+
+@media (max-width: 350px) {
+.hero-icon {
+  width: 100px;
+}
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+	.hero-text p {
+ 
+  font-size: 16px;
+	}
+
+  .hero-text h1 {
+    font-size: 30px;
+  }
+
+  .hero-image img {
+    max-width: 100%
+	   height:100px;
+	  width:100px;
+  }
+	.message-section img {
+  width: 100px;
 	
 }
 	
