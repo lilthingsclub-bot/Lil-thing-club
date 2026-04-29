@@ -358,7 +358,7 @@ background-size: 100px 100px;
 }
 
 /* RIGHT IMAGE */
-.image-content img {
+  .hero-image img {
     max-width: 100%; /* Ensures image is responsive */
     height: auto;
 }
