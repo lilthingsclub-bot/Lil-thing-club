@@ -320,12 +320,19 @@ background-size: 100px 100px;
 
 .hero-text {
   flex: 1;
-	
+	padding: 60px 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical center */
+  align-items: center;      /* horizontal center */
+
+  text-align: center;       /* center text */
 }
 
 .hero-icon {
-  width: 80px;
-  margin-bottom: 10px;
+  width: 110px;
+  margin-bottom: 15px;
 }
 
 .hero-text h1 {
@@ -360,7 +367,7 @@ background-size: 100px 100px;
 /* RIGHT IMAGE */
   .hero-image img {
     max-width: 100%; /* Ensures image is responsive */
-    height: 200px;
+    height: 768px;
 }
 
 /* MESSAGE SECTION */
