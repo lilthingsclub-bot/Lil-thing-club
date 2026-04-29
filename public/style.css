@@ -209,23 +209,13 @@ font-family: 'Baloo 2', sans-serif;
   gap: 20px;
 }
 .product-nav {
-
-																																																																																																																										
-																																																																																																																																																																								
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-																																																																																																																																																																																					   
-
-																																																	
-
+z-index: 2000;
+   
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  padding: 40px 40px;
 																																																																																																																																																				
 }
 
