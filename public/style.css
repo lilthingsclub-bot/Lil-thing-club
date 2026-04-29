@@ -418,9 +418,10 @@ Colletion 767px
 	
 }
 
-@media (max-width: 350px) {
+@media (max-width: 350px) and (min-width: 768px) {
 .hero-icon {
   width: 100px;
+	 margin: -50px 0;
 }
   .hero-container {
     flex-direction: column;
