@@ -394,7 +394,7 @@ background-size: 100px 100px;
 /* =========================
 Colletion 767px
 ========================= */
-@media (max-width: 980px) {
+@media (max-width: 786px) {
 .hero-icon {
   width: 300px;
 }
@@ -420,7 +420,7 @@ Colletion 767px
 	
 }
 
-@media (max-width: 350px) and (min-width: 768px) {
+@media (max-width: 350px) and (min-width: 500px) {
 .hero-icon {
   width: 100px;
 	 margin: 15px 0;
