@@ -1054,8 +1054,8 @@ position: relative;
 .left-sector a {
   color: #FEFDE5;
   text-decoration: none;
-  font-size: 30px;
-  font-weight: 600px;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .left-sector a:hover {
@@ -1070,7 +1070,7 @@ position: relative;
 }
 
 .middle-sector h4 {
-  font-size: 30px;
+  font-size: 25px;
   color: #FEFDE5;
   line-height: 1.4;
   font-weight: 600;
@@ -1084,7 +1084,7 @@ position: relative;
 }
 
 .right-sector h2 {
-  font-size: 60px;
+  font-size: 35px;
   color: #FEFDE5;
   margin-bottom: 15px;
 }
@@ -1135,8 +1135,8 @@ position: relative;
 }
 
 .bottom-line a {
-  font-size: 2.2rem;
-  color: #ff66c4;
+  font-size: 35px;
+  color: #FEFDE5;
   margin: 0 15px;
 }
 
