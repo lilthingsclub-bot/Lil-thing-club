@@ -364,10 +364,10 @@ background-size: 100% 20px; /* Width 100%, height 20px (total stripe height) */
 
 /* MESSAGE SECTION */
 .message-section {
-  background: #33A9FF;
-  text-algin:center;
+	  text-algin:center;
 	 align-items: center;
-  padding: 10px 10px;
+  padding: 10px 10px
+  background: #33A9FF;
 	background-image: 
     radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#fff 10%, transparent 10%);
@@ -1026,7 +1026,14 @@ position: relative;
 
 /* --- GENERAL FOOTER SECTION --- */
 .new-signup {
-    background: #fff;
+	
+	background: #33A9FF;
+	background-image: 
+    radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#fff 10%, transparent 10%);
+  background-size: 39px 35px; /* Sets the spacing between dots */
+  Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+ overflow: visible;
   padding: 50px 5%;
   display: flex;
   flex-wrap: wrap;
