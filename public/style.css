@@ -1048,7 +1048,7 @@ position: relative;
   flex: 1 1 200px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .left-sector a {
@@ -1056,7 +1056,7 @@ position: relative;
  -webkit-text-stroke: 1.0px #ff66c4;
   text-decoration: none;
   font-size: 25px;
-  font-weight: 750;
+  font-weight: 900;
 }
 
 .left-sector a:hover {
@@ -1071,7 +1071,7 @@ position: relative;
 }
 
 .middle-sector h4 {
-  font-size: 25px;
+  font-size: 30px;
   color: #Fbff33;
  -webkit-text-stroke: 1.0px #ff66c4;
   line-height: 1.4;
@@ -1130,6 +1130,7 @@ position: relative;
   width: 100%;
   text-align: center;
   margin-top: 40px;
+	backgroun: #Fbff33;
 }
 
 .bottom-line h2 {
