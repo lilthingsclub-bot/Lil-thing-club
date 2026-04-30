@@ -295,11 +295,9 @@ z-index: 2000;
 /* HERO SECTION */
 .hero {
   background: #A9FF93;
-	background: linear-gradient(0deg, #fff 70%, #fff 10%);
+	background: linear-gradient(0deg, #a9ff93 70%, #fff 10%);
 background-size: 100% 5px; /* Width 100%, height 20px (total stripe height) */
-  padding: 50px 5%;
-  padding: 25px 15px;
-  text-align: center;
+  
 }
 
 .hero-container {
