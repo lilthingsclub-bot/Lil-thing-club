@@ -1052,10 +1052,11 @@ position: relative;
 }
 
 .left-sector a {
-  color: #FEFDE5;
+	color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   text-decoration: none;
   font-size: 25px;
-  font-weight: 600;
+  font-weight: 750;
 }
 
 .left-sector a:hover {
@@ -1071,7 +1072,8 @@ position: relative;
 
 .middle-sector h4 {
   font-size: 25px;
-  color: #FEFDE5;
+  color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   line-height: 1.4;
   font-weight: 600;
 }
@@ -1085,7 +1087,8 @@ position: relative;
 
 .right-sector h2 {
   font-size: 35px;
-  color: #FEFDE5;
+  color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   margin-bottom: 15px;
 }
 
@@ -1105,7 +1108,8 @@ position: relative;
   border-radius: 25px;
   border: 2px solid #ff66c4;
   background: #ffebf9; /* bright yellow */
-  color: #FEFDE5;
+  color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
@@ -1130,13 +1134,15 @@ position: relative;
 
 .bottom-line h2 {
   font-size: 2rem;
-  color: #FEFDE5;
+  color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   margin-bottom: 15px;
 }
 
 .bottom-line a {
   font-size: 35px;
-  color: #FEFDE5;
+  color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   margin: 0 15px;
 }
 
@@ -1147,11 +1153,13 @@ position: relative;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-color:#FEFDE5;
+color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
 }
 
 .footer-links a {
-  color: #FEFDE5;
+  color: #Fbff33;
+ -webkit-text-stroke: 1.0px #ff66c4;
   font-weight: 600;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
