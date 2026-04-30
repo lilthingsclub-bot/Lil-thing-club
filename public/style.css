@@ -1054,7 +1054,7 @@ position: relative;
 .left-sector a {
   color: #FEFDE5;
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -1070,7 +1070,7 @@ position: relative;
 }
 
 .middle-sector h4 {
-  font-size: 1.4rem;
+  font-size: 16px;
   color: #FEFDE5;
   line-height: 1.4;
   font-weight: 600;
@@ -1084,7 +1084,7 @@ position: relative;
 }
 
 .right-sector h2 {
-  font-size: 2rem;
+  font-size: 20px;
   color: #FEFDE5;
   margin-bottom: 15px;
 }
