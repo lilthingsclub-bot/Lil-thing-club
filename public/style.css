@@ -1039,7 +1039,7 @@ position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  color: #ff66c4;
+  color: #FEFDE5;
   text-align: left;
 }
 
@@ -1052,7 +1052,7 @@ position: relative;
 }
 
 .left-sector a {
-  color: #FFE8F9;
+  color: #FEFDE5;
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 700;
@@ -1071,7 +1071,7 @@ position: relative;
 
 .middle-sector h4 {
   font-size: 1.4rem;
-  color: #FFE8F9;
+  color: #FEFDE5;
   line-height: 1.4;
   font-weight: 600;
 }
@@ -1085,7 +1085,7 @@ position: relative;
 
 .right-sector h2 {
   font-size: 2rem;
-  color: #FFE8F9;
+  color: #FEFDE5;
   margin-bottom: 15px;
 }
 
@@ -1105,7 +1105,7 @@ position: relative;
   border-radius: 25px;
   border: 2px solid #ff66c4;
   background: #ffebf9; /* bright yellow */
-  color: #ff66c4;
+  color: #FEFDE5;
   font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
@@ -1117,7 +1117,7 @@ position: relative;
 
 #thanks-message {
   margin-top: 15px;
-  color: #ff66c4;           /* white text stays visible */
+  color: #FEFDE5;           /* white text stays visible */
   font-weight: bold;
 }
 
@@ -1130,7 +1130,7 @@ position: relative;
 
 .bottom-line h2 {
   font-size: 2rem;
-  color: #ff66c4;
+  color: #FEFDE5;
   margin-bottom: 15px;
 }
 
@@ -1147,11 +1147,11 @@ position: relative;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-color:#ff66c4;
+color:#FEFDE5;
 }
 
 .footer-links a {
-  color: #ff66c4;
+  color: #FEFDE5;
   font-weight: 600;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
@@ -1159,7 +1159,7 @@ color:#ff66c4;
 }
 
 .footer-links a:hover {
-  color: #ff66c4;  /* pink hover */
+  color: #FEFDE5;  /* pink hover */
 }
 
 
@@ -1173,6 +1173,7 @@ color:#ff66c4;
     #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
     #ffe2f6 20px       /* Color 2 stop position */
   );
+	text-align: center;
 }
 
 .thank-you p {
