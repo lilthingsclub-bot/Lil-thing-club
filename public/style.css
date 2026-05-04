@@ -243,8 +243,13 @@ z-index: 2000;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
+	overflow-x: auto;
+  scroll-behavior: smooth;
+	scrollbar-width: auto;
 }
-
+.dropbtn::-webkit-scrollbar {
+  display: flex;
+}
 /* Hover effect */
 .dropbtn:hover {
   background: #ffe6fb;
