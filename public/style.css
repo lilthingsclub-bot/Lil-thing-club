@@ -850,6 +850,15 @@ Coupon Section
   padding: 50px 50px 50px;
   overflow: visible;
   position: relative;
+
+	display: flex;
+  flex-wrap: nowrap;        /* 🔥 IMPORTANT: prevents wrapping */
+  overflow-x: auto; /* 🔥 enables horizontal scroll */
+	overflow-y: hidden;
+  white-space: nowrap;      /* keeps items in one line */
+
+
+  scroll-behavior: smooth;
 }
 
 .coupon h1 {
