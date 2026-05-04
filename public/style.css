@@ -222,7 +222,8 @@ font-family: 'Baloo 2', sans-serif;
 
   display: flex;
   flex-wrap: nowrap;        /* 🔥 IMPORTANT: prevents wrapping */
-  overflow-x: auto;         /* 🔥 enables horizontal scroll */
+  overflow-x: auto; /* 🔥 enables horizontal scroll */
+	overflow-y: hidden;
   white-space: nowrap;      /* keeps items in one line */
 
   gap: 18px;
