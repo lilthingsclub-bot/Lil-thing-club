@@ -209,22 +209,25 @@ font-family: 'Baloo 2', sans-serif;
   gap: 20px;
 }
 .product-nav {
-background: repeating-linear-gradient(
-    90deg,          /* Angle of the stripes */
-    #fff,           /* Color 1 */
-    #fff 10px,      /* Color 1 stop position */
-    #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
-    #ffe2f6 20px       /* Color 2 stop position */
+  background: repeating-linear-gradient(
+    90deg,
+    #fff,
+    #fff 10px,
+    #ffe2f6 10px,
+    #ffe2f6 20px
   );
-	
-z-index: 2000;
-   
+
+  z-index: 2000;
+
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;        /* 🔥 IMPORTANT: prevents wrapping */
+  overflow-x: auto;         /* 🔥 enables horizontal scroll */
+  white-space: nowrap;      /* keeps items in one line */
+
   gap: 18px;
-  padding: 40px 40px;
-																																																																																																																																																				
+  padding: 20px 20px;
+
+  scroll-behavior: smooth;
 }
 
 /* ===== EACH DROPDOWN ===== */
@@ -243,13 +246,9 @@ z-index: 2000;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
-	overflow-x: auto;
-  scroll-behavior: smooth;
-	scrollbar-width: auto;
+	
 }
-.dropbtn::-webkit-scrollbar {
-  display: flex;
-}
+
 /* Hover effect */
 .dropbtn:hover {
   background: #ffe6fb;
