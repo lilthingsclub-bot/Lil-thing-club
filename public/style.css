@@ -267,7 +267,7 @@ font-family: 'Baloo 2', sans-serif;
   padding: 10px;
   
   min-width: 180px;
-  z-index: 100;
+  z-index: 3000;
 }
 
 /* ===== DROPDOWN ITEMS ===== */
