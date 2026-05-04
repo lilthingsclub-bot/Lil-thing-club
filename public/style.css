@@ -225,7 +225,7 @@ font-family: 'Baloo 2', sans-serif;
   white-space: nowrap;      /* keeps items in one line */
 
   gap: 18px;
-  padding: 20px 20px;
+  padding: 40px 20px;
 
   scroll-behavior: smooth;
 }
