@@ -690,7 +690,7 @@ Featured Products Section
 .featured-products h3{
 font-size: 25px;
 font-weight: 800px;
-	line-height: -12px;
+	line-height: 1.5;
 }
 
 .featured-products .product-row {
@@ -742,7 +742,7 @@ font-weight: 800px;
   font-family: 'Nunito', sans-serif;
   font-size: 25px;
 font-weight: 800px;
-	line-height: -12px;
+	line-height: 1.5;
   margin: 8px 0 4px 0;
   color: #ff66c4;
 }
@@ -751,7 +751,7 @@ font-weight: 800px;
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
 	font-weight: 800px;
-  color: #ff66c4;
+  color: #33A9FF;
   margin-bottom: 12px;
 }
 
@@ -1570,15 +1570,18 @@ font-weight:600px;
 
 .product-name1 {
   font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
+  font-size: 25px;
+font-weight: 800px;
+	line-height: 1.5;
   margin: 8px 0 4px 0;
   color: #ff66c4;
 }
 
 .product-price1 {
   font-family: 'Nunito', sans-serif;
-  font-size: 0.9rem;
-  color: #ff66c4;
+  font-size: 20px;
+	font-weight: 800px;
+  color: #33A9FF;
   margin-bottom: 12px;
 }
 
