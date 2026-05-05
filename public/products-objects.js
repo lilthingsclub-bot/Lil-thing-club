@@ -4,7 +4,7 @@ const PRODUCTS_LIST = [
     name: "Spring Memo pad",
     price: "$3.00",
     image: "asset/39.png",
-    categories:["momo-pad", "stationery", "all"],
+    categories:["momo-pad", "stationery", "all", "new"],
     tags: ["spring", "cute","fun"]
   },
 {
@@ -12,7 +12,7 @@ const PRODUCTS_LIST = [
     name: "Tamagotchi Memo pad",
     price: "$3.00",
     image: "asset/38.png",
-    categories:["momo-pad", "stationery", "all"],
+    categories:["momo-pad", "stationery", "all", "new"],
     tags: ["game", "cute","tofu"]
   },
  {
@@ -20,7 +20,7 @@ const PRODUCTS_LIST = [
     name: "Under the sea Memo pad",
     price: "$3.00",
     image: "asset/37.png",
-    categories:["momo-pad", "stationery", "all"],
+    categories:["momo-pad", "stationery", "all", "new"],
     tags: ["sea", "cute","fish","tofu"]
   },
    {
@@ -28,7 +28,7 @@ const PRODUCTS_LIST = [
     name: "Momo Spring Day 1 sticker sheet",
     price: "$5.99＋",
     image: "asset/34.png",
-    categories:["sticker-sheet", "sticker","featured", "all"],
+    categories:["sticker-sheet", "sticker","featured", "all", "new"],
     tags: ["spring", "cute","momo","season"]
   },
    {
@@ -36,7 +36,7 @@ const PRODUCTS_LIST = [
     name: "Lil thing spring postcard",
     price: "$4.00",
     image: "asset/36.png",
-    categories: ["postcard", "print","featured", "all"],
+    categories: ["postcard", "print","featured", "all", "new"],
     tags: ["spring", "cute","momo","season","tofu","cheri","noodle"]
   },
   {
@@ -44,7 +44,7 @@ const PRODUCTS_LIST = [
     name: "Momo Spring Day 2 sticker sheet",
     price: "$3.00＋",
     image: "asset/35.png",
-    categories: ["sticker-sheet", "sticker", "all"],
+    categories: ["sticker-sheet", "sticker", "all", "new"],
     tags: ["spring", "cute","momo","season"]
   },
   {
