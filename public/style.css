@@ -688,8 +688,9 @@ Featured Products Section
 }
 
 .featured-products h3{
-font-size: 30px;
-font-weight: 800px
+font-size: 25px;
+font-weight: 800px;
+	line-height: -12px;
 }
 
 .featured-products .product-row {
@@ -739,14 +740,17 @@ font-weight: 800px
 
 .product-name {
   font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
+  font-size: 25px;
+font-weight: 800px;
+	line-height: -12px;
   margin: 8px 0 4px 0;
   color: #ff66c4;
 }
 
 .product-price {
   font-family: 'Nunito', sans-serif;
-  font-size: 0.9rem;
+  font-size: 20px;
+	font-weight: 800px;
   color: #ff66c4;
   margin-bottom: 12px;
 }
