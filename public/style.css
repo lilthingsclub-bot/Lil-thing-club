@@ -741,7 +741,7 @@ font-weight: 800px;
 .product-name {
   font-family: 'Nunito', sans-serif;
   font-size: 25px;
-font-weight: 800px;
+font-weight: 1200px;
 	line-height: 1.5;
   margin: 8px 0 4px 0;
   color: #ff66c4;
@@ -750,7 +750,7 @@ font-weight: 800px;
 .product-price {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
-	font-weight: 800px;
+	font-weight: 1000px;
   color: #33A9FF;
   margin-bottom: 12px;
 }
