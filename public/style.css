@@ -231,7 +231,7 @@ font-family: 'Baloo 2', sans-serif;
   padding-top: 40px;
 
   scroll-behavior: smooth;
-	padding-left: 50px ;
+	padding-left: 80px ;
 }
 
 /* ===== EACH DROPDOWN ===== */
@@ -688,8 +688,8 @@ Featured Products Section
 }
 
 .featured-products h3{
-font-size: 20px;
-font-weight: 500px
+font-size: 30px;
+font-weight: 800px
 }
 
 .featured-products .product-row {
@@ -816,7 +816,7 @@ font-weight: 500px
 @media screen and (max-width: 500px) {
 /* start of phone styles */
  .product-row {
-    grid-template-columns:  1fr; /* 2 columns for mobile */
+    grid-template-columns:  repeat(2, 1fr); /* 2 columns for mobile */
 
   }
 .featured-products h2{
