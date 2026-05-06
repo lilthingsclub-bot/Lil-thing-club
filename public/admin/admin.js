@@ -65,3 +65,70 @@ async function loadDashboard() {
   document.getElementById("total-revenue").textContent = "$" + revenue.toFixed(2);
   document.getElementById("pending-orders").textContent = pending;
 }
+
+
+let images = [];
+let variants = [];
+
+// Upload
+async function uploadToSupabase(file) {
+  const fileName = Date.now() + "-" + file.name;
+
+  const { error } = await supabase.storage
+    .from("product-images")
+    .upload(fileName, file);
+
+  if (error) return null;
+
+  return `https://YOUR_PROJECT.supabase.co/storage/v1/object/public/product-images/${fileName}`;
+}
+
+// Drag drop
+async function handleFiles(files) {
+  for (let file of files) {
+    const url = await uploadToSupabase(file);
+    if (url) {
+      images.push(url);
+      document.getElementById("previewImages").innerHTML += `<img src="${url}" />`;
+      updatePreview();
+    }
+  }
+}
+
+// Variants
+function addVariant() {
+  const label = document.getElementById("variantLabel").value;
+  const price = parseFloat(document.getElementById("variantPrice").value);
+  const stock = parseInt(document.getElementById("variantStock").value);
+
+  variants.push({ id: label, label, price, stock });
+
+  document.getElementById("variantList").innerHTML += `<li>${label} - $${price}</li>`;
+}
+
+// Save
+async function saveProduct() {
+  const name = document.getElementById("name").value;
+  const slug = name.toLowerCase().replace(/\s+/g, "-");
+
+  await supabase.from("products").insert([{
+    name,
+    slug,
+    price: variants[0]?.price || 0,
+    image: images[0] || "",
+    images,
+    description: document.getElementById("description").value,
+    variants,
+    categories: document.getElementById("categories").value.split(",")
+  }]);
+
+  alert("Saved!");
+}
+
+// Preview
+function updatePreview() {
+  document.getElementById("previewCard").innerHTML = `
+    <img src="${images[0] || ""}" width="100"/>
+    <h4>${document.getElementById("name").value}</h4>
+  `;
+}
