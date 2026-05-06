@@ -238,8 +238,8 @@ async function uploadToSupabase(file) {
 
   if (error) return null;
 
-  return  `https://yqqodiylewlwoemyuzfd.supabase.co/storage/v1/object/public/product-images/${fileName}`;
-}
+  return  `https://yqqodiylewlwoemyuzfd.storage.supabase.co/storage/v1/object/public/product-images/${fileName}`;
+  
 
 // Drag drop
 async function handleFiles(files) {
