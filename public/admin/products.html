@@ -123,11 +123,27 @@
   </div>
 
 <h1>Add Product</h1>
+  <div id="uploadBox">Drag & Drop Images</div>
+<input type="file" id="fileInput" multiple hidden />
+<div id="previewImages"></div>
 
 <input id="name" placeholder="Product name" />
-<input id="price" type="number" placeholder="Price" />
-<input id="image" placeholder="Image URL" />
-<button onclick="addProduct()">Add Product</button>
+<textarea id="description"></textarea>
+
+<input id="categories" placeholder="comma categories" />
+
+<h3>Variants</h3>
+<input id="variantLabel" placeholder="Label" />
+<input id="variantPrice" type="number" placeholder="Price" />
+<input id="variantStock" type="number" placeholder="Stock" />
+<button onclick="addVariant()">Add Variant</button>
+
+<ul id="variantList"></ul>
+
+<button onclick="saveProduct()">Save</button>
+
+<div id="previewCard"></div>
+
 </body>
 </html>
 
