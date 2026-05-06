@@ -269,7 +269,7 @@
     const fileName = Date.now() + "-" + file.name; 
     const { error } = await supabase.storage .from("product-images") .upload(fileName, file);
     if (error) return null; 
-    return https://YOUR_PROJECT.supabase.co/storage/v1/object/public/product-images/${fileName};
+    return https://yqqodiylewlwoemyuzfd.storage.supabase.co/storage/v1/object/public/product-images/${fileName};
   }  
   // Drag drop async function handleFiles(files) { for (let file of files)
   { const url = await uploadToSupabase(file); 
