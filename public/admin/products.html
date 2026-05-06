@@ -290,6 +290,38 @@ function updatePreview() {
     <h4>${document.getElementById("name").value}</h4>
   `;
 }
+    const uploadBox = document.getElementById("uploadBox");
+const fileInput = document.getElementById("fileInput");
+
+// CLICK → open file picker
+uploadBox.addEventListener("click", () => {
+  fileInput.click();
+});
+
+// FILE SELECT
+fileInput.addEventListener("change", (e) => {
+  handleFiles(e.target.files);
+});
+
+// DRAG OVER
+uploadBox.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  uploadBox.classList.add("dragover");
+});
+
+// DRAG LEAVE
+uploadBox.addEventListener("dragleave", () => {
+  uploadBox.classList.remove("dragover");
+});
+
+// DROP
+uploadBox.addEventListener("drop", (e) => {
+  e.preventDefault();
+  uploadBox.classList.remove("dragover");
+
+  const files = e.dataTransfer.files;
+  handleFiles(files);
+});
 </script>
 
 </body>
