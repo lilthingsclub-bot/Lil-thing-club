@@ -250,10 +250,15 @@
    ꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆
  </p>
 </section>
-
-<script src="products-objects.js"></script>
-<script src="products.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-products.js"></script>
 <script src="product-page.js"></script>
+
+<script>
+loadProductsFromSupabase().then(() => {
+  initProductPage();
+});
+</script>
 <script src="script.js"></script>
 </body>
 </html>
