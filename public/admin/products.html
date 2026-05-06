@@ -109,12 +109,24 @@
   border-radius: 20px;
   cursor: pointer;
   background: #fff;
-      padding-right:  900px;
+  position: relative;
 }
+ 
 
 .upload-box.dragover {
   background: #ffe6fb;
 }
+       .product-name {
+      position: relative;
+      }
+
+      .product-description {
+      position: relative;
+      }
+     .product-Variants {
+      position: relative;
+      }
+   
 
 .preview-images img {
   width: 80px;
@@ -162,24 +174,25 @@
 <div id="previewImages"></div>
   </section>
   
-<section>
+<section class="product-name">
   <h3>Title</h3>
   <div>
 <input id="name" placeholder="Product name" />
     </div>
 </section>
   
-  <section>
+  <section class="product-description">
     <h3>Title</h3>
 <textarea id="description" placeholder="description"></textarea>
 </section>
   
-  <section>
+
+  <section class="product-categories">
     <h3>Title</h3>
 <input id="categories" placeholder="comma categories" />
 </section>
     
-<section>
+<section class="product-Variants">
 <h3>Variants</h3>
 <input id="variantLabel" placeholder="Label" />
 <input id="variantPrice" type="number" placeholder="Price" />
