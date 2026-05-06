@@ -262,359 +262,44 @@
 
   <script src="/admin/admin.js"></script>
   
-  <script>  
-  /*
-SHOPIFY-LEVEL 4 (ENTERPRISE ECOMMERCE MEDIA ENGINE)
-LIL THINGS CLUB — PRODUCTION SCALE SYSTEM
-
-NEW FEATURES:
-- AI image auto-tagging (mock-ready hook)
-- Smart “best image” selector
-- Lazy render gallery (performance boost)
-- Hover zoom preview (Shopify-style)
-- Crop & focus point system (foundation)
-- Bulk import structure ready (CSV + images)
-- CDN optimization hooks
-- Virtual-safe rendering (large product support)
-*/
-
-// =====================
-// STATE ENGINE (ENTERPRISE)
-// =====================
-let state = {
-  images: [],
-  deleted: [],
-  variants: [],
-  draftKey: "lil-things-product-draft-v4",
-  focusMap: {} // imageId -> {x,y}
-};
-
-const uploadBox = document.getElementById("uploadBox");
-const fileInput = document.getElementById("fileInput");
-const preview = document.getElementById("previewImages");
-
-// =====================
-// INIT + DRAFT RECOVERY
-// =====================
-(function init() {
-  const saved = localStorage.getItem(state.draftKey);
-  if (saved) state = JSON.parse(saved);
-  render();
-})();
-
-function save() {
-  localStorage.setItem(state.draftKey, JSON.stringify(state));
-}
-
-// =====================
-// FILE HANDLING
-// =====================
-
-uploadBox.addEventListener("click", () => fileInput.click());
-fileInput.addEventListener("change", (e) => handleFiles(e.target.files));
-
-uploadBox.addEventListener("dragover", e => {
-  e.preventDefault();
-  uploadBox.classList.add("dragover");
-});
-
-uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
-
-uploadBox.addEventListener("drop", e => {
-  e.preventDefault();
-  uploadBox.classList.remove("dragover");
-  handleFiles(e.dataTransfer.files);
-});
-
-// =====================
-// VALIDATION
-// =====================
-
-function validate(file) {
-  const allowed = ["image/jpeg", "image/png", "image/webp"];
-  if (!allowed.includes(file.type)) return "Invalid file";
-  if (file.size > 5 * 1024 * 1024) return "Too large";
-  return null;
-}
-
-// =====================
-// AI HOOK (READY FOR BACKEND)
-// =====================
-
-async function aiTagImage(file) {
-  // placeholder for OpenAI / vision model later
-  return {
-    tags: ["cute", "kawaii", "pastel"],
-    suggestedRole: "product-main"
-  };
-}
-
-// =====================
-// SMART BEST IMAGE SELECTOR
-// =====================
-
-function calculateBestImage(images) {
-  // simple heuristic (upgradeable with AI)
-  return images.find(i => i.url && i.url.includes("main")) || images[0];
-}
-
-// =====================
-// COMPRESSION (LIGHTWEIGHT)
-// =====================
-
-function compress(file) {
-  return new Promise(res => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.src = e.target.result;
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = img.width * 0.75;
-        canvas.height = img.height * 0.75;
-
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        canvas.toBlob(blob => {
-          res(new File([blob], file.name, { type: file.type }));
-        }, file.type, 0.72);
-      };
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// =====================
-// HANDLE FILES (ENTERPRISE QUEUE)
-// =====================
-
-async function handleFiles(files) {
-  for (let file of files) {
-
-    const error = validate(file);
-    if (error) continue;
-
-    const compressed = await compress(file);
-    const ai = await aiTagImage(file);
-
-    const item = {
-      id: crypto.randomUUID(),
-      file: compressed,
-      url: "",
-      uploading: true,
-      progress: 0,
-      tags: ai.tags,
-      role: ai.suggestedRole,
-      isMain: state.images.length === 0
-    };
-
-    state.images.push(item);
-    render();
-    save();
-
-    await upload(item);
-  }
-}
-
-// =====================
-// UPLOAD (SUPABASE SAFE)
-// =====================
-
-async function upload(item) {
-  const fileName = `${Date.now()}-${item.file.name}`;
-
-  const { error } = await supabase.storage
-    .from("product-images")
-    .upload(fileName, item.file);
-
-  if (error) {
-    item.uploading = false;
-    render();
-    return;
-  }
-
-  const { data } = supabase.storage
-    .from("product-images")
-    .getPublicUrl(fileName);
-
-  item.url = data.publicUrl;
-  item.uploading = false;
-  item.progress = 100;
-
-  render();
-  save();
-}
-
-// =====================
-// RENDER (LAZY + SHOPIFY STYLE)
-// =====================
-
-function render() {
-  preview.innerHTML = "";
-
-  state.images.forEach((img, index) => {
-
-    const el = document.createElement("div");
-    el.className = "img-card";
-    el.draggable = true;
-
-    el.innerHTML = `
-      <div class="img-wrap">
-        <img src="${img.url || ''}" loading="lazy" />
-      </div>
-
-      ${img.isMain ? `<span class='main-badge'>MAIN</span>` : ""}
-
-      <div class="tags">${(img.tags || []).join(" ")}</div>
-
-      ${img.uploading ? `<div class='bar'><div style='width:${img.progress}%'></div></div>` : ""}
-
-      <button onclick="removeImage('${img.id}')">✕</button>
-      <button onclick="setMain('${img.id}')">★</button>
-      <button onclick="setFocus('${img.id}')">🎯</button>
-    `;
-
-    // DRAG
-    el.addEventListener("dragstart", e => {
-      e.dataTransfer.setData("from", index);
-    });
-
-    el.addEventListener("dragover", e => e.preventDefault());
-
-    el.addEventListener("drop", e => {
-      const from = +e.dataTransfer.getData("from");
-      const to = index;
-
-      const moved = state.images.splice(from, 1)[0];
-      state.images.splice(to, 0, moved);
-
-      render(); save();
-    });
-
-    // HOVER ZOOM PREVIEW
-    el.addEventListener("mouseenter", () => {
-      el.style.transform = "scale(1.05)";
-    });
-
-    el.addEventListener("mouseleave", () => {
-      el.style.transform = "scale(1)";
-    });
-
-    preview.appendChild(el);
-  });
-}
-
-// =====================
-// MAIN IMAGE
-// =====================
-
-function setMain(id) {
-  state.images.forEach(i => i.isMain = false);
-  const img = state.images.find(i => i.id === id);
-  if (img) img.isMain = true;
-
-  render(); save();
-}
-
-// =====================
-// FOCUS POINT (CROP FOUNDATION)
-// =====================
-
-function setFocus(id) {
-  state.focusMap[id] = { x: 50, y: 50 };
-  save();
-}
-
-// =====================
-// REMOVE + UNDO
-// =====================
-
-function removeImage(id) {
-  const img = state.images.find(i => i.id === id);
-  state.deleted.push(img);
-
-  state.images = state.images.filter(i => i.id !== id);
-
-  if (!state.images.some(i => i.isMain) && state.images.length) {
-    state.images[0].isMain = true;
-  }
-
-  render(); save();
-}
-
-function undoDelete() {
-  const item = state.deleted.pop();
-  if (item) state.images.push(item);
-
-  render(); save();
-}
-
-// =====================
-// EXPORT (CDN READY)
-// =====================
-
-function exportMedia() {
-  return {
-    images: state.images.map(i => i.url),
-    mainImage: calculateBestImage(state.images)?.url,
-    tags: state.images.map(i => i.tags),
-    focusMap: state.focusMap
-  };
-}
-
-// =====================
-// GLOBALS
-// =====================
-
-window.removeImage = removeImage;
-window.setMain = setMain;
-window.undoDelete = undoDelete;
-window.setFocus = setFocus;
-window.exportMedia = exportMedia;
-
-
+<script> let images = []; 
+  let variants = []; 
+  // Upload async function uploadToSupabase(file)
+  { 
+    const fileName = Date.now() + "-" + file.name; 
+    const { error } = await supabase.storage .from("product-images") .upload(fileName, file);
+    if (error) return null; 
+    return https://YOUR_PROJECT.supabase.co/storage/v1/object/public/product-images/${fileName};
+  }  
+  // Drag drop async function handleFiles(files) { for (let file of files)
+  { const url = await uploadToSupabase(file); 
+   if (url) { images.push(url); 
+             document.getElementById("previewImages").innerHTML += <img src="${url}" />; updatePreview();
+            
+            }
+  } 
+  } 
   
-// Variants
-function addVariant() {
-  const label = document.getElementById("variantLabel").value;
-  const price = parseFloat(document.getElementById("variantPrice").value);
-  const stock = parseInt(document.getElementById("variantStock").value);
+  // Variants function addVariant() 
+  { 
+    const label = document.getElementById("variantLabel").value; 
+    const price = parseFloat(document.getElementById("variantPrice").value); 
+    const stock = parseInt(document.getElementById("variantStock").value); 
+    variants.push({id: label, label, price, stock }); 
+    document.getElementById("variantList").innerHTML += <li>${label} - $${price}</li>; } 
+      // Save async function saveProduct() 
+    { 
+      const name = document.getElementById("name").value; 
+      const slug = name.toLowerCase().replace(/\s+/g, "-"); 
+      await supabase.from("products").insert([{ name, slug, price: variants[0]?.price || 0, image: images[0] || "", images, description: document.getElementById("description").value, variants, categories: document.getElementById("categories").value.split(",") }]); alert("Saved!"); } 
+    // Preview function updatePreview() 
+    { 
+      document.getElementById("previewCard").innerHTML = <img src="${images[0] || ""}" width="100"/> <h4>${document.getElementById("name").value}</h4> ; } 
 
-  variants.push({ id: label, label, price, stock });
 
-  document.getElementById("variantList").innerHTML += `<li>${label} - $${price}</li>`;
-}
 
-// Save
-async function saveProduct() {
-  const name = document.getElementById("name").value;
-  const slug = name.toLowerCase().replace(/\s+/g, "-");
-
-  await supabase.from("products").insert([{
-    name,
-    slug,
-    price: variants[0]?.price || 0,
-    image: images[0] || "",
-    images,
-    description: document.getElementById("description").value,
-    variants,
-    categories: document.getElementById("categories").value.split(",")
-  }]);
-
-  alert("Saved!");
-}
-
-// Preview
-function updatePreview() {
-  document.getElementById("previewCard").innerHTML = `
-    <img src="${images[0] || ""}" width="100"/>
-    <h4>${document.getElementById("name").value}</h4>
-  `;
-}
-    const uploadBox = document.getElementById("uploadBox");
+    
+      const uploadBox = document.getElementById("uploadBox");
 const fileInput = document.getElementById("fileInput");
 
 // CLICK → open file picker
@@ -646,7 +331,9 @@ uploadBox.addEventListener("drop", (e) => {
   const files = e.dataTransfer.files;
   handleFiles(files);
 });
-</script>
+
+    
+      </script
 
 </body>
 </html>
