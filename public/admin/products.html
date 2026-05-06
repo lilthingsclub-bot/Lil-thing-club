@@ -154,15 +154,25 @@
 
 <h1>Add Product</h1>
   
+  <section>
   <div id="uploadBox">Drag & Drop Images</div>
 <input type="file" id="fileInput" multiple hidden />
 <div id="previewImages"></div>
-
+  </section>
+  
+<section>
 <input id="name" placeholder="Product name" />
+</section>
+  
+  <section>
 <textarea id="description" placeholder="description"></textarea>
-
+</section>
+  
+  <section>
 <input id="categories" placeholder="comma categories" />
-
+</section>
+    
+<section>
 <h3>Variants</h3>
 <input id="variantLabel" placeholder="Label" />
 <input id="variantPrice" type="number" placeholder="Price" />
@@ -170,6 +180,7 @@
 <button onclick="addVariant()">Add Variant</button>
 
 <ul id="variantList"></ul>
+  </section>
 
 <button onclick="saveProduct()">Save</button>
 
