@@ -189,3 +189,48 @@ document.addEventListener("DOMContentLoaded", () => {
     recContainer.appendChild(card);
   });
 });
+
+function initProductPage() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+
+  const product = PRODUCTS[slug];
+  if (!product) return;
+
+  document.getElementById("productName").textContent = product.name;
+  document.querySelector(".desc p").textContent = product.description;
+
+  // Images
+  const mainImage = document.getElementById("mainImage");
+  mainImage.src = product.images[0];
+
+  renderVariants(product);
+}
+
+function renderVariants(product) {
+  const container = document.getElementById("variantOptions");
+  container.innerHTML = "";
+
+  let selectedVariant = product.variants[0];
+
+  product.variants.forEach((variant, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = variant.label;
+
+    if (index === 0) btn.classList.add("active");
+
+    btn.onclick = () => {
+      selectedVariant = variant;
+
+      document.getElementById("price").textContent = `$${variant.price}`;
+
+      container.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    };
+
+    container.appendChild(btn);
+  });
+
+  document.getElementById("price").textContent = `$${selectedVariant.price}`;
+}
+
