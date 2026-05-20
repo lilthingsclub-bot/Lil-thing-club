@@ -155,14 +155,17 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 
-
 function loadProducts(category, containerId) {
 
   const container = document.getElementById(containerId);
 
+  if (!container) return;
+
   const filteredProducts = PRODUCTS_LIST.filter(product =>
     product.categories.includes(category)
   );
+
+  container.innerHTML = "";
 
   filteredProducts.forEach(product => {
 
@@ -175,7 +178,7 @@ function loadProducts(category, containerId) {
 
           <h3>${product.name}</h3>
 
-          <p>$${product.price}</p>
+          <p>${product.price}</p>
 
         </a>
 
