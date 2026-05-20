@@ -157,3 +157,54 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 
+async function loadProducts(tag, containerId) {
+  const container = document.getElementById(containerId);
+
+  try {
+    const response = await fetch("products.json");
+    const products = await response.json();
+
+    const filteredProducts = products.filter(product =>
+      product.tags.includes(tag)
+    );
+
+    filteredProducts.slice(0, 6).forEach(product => {
+      container.innerHTML += `
+        <div class="product-card1">
+
+          <a href="product.html?slug=${product.slug}">
+            <img src="${product.image}" alt="${product.name}">
+
+            <h3 class="product-name1">
+              ${product.name}
+            </h3>
+
+            <p class="product-price1">
+              $${product.price}
+            </p>
+          </a>
+
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    
+
+    loadProducts("new", "new-products");
+
+loadProducts("popular", "popular-products");
+
+loadProducts("featured", "featured-products");
+
+  }
+}
+
+
+
+
+
+
+
