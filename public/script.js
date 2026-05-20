@@ -161,31 +161,25 @@ function loadProducts(category, containerId) {
   const container = document.getElementById(containerId);
 
   const filteredProducts = PRODUCTS_LIST.filter(product =>
-    product.category.includes(category)
+    product.categories.includes(category)
   );
 
-  filteredProducts.slice(0, 6).forEach(product => {
+  filteredProducts.forEach(product => {
 
     container.innerHTML += `
-
       <div class="product-card1">
 
         <a href="product.html?slug=${product.slug}">
 
           <img src="${product.image}" alt="${product.name}">
 
-          <h3 class="product-name1">
-            ${product.name}
-          </h3>
+          <h3>${product.name}</h3>
 
-          <p class="product-price1">
-            $${product.price}
-          </p>
+          <p>$${product.price}</p>
 
         </a>
 
       </div>
-
     `;
   });
 }
