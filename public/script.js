@@ -156,55 +156,42 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 
+function loadProducts(category, containerId) {
 
-async function loadProducts(tag, containerId) {
   const container = document.getElementById(containerId);
 
-  try {
-    const response = await fetch("products.json");
-    const products = await response.json();
+  const filteredProducts = products.filter(product =>
+    product.category.includes(category)
+  );
 
-    const filteredProducts = products.filter(product =>
-      product.tags.includes(tag)
-    );
+  filteredProducts.slice(0, 6).forEach(product => {
 
-    filteredProducts.slice(0, 6).forEach(product => {
-      container.innerHTML += `
-        <div class="product-card1">
+    container.innerHTML += `
 
-          <a href="product.html?slug=${product.slug}">
-            <img src="${product.image}" alt="${product.name}">
+      <div class="product-card1">
 
-            <h3 class="product-name1">
-              ${product.name}
-            </h3>
+        <a href="product.html?slug=${product.slug}">
 
-            <p class="product-price1">
-              $${product.price}
-            </p>
-          </a>
+          <img src="${product.image}" alt="${product.name}">
 
-        </div>
-      `;
-    });
+          <h3 class="product-name1">
+            ${product.name}
+          </h3>
 
-  } catch (error) {
-    console.error(error);
+          <p class="product-price1">
+            $${product.price}
+          </p>
 
-    
+        </a>
 
-    loadProducts("new", "new-products");
+      </div>
+
+    `;
+  });
+}
+
+loadProducts("new", "new-products");
 
 loadProducts("popular", "popular-products");
 
 loadProducts("featured", "featured-products");
-
-  }
-}
-
-
-
-
-
-
-
