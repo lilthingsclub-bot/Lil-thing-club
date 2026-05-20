@@ -160,7 +160,7 @@ function loadProducts(category, containerId) {
 
   const container = document.getElementById(containerId);
 
-  const filteredProducts = products.filter(product =>
+  const filteredProducts = PRODUCTS_LIST.filter(product =>
     product.category.includes(category)
   );
 
