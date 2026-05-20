@@ -100,7 +100,7 @@ const PRODUCTS_LIST = [
     name: "Lucky Day Sticker Sheet",
     price: "$5.99＋",
     image: "asset/8.png",
-    categories:["sticker-sheet", "sticker", "all"],
+    categories:["sticker-sheet", "sticker","popular", "all"],
     tags: ["clover", "cute", "tofu", "cheri"]
   },
  {
