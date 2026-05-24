@@ -155,40 +155,6 @@ document.getElementById("contact-form").addEventListener("submit", function(e) {
 
 
 
-function loadProducts(category, containerId) {
 
-  const container = document.getElementById(containerId);
 
-  if (!container) return;
 
-  const filteredProducts = PRODUCTS_LIST.filter(product =>
-    product.categories.includes(category)
-  );
-
-  container.innerHTML = "";
-
-  filteredProducts.forEach(product => {
-
-    container.innerHTML += `
-      <div class="product-card1">
-
-        <a href="product.html?slug=${product.slug}">
-
-          <img src="${product.image}" alt="${product.name}">
-
-          <h3>${product.name}</h3>
-
-          <p>${product.price}</p>
-
-        </a>
-
-      </div>
-    `;
-  });
-}
-
-loadProducts("new", "new-products");
-
-loadProducts("popular", "popular-products");
-
-loadProducts("featured", "featured-products");
