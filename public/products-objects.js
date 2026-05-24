@@ -345,7 +345,10 @@ function displayProducts(products, sectionId) {
     `; 
   }); 
 
-  container.appendChild(productWrapper);
+  // Target the section where the new products should live
+const newProductsSection = document.getElementById("new-products"); 
+newProductsSection.appendChild(productWrapper);
+
 } 
 
 // Render products into the respective HTML containers 
