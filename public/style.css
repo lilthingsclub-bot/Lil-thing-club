@@ -651,7 +651,7 @@ Featured Products Section
   overflow-x: auto;
   gap: 20px;
 	  scroll-behavior: smooth;
-  padding-left: 97px ;
+  padding-left: 15px ;
   scrollbar-width: auto;
  z-index: 5
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
