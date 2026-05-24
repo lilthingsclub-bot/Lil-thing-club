@@ -319,38 +319,38 @@ const PRODUCTS_LIST = [
 ];
 
 
-/ Filter arrays based on the specific categories
-const newproducts = PRODUCTS_LIST.filter(p => p.categories.includes("new"));
-const popularProducts = PRODUCTS_LIST.filter(p => p.categories.includes("popular"));
-const featuredProducts = PRODUCTS_LIST.filter(p => p.categories.includes("featured"));
+// Filter arrays based on the specific categories 
+const newProducts = PRODUCTS_LIST.filter(p => p.categories.includes("new")); 
+const popularProducts = PRODUCTS_LIST.filter(p => p.categories.includes("popular")); 
+const featuredProducts = PRODUCTS_LIST.filter(p => p.categories.includes("featured")); 
 
-// Function to generate HTML inside specific sections
-function displayProducts(products, sectionId) {
-  const container = document.getElementById(sectionId);
-  container.innerHTML = ""; // Clear existing content
+// Function to generate HTML inside specific sections 
+function displayProducts(products, sectionId) { 
+  const container = document.getElementById(sectionId); 
+  container.innerHTML = ""; // Clear existing content 
+  
+  // Create a wrapper div for styling (Flexbox/Grid)
+  const productWrapper = document.createElement("div");
+  productWrapper.className = "product-row"; 
 
-  products.forEach(product => {
-    container.innerHTML += `
-      <div class="product-card1">
+  products.forEach(product => { 
+    productWrapper.innerHTML += ` 
+      <div class="product-card1"> 
+        <a href="product.html?slug=${product.slug}"> 
+          <img src="${product.image}" alt="${product.name}"> 
+          <h3>${product.name}</h3> 
+          <p>${product.price}</p> 
+        </a> 
+      </div> 
+    `; 
+  }); 
 
-        <a href="product.html?slug=${product.slug}">
+  container.appendChild(productWrapper);
+} 
 
-          <img src="${product.image}" alt="${product.name}">
-
-          <h3>${product.name}</h3>
-
-          <p>${product.price}</p>
-
-        </a>
-
-      </div>
-    `;
-  });
-}
-
-// Render products into the respective HTML containers
-displayProducts(newProducts, "new-products");
-displayProducts(popularProducts, "popular-products");
+// Render products into the respective HTML containers 
+displayProducts(newProducts, "new-products"); 
+displayProducts(popularProducts, "popular-products"); 
 displayProducts(featuredProducts, "featured-products");
 
 
