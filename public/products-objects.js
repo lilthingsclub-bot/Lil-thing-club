@@ -331,7 +331,7 @@ function displayProducts(products, sectionId) {
   
   // Create a wrapper div for styling (Flexbox/Grid)
   const productWrapper = document.createElement("div");
-  productWrapper.className = "product-row1"; 
+  productWrapper.className = "product-row"; 
 
   products.forEach(product => { 
     productWrapper.innerHTML += ` 
