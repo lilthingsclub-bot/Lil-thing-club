@@ -683,22 +683,7 @@ Featured Products Section
 }
 
 
-.featured-products.scallop::after {
-   content: "";
-  position: absolute;
-  bottom: -45px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  pointer-events: none;
-  z-index: 2;
-  background-repeat: repeat-x;
-  background-size: 100px 90px;
-  background-image:
-    radial-gradient(circle at 25px 0, #effff4  25px, transparent 26px),
-    radial-gradient(circle at 73px 0, #ffebf9 25px, transparent 26px);
- 
-}
+
 
 .featured-products h2{
   text-align: center;
@@ -714,21 +699,7 @@ font-weight: 2000px;
 	line-height: 1.5;
 }
 
-.featured-products .product-row {
-  max-width: 1200px;          /* limit row content for readability */
-  margin: 0 auto 30px auto;   /* center the row horizontally, add bottom spacing */
-  display: grid;
-  align-items: center;
-  justify-items: center;
- 
-}
 
-.product-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 30px;
-}
 
 .product-card {
   z-index: 5; 
@@ -819,17 +790,12 @@ font-weight: 2000px;
 
 /* Responsive */
 @media (max-width: 780px) and (max-width: 1024px) {
-  .product-row {
-    grid-template-columns: repeat(3, 1fr); /* keep 4 columns for tablet */
-  }
-
+  
 }
 
 
 @media (max-width: 767px) {
-  .product-row {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
-
+  
   }
 
 .featured-products h2{
@@ -840,10 +806,7 @@ font-weight: 2000px;
 
 @media screen and (max-width: 500px) {
 /* start of phone styles */
- .product-row {
-    grid-template-columns:  repeat(2, 1fr); /* 2 columns for mobile */
-
-  }
+ 
 .featured-products h2{
   font-size: 35px;
 }
