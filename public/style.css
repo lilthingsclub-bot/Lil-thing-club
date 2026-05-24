@@ -58,6 +58,9 @@ font-family: 'Baloo 2', sans-serif;
   padding-bottom: 15px; /* Space for the scrollbar */
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
 }
+.product-row::-webkit-scrollbar {
+  display: none;
+}
 
 
 .nav-bar {
