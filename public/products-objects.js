@@ -68,7 +68,7 @@ const PRODUCTS_LIST = [
     name: "Lucky charms Sticker Sheet",
     price: "$4.79＋",
     image: "asset/31.png",
-    categories:["sticker-sheet", "sticker", "all"],
+    categories:["sticker-sheet", "sticker", "all", "popular"],
     tags: ["wing", "cute"]
   },
   {
