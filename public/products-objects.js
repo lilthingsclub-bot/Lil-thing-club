@@ -349,8 +349,11 @@ function displayProducts(products, sectionId) {
 }
 
 // Render products into the respective HTML containers
-displayProducts(newProducts, "home-section");
-displayProducts(popularProducts, "music-section");
-displayProducts(featuredProducts, "electronics-section");
+displayProducts(newProducts, "new-products");
+displayProducts(popularProducts, "popular-products");
+displayProducts(featuredProducts, "featured-products");
+
+
+
 
 
