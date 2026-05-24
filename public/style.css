@@ -50,17 +50,7 @@ font-family: 'Baloo 2', sans-serif;
 
 
 
-.product-row {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 20px;
-  padding-bottom: 15px; /* Space for the scrollbar */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
-}
-.product-row::-webkit-scrollbar {
-  display: none;
-}
+
 
 
 .nav-bar {
@@ -654,6 +644,26 @@ font-size: 25px;
 /* =========================
 Featured Products Section
 ========================= */
+
+.product-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+	  scroll-behavior: smooth;
+  padding-left: 97px ;
+  scrollbar-width: auto;
+ z-index: 5
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+}
+
+.product-card1 {
+  flex: 0 0 250px; /* Adjust width to your preference */
+}
+
+.product-row::-webkit-scrollbar {
+  display: none;
+}
 
 
 
