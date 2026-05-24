@@ -679,6 +679,7 @@ Featured Products Section
    position: relative;
     display: flex;
   flex-direction: column;
+	justify-content: flex-start;
   align-items: center;
 }
 
@@ -686,6 +687,7 @@ Featured Products Section
 
 
 .featured-products h2{
+	display: block;
   text-align: center;
   font-size: 50px;
   color: #ff66c4;
