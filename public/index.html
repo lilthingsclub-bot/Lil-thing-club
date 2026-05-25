@@ -183,8 +183,7 @@
   <div class="category-tabs">
     <a href="?category=new" class="tab-link">New Arrivals</a>
     <a href="?category=featured" class="tab-link">Summer Shop</a>
-    <a href="?category=stamp" class="tab-link">Punch Stamps</a>
-    <a href="?category=tweezer" class="tab-link">Sticker Tweezer</a>
+    <a href="?category=popular" class="tab-link">Punch Stamps</a>
   </div>
 
   <!-- PRODUCTS -->
@@ -512,22 +511,28 @@ and the little things that make us smile.</h3>
  </p>
 </section>
 
+<!-- LOAD PRODUCTS FIRST -->
+<script src="products-objects.js"></script>
 
-    <script>
+<!-- THEN RUN FILTER SCRIPT -->
+<script>
 
-  // GET CATEGORY FROM URL
   const params = new URLSearchParams(window.location.search);
 
-  // default category = new
   const category = params.get("category") || "new";
+
+  const productContainer = document.getElementById("product-list");
+
+  // IMPORTANT
+  if (!productContainer) {
+    console.error("product-list element not found");
+  }
 
   // FILTER PRODUCTS
   const filteredProducts = PRODUCTS_LIST.filter(product =>
     Array.isArray(product.categories) &&
     product.categories.includes(category)
   );
-
-  const productContainer = document.getElementById("product-list");
 
   productContainer.innerHTML = "";
 
@@ -550,22 +555,22 @@ and the little things that make us smile.</h3>
 
   });
 
-
   // ACTIVE TAB
   const tabs = document.querySelectorAll(".tab-link");
 
   tabs.forEach(tab => {
 
-    const tabCategory = new URL(tab.href).searchParams.get("category");
+    const tabCategory =
+      new URL(tab.href).searchParams.get("category");
 
-    if(tabCategory === category){
+    if (tabCategory === category) {
       tab.classList.add("active");
     }
 
   });
 
 </script>
-<script src="products-objects.js"></script>
+
 <script src="script.js"></script>
 </body>
 </html>
