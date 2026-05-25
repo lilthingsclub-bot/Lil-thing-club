@@ -740,12 +740,7 @@ display: flex;  /* This aligns the children side-by-side */
 gap: 10px;  /* Adds space between the divs */ 
 }
 
-.infobox { 
-flex: 1;  /* Makes all divs take up equal width */ 
-padding: 20px; 
-background-color: lightblue; 
-border: 1px solid #333; 
-}
+
 
 
 /* =========================
