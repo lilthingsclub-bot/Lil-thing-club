@@ -515,7 +515,30 @@ and the little things that make us smile.</h3>
    ꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆꩜⋆ 𐙚 ̊.⋆ 
  </p>
 </section>
-      
+
+
+      <script>
+  // ======== Filter Products by Category ========
+ let filteredProducts = PRODUCTS_LIST.filter(
+  p => Array.isArray(p.categories) && p.categories.includes(category)
+);
+
+  const productContainer = document.getElementById("product-list");
+  productContainer.innerHTML = "";
+
+  filteredProducts.forEach(product => {
+    const div = document.createElement("div");
+    div.className = "product-card1";
+    div.innerHTML = `
+      <a href="product.html?slug=${product.slug}">
+        <img src="${product.image}" alt="${product.name}" />
+        <p class="product-name1">${product.name}</p>
+        <p class="product-price1">${product.price}</p>
+      </a>
+    `;
+    productContainer.appendChild(div);
+  });
+    </script>    
 <script src="products-objects.js"></script>
 <script src="script.js"></script>
 </body>
