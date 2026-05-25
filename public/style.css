@@ -658,7 +658,7 @@ Featured Products Section
 }
 
 .product-card1 {
-  flex: 0 0 250px; /* Adjust width to your preference */
+  flex: 0 0 450px; /* Adjust width to your preference */
 }
 
 .product-row::-webkit-scrollbar {
@@ -700,24 +700,6 @@ Featured Products Section
   flex-direction: column;
 	justify-content: flex-start;
   align-items: center;
-}
-
-
-
-
-.featured-products h2{
-	display: block;
-  text-align: center;
-  font-size: 50px;
-  color: #ff66c4;
-  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
- margin: 0 auto 30px auto;
-}
-
-.featured-products h3{
-font-size: 20px;
-font-weight: 2000px;
-	line-height: 1.5;
 }
 
 
@@ -766,44 +748,6 @@ font-weight: 2000px;
 	font-weight: 1200px;
   color: #33A9FF;
   margin-bottom: 12px;
-}
-
-/* All Products Button */
-
-.all-products {
-  display: flex;             /* use flexbox */
-  justify-content: center;   /* center horizontally */
-  margin-top: 40px;          /* space above button */
-  margin-bottom: 40px;       /* space below button */
-}
-
-.all-products-btn {
-  background: #ffebf9;
-  color: #ff66c4;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  display: inline-block;
-  text-align: center;
-   border: 1.5px solid #ff66c4;
-}
-
-.all-products-btn a {
-  display: inline-block;
-  padding: 10px 24px;
- 
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.all-products-btn:hover {
-  background: #ffbde8; /* slightly darker on hover */
 }
 
 
