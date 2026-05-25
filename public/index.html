@@ -176,29 +176,25 @@
 
   </div>
 </section>
-  <section>
-<a href="index.html?category=new">New Arrivals</a>
-   <a href="index.html?category=featured">New Arrivals</a>
+  
+ <section class="product-section">
 
-    <section class="sticker-products">
-  <div class="product-row1" id="product-list"></div>
+  <!-- CATEGORY TABS -->
+  <div class="category-tabs">
+    <a href="?category=new" class="tab-link">New Arrivals</a>
+    <a href="?category=featured" class="tab-link">Summer Shop</a>
+    <a href="?category=stamp" class="tab-link">Punch Stamps</a>
+    <a href="?category=tweezer" class="tab-link">Sticker Tweezer</a>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="sticker-products">
+    <div class="product-row1" id="product-list"></div>
+  </div>
+
 </section>
-
- </section> 
 
   
-  <main class="featured-products" >
-      <h2>New Arrivals</h2>
-<section id="new-products">
-</section>
-      
-<section id="popular-products">
-</section>
-      
-<section id="featured-products">
-</section>
-
-</main>
 
 
 
@@ -517,28 +513,58 @@ and the little things that make us smile.</h3>
 </section>
 
 
-      <script>
-  // ======== Filter Products by Category ========
- let filteredProducts = PRODUCTS_LIST.filter(
-  p => Array.isArray(p.categories) && p.categories.includes(category)
-);
+    <script>
+
+  // GET CATEGORY FROM URL
+  const params = new URLSearchParams(window.location.search);
+
+  // default category = new
+  const category = params.get("category") || "new";
+
+  // FILTER PRODUCTS
+  const filteredProducts = PRODUCTS_LIST.filter(product =>
+    Array.isArray(product.categories) &&
+    product.categories.includes(category)
+  );
 
   const productContainer = document.getElementById("product-list");
+
   productContainer.innerHTML = "";
 
+  // SHOW PRODUCTS
   filteredProducts.forEach(product => {
+
     const div = document.createElement("div");
+
     div.className = "product-card1";
+
     div.innerHTML = `
       <a href="product.html?slug=${product.slug}">
-        <img src="${product.image}" alt="${product.name}" />
+        <img src="${product.image}" alt="${product.name}">
         <p class="product-name1">${product.name}</p>
         <p class="product-price1">${product.price}</p>
       </a>
     `;
+
     productContainer.appendChild(div);
+
   });
-    </script>    
+
+
+  // ACTIVE TAB
+  const tabs = document.querySelectorAll(".tab-link");
+
+  tabs.forEach(tab => {
+
+    const tabCategory = new URL(tab.href).searchParams.get("category");
+
+    if(tabCategory === category){
+      tab.classList.add("active");
+    }
+
+  });
+
+</script>
 <script src="products-objects.js"></script>
 <script src="script.js"></script>
 </body>
