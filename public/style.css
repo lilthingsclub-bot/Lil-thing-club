@@ -740,6 +740,11 @@ display: flex;  /* This aligns the children side-by-side */
 gap: 10px;  /* Adds space between the divs */ 
 }
 
+.infobox img {
+  max-width: 100%;
+  height: auto;
+}
+
 
 
 
