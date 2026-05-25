@@ -734,6 +734,17 @@ font-size: 25px;
   font-size: 2rem;
 }
 
+
+.info {
+display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 46px;
+  row-gap: 48px;
+  margin-bottom: 30px;
+}
+
+
+
 /* =========================
 Featured Products Section
 ========================= */
