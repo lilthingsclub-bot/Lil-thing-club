@@ -738,7 +738,6 @@ font-size: 25px;
 
 
 .basic-info{
- padding: 5rem 2rem;
   background: #fff;
   background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
@@ -748,6 +747,7 @@ font-size: 25px;
    padding: 80px 50px 50px;  /* top padding pushes content down */
    overflow: visible;
    position: relative;	
+	align-items: center;
 }
 
 .info { 
@@ -763,8 +763,9 @@ gap: 30px;  /* Adds space between the divs */
 }
 
 .infobox h3 {
-font-size: 1rem;
+font-size: 1.5rem;
   margin-bottom: 0.5rem;	
+	 align-text: center;
 }
 
 .infobox p {
