@@ -752,7 +752,7 @@ font-size: 25px;
 
 .info { 
 display: flex;  /* This aligns the children side-by-side */ 
-gap: 30px;  /* Adds space between the divs */ 
+gap: 50px;  /* Adds space between the divs */ 
 	 align-items: center;
 }
 
