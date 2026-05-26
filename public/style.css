@@ -738,16 +738,11 @@ font-size: 25px;
 
 
 .basic-info{
-  background: #33A9FF;
-   background-image: 
-    radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
-    radial-gradient(#fff 10%, transparent 10%);
-   background-size: 39px 35px; /* Sets the spacing between dots */
-   background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
-  padding: 15px 24px 40px;  /* top padding pushes content down */
-  display: flex;
-  flex-direction: column;
+  background: #96D3FF;
   align-items: center;
+	  overflow: visible;
+ Padding: 50px 10px 10px; 
+  z-index: 200;
 }
 
 .info { 
@@ -784,7 +779,7 @@ color: #666;
   background-size: 50px 50px;
   background-image: radial-gradient(circle at 25px 50px, #33A9FF 25px, transparent 26px);
  overflow: visible;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .basic-info.scallop-bottom::after {
@@ -798,7 +793,7 @@ color: #666;
   background-size: 50px 50px;
   background-image: radial-gradient(circle at 25px 10px,  #33A9FF 25px, transparent 26px);
  overflow: visible;
-  z-index: 1;
+  z-index: 1000;
 }
 
 
