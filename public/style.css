@@ -830,6 +830,101 @@ color: #666;
 
 }
 
+
+
+ .character-universe{
+  padding: 5rem 2rem;
+  background: #fff;
+  background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+  background-size: 39px 35px; /* Sets the spacing between dots */
+  background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+   padding: 80px 50px 50px;  /* top padding pushes content down */
+   overflow: visible;
+   position: relative;
+}
+
+.character-intro{
+  max-width: 400px;
+  margin-bottom: 3rem;
+}
+
+.character-intro h2{
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.character-intro p{
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.character-slider{
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+
+.character-slider::-webkit-scrollbar{
+  display: none;
+}
+
+.character-card{
+  min-width: 420px;
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #000;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover{
+  transform: translateY(-6px);
+}
+
+.character-card img{
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.character-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.character-info h3{
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.character-info p{
+  color: #666;
+}
+
+.character-info span{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+
+
+
 /* =========================
 Featured Products Section
 ========================= */
