@@ -746,10 +746,11 @@ font-size: 25px;
 	position: relative;
 }
 
-.info { 
-display: flex;  /* This aligns the children side-by-side */ 
-gap: 50px;  /* Adds space between the divs */ 
-	 align-items: center;
+.info{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  align-items: start;
 }
 
 .infobox img {
@@ -798,6 +799,33 @@ color: #666;
 }
 
 
+@media (max-width: 992px){
+
+  .info{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+@media (max-width: 600px){
+
+  .info{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .infobox img{
+    height: 140px;
+  }
+
+  .infobox h3{
+    font-size: 1.1rem;
+  }
+
+  .infobox p{
+    font-size: 0.9rem;
+  }
+
+}
 
 /* =========================
 Featured Products Section
