@@ -739,14 +739,15 @@ font-size: 25px;
 
 .basic-info{
   background: #fff;
-  background-image: 
+   background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
-  background-size: 39px 35px; /* Sets the spacing between dots */
-  background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
-   overflow: visible;
-   position: relative;	
-	align-items: center;
+   background-size: 39px 35px; /* Sets the spacing between dots */
+   background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+  padding: 15px 24px 40px;  /* top padding pushes content down */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .info { 
@@ -764,11 +765,12 @@ gap: 30px;  /* Adds space between the divs */
 .infobox h3 {
 font-size: 1.5rem;
   margin-bottom: 0.5rem;	
-	 align-text: center;
+	 text-align: center;
 }
 
 .infobox p {
 color: #666;
+	text-align: center;
 }
 
 
