@@ -644,6 +644,8 @@ font-size: 25px;
 /* =========================================
    GLOBAL FONT SETTINGS
    ========================================= */
+
+
  .brand-universe{
   padding: 5rem 2rem;
   background: #fff;
@@ -735,16 +737,38 @@ font-size: 25px;
 }
 
 
+.basic-info{
+ padding: 5rem 2rem;
+  background: #fff;
+  background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+  background-size: 39px 35px; /* Sets the spacing between dots */
+  background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+   padding: 80px 50px 50px;  /* top padding pushes content down */
+   overflow: visible;
+   position: relative;	
+}
+
 .info { 
 display: flex;  /* This aligns the children side-by-side */ 
-gap: 10px;  /* Adds space between the divs */ 
+gap: 30px;  /* Adds space between the divs */ 
 }
 
 .infobox img {
   max-width: 100%;
-  height: auto;
+  height: 300px;
+  object-fit: cover;
 }
 
+.infobox h3 {
+font-size: 2rem;
+  margin-bottom: 0.5rem;	
+}
+
+.infobox p {
+color: #666;
+}
 
 
 
