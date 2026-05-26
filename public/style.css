@@ -743,6 +743,7 @@ font-size: 25px;
 	  overflow: visible;
  Padding: 50px 10px 10px; 
   z-index: 200;
+	position: relative;
 }
 
 .info { 
