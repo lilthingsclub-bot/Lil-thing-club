@@ -738,7 +738,7 @@ font-size: 25px;
 
 
 .basic-info{
-  background: #96D3FF;
+  background: #AAFF92;
   align-items: center;
 	  overflow: visible;
  Padding: 50px 10px 10px; 
@@ -778,7 +778,7 @@ color: #666;
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 50px, #33A9FF 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 50px, #AAFF92 25px, transparent 26px);
  overflow: visible;
   z-index: 1000;
 }
@@ -792,7 +792,7 @@ color: #666;
   height: 50px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,  #33A9FF 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,  #AAFF92 25px, transparent 26px);
  overflow: visible;
   z-index: 1000;
 }
