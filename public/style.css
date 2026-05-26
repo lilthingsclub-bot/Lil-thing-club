@@ -750,7 +750,7 @@ font-size: 25px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
-  align-items: start;
+  align-items: center;
 }
 
 .infobox img {
@@ -807,6 +807,11 @@ color: #666;
 
 }
 @media (max-width: 600px){
+	.basic-info{
+  align-items: center;
+}
+
+.info{
 
   .info{
     grid-template-columns: repeat(2, 1fr);
