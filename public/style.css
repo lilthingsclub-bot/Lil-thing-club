@@ -698,6 +698,7 @@ font-size: 25px;
   transition: transform 0.3s ease;
 	min-width: 390px; 
   min-height: 100px; 
+	  overflow: hidden; 
 
 }
 
