@@ -707,8 +707,10 @@ font-size: 25px;
 }
 
 .brand-card img{
+	max-width: 300px; 
 width: 100%;       /* Spans the full width of the container */
   height: auto;     /* Set a fixed height that fits your design */
+	display: block;
   
 }
 
