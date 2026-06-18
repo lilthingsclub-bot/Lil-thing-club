@@ -1203,7 +1203,13 @@ Friends Section
 ========================= */
 
 .meet-my-friends {
-    background: #FEE2F6;
+    background: #fff;
+  background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+  background-size: 39px 35px; /* Sets the spacing between dots */
+  background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+   padding: 80px 50px 50px;  /* top padding pushes content down */
   text-align: center;
   padding: 50px 1px 50px;
   overflow: visible;
