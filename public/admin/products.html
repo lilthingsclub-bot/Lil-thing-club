@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lil Things Club | Product Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="products.css">
+</head>
+<body class="admin-page">
+<header class="admin-header">
+  <div>
+    <div class="admin-logo">Lil Things Club ♡</div>
+    <h1>Product Manager</h1>
+  </div>
+  <div class="header-actions">
+    <a href="../products-objects.html" target="_blank">View Shop</a>
+    <button id="logoutBtn" class="ghost-btn">Log out</button>
+  </div>
+</header>
+
+<main class="admin-shell">
+  <section class="editor-card">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">PRODUCT</span>
+        <h2 id="formTitle">Add New Product</h2>
+      </div>
+      <button id="cancelEditBtn" class="ghost-btn hidden" type="button">Cancel Edit</button>
+    </div>
+
+    <form id="productForm">
+      <input type="hidden" id="productId">
+
+      <div class="grid-2">
+        <label>Product Name *
+          <input id="name" required placeholder="Cute Bunny Postcard">
+        </label>
+        <label>Brand
+          <input id="brand" value="Lil Things Club">
+        </label>
+      </div>
+
+      <div class="grid-2">
+        <label>Categories
+          <div id="categoryList" class="chip-input"></div>
+          <input id="categoryInput" placeholder="Type a category and press Enter">
+          <small>Examples: postcard, sticker-sheet, sticker, all, new</small>
+        </label>
+        <label>Tags
+          <div id="tagList" class="chip-input"></div>
+          <input id="tagInput" placeholder="Type a tag and press Enter">
+        </label>
+      </div>
+
+      <div class="checkbox-row">
+        <label class="check"><input id="active" type="checkbox" checked> Active / visible</label>
+        <label class="check"><input id="isNew" type="checkbox"> New product</label>
+        <label class="check"><input id="featured" type="checkbox"> Featured</label>
+      </div>
+
+      <label>Description
+        <textarea id="description" rows="5" placeholder="Tell customers about this product..."></textarea>
+      </label>
+
+      <section>
+        <div class="subheading">
+          <h3>Features</h3>
+          <button id="addFeatureBtn" type="button" class="small-btn">+ Add Feature</button>
+        </div>
+        <div id="featuresList"></div>
+      </section>
+
+      <section>
+        <div class="subheading">
+          <h3>Product Images</h3>
+          <span class="muted">You can select multiple images at once.</span>
+        </div>
+        <input id="imageFiles" type="file" accept="image/*" multiple>
+        <div id="imagePreview" class="image-grid"></div>
+      </section>
+
+      <section>
+        <div class="subheading">
+          <h3>Variants</h3>
+          <button id="addVariantBtn" type="button" class="small-btn">+ Add Variant</button>
+        </div>
+        <div id="variantsList"></div>
+      </section>
+
+      <div class="form-actions">
+        <button class="primary-btn" type="submit" id="saveBtn">Save Product</button>
+        <p id="formMessage" class="message"></p>
+      </div>
+    </form>
+  </section>
+
+  <section class="products-card">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">DATABASE</span>
+        <h2>Your Products</h2>
+      </div>
+      <input id="searchProducts" class="search" placeholder="Search products...">
+    </div>
+    <div id="productsTable"></div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="products.js"></script>
+</body>
+</html>
