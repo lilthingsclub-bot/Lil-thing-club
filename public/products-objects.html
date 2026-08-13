@@ -490,35 +490,7 @@ sortDropdown.querySelectorAll("div").forEach(item => {
 
 
 
-    // Re-render the products
-    renderProducts(filteredProducts);
-
-    // Close the dropdown
-    sortDropdown.classList.remove("show");
-  });
-});
-
-// Function to render products (reuse your code)
-function renderProducts(productsArray) {
-  const productContainer = document.getElementById("product-list");
-  productContainer.innerHTML = "";
-
-  productsArray.forEach(product => {
-    const div = document.createElement("div");
-    div.className = "product-card1";
-    div.innerHTML = `
-      <a href="product.html?slug=${product.slug}">
-        <img src="${product.image}" alt="${product.name}" />
-        <p class="product-name1">${product.name}</p>
-        <p class="product-price1">${product.price}</p>
-      </a>
-    `;
-    productContainer.appendChild(div);
-  });
-}
-
-// ======== Initial render ========
-renderProducts(filteredProducts);
+   
   
 </script>
   
