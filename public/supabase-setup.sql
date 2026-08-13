@@ -197,9 +197,9 @@ grant execute on function public.is_lil_things_admin() to authenticated;
 -- 2. Copy the user's UUID.
 -- 3. Replace YOUR-AUTH-USER-UUID below.
 --
--- insert into public.admin_users (user_id)
--- values ('YOUR-AUTH-USER-UUID')
--- on conflict (user_id) do nothing;
+insert into public.admin_users (user_id)
+values ('6cf73f64-5c6e-4527-b656-6a536c267d99')
+on conflict (user_id) do nothing;
 
 -- ============================================================
 -- STORAGE BUCKET
