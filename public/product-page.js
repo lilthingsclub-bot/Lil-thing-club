@@ -579,37 +579,46 @@ function setupAddToCart(
 
         cart.push({
 
-          cartKey,
+  cartKey,
 
-          slug:
-            product.slug,
+  slug:
+    product.slug,
 
-          name:
-            product.name,
+  name:
+    product.name,
 
-          image:
-            product.images?.[0] || "",
+  image:
+    product.images?.[0] || "",
 
-          price:
-            Number(
-              selectedVariant.price
-            ),
+  // Keep price as a number
+  price:
+    Number(
+      selectedVariant.price
+    ),
 
-          quantity,
+  // IMPORTANT:
+  // cart.js uses "qty"
+  qty:
+    quantity,
 
-          variant:
-            selectedVariant.label ||
-            selectedVariant.name,
+  // IMPORTANT:
+  // cart.js uses "option"
+  option:
+    selectedVariant.label ||
+    selectedVariant.name ||
+    "Standard",
 
-          variantId:
-            selectedVariant.id,
+  // Keep the Supabase variant ID
+  variantId:
+    selectedVariant.id,
 
-          weight:
-            Number(
-              selectedVariant.weight || 0
-            )
+  weight:
+    Number(
+      selectedVariant.weight || 0
+    )
 
-        });
+});
+    
 
       }
 
