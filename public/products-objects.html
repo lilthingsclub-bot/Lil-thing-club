@@ -213,10 +213,30 @@
 </section>
 
 <!-- JS -->
-  
-<script src="products-objects.js"></script>
 
-  <script src="script.js"></script>
+
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://wzdjjctrxwvtugssnalf.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_nlxyJrJ3RqtsjP6RtMByyg_a5tYT1G3";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
+
+<script src="script.js"></script>
+
+
+
+
+  
 <script>
   // ======== Dynamic Category Titles & Descriptions ========
   const params = new URLSearchParams(window.location.search);
@@ -292,26 +312,150 @@
     categoryDescEl.textContent = CATEGORY_INFO["all"].desc;
   }
 
-  // ======== Filter Products by Category ========
- let filteredProducts = PRODUCTS_LIST.filter(
-  p => Array.isArray(p.categories) && p.categories.includes(category)
-);
+
+
+  
+let filteredProducts = [];
+
+// ======== Load Products From Supabase ========
+
+async function loadProducts() {
+  const productContainer = document.getElementById("product-list");
+
+  productContainer.innerHTML = `
+    <p style="text-align:center; width:100%;">
+      Loading products...
+    </p>
+  `;
+
+  const { data: products, error } = await supabaseClient
+    .from("products")
+    .select(`
+      id,
+      slug,
+      name,
+      brand,
+      description,
+      categories,
+      tags,
+      images,
+      features,
+      active,
+      is_new,
+      featured,
+      product_variants (
+        id,
+        name,
+        label,
+        price,
+        weight,
+        sort_order
+      )
+    `)
+    .eq("active", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Supabase product error:", error);
+
+    productContainer.innerHTML = `
+      <p style="text-align:center; width:100%;">
+        Sorry, we couldn't load the products right now.
+      </p>
+    `;
+
+    return;
+  }
+
+  // Convert database products into the format
+  // your existing product-card code expects.
+  const allProducts = products.map(product => {
+
+    const variants = [...(product.product_variants || [])]
+      .sort((a, b) => a.sort_order - b.sort_order);
+
+    const firstVariant = variants[0];
+
+    return {
+      ...product,
+
+      // Your old listing expects one image.
+      image: product.images?.[0] || "",
+
+      // Display the first variant's price.
+      price: firstVariant
+        ? `$${Number(firstVariant.price).toFixed(2)}`
+        : "",
+
+      variants
+    };
+  });
+
+  // Keep your existing category URLs working.
+  filteredProducts = allProducts.filter(product =>
+    Array.isArray(product.categories) &&
+    product.categories.includes(category)
+  );
+
+  renderProducts(filteredProducts);
+}
+
+
+// ======== Render Products ========
+
+function renderProducts(productsArray) {
 
   const productContainer = document.getElementById("product-list");
+
   productContainer.innerHTML = "";
 
-  filteredProducts.forEach(product => {
+  if (!productsArray.length) {
+    productContainer.innerHTML = `
+      <p style="text-align:center; width:100%;">
+        No products found.
+      </p>
+    `;
+
+    return;
+  }
+
+  productsArray.forEach(product => {
+
     const div = document.createElement("div");
+
     div.className = "product-card1";
+
     div.innerHTML = `
-      <a href="product.html?slug=${product.slug}">
-        <img src="${product.image}" alt="${product.name}" />
-        <p class="product-name1">${product.name}</p>
-        <p class="product-price1">${product.price}</p>
+      <a href="product.html?slug=${encodeURIComponent(product.slug)}">
+
+        <img
+          src="${product.image}"
+          alt="${product.name}"
+          loading="lazy"
+        />
+
+        <p class="product-name1">
+          ${product.name}
+        </p>
+
+        <p class="product-price1">
+          ${product.price}
+        </p>
+
       </a>
     `;
+
     productContainer.appendChild(div);
   });
+}
+
+
+// ======== Load Products ========
+
+loadProducts();
+
+  
+
 
   // ======== Dropdown Toggle ========
   function toggleDropdown() {
@@ -340,6 +484,11 @@ sortDropdown.querySelectorAll("div").forEach(item => {
           return 0;
       }
     });
+
+
+    
+
+
 
     // Re-render the products
     renderProducts(filteredProducts);
