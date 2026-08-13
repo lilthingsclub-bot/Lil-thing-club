@@ -238,260 +238,518 @@
 
   
 <script>
-  // ======== Dynamic Category Titles & Descriptions ========
-  const params = new URLSearchParams(window.location.search);
-  let category = params.get("category") || "all";
+  // ==========================================
+  // CATEGORY
+  // ==========================================
 
-  const categoryTitleEl = document.querySelector(".category-title");
-  const categoryDescEl = document.querySelector(".category-desc");
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category") || "all";
+
+  const categoryTitleEl =
+    document.querySelector(".category-title");
+
+  const categoryDescEl =
+    document.querySelector(".category-desc");
+
+
+  // ==========================================
+  // CATEGORY INFORMATION
+  // ==========================================
 
   const CATEGORY_INFO = {
+
     "vinyl-sticker": {
       title: "Vinyl-stickers",
       desc: "Explore our cute vinyl sticker sheets, perfect for decorating your Laptop, Water Bottle, or any creative project!"
     },
-     "sticker-sheet": {
+
+    "sticker-sheet": {
       title: "Sticker Sheets",
       desc: "Explore our cute vinyl sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
     },
-     "postcard": {
+
+    "postcard": {
       title: "Postcard",
-      desc: "Explore our cute postacrd, come in fun designs - collet them all"
+      desc: "Explore our cute postcards, come in fun designs - collect them all!"
     },
+
     "art-print": {
       title: "Art Print",
-      desc: "Explore our cute Art Print, come in fun designs - collet them all"
+      desc: "Explore our cute Art Prints, come in fun designs - collect them all!"
     },
+
     "sticker": {
       title: "Stickers",
       desc: "Our adorable stickers come in many fun designs — collect them all!"
     },
+
     "crochet": {
       title: "Crochet Cuties",
       desc: "Handmade crochet keychains and charms — soft, adorable, and full of personality."
     },
+
     "crochet-keychain": {
-      title: "crochet-keychain",
+      title: "Crochet Keychain",
       desc: "Handmade crochet keychains — soft, adorable, and full of personality."
     },
+
     "phone-charm": {
       title: "Phone Charms",
       desc: "Decorate your phone with our unique handmade charms, perfect for gifts or personal style."
     },
+
     "stationery": {
-      title: "Stationary",
-      desc: "shop all our stationary item."
+      title: "Stationery",
+      desc: "Shop all our stationery items."
     },
-     "phone-charm": {
-      title: "Phone Candy",
-      desc: "shop all our phone accessories and charm."
-    },
+
     "momo-pad": {
       title: "Memo Pad",
-      desc: "Explore our cute Memo Pad, come in fun designs - collet them all"
+      desc: "Explore our cute Memo Pads, come in fun designs — collect them all!"
     },
+
     "new": {
-      title: "New Product",
-      desc: "Browse all New handmade items — stickers, crochet keychains, and phone charms, packed with love!"
+      title: "New Products",
+      desc: "Browse all our newest handmade items, packed with love!"
     },
+
     "washi-tape": {
       title: "Washi Tape",
-      desc: "coming soon"
+      desc: "Coming soon!"
     },
+
     "all": {
       title: "All Products",
-      desc: "Browse all our handmade items — stickers, crochet keychains, and phone charms, packed with love!"
+      desc: "Browse all our handmade items — stickers, crochet keychains, stationery, and more, packed with love!"
     }
+
   };
 
-  if (CATEGORY_INFO[category]) {
-    categoryTitleEl.textContent = CATEGORY_INFO[category].title;
-    categoryDescEl.textContent = CATEGORY_INFO[category].desc;
-  } else {
-    categoryTitleEl.textContent = CATEGORY_INFO["all"].title;
-    categoryDescEl.textContent = CATEGORY_INFO["all"].desc;
+
+  // ==========================================
+  // UPDATE CATEGORY HEADER
+  // ==========================================
+
+  if (categoryTitleEl && categoryDescEl) {
+
+    const info =
+      CATEGORY_INFO[category] ||
+      CATEGORY_INFO["all"];
+
+    categoryTitleEl.textContent = info.title;
+    categoryDescEl.textContent = info.desc;
+
   }
 
 
+  // ==========================================
+  // PRODUCT DATA
+  // ==========================================
 
-  
-let filteredProducts = [];
+  let filteredProducts = [];
 
-// ======== Load Products From Supabase ========
 
-async function loadProducts() {
-  const productContainer = document.getElementById("product-list");
+  // ==========================================
+  // LOAD PRODUCTS FROM SUPABASE
+  // ==========================================
 
-  productContainer.innerHTML = `
-    <p style="text-align:center; width:100%;">
-      Loading products...
-    </p>
-  `;
+  async function loadProducts() {
 
-  const { data: products, error } = await supabaseClient
-    .from("products")
-    .select(`
-      id,
-      slug,
-      name,
-      brand,
-      description,
-      categories,
-      tags,
-      images,
-      features,
-      active,
-      is_new,
-      featured,
-      product_variants (
-        id,
-        name,
-        label,
-        price,
-        weight,
-        sort_order
-      )
-    `)
-    .eq("active", true)
-    .order("created_at", { ascending: false });
+    const productContainer =
+      document.getElementById("product-list");
 
-  if (error) {
-    console.error("Supabase product error:", error);
+    if (!productContainer) {
+      console.error(
+        "Could not find #product-list"
+      );
+      return;
+    }
+
+
+    // Show loading message
 
     productContainer.innerHTML = `
-      <p style="text-align:center; width:100%;">
-        Sorry, we couldn't load the products right now.
+      <p style="
+        text-align:center;
+        width:100%;
+        padding:40px;
+      ">
+        Loading products...
       </p>
     `;
 
-    return;
-  }
 
-  // Convert database products into the format
-  // your existing product-card code expects.
-  const allProducts = products.map(product => {
-
-    const variants = [...(product.product_variants || [])]
-      .sort((a, b) => a.sort_order - b.sort_order);
-
-    const firstVariant = variants[0];
-
-    return {
-      ...product,
-
-      // Your old listing expects one image.
-      image: product.images?.[0] || "",
-
-      // Display the first variant's price.
-      price: firstVariant
-        ? `$${Number(firstVariant.price).toFixed(2)}`
-        : "",
-
-      variants
-    };
-  });
-
-  // Keep your existing category URLs working.
-  filteredProducts = allProducts.filter(product =>
-    Array.isArray(product.categories) &&
-    product.categories.includes(category)
-  );
-
-  renderProducts(filteredProducts);
-}
+    console.log(
+      "Loading products from Supabase..."
+    );
 
 
-// ======== Render Products ========
+    // Get products
 
-function renderProducts(productsArray) {
+    const { data: products, error } =
+      await supabaseClient
 
-  const productContainer = document.getElementById("product-list");
+        .from("products")
 
-  productContainer.innerHTML = "";
+        .select(`
+          id,
+          slug,
+          name,
+          brand,
+          description,
+          categories,
+          tags,
+          images,
+          features,
+          active,
+          is_new,
+          featured,
+          created_at,
 
-  if (!productsArray.length) {
-    productContainer.innerHTML = `
-      <p style="text-align:center; width:100%;">
-        No products found.
-      </p>
-    `;
+          product_variants (
+            id,
+            name,
+            label,
+            price,
+            weight,
+            sort_order
+          )
+        `)
 
-    return;
-  }
+        .eq("active", true)
 
-  productsArray.forEach(product => {
+        .order(
+          "created_at",
+          { ascending: false }
+        );
 
-    const div = document.createElement("div");
 
-    div.className = "product-card1";
+    // Database error
 
-    div.innerHTML = `
-      <a href="product.html?slug=${encodeURIComponent(product.slug)}">
+    if (error) {
 
-        <img
-          src="${product.image}"
-          alt="${product.name}"
-          loading="lazy"
-        />
+      console.error(
+        "SUPABASE PRODUCT ERROR:",
+        error
+      );
 
-        <p class="product-name1">
-          ${product.name}
+      productContainer.innerHTML = `
+        <p style="
+          text-align:center;
+          width:100%;
+          padding:40px;
+        ">
+          Sorry, we couldn't load the products.
         </p>
+      `;
 
-        <p class="product-price1">
-          ${product.price}
+      return;
+    }
+
+
+    console.log(
+      "Products received:",
+      products
+    );
+
+
+    // No products
+
+    if (!products || products.length === 0) {
+
+      productContainer.innerHTML = `
+        <p style="
+          text-align:center;
+          width:100%;
+          padding:40px;
+        ">
+          No products found in the database.
         </p>
+      `;
 
-      </a>
-    `;
-
-    productContainer.appendChild(div);
-  });
-}
+      return;
+    }
 
 
+    // ==========================================
+    // CONVERT DATABASE PRODUCTS
+    // ==========================================
 
-  
+    const allProducts =
+      products.map(product => {
+
+        const variants =
+          [...(product.product_variants || [])]
+            .sort(
+              (a, b) =>
+                (a.sort_order || 0) -
+                (b.sort_order || 0)
+            );
 
 
-  // ======== Dropdown Toggle ========
-  function toggleDropdown() {
-    document.getElementById("sortDropdown").classList.toggle("show");
+        const firstVariant =
+          variants[0];
+
+
+        return {
+
+          ...product,
+
+          image:
+            product.images?.[0] || "",
+
+          price:
+            firstVariant
+              ? `$${Number(
+                  firstVariant.price
+                ).toFixed(2)}`
+              : "",
+
+          variants
+
+        };
+
+      });
+
+
+    console.log(
+      "All converted products:",
+      allProducts
+    );
+
+
+    // ==========================================
+    // CATEGORY FILTER
+    // ==========================================
+
+    if (category === "all") {
+
+      filteredProducts =
+        allProducts;
+
+    } else {
+
+      filteredProducts =
+        allProducts.filter(product =>
+
+          Array.isArray(product.categories) &&
+
+          product.categories.includes(category)
+
+        );
+
+    }
+
+
+    console.log(
+      "Current category:",
+      category
+    );
+
+    console.log(
+      "Filtered products:",
+      filteredProducts
+    );
+
+
+    // Render
+
+    renderProducts(
+      filteredProducts
+    );
+
   }
-// ======== Sort Dropdown Functionality ========
-const sortDropdown = document.getElementById("sortDropdown");
 
-// Listen for clicks on dropdown items
-sortDropdown.querySelectorAll("div").forEach(item => {
-  item.addEventListener("click", () => {
-    const sortType = item.getAttribute("data-sort");
-    
-    // Sort the filteredProducts array
-    filteredProducts.sort((a, b) => {
-      switch(sortType) {
-        case "name-asc":
-          return a.name.localeCompare(b.name);
-        case "name-desc":
-          return b.name.localeCompare(a.name);
-        case "price-asc":
-          return parseFloat(a.price.replace(/[^0-9.]/g, "")) - parseFloat(b.price.replace(/[^0-9.]/g, ""));
-        case "price-desc":
-          return parseFloat(b.price.replace(/[^0-9.]/g, "")) - parseFloat(a.price.replace(/[^0-9.]/g, ""));
-        default:
-          return 0;
-      }
+
+  // ==========================================
+  // RENDER PRODUCTS
+  // ==========================================
+
+  function renderProducts(productsArray) {
+
+    const productContainer =
+      document.getElementById("product-list");
+
+
+    productContainer.innerHTML = "";
+
+
+    if (
+      !productsArray ||
+      productsArray.length === 0
+    ) {
+
+      productContainer.innerHTML = `
+        <p style="
+          text-align:center;
+          width:100%;
+          padding:40px;
+        ">
+          No products found.
+        </p>
+      `;
+
+      return;
+    }
+
+
+    productsArray.forEach(product => {
+
+      const div =
+        document.createElement("div");
+
+
+      div.className =
+        "product-card1";
+
+
+      div.innerHTML = `
+
+        <a href="product.html?slug=${encodeURIComponent(
+          product.slug
+        )}">
+
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+            loading="lazy"
+          >
+
+          <p class="product-name1">
+            ${product.name}
+          </p>
+
+          <p class="product-price1">
+            ${product.price}
+          </p>
+
+        </a>
+
+      `;
+
+
+      productContainer.appendChild(div);
+
     });
 
+  }
 
-    
+
+  // ==========================================
+  // SORT DROPDOWN
+  // ==========================================
+
+  const sortDropdown =
+    document.getElementById(
+      "sortDropdown"
+    );
 
 
-// ======== Load Products ========
+  if (sortDropdown) {
 
-loadProducts();
+    sortDropdown
+      .querySelectorAll("div")
+      .forEach(item => {
 
-   
-  
+        item.addEventListener(
+          "click",
+          () => {
+
+            const sortType =
+              item.getAttribute(
+                "data-sort"
+              );
+
+
+            filteredProducts.sort(
+              (a, b) => {
+
+                switch (sortType) {
+
+                  case "name-asc":
+
+                    return a.name.localeCompare(
+                      b.name
+                    );
+
+
+                  case "name-desc":
+
+                    return b.name.localeCompare(
+                      a.name
+                    );
+
+
+                  case "price-asc":
+
+                    return (
+                      parseFloat(
+                        a.price.replace(
+                          /[^0-9.]/g,
+                          ""
+                        )
+                      ) -
+                      parseFloat(
+                        b.price.replace(
+                          /[^0-9.]/g,
+                          ""
+                        )
+                      )
+                    );
+
+
+                  case "price-desc":
+
+                    return (
+                      parseFloat(
+                        b.price.replace(
+                          /[^0-9.]/g,
+                          ""
+                        )
+                      ) -
+                      parseFloat(
+                        a.price.replace(
+                          /[^0-9.]/g,
+                          ""
+                        )
+                      )
+                    );
+
+
+                  default:
+
+                    return 0;
+
+                }
+
+              }
+            );
+
+
+            renderProducts(
+              filteredProducts
+            );
+
+
+            sortDropdown.classList.remove(
+              "show"
+            );
+
+          }
+
+        );
+
+      });
+
+  }
+
+
+  // ==========================================
+  // START
+  // ==========================================
+
+  loadProducts();
+
 </script>
   
 </body>
