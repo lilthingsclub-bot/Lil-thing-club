@@ -571,11 +571,13 @@ function setupAddToCart(
 
       if (existingItem) {
 
-        existingItem.quantity =
-          (existingItem.quantity || 0) +
-          quantity;
+  existingItem.qty =
+    (existingItem.qty || 0) +
+    quantity;
 
-      } else {
+}
+
+      else {
 
         cart.push({
 
