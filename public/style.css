@@ -964,7 +964,7 @@ Featured Products Section
 
 .tab-link{
   text-decoration:none;
-  font-size:40px;
+  font-size: 100%;
   font-weight:500;
   color:#b5b5b5;
   transition:0.3s;
@@ -1061,7 +1061,7 @@ font-weight: 2000px;
 
 @media (max-width: 487px) {
 .tab-link{
-	font-size: 15px;
+	font-size: 10%;
 }
 }
 
