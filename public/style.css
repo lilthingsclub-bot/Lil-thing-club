@@ -1064,11 +1064,14 @@ font-weight: 2000px;
 .featured-products h2{
   font-size: 35px;
 }
-
 }
 
 
-
+@media (max-width: 487px) {
+.tab-link {
+	font-size: 35px;
+}
+}
 
 
 
