@@ -620,10 +620,19 @@ and the little things that make us smile.</h3>
  </p>
 </section>
 
-<!-- LOAD PRODUCTS FIRST -->
-<script src="products-objects.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- THEN RUN FILTER SCRIPT -->
+<script>
+  const SUPABASE_URL = "https://wzdjjctrxwvtugssnalf.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_nlxyJrJ3RqtsjP6RtMByyg_a5tYT1G3";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
 <script>
 
   const params = new URLSearchParams(window.location.search);
