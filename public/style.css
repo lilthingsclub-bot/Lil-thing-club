@@ -305,8 +305,6 @@ font-family: 'Baloo 2', sans-serif;
     radial-gradient(#ffd5f2 10%, transparent 10%);
   background-size: 39px 35px; /* Sets the spacing between dots */
   background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
-background-size: 100% 20px; /* Width 100%, height 20px (total stripe height) */
-  
 }
 
 .hero-container {
