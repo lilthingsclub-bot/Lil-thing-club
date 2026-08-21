@@ -1060,7 +1060,7 @@ font-weight: 2000px;
 
 
 @media (max-width: 487px) {
-.category-tap a {
+.tab-link{
 	font-size: 15px;
 }
 }
