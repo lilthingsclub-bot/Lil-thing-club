@@ -635,6 +635,139 @@ and the little things that make us smile.</h3>
 </script>
 <script>
 
+
+ // ==========================================
+  // PRODUCT DATA
+  // ==========================================
+
+  let filteredProducts = [];
+
+
+  // ==========================================
+  // LOAD PRODUCTS FROM SUPABASE
+  // ==========================================
+
+  async function loadProducts() {
+
+    const productContainer =
+      document.getElementById("product-list");
+
+    if (!productContainer) {
+      console.error(
+        "Could not find #product-list"
+      );
+      return;
+    }
+
+
+    // Show loading message
+
+    productContainer.innerHTML = `
+      <p style="
+        text-align:center;
+        width:100%;
+        padding:40px;
+      ">
+        Loading products...
+      </p>
+    `;
+
+
+    console.log(
+      "Loading products from Supabase..."
+    );
+
+
+    // Get products
+
+    const { data: products, error } =
+      await supabaseClient
+
+        .from("products")
+
+        .select(`
+          id,
+          slug,
+          name,
+          brand,
+          description,
+          categories,
+          tags,
+          images,
+          features,
+          active,
+          is_new,
+          featured,
+          created_at,
+
+          product_variants (
+            id,
+            name,
+            label,
+            price,
+            weight,
+            sort_order
+          )
+        `)
+
+        .eq("active", true)
+
+        .order(
+          "created_at",
+          { ascending: false }
+        );
+
+
+    // Database error
+
+    if (error) {
+
+      console.error(
+        "SUPABASE PRODUCT ERROR:",
+        error
+      );
+
+      productContainer.innerHTML = `
+        <p style="
+          text-align:center;
+          width:100%;
+          padding:40px;
+        ">
+          Sorry, we couldn't load the products.
+        </p>
+      `;
+
+      return;
+    }
+
+
+    console.log(
+      "Products received:",
+      products
+    );
+
+
+    // No products
+
+    if (!products || products.length === 0) {
+
+      productContainer.innerHTML = `
+        <p style="
+          text-align:center;
+          width:100%;
+          padding:40px;
+        ">
+          No products found in the database.
+        </p>
+      `;
+
+      return;
+    }
+
+
+
+
+  
   const params = new URLSearchParams(window.location.search);
 
   const category = params.get("category") || "new";
