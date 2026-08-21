@@ -1058,17 +1058,9 @@ font-weight: 2000px;
 
 }
 
-@media screen and (max-width: 500px) {
-/* start of phone styles */
- 
-.featured-products h2{
-  font-size: 35px;
-}
-}
-
 
 @media (max-width: 487px) {
-.tab-link {
+.category-tap a {
 	font-size: 15px;
 }
 }
