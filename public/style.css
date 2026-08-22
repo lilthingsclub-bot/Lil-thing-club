@@ -1060,9 +1060,7 @@ font-weight: 2000px;
 
 
 @media (max-width: 487px) {
-.tab-link{
-	font-size: 10%;
-}
+.tab-link { font-size: 25px; }
 }
 
 
