@@ -87,7 +87,7 @@ font-family: 'Baloo 2', sans-serif;
   height: 40px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px, #FFE8F725px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px, #FFE8F7px, transparent 26px);
   z-index: 2;
 }
 
