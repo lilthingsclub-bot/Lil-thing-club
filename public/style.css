@@ -58,7 +58,7 @@ font-family: 'Baloo 2', sans-serif;
   align-items: center;
   justify-content: space-between;
   padding: 15px 25px;
-  background: #33a9ff; /* light pink */
+  background:  #FFE8F7; /* light pink */
 }
 
 
@@ -87,7 +87,7 @@ font-family: 'Baloo 2', sans-serif;
   height: 40px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,#33a9ff 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px, #FFE8F725px, transparent 26px);
   z-index: 2;
 }
 
@@ -141,7 +141,7 @@ color: #fff;
   left: -260px;
   width: 250px;
   height: 100vh;
-  background: #33a9ff;
+  background:  #FFE8F7;
   padding: 20px;
   box-shadow: 3px 0 10px rgba(0,0,0,0.1);
   transition: left 0.3s ease;
