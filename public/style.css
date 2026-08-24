@@ -87,7 +87,7 @@ font-family: 'Baloo 2', sans-serif;
   height: 40px;
   background-repeat: repeat-x;
   background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,#FFFEED 25px, transparent 26px);
+  background-image: radial-gradient(circle at 25px 10px,#33a9ff 25px, transparent 26px);
   z-index: 2;
 }
 
@@ -95,8 +95,7 @@ font-family: 'Baloo 2', sans-serif;
 
 .logo img {
   height: 120px;
- 
-  
+color: #fff;  
 }
 
 .middle-nav {
@@ -111,7 +110,7 @@ font-family: 'Baloo 2', sans-serif;
 /* -------- CART COUNT -------- */
 
 .cart-count {
-  background: #ff5fa2;
+  background: #fff
   color: white;
   font-size: 12px;
   padding: 2px 6px;
@@ -128,7 +127,7 @@ font-family: 'Baloo 2', sans-serif;
 .hamburger {
   font-size: 28px;
   background: none;
-  color: #ff66c4;
+  color: #fff;
   border: none;
   cursor: pointer;
   display: none;
