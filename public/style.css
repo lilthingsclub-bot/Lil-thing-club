@@ -127,7 +127,7 @@ color: #fff;
 .hamburger {
   font-size: 28px;
   background: none;
-  color: #fff;
+  color: #ff66c4;
   border: none;
   cursor: pointer;
   display: none;
@@ -211,8 +211,8 @@ color: #fff;
     90deg,
     #fff,
     #fff 10px,
-    #ffe2f6 10px,
-    #ffe2f6 20px
+    #A9FF93  10px,
+   #A9FF93  20px
   );
 
   z-index: 2000;
