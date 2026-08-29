@@ -208,12 +208,11 @@ color: #fff;
 }
 .product-nav {
   background-color: #0b1126;
-	  background-image: 
-    radial-gradient(1px 1px at 25px 35px, #ffffff, rgba(255,255,255,0)),
-    radial-gradient(1.5px 1.5px at 60px 120px, #ffffff, rgba(255,255,255,0)),
-    radial-gradient(2px 2px at 125px 50px, #ffffff, rgba(255,255,255,0)),
-    radial-gradient(1.5px 1.5px at 180px 190px, #ffffff, rgba(255,255,255,0));
-	
+	   background-image: 
+    radial-gradient(4px 4px at 25px 35px, #ffffff 2px, rgba(255,255,255,0) 4px),
+    radial-gradient(5px 5px at 70px 140px, #ffffff 2.5px, rgba(255,255,255,0) 5px),
+    radial-gradient(6px 6px at 150px 60px, #ffffff 3px, rgba(255,255,255,0) 6px),
+    radial-gradient(4.5px 4.5px at 200px 210px, #ffffff 2px, rgba(255,255,255,0) 4.5px);
 
 
 	background-repeat: repeat;
