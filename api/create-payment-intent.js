@@ -50,6 +50,12 @@ module.exports = async function handler(req, res) {
       metadata: {
        itemCount: cart.length.toString(),
          items: cart.map(item => item.name).join(", ").slice(0, 200),
+        inventory_items: JSON.stringify(
+  cart.map(item => ({
+    variantId: item.variantId,
+    qty: Number(item.qty)
+  }))
+).slice(0, 500),
        subtotal: String(subtotal),
        shipping: String(shippingNum),
        tax: String(taxNum),
