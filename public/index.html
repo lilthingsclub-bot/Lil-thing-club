@@ -638,354 +638,477 @@ and the little things that make us smile.</h3>
 
 
 <script>
-  // ==========================================
-  // LIL THINGS CLUB HOMEPAGE PRODUCTS
-  // SUPABASE VERSION
-  // ==========================================
 
-  const homepageParams =
-    new URLSearchParams(window.location.search);
+// ==========================================
+// LIL THINGS CLUB HOMEPAGE PRODUCTS
+// SUPABASE + TAG FILTERING
+// ==========================================
 
-  const homepageCategory =
-    homepageParams.get("category") || "new";
-
-
-  // ==========================================
-  // LOAD HOMEPAGE PRODUCTS
-  // ==========================================
-
-  async function loadHomepageProducts() {
-
-    const productContainer =
-      document.getElementById("product-list");
+document.addEventListener(
+  "DOMContentLoaded",
+  loadHomepageProducts
+);
 
 
-    if (!productContainer) {
-      console.error(
-        "Homepage product-list not found."
-      );
-      return;
-    }
+// ==========================================
+// GET CURRENT TAB
+// ==========================================
+
+const homepageParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const homepageCategory =
+  homepageParams.get("category") || "new";
+
+
+// ==========================================
+// LOAD PRODUCTS
+// ==========================================
+
+async function loadHomepageProducts() {
+
+  const productContainer =
+    document.getElementById(
+      "product-list"
+    );
+
+
+  if (!productContainer) {
+
+    console.error(
+      "❌ #product-list was not found."
+    );
+
+    return;
+  }
+
+
+  productContainer.innerHTML = `
+    <p style="
+      width:100%;
+      text-align:center;
+      padding:30px;
+    ">
+      Loading products...
+    </p>
+  `;
+
+
+  console.log(
+    "🔄 Loading homepage products..."
+  );
+
+
+  // ========================================
+  // SUPABASE
+  // ========================================
+
+  const {
+    data: products,
+    error
+  } = await supabaseClient
+
+    .from("products")
+
+    .select(`
+      id,
+      slug,
+      name,
+      brand,
+      description,
+      categories,
+      tags,
+      images,
+      features,
+      active,
+      created_at,
+
+      product_variants (
+        id,
+        name,
+        label,
+        price,
+        weight,
+        sort_order
+      )
+    `)
+
+    .eq(
+      "active",
+      true
+    )
+
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    );
+
+
+  // ========================================
+  // DATABASE ERROR
+  // ========================================
+
+  if (error) {
+
+    console.error(
+      "❌ SUPABASE ERROR:",
+      error
+    );
 
 
     productContainer.innerHTML = `
       <p style="
-        text-align:center;
         width:100%;
+        text-align:center;
         padding:30px;
       ">
-        Loading products...
+        Sorry, we couldn't load the products.
       </p>
     `;
 
-
-    console.log(
-      "Loading homepage products..."
-    );
-
-
-    // ========================================
-    // GET PRODUCTS FROM SUPABASE
-    // ========================================
-
-    const {
-      data: products,
-      error
-    } = await supabaseClient
-
-      .from("products")
-
-      .select(`
-        id,
-        slug,
-        name,
-        categories,
-        images,
-        is_new,
-        active,
-
-        product_variants (
-          id,
-          price,
-          sort_order
-        )
-      `)
-
-      .eq("active", true)
-
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      );
-
-
-    // ========================================
-    // ERROR
-    // ========================================
-
-    if (error) {
-
-      console.error(
-        "Homepage Supabase error:",
-        error
-      );
-
-
-      productContainer.innerHTML = `
-        <p style="
-          text-align:center;
-          width:100%;
-          padding:30px;
-        ">
-          Sorry, we couldn't load the products.
-        </p>
-      `;
-
-
-      return;
-    }
-
-
-    console.log(
-      "Homepage products:",
-      products
-    );
-
-
-    // ========================================
-    // FILTER
-    // ========================================
-
-    let filteredProducts;
-
-
-    if (
-      homepageCategory === "new"
-    ) {
-
-      // New Arrivals
-      filteredProducts =
-        products.filter(
-          product =>
-            product.is_new === true
-        );
-
-    }
-
-   
-else if (homepageCategory === "junk-jouranl") {
-
-  filteredProducts = products.filter(product =>
-    Array.isArray(product.tags) &&
-    (
-      product.tags.includes("junk-jouranl") ||
-      product.tags.includes("junk-journal")
-    )
-  );
-
-}
-
-else if (homepageCategory === "featured-product") {
-
-  filteredProducts =
-        products.filter(
-          product =>
-            product.is_featured === true
-  );
-
-}
-
-else if (homepageCategory === "best-seller") {
-
- filteredProducts =
-        products.filter(
-          product =>
-            product.is_bestseller === true
-  );
-
-}
-
-else {
-
-  filteredProducts = products;
-
-}
-
-
-  // ==========================================
-  // RENDER PRODUCTS
-  // ==========================================
-
-  function renderHomepageProducts(
-    products
-  ) {
-
-    const productContainer =
-      document.getElementById(
-        "product-list"
-      );
-
-
-    productContainer.innerHTML = "";
-
-
-    if (
-      !products ||
-      products.length === 0
-    ) {
-
-      productContainer.innerHTML = `
-        <p style="
-          text-align:center;
-          width:100%;
-          padding:30px;
-        ">
-          No products found.
-        </p>
-      `;
-
-      return;
-    }
-
-
-    // Show up to 4 products
-    products
-      .slice(0, 4)
-      .forEach(product => {
-
-
-        // Sort variants
-        const variants =
-          [...(
-            product.product_variants ||
-            []
-          )]
-          .sort(
-            (a, b) =>
-              (a.sort_order || 0) -
-              (b.sort_order || 0)
-          );
-
-
-        const firstVariant =
-          variants[0];
-
-
-        const price =
-          firstVariant
-            ? `$${Number(
-                firstVariant.price
-              ).toFixed(2)}`
-            : "";
-
-
-        const image =
-          product.images?.[0] ||
-          "";
-
-
-        const card =
-          document.createElement(
-            "div"
-          );
-
-
-        card.className =
-          "product-card1";
-
-
-        card.innerHTML = `
-
-          <a
-            href="product.html?slug=${encodeURIComponent(
-              product.slug
-            )}"
-          >
-
-            <img
-              src="${image}"
-              alt="${product.name}"
-              loading="lazy"
-            >
-
-            <p class="product-name1">
-              ${product.name}
-            </p>
-
-            <p class="product-price1">
-              ${price}
-            </p>
-
-          </a>
-
-        `;
-
-
-        productContainer.appendChild(
-          card
-        );
-
-      });
-
+    return;
   }
 
 
-  // ==========================================
-  // ACTIVE TAB
-  // ==========================================
-
-  function updateHomepageTabs() {
-
-    const tabs =
-      document.querySelectorAll(
-        ".tab-link"
-      );
+  console.log(
+    "✅ Products from Supabase:",
+    products
+  );
 
 
-    tabs.forEach(tab => {
+  // ========================================
+  // FILTER USING TAGS
+  // ========================================
 
-      const url =
-        new URL(
-          tab.href,
-          window.location.href
+  let filteredProducts = [];
+
+
+  filteredProducts =
+    products.filter(product => {
+
+      const tags =
+        Array.isArray(product.tags)
+          ? product.tags
+          : [];
+
+
+      // Convert tags to lowercase
+      // so capitalization doesn't matter.
+      const normalizedTags =
+        tags.map(tag =>
+          String(tag)
+            .trim()
+            .toLowerCase()
         );
 
 
-      const tabCategory =
-        url.searchParams.get(
-          "category"
-        );
-
+      // -------------------------------
+      // NEW
+      // -------------------------------
 
       if (
-        tabCategory ===
-        homepageCategory
+        homepageCategory === "new"
       ) {
 
-        tab.classList.add(
-          "active"
-        );
-
-      } else {
-
-        tab.classList.remove(
-          "active"
+        return normalizedTags.includes(
+          "new"
         );
 
       }
 
+
+      // -------------------------------
+      // SPRING
+      // -------------------------------
+
+      if (
+        homepageCategory === "spring"
+      ) {
+
+        return normalizedTags.includes(
+          "spring"
+        );
+
+      }
+
+
+      // -------------------------------
+      // JUNK JOURNAL
+      // -------------------------------
+
+      if (
+        homepageCategory ===
+        "junk-jouranl"
+      ) {
+
+        return (
+          normalizedTags.includes(
+            "junk-journal"
+          ) ||
+
+          normalizedTags.includes(
+            "junk-jouranl"
+          )
+        );
+
+      }
+
+
+      // -------------------------------
+      // FEATURED PRODUCT
+      // -------------------------------
+
+      if (
+        homepageCategory ===
+        "featured-product"
+      ) {
+
+        return normalizedTags.includes(
+          "featured-product"
+        );
+
+      }
+
+
+      // -------------------------------
+      // BEST SELLER
+      // -------------------------------
+
+      if (
+        homepageCategory ===
+        "best-seller"
+      ) {
+
+        return normalizedTags.includes(
+          "best-seller"
+        );
+
+      }
+
+
+      return false;
+
     });
 
+
+  console.log(
+    "🏷️ Current tab:",
+    homepageCategory
+  );
+
+  console.log(
+    "🏷️ Matching products:",
+    filteredProducts
+  );
+
+
+  // ========================================
+  // SHOW PRODUCTS
+  // ========================================
+
+  renderHomepageProducts(
+    filteredProducts
+  );
+
+
+  // ========================================
+  // ACTIVE TAB
+  // ========================================
+
+  updateActiveTab();
+
+}
+
+
+// ==========================================
+// RENDER PRODUCT CARDS
+// ==========================================
+
+function renderHomepageProducts(
+  products
+) {
+
+  const productContainer =
+    document.getElementById(
+      "product-list"
+    );
+
+
+  productContainer.innerHTML = "";
+
+
+  // ========================================
+  // NO PRODUCTS
+  // ========================================
+
+  if (
+    !products ||
+    products.length === 0
+  ) {
+
+    productContainer.innerHTML = `
+      <p style="
+        width:100%;
+        text-align:center;
+        padding:30px;
+      ">
+        No products found for this collection.
+      </p>
+    `;
+
+    return;
   }
 
 
-  // ==========================================
-  // START
-  // ==========================================
+  // ========================================
+  // ONLY SHOW 4
+  // ========================================
 
-  loadHomepageProducts();
+  products
+    .slice(0, 4)
+    .forEach(product => {
+
+
+      // -------------------------------
+      // VARIANTS
+      // -------------------------------
+
+      const variants =
+        [
+          ...(product.product_variants || [])
+        ]
+        .sort(
+          (a, b) =>
+            (a.sort_order || 0) -
+            (b.sort_order || 0)
+        );
+
+
+      const firstVariant =
+        variants[0];
+
+
+      // -------------------------------
+      // PRICE
+      // -------------------------------
+
+      const price =
+        firstVariant
+          ? `$${Number(
+              firstVariant.price
+            ).toFixed(2)}`
+          : "";
+
+
+      // -------------------------------
+      // IMAGE
+      // -------------------------------
+
+      const image =
+        product.images?.[0] || "";
+
+
+      // -------------------------------
+      // CARD
+      // -------------------------------
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "product-card1";
+
+
+      card.innerHTML = `
+
+        <a
+          href="product.html?slug=${encodeURIComponent(
+            product.slug
+          )}"
+        >
+
+          <img
+            src="${image}"
+            alt="${product.name}"
+            loading="lazy"
+          >
+
+          <p class="product-name1">
+            ${product.name}
+          </p>
+
+          <p class="product-price1">
+            ${price}
+          </p>
+
+        </a>
+
+      `;
+
+
+      productContainer.appendChild(
+        card
+      );
+
+    });
+
+}
+
+
+// ==========================================
+// ACTIVE TAB
+// ==========================================
+
+function updateActiveTab() {
+
+  const tabs =
+    document.querySelectorAll(
+      ".tab-link"
+    );
+
+
+  tabs.forEach(tab => {
+
+    const url =
+      new URL(
+        tab.href,
+        window.location.href
+      );
+
+
+    const tabCategory =
+      url.searchParams.get(
+        "category"
+      );
+
+
+    if (
+      tabCategory ===
+      homepageCategory
+    ) {
+
+      tab.classList.add(
+        "active"
+      );
+
+    } else {
+
+      tab.classList.remove(
+        "active"
+      );
+
+    }
+
+  });
+
+}
 
 </script>
 
