@@ -459,6 +459,7 @@ background-size: 100px 100px;
   }
 
   .hero-icon {
+	   margin-top: 20px;
     width: 120px;
     margin: -20px 0;
   }
@@ -468,6 +469,7 @@ background-size: 100px 100px;
     font-size: 14px;
   }
 	  .hero-image {
+		   margin-top: 20px;
     order: 2; /* image below */
     width: 100%;
   }
