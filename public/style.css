@@ -240,6 +240,7 @@ background-size: 100px 100px;
   gap: 18px;
   padding-bottom: 40px;
   padding-top: 40px;
+	align-item: center;
 }
 
 /* ===== EACH DROPDOWN ===== */
@@ -307,7 +308,7 @@ background-size: 100px 100px;
 @media (max-width: 360px) {
 	.product-nav {
 		 scroll-behavior: smooth;
-	padding-left: 70px ;
+	padding-left: 78px ;
 		
 	}
 }
