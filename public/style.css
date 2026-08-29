@@ -1002,9 +1002,7 @@ Featured Products Section
   gap: 20px;
 	  scroll-behavior: smooth;
   padding-left: 15px ;
-  scrollbar-width: auto;
- z-index: 5
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+  
 }
 
 .product-card1 {
@@ -1021,8 +1019,7 @@ Featured Products Section
   gap:40px;
   margin-bottom:40px;
   overflow-x:auto;
-	scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
 }
 
  .category-tabs::-webkit-scrollbar {
