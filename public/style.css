@@ -196,7 +196,7 @@ color: #fff;
 /* ===== PRODUCT NAV CONTAINER ===== */
 
 .annoment-slide{
- background-color: #FFFEED;
+ background-color: #Fbff33;
 	align-items: left;
 	 padding: 10px;
 	z-index: 3;
@@ -204,7 +204,8 @@ color: #fff;
 
 .annoment-slide p{
 	display: flex;
-  gap: 20px;
+  gap: 80px;
+	color:#33A9FF ;
 }
 .product-nav {
   background:
@@ -1651,11 +1652,11 @@ color: #Fbff33;
   }
 
   .left-sector a {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
 
   .middle-sector h4 {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
   }
 
   /* Form below */
