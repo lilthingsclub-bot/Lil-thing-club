@@ -200,6 +200,10 @@ color: #fff;
 	align-items: left;
 	 padding: 10px;
 	z-index: 3;
+	display: flex;
+  flex-direction: column;
+  gap: 1.5rem; 
+color:#33A9FF
 }
 
 .annoment-slide p{
