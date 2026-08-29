@@ -204,8 +204,9 @@ color: #fff;
 
 .annoment-slide p{
 	display: flex;
-  gap: 80px;
-	color:#33A9FF ;
+  flex-direction: column;
+  gap: 1.5rem; 
+color:#33A9FF ;
 }
 .product-nav {
   background:
