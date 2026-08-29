@@ -37,15 +37,73 @@ module.exports = async function handler(req, res) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  if (event.type === "payment_intent.succeeded") {
-    const paymentIntent = event.data.object;
+if (event.type === "payment_intent.succeeded") {
 
-    let items = [];
-    try {
-      items = JSON.parse(paymentIntent.metadata.items || "[]");
-    } catch (err) {
-      console.error("❌ Failed to parse items:", err);
+  const paymentIntent =
+    event.data.object;
+
+
+  // Get inventory items
+  let inventoryItems = [];
+
+  try {
+
+    inventoryItems =
+      JSON.parse(
+        paymentIntent.metadata.inventory_items || "[]"
+      );
+
+  } catch (err) {
+
+    console.error(
+      "❌ Failed to parse inventory items:",
+      err
+    );
+
+    return res.status(400).json({
+      error: "Invalid inventory data"
+    });
+
+  }
+
+
+  // Reduce inventory
+  const {
+    data: inventoryResult,
+    error: inventoryError
+  } = await supabase.rpc(
+    "complete_inventory_sale",
+    {
+      p_items: inventoryItems
     }
+  );
+
+
+  if (inventoryError) {
+
+    console.error(
+      "❌ Inventory update failed:",
+      inventoryError
+    );
+
+    return res.status(500).json({
+      error: "Inventory update failed"
+    });
+
+  }
+
+
+  console.log(
+    "✅ Inventory updated:",
+    inventoryResult
+  );
+
+
+  // Continue with your existing order code...
+}
+
+
+    
 
     const { error } = await supabase.from("orders").insert([
       {
