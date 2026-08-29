@@ -309,7 +309,7 @@ background-size: 100px 100px;
 @media (max-width: 360px) {
 	.product-nav {
 		 scroll-behavior: smooth;
-	padding-left: 78px ;
+	padding-left: 80px ;
 		
 	}
 }
