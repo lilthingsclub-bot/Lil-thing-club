@@ -705,7 +705,7 @@ font-size: 25px;
   overflow: hidden;
   text-decoration: none;
   color: #000;
-  flex-shrink: 0;
+  flex-shrink: 5;
   scroll-snap-align: start;
   transition: transform 0.3s ease;
 	min-width: 420px;
@@ -732,11 +732,17 @@ width: 100%;       /* Spans the full width of the container */
 	.brand-card img{
 	}
 
+	.brand-universe{
+		
+	}
+
 	.brand-card{
 		min-width: 360px;
   min-height: 94px;
 	}
 }
+
+
 .brand-info{
   display: flex;
   justify-content: space-between;
