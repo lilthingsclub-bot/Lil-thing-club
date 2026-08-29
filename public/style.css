@@ -726,6 +726,17 @@ width: 100%;       /* Spans the full width of the container */
   
 }
 
+
+
+@media screen and (max-width: 500px) {
+	.brand-card img{
+	}
+
+	.brand-card{
+		min-width: 360px;
+  min-height: 94px;
+	}
+}
 .brand-info{
   display: flex;
   justify-content: space-between;
@@ -762,6 +773,7 @@ width: 100%;       /* Spans the full width of the container */
   z-index: 200;
 	position: relative;
 }
+
 
 .info{
   display: grid;
