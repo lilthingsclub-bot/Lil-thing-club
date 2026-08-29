@@ -774,82 +774,28 @@ and the little things that make us smile.</h3>
 
     }
 
-        else if (
-      homepageCategory === "spring"
-    ) {
+     else if (homepageCategory === "spring") {
 
-      filteredProducts =
-        products.filter(
-          product =>
-            Array.isArray(
-              product.tags
-            ) &&
-            product.tags.includes(
-              "spring"
-            )
-        );
+  filteredProducts = products.filter(
+    product =>
+      Array.isArray(product.tags) &&
+      product.tags.includes("spring")
+  );
 
-    }
+}
 
+else if (homepageCategory === "junk-jouranl") {
 
-    else if (
-      homepageCategory === "featured-product"
-    ) {
+  filteredProducts = products.filter(
+    product =>
+      Array.isArray(product.tags) &&
+      (
+        product.tags.includes("junk-jouranl") ||
+        product.tags.includes("junk-journal")
+      )
+  );
 
-      filteredProducts =
-        products.filter(
-          product =>
-            Array.isArray(
-              product.tags
-            ) &&
-            product.tags.includes(
-              "featured-product"
-            )
-        );
-
-    }
-
-      else if (
-      homepageCategory === "best-seller"
-    ) {
-
-      filteredProducts =
-        products.filter(
-          product =>
-            Array.isArray(
-              product.tags
-            ) &&
-            product.tags.includes(
-              "best-seller"
-            )
-        );
-
-    }
-
-    else if (
-      homepageCategory ===
-      "junk-jouranl"
-    ) {
-
-      filteredProducts =
-        products.filter(
-          product =>
-            Array.isArray(
-              product.tags
-            ) &&
-            (
-              product.tags.includes(
-                "junk-jouranl"
-              ) ||
-
-              product.tags.includes(
-                "junk-journal"
-              )
-            )
-        );
-
-    }
-
+}
     else {
 
       filteredProducts =
