@@ -232,16 +232,34 @@ background-size: 100px 100px;
 	
 
   display: flex;
-  flex-wrap: nowrap;        /* 🔥 IMPORTANT: prevents wrapping */
-  overflow-x: auto; /* 🔥 enables horizontal scroll */
-	overflow-y: hidden;
-  white-space: nowrap;      /* keeps items in one line */
+  flex-wrap: nowrap;
+
+  /* Scroll when the items don't fit */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Center items when they fit */
+  justify-content: center;
 
   gap: 18px;
-  padding-bottom: 40px;
+
   padding-top: 40px;
- scroll-behavior: smooth;
-	padding-left: 200px ;
+  padding-bottom: 40px;
+
+  /* REMOVE padding-left: 200px */
+  padding-left: 0;
+  padding-right: 0;
+
+  scroll-behavior: smooth;
+  white-space: nowrap;
+
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar */
+.product-nav::-webkit-scrollbar {
+  display: none;
+
 }
 
 /* ===== EACH DROPDOWN ===== */
@@ -306,7 +324,7 @@ background-size: 100px 100px;
 
 
 
-@media (max-width: 360px) {
+@media screen and (max-width: 500px) {
 	.product-nav {
 		 scroll-behavior: smooth;
 	padding-left: 80px ;
