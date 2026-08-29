@@ -1129,7 +1129,9 @@ font-weight: 2000px;
     padding: 0 5px;
     overflow-x: auto;
     overflow-y: hidden;
-    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+  scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -1159,8 +1161,9 @@ font-weight: 2000px;
     padding: 0 5px 10px;
     overflow-x: auto;
     overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+
+  scrollbar-width: none;
   }
 
   .product-row::-webkit-scrollbar {
