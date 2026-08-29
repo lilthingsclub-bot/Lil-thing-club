@@ -774,7 +774,7 @@ and the little things that make us smile.</h3>
 
     }
 
-    else if (
+        else if (
       homepageCategory === "spring"
     ) {
 
@@ -782,10 +782,45 @@ and the little things that make us smile.</h3>
         products.filter(
           product =>
             Array.isArray(
-              product.categories
+              product.tags
             ) &&
-            product.categories.includes(
+            product.tags.includes(
               "spring"
+            )
+        );
+
+    }
+
+
+    else if (
+      homepageCategory === "featured-product"
+    ) {
+
+      filteredProducts =
+        products.filter(
+          product =>
+            Array.isArray(
+              product.tags
+            ) &&
+            product.tags.includes(
+              "featured-product"
+            )
+        );
+
+    }
+
+      else if (
+      homepageCategory === "best-seller"
+    ) {
+
+      filteredProducts =
+        products.filter(
+          product =>
+            Array.isArray(
+              product.tags
+            ) &&
+            product.tags.includes(
+              "best-seller"
             )
         );
 
@@ -800,14 +835,14 @@ and the little things that make us smile.</h3>
         products.filter(
           product =>
             Array.isArray(
-              product.categories
+              product.tags
             ) &&
             (
-              product.categories.includes(
+              product.tags.includes(
                 "junk-jouranl"
               ) ||
 
-              product.categories.includes(
+              product.tags.includes(
                 "junk-journal"
               )
             )
