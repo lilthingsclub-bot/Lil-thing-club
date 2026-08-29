@@ -40,13 +40,14 @@ async function loadProduct() {
       featured,
 
       product_variants (
-        id,
-        name,
-        label,
-        price,
-        weight,
-        sort_order
-      )
+  id,
+  name,
+  label,
+  price,
+  stock_quantity,
+  weight,
+  sort_order
+)
     `)
     .eq("slug", slug)
     .eq("active", true)
@@ -305,7 +306,7 @@ function setupProductImages(images) {
 
 
 // ======================================================
-// VARIANTS
+// VARIANTS + INVENTORY
 // ======================================================
 
 function setupVariants(
@@ -330,16 +331,78 @@ function setupVariants(
   variantContainer.innerHTML = "";
 
 
+  
+  // ----------------------------------------------------
+  // Create inventory message if it doesn't exist
+  // ----------------------------------------------------
+
+  let stockElement =
+    document.getElementById("stockStatus");
+
+
+  if (!stockElement) {
+
+    stockElement =
+      document.createElement("div");
+
+    stockElement.id =
+      "stockStatus";
+
+    stockElement.style.marginTop =
+      "10px";
+
+    stockElement.style.fontSize =
+      "14px";
+
+    stockElement.style.fontWeight =
+      "600";
+
+    // Put it underneath the price
+    if (priceElement) {
+
+      priceElement.parentNode
+        .insertBefore(
+          stockElement,
+          priceElement.nextSibling
+        );
+
+    } else {
+
+      variantContainer.parentNode
+        .insertBefore(
+          stockElement,
+          variantContainer
+        );
+
+    }
+
+  }
+
+
+
+
+
+  
+ // ----------------------------------------------------
   // No variants
+  // ----------------------------------------------------
+
   if (!variants.length) {
 
     if (priceElement) {
       priceElement.textContent = "";
     }
 
+    stockElement.textContent = "";
+
     return;
   }
 
+
+
+ // ----------------------------------------------------
+  // First variant
+  // ----------------------------------------------------
 
   let selectedVariant =
     variants[0];
@@ -349,26 +412,126 @@ function setupVariants(
     selectedVariant;
 
 
-  function updatePrice() {
 
-    if (!priceElement) {
-      return;
+
+
+
+
+
+  // ----------------------------------------------------
+  // Update price + stock
+  // ----------------------------------------------------
+
+  function updateVariantInfo() {
+
+    // PRICE
+    if (priceElement) {
+
+      priceElement.textContent =
+        `$${Number(
+          selectedVariant.price
+        ).toFixed(2)}`;
+
     }
 
 
-    priceElement.textContent =
-      `$${Number(
-        selectedVariant.price
-      ).toFixed(2)}`;
+    // STOCK
+    const stock =
+      Number(
+        selectedVariant.stock_quantity || 0
+      );
+
+
+    if (stock <= 0) {
+
+      stockElement.textContent =
+        "Sold out";
+
+      stockElement.style.color =
+        "#d9534f";
+
+    }
+
+    else if (stock <= 3) {
+
+      stockElement.textContent =
+        `Only ${stock} left`;
+
+      stockElement.style.color =
+        "#d98b00";
+
+    }
+
+    else {
+
+      stockElement.textContent =
+        `${stock} in stock`;
+
+      stockElement.style.color =
+        "#4f8a5b";
+
+    }
+
+
+    // Tell quantity system about
+    // the newly selected variant
+    if (
+      typeof window.updateQuantityStock ===
+      "function"
+    ) {
+
+      window.updateQuantityStock(
+        stock
+      );
+
+    }
+
+
+    // Update add-to-cart button
+    const addButton =
+      document.querySelector(".add");
+
+
+    if (addButton) {
+
+      if (stock <= 0) {
+
+        addButton.disabled = true;
+
+        addButton.textContent =
+          "Sold Out";
+
+      }
+
+      else {
+
+        addButton.disabled = false;
+
+        addButton.textContent =
+          "Add to Cart";
+
+      }
+
+    }
 
   }
 
+
+
+
+  
+
+// ----------------------------------------------------
+  // Create variant buttons
+  // ----------------------------------------------------
 
   variants.forEach(
     (variant, index) => {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
 
       button.type = "button";
@@ -384,8 +547,28 @@ function setupVariants(
         "Option";
 
 
-      // First variant selected
-      if (index === 0) {
+      // Disable sold-out variant
+      if (
+        Number(
+          variant.stock_quantity || 0
+        ) <= 0
+      ) {
+
+        button.disabled = true;
+
+        button.title =
+          "Sold out";
+
+      }
+
+
+      // First available variant
+      if (
+        index === 0 &&
+        Number(
+          variant.stock_quantity || 0
+        ) > 0
+      ) {
 
         button.classList.add(
           "selected"
@@ -406,24 +589,25 @@ function setupVariants(
             variant;
 
 
-          // Remove selected state
           variantContainer
-            .querySelectorAll("button")
-            .forEach(
-              btn =>
-                btn.classList.remove(
-                  "selected"
-                )
-            );
+            .querySelectorAll(
+              "button"
+            )
+            .forEach(btn => {
+
+              btn.classList.remove(
+                "selected"
+              );
+
+            });
 
 
-          // Select clicked button
           button.classList.add(
             "selected"
           );
 
 
-          updatePrice();
+          updateVariantInfo();
 
         }
       );
@@ -437,13 +621,60 @@ function setupVariants(
   );
 
 
-  updatePrice();
+  // ----------------------------------------------------
+  // If first variant is sold out,
+  // find the first available one.
+  // ----------------------------------------------------
+
+  const firstAvailable =
+    variants.find(
+      variant =>
+        Number(
+          variant.stock_quantity || 0
+        ) > 0
+    );
+
+
+  if (firstAvailable) {
+
+    selectedVariant =
+      firstAvailable;
+
+
+    window.SELECTED_VARIANT =
+      firstAvailable;
+
+
+    const firstButton =
+      [...variantContainer.children]
+        .find(
+          button =>
+            !button.disabled
+        );
+
+
+    if (firstButton) {
+
+      firstButton.classList.add(
+        "selected"
+      );
+
+    }
+
+  }
+
+
+  updateVariantInfo();
 
 }
 
 
+
+
+
+
 // ======================================================
-// QUANTITY
+// QUANTITY + INVENTORY LIMIT
 // ======================================================
 
 function setupQuantity() {
@@ -463,23 +694,91 @@ function setupQuantity() {
     !plus ||
     !qtyElement
   ) {
+
     return;
+
   }
 
 
   let quantity = 1;
 
+  let maxStock = Infinity;
+
+
+  // ----------------------------------------------------
+  // Update quantity display
+  // ----------------------------------------------------
+
+  function updateQuantityDisplay() {
+
+    qtyElement.textContent =
+      quantity;
+
+
+    // Disable minus at 1
+    minus.disabled =
+      quantity <= 1;
+
+
+    // Disable plus at stock limit
+    plus.disabled =
+      quantity >= maxStock;
+
+  }
+
+
+  // ----------------------------------------------------
+  // Update maximum stock
+  // ----------------------------------------------------
+
+  window.updateQuantityStock =
+    function(stock) {
+
+      maxStock =
+        Number(stock);
+
+
+      // If current quantity is higher
+      // than the new stock, reduce it.
+      if (
+        maxStock <= 0
+      ) {
+
+        quantity = 1;
+
+      }
+
+      else if (
+        quantity > maxStock
+      ) {
+
+        quantity =
+          maxStock;
+
+      }
+
+
+      updateQuantityDisplay();
+
+    };
+
+
+
+  // ----------------------------------------------------
+  // MINUS
+  // ----------------------------------------------------
 
   minus.addEventListener(
     "click",
     () => {
 
-      if (quantity > 1) {
+      if (
+        quantity > 1
+      ) {
 
         quantity--;
 
-        qtyElement.textContent =
-          quantity;
+        updateQuantityDisplay();
 
       }
 
@@ -487,21 +786,36 @@ function setupQuantity() {
   );
 
 
+  // ----------------------------------------------------
+  // PLUS
+  // ----------------------------------------------------
+
   plus.addEventListener(
     "click",
     () => {
 
-      quantity++;
+      if (
+        quantity < maxStock
+      ) {
 
-      qtyElement.textContent =
-        quantity;
+        quantity++;
+
+        updateQuantityDisplay();
+
+      }
 
     }
   );
 
+ // ----------------------------------------------------
+  // Return quantity
+  // ----------------------------------------------------
 
   window.getProductQuantity =
     () => quantity;
+
+
+  updateQuantityDisplay();
 
 }
 
@@ -547,6 +861,42 @@ function setupAddToCart(
         window.getProductQuantity
           ? window.getProductQuantity()
           : 1;
+
+
+// ==================================================
+// CHECK INVENTORY
+// ==================================================
+
+const availableStock =
+  Number(
+    selectedVariant.stock_quantity || 0
+  );
+
+
+if (availableStock <= 0) {
+
+  alert(
+    "Sorry, this option is sold out 💕"
+  );
+
+  return;
+
+}
+
+
+if (
+  quantity > availableStock
+) {
+
+  alert(
+    `Sorry, only ${availableStock} available.`
+  );
+
+  return;
+
+}
+
+      
 
 
       // Get existing cart
