@@ -240,7 +240,8 @@ background-size: 100px 100px;
   gap: 18px;
   padding-bottom: 40px;
   padding-top: 40px;
-	align-items: center;
+ scroll-behavior: smooth;
+	padding-left: 100px ;
 }
 
 /* ===== EACH DROPDOWN ===== */
