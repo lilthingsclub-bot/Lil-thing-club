@@ -261,7 +261,7 @@ background-size: 100px 100px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
-	
+	align-item: center;
 }
 
 /* Hover effect */
