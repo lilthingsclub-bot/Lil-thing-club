@@ -422,8 +422,8 @@ background-size: 100px 100px;
   }
 
   .hero-icon {
-	  margin-bottom: 10px;
-	   margin-top: 50px;
+	  margin-bottom: -20px;
+	   margin-top: 10px;
     width: 180px;
   
   }
@@ -461,8 +461,8 @@ background-size: 100px 100px;
   }
 
   .hero-icon {
-	 margin-bottom: 10px;
-	   margin-top: 50px;
+	 margin-bottom: -20px;
+	   margin-top: 10px;
     width: 120px;
   }
 
