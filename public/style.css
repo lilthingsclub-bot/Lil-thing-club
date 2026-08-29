@@ -326,10 +326,11 @@ background-size: 100px 100px;
 
 @media screen and (max-width: 500px) {
 	.product-nav {
-		 scroll-behavior: smooth;
-	padding-left: 80px ;
-		
-	}
+    justify-content: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+    gap: 15px;
+  }
 }
 
 /* ================================
