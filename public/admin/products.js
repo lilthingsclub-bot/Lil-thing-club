@@ -166,71 +166,196 @@ function addVariant(variant = {}) {
 
   $("addVariantBtn").onclick = () => addVariant();
 
-  // ---------- Images ----------
-  function renderImages() {
-    $("imagePreview").innerHTML = "";
-    selectedImages.forEach((item, index) => {
-      const card = document.createElement("div");
-      card.className = "image-card";
-      card.innerHTML = `
-        <img src="${escapeHtml(item.url)}" alt="">
-        <button type="button" class="remove-image">×</button>
-        <small>${index === 0 ? "Main image" : `Image ${index + 1}`}</small>
-      `;
-      card.querySelector(".remove-image").onclick = () => {
-        if (item.file) URL.revokeObjectURL(item.url);
-        selectedImages.splice(index, 1);
-        renderImages();
-      };
-      $("imagePreview").appendChild(card);
-    });
-  }
+// ---------- Images ----------
 
-  $("imageFiles").addEventListener("change", e => {
-    for (const file of e.target.files) {
-      if (!file.type.startsWith("image/")) continue;
-      selectedImages.push({
-        file,
-        url: URL.createObjectURL(file),
-        existing: false
-      });
-    }
-    e.target.value = "";
-    renderImages();
+function renderImages() {
+
+  const preview = $("imagePreview");
+
+  preview.innerHTML = "";
+
+  selectedImages.forEach((item, index) => {
+
+    const card = document.createElement("div");
+
+    card.className = "image-card";
+
+    card.draggable = true;
+
+    card.dataset.index = index;
+
+    card.innerHTML = `
+      <img
+        src="${escapeHtml(item.url)}"
+        alt="Product image ${index + 1}"
+      >
+
+      <div class="image-card-info">
+        <strong>
+          ${index === 0 ? "⭐ Main image" : `Image ${index + 1}`}
+        </strong>
+      </div>
+
+      <button
+        type="button"
+        class="remove-image"
+      >
+        ×
+      </button>
+    `;
+
+
+    // ----------------------------------------------
+    // Remove image
+    // ----------------------------------------------
+
+    card
+      .querySelector(".remove-image")
+      .onclick = () => {
+
+        if (item.file) {
+          URL.revokeObjectURL(item.url);
+        }
+
+        selectedImages.splice(index, 1);
+
+        renderImages();
+
+      };
+
+
+    // ----------------------------------------------
+    // Drag start
+    // ----------------------------------------------
+
+    card.addEventListener(
+      "dragstart",
+      e => {
+
+        e.dataTransfer.effectAllowed =
+          "move";
+
+        e.dataTransfer.setData(
+          "text/plain",
+          index
+        );
+
+        card.classList.add(
+          "dragging"
+        );
+
+      }
+    );
+
+
+    // ----------------------------------------------
+    // Drag end
+    // ----------------------------------------------
+
+    card.addEventListener(
+      "dragend",
+      () => {
+
+        card.classList.remove(
+          "dragging"
+        );
+
+      }
+    );
+
+
+    // ----------------------------------------------
+    // Drag over
+    // ----------------------------------------------
+
+    card.addEventListener(
+      "dragover",
+      e => {
+
+        e.preventDefault();
+
+        card.classList.add(
+          "drag-over"
+        );
+
+      }
+    );
+
+
+    // ----------------------------------------------
+    // Drag leave
+    // ----------------------------------------------
+
+    card.addEventListener(
+      "dragleave",
+      () => {
+
+        card.classList.remove(
+          "drag-over"
+        );
+
+      }
+    );
+
+
+    // ----------------------------------------------
+    // Drop
+    // ----------------------------------------------
+
+    card.addEventListener(
+      "drop",
+      e => {
+
+        e.preventDefault();
+
+        card.classList.remove(
+          "drag-over"
+        );
+
+
+        const fromIndex =
+          Number(
+            e.dataTransfer.getData(
+              "text/plain"
+            )
+          );
+
+        const toIndex =
+          index;
+
+
+        if (
+          fromIndex === toIndex
+        ) {
+          return;
+        }
+
+
+        const movedImage =
+          selectedImages.splice(
+            fromIndex,
+            1
+          )[0];
+
+
+        selectedImages.splice(
+          toIndex,
+          0,
+          movedImage
+        );
+
+
+        renderImages();
+
+      }
+    );
+
+
+    preview.appendChild(card);
+
   });
 
-  async function uploadImage(file, slug) {
-    const safeName = file.name.toLowerCase()
-      .replace(/[^a-z0-9._-]/g, "-");
-    const path = `products/${slug}/${crypto.randomUUID()}-${safeName}`;
-
-    const { error } = await supabaseClient.storage
-      .from("product-images")
-      .upload(path, file, {
-        cacheControl: "3600",
-        upsert: false
-      });
-
-    if (error) throw error;
-
-    const { data } = supabaseClient.storage
-      .from("product-images")
-      .getPublicUrl(path);
-
-    return data.publicUrl;
-  }
-
-  async function resolveImages(slug) {
-    const urls = [];
-    for (const item of selectedImages) {
-      if (item.existing) {
-        urls.push(item.url);
-      } else if (item.file) {
-        urls.push(await uploadImage(item.file, slug));
-      }
-    }
-    return urls;
-  }
+}
 
   // ---------- Load ----------
   async function loadProducts() {
