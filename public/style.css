@@ -1001,6 +1001,7 @@ Featured Products Section
   overflow-x: auto;
   gap: 20px;
 	  scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
   padding-left: 15px ;
   
 }
@@ -1013,14 +1014,7 @@ Featured Products Section
   display: none;
 }
 
-.featured-products{
-	scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
-}
 
-.featured-products::-webkit-scrollbar{
-	 display: none;
-}
 .category-tabs{
   display:flex;
   gap:40px;
