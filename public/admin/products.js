@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const chip = document.createElement("span");
     chip.className = "chip";
     chip.dataset.value = value;
-    chip.innerHTML = `${escapeHtml(value)} <button type="button" aria-label="Remove">×</button>`;
+    chip.innerHTML = `${escapeHtml(value)} <button type="button" aria-label="Remove">Ã—</button>`;
     chip.querySelector("button").onclick = () => chip.remove();
     listEl.appendChild(chip);
     inputEl.value = "";
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     row.className = "dynamic-row";
     row.innerHTML = `
       <input class="feature-input" value="${escapeHtml(value)}" placeholder="Printed on thick cardstock">
-      <button type="button" class="remove-btn">×</button>
+      <button type="button" class="remove-btn">Ã—</button>
     `;
     row.querySelector(".remove-btn").onclick = () => row.remove();
     $("featuresList").appendChild(row);
@@ -155,7 +155,7 @@ function addVariant(variant = {}) {
       type="button"
       class="remove-btn"
     >
-      ×
+      Ã—
     </button>
   `;
 
@@ -166,196 +166,71 @@ function addVariant(variant = {}) {
 
   $("addVariantBtn").onclick = () => addVariant();
 
-// ---------- Images ----------
-
-function renderImages() {
-
-  const preview = $("imagePreview");
-
-  preview.innerHTML = "";
-
-  selectedImages.forEach((item, index) => {
-
-    const card = document.createElement("div");
-
-    card.className = "image-card";
-
-    card.draggable = true;
-
-    card.dataset.index = index;
-
-    card.innerHTML = `
-      <img
-        src="${escapeHtml(item.url)}"
-        alt="Product image ${index + 1}"
-      >
-
-      <div class="image-card-info">
-        <strong>
-          ${index === 0 ? "⭐ Main image" : `Image ${index + 1}`}
-        </strong>
-      </div>
-
-      <button
-        type="button"
-        class="remove-image"
-      >
-        ×
-      </button>
-    `;
-
-
-    // ----------------------------------------------
-    // Remove image
-    // ----------------------------------------------
-
-    card
-      .querySelector(".remove-image")
-      .onclick = () => {
-
-        if (item.file) {
-          URL.revokeObjectURL(item.url);
-        }
-
+  // ---------- Images ----------
+  function renderImages() {
+    $("imagePreview").innerHTML = "";
+    selectedImages.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.className = "image-card";
+      card.innerHTML = `
+        <img src="${escapeHtml(item.url)}" alt="">
+        <button type="button" class="remove-image">Ã—</button>
+        <small>${index === 0 ? "Main image" : `Image ${index + 1}`}</small>
+      `;
+      card.querySelector(".remove-image").onclick = () => {
+        if (item.file) URL.revokeObjectURL(item.url);
         selectedImages.splice(index, 1);
-
         renderImages();
-
       };
+      $("imagePreview").appendChild(card);
+    });
+  }
 
-
-    // ----------------------------------------------
-    // Drag start
-    // ----------------------------------------------
-
-    card.addEventListener(
-      "dragstart",
-      e => {
-
-        e.dataTransfer.effectAllowed =
-          "move";
-
-        e.dataTransfer.setData(
-          "text/plain",
-          index
-        );
-
-        card.classList.add(
-          "dragging"
-        );
-
-      }
-    );
-
-
-    // ----------------------------------------------
-    // Drag end
-    // ----------------------------------------------
-
-    card.addEventListener(
-      "dragend",
-      () => {
-
-        card.classList.remove(
-          "dragging"
-        );
-
-      }
-    );
-
-
-    // ----------------------------------------------
-    // Drag over
-    // ----------------------------------------------
-
-    card.addEventListener(
-      "dragover",
-      e => {
-
-        e.preventDefault();
-
-        card.classList.add(
-          "drag-over"
-        );
-
-      }
-    );
-
-
-    // ----------------------------------------------
-    // Drag leave
-    // ----------------------------------------------
-
-    card.addEventListener(
-      "dragleave",
-      () => {
-
-        card.classList.remove(
-          "drag-over"
-        );
-
-      }
-    );
-
-
-    // ----------------------------------------------
-    // Drop
-    // ----------------------------------------------
-
-    card.addEventListener(
-      "drop",
-      e => {
-
-        e.preventDefault();
-
-        card.classList.remove(
-          "drag-over"
-        );
-
-
-        const fromIndex =
-          Number(
-            e.dataTransfer.getData(
-              "text/plain"
-            )
-          );
-
-        const toIndex =
-          index;
-
-
-        if (
-          fromIndex === toIndex
-        ) {
-          return;
-        }
-
-
-        const movedImage =
-          selectedImages.splice(
-            fromIndex,
-            1
-          )[0];
-
-
-        selectedImages.splice(
-          toIndex,
-          0,
-          movedImage
-        );
-
-
-        renderImages();
-
-      }
-    );
-
-
-    preview.appendChild(card);
-
+  $("imageFiles").addEventListener("change", e => {
+    for (const file of e.target.files) {
+      if (!file.type.startsWith("image/")) continue;
+      selectedImages.push({
+        file,
+        url: URL.createObjectURL(file),
+        existing: false
+      });
+    }
+    e.target.value = "";
+    renderImages();
   });
 
-}
+  async function uploadImage(file, slug) {
+    const safeName = file.name.toLowerCase()
+      .replace(/[^a-z0-9._-]/g, "-");
+    const path = `products/${slug}/${crypto.randomUUID()}-${safeName}`;
+
+    const { error } = await supabaseClient.storage
+      .from("product-images")
+      .upload(path, file, {
+        cacheControl: "3600",
+        upsert: false
+      });
+
+    if (error) throw error;
+
+    const { data } = supabaseClient.storage
+      .from("product-images")
+      .getPublicUrl(path);
+
+    return data.publicUrl;
+  }
+
+  async function resolveImages(slug) {
+    const urls = [];
+    for (const item of selectedImages) {
+      if (item.existing) {
+        urls.push(item.url);
+      } else if (item.file) {
+        urls.push(await uploadImage(item.file, slug));
+      }
+    }
+    return urls;
+  }
 
   // ---------- Load ----------
   async function loadProducts() {
@@ -409,12 +284,12 @@ function renderImages() {
       return `
         <article class="product-row-admin">
           <div class="admin-product-image">
-            ${firstImage ? `<img src="${escapeHtml(firstImage)}" alt="">` : "♡"}
+            ${firstImage ? `<img src="${escapeHtml(firstImage)}" alt="">` : "â™¡"}
           </div>
           <div class="admin-product-info">
             <strong>${escapeHtml(p.name)}</strong>
-            <span>${escapeHtml(priceText)} · ${escapeHtml((p.categories || []).join(", "))}</span>
-            <small>${p.active ? "Visible" : "Hidden"}${p.featured ? " · Featured" : ""}${p.is_new ? " · New" : ""}</small>
+            <span>${escapeHtml(priceText)} Â· ${escapeHtml((p.categories || []).join(", "))}</span>
+            <small>${p.active ? "Visible" : "Hidden"}${p.featured ? " Â· Featured" : ""}${p.is_new ? " Â· New" : ""}</small>
           </div>
           <div class="admin-row-actions">
             <a href="../product.html?slug=${encodeURIComponent(p.slug)}" target="_blank">View</a>
@@ -619,7 +494,7 @@ function renderImages() {
 
       if (variantError) throw variantError;
 
-      showMessage(editingId ? "Product updated! 💕" : "Product saved! 💕");
+      showMessage(editingId ? "Product updated! ðŸ’•" : "Product saved! ðŸ’•");
       resetForm();
       await loadProducts();
 
@@ -634,7 +509,7 @@ function renderImages() {
   function setSaving(saving) {
     $("saveBtn").disabled = saving;
     $("saveBtn").textContent = saving
-      ? "Saving…"
+      ? "Savingâ€¦"
       : editingId ? "Update Product" : "Save Product";
   }
 
