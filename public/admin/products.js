@@ -103,19 +103,66 @@ document.addEventListener("DOMContentLoaded", async () => {
   $("addFeatureBtn").onclick = () => addFeature();
 
   // ---------- Variants ----------
-  function addVariant(variant = {}) {
-    const row = document.createElement("div");
-    row.className = "variant-row";
-    row.innerHTML = `
-      <input class="variant-name" placeholder="Name" value="${escapeHtml(variant.name || "")}" required>
-      <input class="variant-label" placeholder="Label shown to customer" value="${escapeHtml(variant.label || "")}" required>
-      <input class="variant-price" type="number" min="0" step="0.01" placeholder="Price" value="${variant.price ?? ""}" required>
-      <input class="variant-weight" type="number" min="0" step="0.01" placeholder="Weight (g)" value="${variant.weight ?? ""}">
-      <button type="button" class="remove-btn">×</button>
-    `;
-    row.querySelector(".remove-btn").onclick = () => row.remove();
-    $("variantsList").appendChild(row);
-  }
+function addVariant(variant = {}) {
+  const row = document.createElement("div");
+  row.className = "variant-row";
+
+  row.innerHTML = `
+    <input
+      class="variant-name"
+      placeholder="Name"
+      value="${escapeHtml(variant.name || "")}"
+      required
+    >
+
+    <input
+      class="variant-label"
+      placeholder="Label shown to customer"
+      value="${escapeHtml(variant.label || "")}"
+      required
+    >
+
+    <input
+      class="variant-price"
+      type="number"
+      min="0"
+      step="0.01"
+      placeholder="Price"
+      value="${variant.price ?? ""}"
+      required
+    >
+
+    <input
+      class="variant-stock"
+      type="number"
+      min="0"
+      step="1"
+      placeholder="Stock"
+      value="${variant.stock_quantity ?? 0}"
+      required
+    >
+
+    <input
+      class="variant-weight"
+      type="number"
+      min="0"
+      step="0.01"
+      placeholder="Weight (g)"
+      value="${variant.weight ?? ""}"
+    >
+
+    <button
+      type="button"
+      class="remove-btn"
+    >
+      ×
+    </button>
+  `;
+
+  row.querySelector(".remove-btn").onclick = () => row.remove();
+
+  $("variantsList").appendChild(row);
+}
 
   $("addVariantBtn").onclick = () => addVariant();
 
@@ -191,9 +238,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       .from("products")
       .select(`
         *,
-        product_variants (
-          id, name, label, price, weight, sort_order
-        )
+       product_variants (
+  id,
+  name,
+  label,
+  price,
+  stock_quantity,
+  weight,
+  sort_order
+)
       `)
       .order("created_at", { ascending: false });
 
@@ -330,14 +383,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       .map(x => x.value.trim()).filter(Boolean);
 
     const variants = [...document.querySelectorAll(".variant-row")].map((row, i) => ({
-      name: row.querySelector(".variant-name").value.trim(),
-      label: row.querySelector(".variant-label").value.trim(),
-      price: Number(row.querySelector(".variant-price").value),
-      weight: row.querySelector(".variant-weight").value === ""
-        ? null
-        : Number(row.querySelector(".variant-weight").value),
-      sort_order: i
-    }));
+  name: row.querySelector(".variant-name").value.trim(),
+
+  label: row.querySelector(".variant-label").value.trim(),
+
+  price: Number(
+    row.querySelector(".variant-price").value
+  ),
+
+  stock_quantity: Number(
+    row.querySelector(".variant-stock").value
+  ),
+
+  weight: row.querySelector(".variant-weight").value === ""
+    ? null
+    : Number(
+        row.querySelector(".variant-weight").value
+      ),
+
+  sort_order: i
+}));
 
     if (!name) return showMessage("Please enter a product name.", true);
     if (!categories.length) return showMessage("Add at least one category.", true);
@@ -407,14 +472,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         productId = data.id;
       }
 
-      const variantRows = variants.map(v => ({
-        product_id: productId,
-        name: v.name,
-        label: v.label,
-        price: v.price,
-        weight: v.weight,
-        sort_order: v.sort_order
-      }));
+    const variantRows = variants.map(v => ({
+  product_id: productId,
+
+  name: v.name,
+
+  label: v.label,
+
+  price: v.price,
+
+  stock_quantity: v.stock_quantity,
+
+  weight: v.weight,
+
+  sort_order: v.sort_order
+}));
 
       const { error: variantError } = await supabaseClient
         .from("product_variants")
