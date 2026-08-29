@@ -240,7 +240,7 @@ background-size: 100px 100px;
   gap: 18px;
   padding-bottom: 40px;
   padding-top: 40px;
-	align-item: center;
+	align-items: center;
 }
 
 /* ===== EACH DROPDOWN ===== */
@@ -260,8 +260,8 @@ background-size: 100px 100px;
   color: #7b4cff;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-align: center;
-	align-item: center;
+  
+	
 }
 
 /* Hover effect */
