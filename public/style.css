@@ -1013,13 +1013,21 @@ Featured Products Section
   display: none;
 }
 
+.featured-products{
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+}
 
+.featured-products::-webkit-scrollbar{
+	 display: none;
+}
 .category-tabs{
   display:flex;
   gap:40px;
   margin-bottom:40px;
   overflow-x:auto;
 	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
 }
 
  .category-tabs::-webkit-scrollbar {
