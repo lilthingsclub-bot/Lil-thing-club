@@ -2010,10 +2010,14 @@ font-weight: 2000px;
 
 .product-card1 img {
 	 width: 300%;
-  max-width: 860px;
+  max-width: 360px;
   height: auto;
   display: block;
 }
+.product-card1 a {
+ 
+  max-width: 360px;
+  
 }
 
 
