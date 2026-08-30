@@ -2001,6 +2001,14 @@ font-weight: 2000px;
     grid-template-columns: repeat(2, 1fr);/* 2 columns for mobile */
   }
 
+	@media screen and (max-width: 500px) {
+ .product-row1 {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+	 column-gap: 26px;
+  row-gap: 28px;
+  }
+}
+
 
 
 }
