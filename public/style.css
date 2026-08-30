@@ -2004,13 +2004,11 @@ font-weight: 2000px;
 	@media screen and (max-width: 500px) {
  .product-row1 {
     grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
-	 column-gap: 6px;
-  row-gap: 8px;
+	
   }
 
-		.product-card1 img {
-  width: 100%;
-  max-width: 450px;
+.product-card1 img {
+  max-width: 700px;
   height: auto;
   display: block;
 }
