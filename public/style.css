@@ -1052,12 +1052,22 @@ font-weight: 2000px;
 
 .product-price {
   font-family: 'Nunito', sans-serif;
-  font-size: 20px;
+  font-size: 25px;
 	font-weight: 1200px;
   color: #33A9FF;
   margin-bottom: 12px;
 }
 
+
+.category-tabs{
+display: flex;
+  gap: 150px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-left: 97px ;
+  scrollbar-width: auto;
+	
+}
 
 /* ================================
    MOBILE RESPONSIVE DESIGN
