@@ -996,18 +996,44 @@ Featured Products Section
 ========================= */
 
 .product-row {
+  width: 100%;
+  max-width: 100%;
+
+  box-sizing: border-box;
+
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
+
   gap: 20px;
-	  scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
-  padding-left: 15px ;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 0 15px 10px;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+
+  /* IMPORTANT */
+  min-width: 0;
   
 }
 
 .product-card1 {
-  flex: 0 0 450px; /* Adjust width to your preference */
+  flex: 0 0 450px;
+
+  width: 450px;
+  max-width: 450px;
+
+  box-sizing: border-box;
+
+  scroll-snap-align: start;
+
+  min-width: 0;
 }
 
 .product-row::-webkit-scrollbar {
@@ -1049,6 +1075,7 @@ Featured Products Section
   background-size: 39px 35px; /* Sets the spacing between dots */
   background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
    padding: 80px 50px 50px;  /* top padding pushes content down */
+	
    overflow: visible;
    position: relative;
     display: flex;
@@ -1067,41 +1094,71 @@ Featured Products Section
 
 .product-card a {
   display: block;
+
+  width: 100%;
+  max-width: 360px;
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+
   text-align: center;
+
   border-radius: 10px;
+
   overflow: hidden;
+
   background: transparent;
-  transition: transform 0.2s, box-shadow 0.2s;
-  color: inherit; /* ensures link text inherits color */
-  text-decoration: none; /* remove underline */
+
+  color: inherit;
+  text-decoration: none;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .product-card a:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+ transform: translateY(-5px);
+
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .product-card img {
+  display: block;
+
   width: 100%;
   max-width: 360px;
+
   height: auto;
-  display: block;
+
+  margin: 0 auto;
 }
 
 .product-name {
   font-family: 'Nunito', sans-serif;
+
   font-size: 20px;
-font-weight: 2000px;
-	line-height: 1.5;
-  margin: 8px 0 4px 0;
+  font-weight: 700;
+
+  line-height: 1.5;
+
+  margin: 8px 0 4px;
+
   color: #ff66c4;
+
+  overflow-wrap: break-word;
 }
 
 .product-price {
   font-family: 'Nunito', sans-serif;
+
   font-size: 20px;
-	font-weight: 1200px;
+  font-weight: 600;
+
   color: #33A9FF;
+
   margin-bottom: 12px;
 }
 
@@ -1112,119 +1169,156 @@ font-weight: 2000px;
 
 @media (max-width: 780px) and (max-width: 1024px) {
 
-  /* Product section */
-  .product-section {
-   width: 100%;
-  box-sizing: border-box;
+ .product-section {
+    width: 100%;
+    padding: 60px 25px 45px;
 
-  background: #fff;
-  background-image:
-    radial-gradient(#ffd5f2 10%, transparent 10%),
-    radial-gradient(#ffd5f2 10%, transparent 10%);
-
-  background-size: 39px 35px;
-  background-position: 0 0, -19px -19px;
-
-  padding: 80px 50px 50px;
-
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  /* IMPORTANT */
-  min-width: 0;
-  overflow: hidden;
+    overflow: hidden;
   }
 
-  /* Category tabs */
   .category-tabs {
     width: 100%;
-    gap: 10px;
-    margin-bottom: 25px;
-    padding: 0 5px;
+
+    gap: 25px;
+
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-behavior: smooth;
 
-  scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
+    padding: 0 5px;
 
-  .category-tabs::-webkit-scrollbar {
-    display: none;
+    min-width: 0;
   }
 
   .tab-link {
-    font-size: 24px;
-    flex-shrink: 0;
-    white-space: nowrap;
+    font-size: 32px;
+    flex: 0 0 auto;
   }
 
-  /* Product horizontal scroll */
   .featured-products {
     width: 100%;
     max-width: 100%;
+
+    min-width: 0;
+
     overflow: hidden;
   }
 
   .product-row {
     width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 15px;
-    padding: 0 5px 10px;
+    max-width: 100%;
+
+    gap: 20px;
+
+    padding: 0 10px 10px;
+
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-behavior: smooth;
 
-  scrollbar-width: none;
+    min-width: 0;
   }
 
-  .product-row::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Product card */
   .product-card1 {
-    flex: 0 0 75%;
-    max-width: 75%;
-    box-sizing: border-box;
-  }
+    flex: 0 0 40%;
+    width: 40%;
+    max-width: 40%;
 
-  .product-card {
-    width: 100%;
+    min-width: 0;
   }
 
   .product-card a {
     width: 100%;
-    box-sizing: border-box;
+    max-width: none;
   }
 
-  /* Product image */
   .product-card img {
     width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
+    max-width: none;
   }
 
-  /* Product name */
   .product-name {
-    font-size: 17px;
-    line-height: 1.3;
-    margin: 7px 0 3px;
+    font-size: 18px;
   }
 
-  /* Product price */
   .product-price {
-    font-size: 17px;
-    margin-bottom: 8px;
+    font-size: 18px;
   }
 }
 
+
+
+@media (max-width: 767px) {
+
+  .product-section {
+    width: 100%;
+    padding: 45px 10px 35px;
+
+    /* Prevent content from escaping */
+    overflow: hidden;
+  }
+
+  .category-tabs {
+    width: 100%;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    padding: 0 5px;
+
+    overflow-x: auto;
+  }
+
+  .tab-link {
+    font-size: 24px;
+    flex: 0 0 auto;
+  }
+
+  .featured-products {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+  }
+
+  .product-row {
+    width: 100%;
+    max-width: 100%;
+
+    gap: 15px;
+
+    padding: 0 5px 10px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .product-card1 {
+    flex: 0 0 75%;
+    width: 75%;
+    max-width: 75%;
+
+    min-width: 0;
+  }
+
+  .product-card a {
+    width: 100%;
+    max-width: none;
+  }
+
+  .product-card img {
+    width: 100%;
+    max-width: none;
+  }
+
+  .product-name {
+    font-size: 17px;
+  }
+
+  .product-price {
+    font-size: 17px;
+  }
+}
 
 
 
