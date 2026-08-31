@@ -2294,10 +2294,10 @@ margin-top: -20px;
 
 /* Contact Form Section */
 .contact-container {
-	background: #fff;
-   background-image:
-    radial-gradient(circle at 25px 50px, #fff 25px, transparent 26px),
-    radial-gradient(circle at 75px 50px, #fff 25px, transparent 26px);   /* soft pink background */
+	 background: #fff;
+  background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);  /* soft pink background */
   padding: 60px 20px;
   display: flex;
   justify-content: center;
