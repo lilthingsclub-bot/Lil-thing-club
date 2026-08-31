@@ -1061,11 +1061,17 @@ font-weight: 2000px;
 
 .category-tabs{
 display: flex;
-  gap: 150px;
-  overflow-x: auto;
+  gap: 40px;
   scroll-behavior: smooth;
   padding-left: 97px ;
   scrollbar-width: auto;
+	 overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+
+
+	scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 	
 }
 .category-tabs::-webkit-scrollbar {
