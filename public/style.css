@@ -1028,9 +1028,7 @@ display: none;
 .category-tabs{
   display: flex;
   gap: 40px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: auto;
+  
 	
 }
 
@@ -1045,6 +1043,8 @@ display: none;
   color:#b5b5b5;
   transition:0.3s;
   white-space:nowrap;
+	scroll-behavior: smooth;
+  scrollbar-width: auto;
 	
 }
 
