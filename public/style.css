@@ -1114,10 +1114,28 @@ font-weight: 2000px;
 
   /* Product section */
   .product-section {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 45px 15px 35px;
-    overflow: hidden;
+   width: 100%;
+  box-sizing: border-box;
+
+  background: #fff;
+  background-image:
+    radial-gradient(#ffd5f2 10%, transparent 10%),
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+
+  background-size: 39px 35px;
+  background-position: 0 0, -19px -19px;
+
+  padding: 80px 50px 50px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* IMPORTANT */
+  min-width: 0;
+  overflow: hidden;
   }
 
   /* Category tabs */
