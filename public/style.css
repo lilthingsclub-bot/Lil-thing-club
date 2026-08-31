@@ -996,8 +996,11 @@ Featured Products Section
 ========================= */
 
 .featured-products {
-	scroll-behavior: smooth;
-	
+	 display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: auto;
+ 
 }
 
 .featured-products::-webkit-scrollbar {
@@ -1011,8 +1014,6 @@ display: none;
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 20px;
-	  scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
   padding-left: 15px ;
   
 }
@@ -1021,18 +1022,15 @@ display: none;
   flex: 0 0 450px; /* Adjust width to your preference */
 }
 
-.product-row::-webkit-scrollbar {
-  display: none;
-}
+
 
 
 .category-tabs{
-  display:flex;
-  gap:40px;
-  margin-bottom:40px;
-  overflow-x:auto;
-	scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: auto;
 	
 }
 
@@ -1047,13 +1045,9 @@ display: none;
   color:#b5b5b5;
   transition:0.3s;
   white-space:nowrap;
-	scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
+	
 }
 
-.tab-link::-webkit-scrollbar {
-    display: none;
-  }
 	
 .tab-link.active{
   color:black;
