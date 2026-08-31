@@ -2376,7 +2376,7 @@ margin-top: -20px;
 
 /* Shipping & Policies Section */
 .shipping-policies {
-  background:#effff4;
+  background: #fff;
   background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
