@@ -1232,9 +1232,98 @@ width: 100%;       /* Spans the full width of the container */
 
   margin-bottom: 12px;
 }
-/* ================================
-   MOBILE RESPONSIVE DESIGN
-   ================================ */
+/* =================================
+   TABLET / IPAD
+================================= */
+
+@media (max-width: 1024px) {
+
+  .product-section {
+    padding: 60px 20px 40px;
+  }
+
+  .category-tabs {
+    gap: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .tab-link {
+    font-size: 32px;
+  }
+
+  .featured-products {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .product-card1 {
+    flex: 0 0 40%;
+    width: 40%;
+  }
+
+  .product-card a {
+    max-width: none;
+  }
+
+  .product-card img {
+    max-width: 100%;
+  }
+}
+
+
+/* =================================
+   PHONE
+================================= */
+
+@media (max-width: 767px) {
+
+  .product-section {
+    padding: 45px 10px 35px;
+  }
+
+  .category-tabs {
+    gap: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .tab-link {
+    font-size: 24px;
+  }
+
+  .featured-products {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .product-row {
+    gap: 15px;
+  }
+
+  .product-card1 {
+    flex: 0 0 75%;
+    width: 75%;
+  }
+
+  .product-card a {
+    width: 100%;
+    max-width: none;
+  }
+
+  .product-card img {
+    width: 100%;
+    max-width: none;
+  }
+
+  .product-name {
+    font-size: 17px;
+  }
+
+  .product-price {
+    font-size: 17px;
+  }
+}
 
 
 
