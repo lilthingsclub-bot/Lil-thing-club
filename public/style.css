@@ -1032,6 +1032,7 @@ display: none;
   overflow-x:auto;
 	scroll-behavior: smooth;
 	scroll-snap-type: x mandatory;
+	
 }
 
  .category-tabs::-webkit-scrollbar {
@@ -1045,8 +1046,14 @@ display: none;
   color:#b5b5b5;
   transition:0.3s;
   white-space:nowrap;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
 }
 
+.tab-link::-webkit-scrollbar {
+    display: none;
+  }
+	
 .tab-link.active{
   color:black;
 }
@@ -1149,7 +1156,7 @@ font-weight: 2000px;
   }
 
   .tab-link {
-    font-size: 24px;
+    font-size: 15px;
     flex-shrink: 0;
     white-space: nowrap;
   }
