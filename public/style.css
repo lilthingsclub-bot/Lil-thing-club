@@ -1123,7 +1123,7 @@ font-weight: 2000px;
   /* Category tabs */
   .category-tabs {
     width: 100%;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 25px;
     padding: 0 5px;
     overflow-x: auto;
@@ -1207,26 +1207,6 @@ font-weight: 2000px;
   }
 }
 
-/* Responsive */
-@media (max-width: 780px) and (max-width: 1024px) {
-  
-}
-
-
-@media (max-width: 767px) {
-  
-  }
-
-.featured-products h2{
-  font-size: 40px;
-}
-
-}
-
-
-@media (max-width: 487px) {
-.tab-link { font-size: 25px; }
-}
 
 
 
