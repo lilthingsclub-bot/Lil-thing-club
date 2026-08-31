@@ -1232,6 +1232,7 @@ width: 100%;       /* Spans the full width of the container */
 
   margin-bottom: 12px;
 }
+
 /* =================================
    TABLET / IPAD
 ================================= */
@@ -1257,10 +1258,7 @@ width: 100%;       /* Spans the full width of the container */
     padding-right: 10px;
   }
 
-  .product-card1 {
-    flex: 0 0 40%;
-    width: 40%;
-  }
+ 
 
   .product-card a {
     max-width: none;
@@ -1301,10 +1299,7 @@ width: 100%;       /* Spans the full width of the container */
     gap: 15px;
   }
 
-  .product-card1 {
-    flex: 0 0 75%;
-    width: 75%;
-  }
+ 
 
   .product-card a {
     width: 100%;
