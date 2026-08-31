@@ -994,6 +994,7 @@ width: 100%;       /* Spans the full width of the container */
 /* =========================
 Featured Products Section
 ========================= */
+
 .featured-products {
 	scroll-behavior: smooth;
 	
@@ -1072,6 +1073,7 @@ display: none;
   flex-direction: column;
 	justify-content: flex-start;
   align-items: center;
+	scroll-behavior: smooth;
 }
 
 
@@ -1127,7 +1129,7 @@ font-weight: 2000px;
    MOBILE RESPONSIVE DESIGN
    ================================ */
 
-@media (max-width: 780px) and (max-width: 1024px) {
+@media (max-width: 780px) and (max-width: 1024px){
 
   /* Product section */
   .product-section {
@@ -1156,7 +1158,7 @@ font-weight: 2000px;
   }
 
   .tab-link {
-    font-size: 15px;
+    font-size: 18px;
     flex-shrink: 0;
     white-space: nowrap;
   }
