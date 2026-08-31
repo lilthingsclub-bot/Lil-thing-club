@@ -2105,8 +2105,8 @@ font-weight: 2000px;
   
   /* Scallops facing UP */
   background-image:
-    radial-gradient(circle at 25px 50px, #fffee6 25px, transparent 26px),
-    radial-gradient(circle at 75px 50px, #fffee6 25px, transparent 26px);
+    radial-gradient(circle at 25px 50px, #fff 25px, transparent 26px),
+    radial-gradient(circle at 75px 50px, #fff 25px, transparent 26px);
 }
 
 .about-us.scallop-bottom::after {
@@ -2294,13 +2294,10 @@ margin-top: -20px;
 
 /* Contact Form Section */
 .contact-container {
-    background: repeating-linear-gradient(
-    90deg,          /* Angle of the stripes */
-    #fff,           /* Color 1 */
-    #fff 10px,      /* Color 1 stop position */
-    #ffe2f6 10px,      /* Color 2 start position (same as Color 1 stop) */
-    #ffe2f6 20px       /* Color 2 stop position */
-  );      /* soft pink background */
+	background: #fff;
+   background-image:
+    radial-gradient(circle at 25px 50px, #fff 25px, transparent 26px),
+    radial-gradient(circle at 75px 50px, #fff 25px, transparent 26px);   /* soft pink background */
   padding: 60px 20px;
   display: flex;
   justify-content: center;
