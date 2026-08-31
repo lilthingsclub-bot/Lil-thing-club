@@ -1078,6 +1078,44 @@ display: flex;
 	 display: flex;
 }
 
+.tab-link{
+	text-decoration:none;
+  font-size: 40px;
+  font-weight:500;
+  color:#b5b5b5;
+  transition:0.3s;
+  white-space:nowrap;
+}
+
+.tab-link.active{
+  color:black;
+}
+
+.featured-products{
+	display: flex;
+  gap: 40px;
+  scroll-behavior: smooth;
+  padding-left: 97px ;
+  scrollbar-width: auto;
+	 overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+
+
+	scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-row{
+	display: flex;
+  flex-wrap: nowrap;
+	gap: 20px;
+	padding-left: 15px ;
+}
+
+.product-card1 {
+  flex: 0 0 450px; /* Adjust width to your preference */
+}
 /* ================================
    MOBILE RESPONSIVE DESIGN
    ================================ */
