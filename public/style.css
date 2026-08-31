@@ -1128,7 +1128,7 @@ font-weight: 2000px;
    MOBILE RESPONSIVE DESIGN
    ================================ */
 
-@media (max-width: 1777px){
+@media (max-width: 780px) and (max-width: 1024px)
 
   /* Product section */
   .product-section {
