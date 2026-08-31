@@ -994,6 +994,16 @@ width: 100%;       /* Spans the full width of the container */
 /* =========================
 Featured Products Section
 ========================= */
+.featured-products {
+	scroll-behavior: smooth;
+	
+}
+
+.featured-products::-webkit-scrollbar {
+display: none;
+	
+}
+
 
 .product-row {
   display: flex;
