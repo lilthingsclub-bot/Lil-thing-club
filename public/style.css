@@ -1302,13 +1302,13 @@ width: 100%;       /* Spans the full width of the container */
  
 
   .product-card a {
-    width: 80%;
-    max-width: 150PX;
+    width: 50%;
+    max-width: none;
   }
 
   .product-card img {
-    width: 80%;
-    max-width: 150PX;
+    width: 50%;
+    max-width: none;
   }
 
   .product-name {
