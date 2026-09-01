@@ -1261,12 +1261,14 @@ width: 100%;       /* Spans the full width of the container */
  
 
   .product-card a {
-    max-width: 100%; /* Changed from none to limit size */
+	  width: 100%;
+    max-width: none ; /* Changed from none to limit size */
   
   }
 
   .product-card img {
-   max-width: 100%; /* Changed from none to limit size */
+    width: 100%;
+    max-width: none;  /* Changed from none to limit size */
   
   }
 }
