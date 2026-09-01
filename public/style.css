@@ -1274,7 +1274,7 @@ width: 100%;       /* Spans the full width of the container */
    PHONE
 ================================= */
 
-@media (max-width: 767px) {
+@media (max-width: 500px) {
 
   .product-section {
     padding: 45px 10px 35px;
@@ -1302,12 +1302,12 @@ width: 100%;       /* Spans the full width of the container */
  
  .product-card a {
     width: 100%;
-    max-width: 50%;
+    max-width: none;
   }
 
   .product-card img {
     width: 100%;
-    max-width: 50%;
+    max-width: none%;
   }
  
 
