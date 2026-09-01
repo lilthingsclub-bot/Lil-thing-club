@@ -1301,15 +1301,7 @@ width: 100%;       /* Spans the full width of the container */
 
  
 
-  .product-card a {
-    width: 50%;
-    max-width: 50%;
-  }
-
-  .product-card img {
-    width: 50%;
-    max-width: 50%;
-  }
+ 
 
   .product-name {
     font-size: 17px;
