@@ -2739,10 +2739,17 @@ font-weight: 300px;
 
 .buy-row { flex-direction: row; }
 
-   .shipping {
+  
+
+	.shipping {
+Margin-left: -30px ;
+
+
+padding: 12px 10px;
+
 width: 40%;
-      padding: 12px 10px;
-   }
+	}
+
    .title-row h2{
 font-size: 40px;
 }
