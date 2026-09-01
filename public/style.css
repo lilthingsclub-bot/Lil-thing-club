@@ -1301,15 +1301,17 @@ width: 100%;       /* Spans the full width of the container */
 
  
  .product-card a {
-    width: 100%;
-    max-width: none;
+   max-width: 200px; /* Changed from none to limit size */
+  height: auto;
+  display: block;
+  margin: 0 auto; 
   }
 
- .product-card img {
-  width: 70%; /* Changed from 100% */
-  height: auto; /* Keeps the aspect ratio perfect */
+ width: 100%; 
+  max-width: 200px; /* Changed from none to limit size */
+  height: auto;
   display: block;
-  margin: 0 auto; /* Centers the image if it shrinks */
+  margin: 0 auto; 
 }
 
   .product-name {
