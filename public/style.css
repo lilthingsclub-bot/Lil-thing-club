@@ -2094,42 +2094,6 @@ font-weight: 2000px;
 
 /* All Products Button */
 /* Responsive */
-@media (max-width: 780px) and (max-width: 1024px) {
-  .product-row1 {
-	   width: 100%;
-	  column-gap: 10px;
-    row-gap: 20px;
-    grid-template-columns: repeat(3, 1fr); /* keep 3 columns for tablet */
-  }
-
-	.product-card1 {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .product-card1 a {
-    width: 100%;
-    max-width: none;
-  }
-
-  .product-card1 img {
-    width: 100%;
-    max-width: none;
-    height: auto;
-    display: block;
-  }
-
-	  .product-name1 {
-    font-size: 20px;
-  }
-
-  .product-price1 {
-    font-size: 20px;
-  }
-}
-
-
-}
 
 @media (max-width: 767px) {
 .sticker-products {
@@ -2169,26 +2133,6 @@ font-weight: 2000px;
   }
 }
 
-
-	@media screen and (max-width: 500px) {
- .sticker-products {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
-  .product-row1 {
-    column-gap: -20px;
-  }
-		.product-card1 a {
-  width: 100%;
-  max-width: none;
-}
-
-.product-card1 img {
-  width: 100%;
-  max-width: none;
-}
-}
 /* =========================
    About Us Section
    ========================= */
