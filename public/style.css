@@ -1990,6 +1990,7 @@ Sticker  Products Section
 
 
 .sticker-products  {
+
     background: #fff;
    background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
@@ -2033,6 +2034,7 @@ font-weight:600px;
   display: grid;
   align-items: center;
   justify-items: center;
+
  
 }
 
@@ -2042,6 +2044,7 @@ font-weight:600px;
   column-gap: 46px;
   row-gap: 48px;
   margin-bottom: 30px;
+width: 100vw;
 }
 
 .product-card1 {
