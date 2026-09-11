@@ -2092,8 +2092,14 @@ font-weight: 2000px;
 
 /* All Products Button */
 /* Responsive */
+@media (max-width: 1024px) {
+.product-row1 {
+    width: 100%;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
 .sticker-products {
     padding: 15px 10px 40px;
   }
