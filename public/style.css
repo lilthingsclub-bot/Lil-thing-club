@@ -1146,7 +1146,7 @@ width: 100%;       /* Spans the full width of the container */
    PRODUCT CARD
 ================================= */
 
-.product-card1 {
+.product-card {
   flex: 0 0 450px;
 
   width: 450px;
