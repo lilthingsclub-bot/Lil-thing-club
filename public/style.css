@@ -991,93 +991,73 @@ width: 100%;       /* Spans the full width of the container */
 
 
 
-/* =================================
-   PRODUCT SECTION
-================================= */
+/* =========================
+   FEATURED PRODUCTS SECTION
+========================= */
 
 .product-section {
   width: 100%;
-  
-
+  box-sizing: border-box;
   background: #fff;
-
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
     radial-gradient(#ffd5f2 10%, transparent 10%);
-
   background-size: 39px 35px;
   background-position: 0 0, -19px -19px;
 
-  padding: 80px 50px 50px;
+  padding: 80px 0 50px;
+
+  overflow: hidden;
 
   position: relative;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* IMPORTANT */
-  min-width: 0;
-  overflow: hidden;
 }
 
 
-/* =================================
+/* =========================
    CATEGORY TABS
-================================= */
+========================= */
 
 .category-tabs {
   width: 100%;
   max-width: 100%;
-
-  box-sizing: border-box;
+  min-width: 0;
 
   display: flex;
   flex-wrap: nowrap;
-
+  justify-content: flex-start;
   gap: 40px;
 
-  /* THIS DIV SCROLLS */
+  padding: 0 20px 15px;
+
+  box-sizing: border-box;
+
   overflow-x: auto;
   overflow-y: hidden;
 
-  white-space: nowrap;
-
-  padding: 0 15px 10px;
-
-  margin: 0;
-
-  scroll-behavior: smooth;
-
   scrollbar-width: none;
-
   -webkit-overflow-scrolling: touch;
 
-  /* IMPORTANT */
-  min-width: 0;
-  flex-shrink: 1;
+  scroll-behavior: smooth;
 }
 
 .category-tabs::-webkit-scrollbar {
   display: none;
 }
 
-
-/* =================================
-   CATEGORY LINKS
-================================= */
-
 .tab-link {
   flex: 0 0 auto;
 
   text-decoration: none;
+  white-space: nowrap;
 
   font-size: 40px;
   font-weight: 500;
 
   color: #b5b5b5;
-
-  white-space: nowrap;
 
   transition: 0.3s;
 }
@@ -1087,9 +1067,9 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-/* =================================
-   FEATURED PRODUCTS CONTAINER
-================================= */
+/* =========================
+   FEATURED PRODUCT SCROLLER
+========================= */
 
 .featured-products {
   width: 100%;
@@ -1107,11 +1087,6 @@ width: 100%;       /* Spans the full width of the container */
   -webkit-overflow-scrolling: touch;
 
   scroll-behavior: smooth;
-
-
-  /* VERY IMPORTANT FOR CHROME */
-  min-width: 0;
-  flex-shrink: 1;
 }
 
 .featured-products::-webkit-scrollbar {
@@ -1119,9 +1094,10 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-/* =================================
+/* =========================
    PRODUCT ROW
-================================= */
+========================= */
+
 .featured-products .product-row {
   display: flex;
   flex-wrap: nowrap;
@@ -1137,60 +1113,9 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-
-
-/* =================================
-   PRODUCT CARD
-================================= */
-
-.featured-card {
-  flex: 0 0 450px;
-  width: 450px;
-
-  box-sizing: border-box;
-
-  display: flex;
-  justify-content: center;
-
-  z-index: 5;
-}
-
-.featured-card a {
-  display: block;
-
-  width: 100%;
-
-  text-align: center;
-
-  border-radius: 10px;
-  overflow: hidden;
-
-  background: transparent;
-
-  color: inherit;
-  text-decoration: none;
-
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.featured-card a:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-}
-
-.featured-card img {
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-
-  display: block;
-
-  margin: 0 auto;
-}
-
-/* =================================
-   PRODUCT
-================================= */
+/* =========================
+   FEATURED PRODUCT CARD
+========================= */
 
 .featured-card {
   flex: 0 0 450px;
@@ -1238,16 +1163,14 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-/* =================================
-   PRODUCT TEXT
-================================= */
+/* =========================
+   FEATURED PRODUCT TEXT
+========================= */
 
 .product-name1 {
   font-family: 'Nunito', sans-serif;
-
   font-size: 20px;
   font-weight: 700;
-
   line-height: 1.5;
 
   margin: 8px 0 4px;
@@ -1257,7 +1180,6 @@ width: 100%;       /* Spans the full width of the container */
 
 .product-price1 {
   font-family: 'Nunito', sans-serif;
-
   font-size: 25px;
   font-weight: 600;
 
@@ -1266,9 +1188,10 @@ width: 100%;       /* Spans the full width of the container */
   margin-bottom: 12px;
 }
 
-/* =================================
-   TABLET / IPAD
-================================= */
+
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width: 1024px) {
 
@@ -1346,10 +1269,6 @@ width: 100%;       /* Spans the full width of the container */
     font-size: 21px;
   }
 }
-
-
-
-
 
 
 
