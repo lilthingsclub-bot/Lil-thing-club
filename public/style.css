@@ -2043,7 +2043,6 @@ font-weight:600px;
   column-gap: 46px;
   row-gap: 48px;
   margin-bottom: 30px;
-
 }
 
 .product-card1 {
@@ -2094,7 +2093,7 @@ font-weight: 2000px;
 /* All Products Button */
 /* Responsive */
 
-@media (max-width: 600px) {
+@media (min-width: 600px) {
 .sticker-products {
     padding: 15px 10px 40px;
   }
