@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     products.forEach(product => {
       const div = document.createElement("div");
-      div.className = "product-card1";
+      div.className = "featured-card";
       const image = product.images?.[0] || "";
       div.innerHTML = `
         <a href="product.html?slug=${encodeURIComponent(product.slug)}">
