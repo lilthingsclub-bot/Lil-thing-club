@@ -2044,7 +2044,7 @@ font-weight:600px;
   column-gap: 46px;
   row-gap: 48px;
   margin-bottom: 30px;
-width: 100vw;
+
 }
 
 .product-card1 {
@@ -2096,8 +2096,38 @@ font-weight: 2000px;
 /* Responsive */
 @media (max-width: 780px) and (max-width: 1024px) {
   .product-row1 {
+	   width: 100%;
+	  column-gap: 10px;
+    row-gap: 20px;
     grid-template-columns: repeat(3, 1fr); /* keep 3 columns for tablet */
   }
+
+	.product-card1 {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .product-card1 a {
+    width: 100%;
+    max-width: none;
+  }
+
+  .product-card1 img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    display: block;
+  }
+
+	  .product-name1 {
+    font-size: 20px;
+  }
+
+  .product-price1 {
+    font-size: 20px;
+  }
+}
+
 
 }
 
