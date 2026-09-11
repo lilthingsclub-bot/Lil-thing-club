@@ -997,7 +997,7 @@ width: 100%;       /* Spans the full width of the container */
 
 .product-section {
   width: 100%;
-  box-sizing: border-box;
+  
 
   background: #fff;
 
@@ -1146,14 +1146,14 @@ width: 100%;       /* Spans the full width of the container */
    PRODUCT CARD
 ================================= */
 
-/* product-card {
+.product-card {
   flex: 0 0 450px;
 
   width: 450px;
 
   box-sizing: border-box;
 }
-*/
+
 
 
 /* =================================
