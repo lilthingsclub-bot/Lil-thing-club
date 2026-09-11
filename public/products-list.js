@@ -66,6 +66,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+     products.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "product-card";
+      const image = product.images?.[0] || "";
+      div.innerHTML = `
+        <a href="product.html?slug=${encodeURIComponent(product.slug)}">
+          <img src="${image}" alt="${product.name}">
+          <p class="product-name1">${product.name}</p>
+          <p class="product-price1">${priceText(product)}</p>
+        </a>
+      `;
+      container.appendChild(div);
+    });
+  }
+
     products.forEach(product => {
       const div = document.createElement("div");
       div.className = "product-card1";
