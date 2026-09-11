@@ -1155,8 +1155,8 @@ width: 100%;       /* Spans the full width of the container */
 .featured-card img {
   width: 100%;
   max-width: 360px;
-  height: auto;
-
+ height: 300px;
+object-fit: contain;
   display: block;
 
   margin: 0 auto;
