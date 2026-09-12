@@ -1068,6 +1068,83 @@ width: 100%;       /* Spans the full width of the container */
 
 
 /* =========================
+   FEATURED PRODUCTS SECTION
+========================= */
+
+.product-section {
+  width: 100%;
+  box-sizing: border-box;
+
+  background: #fff;
+  background-image:
+    radial-gradient(#ffd5f2 10%, transparent 10%),
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+  background-size: 39px 35px;
+  background-position: 0 0, -19px -19px;
+
+  padding: 80px 0 50px;
+
+  overflow: hidden;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* =========================
+   CATEGORY TABS
+========================= */
+
+.category-tabs {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+  gap: 40px;
+
+  padding: 0 20px 15px;
+
+  box-sizing: border-box;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-behavior: smooth;
+}
+
+.category-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-link {
+  flex: 0 0 auto;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  font-size: 40px;
+  font-weight: 500;
+
+  color: #b5b5b5;
+
+  transition: 0.3s;
+}
+
+.tab-link.active {
+  color: black;
+}
+
+
+/* =========================
    FEATURED PRODUCT SCROLLER
 ========================= */
 
@@ -1115,7 +1192,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT CARD
 ========================= */
 
-.product-card {
+.featured-card {
   flex: 0 0 280px !important;
 
   width: 280px !important;
@@ -1136,7 +1213,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT LINK
 ========================= */
 
-.product-card a {
+.featured-card a {
   display: block !important;
 
   width: 280px !important;
@@ -1158,7 +1235,7 @@ width: 100%;       /* Spans the full width of the container */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.product-card a:hover {
+.featured-card a:hover {
   transform: translateY(-5px);
 
   box-shadow:
@@ -1170,7 +1247,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT IMAGE
 ========================= */
 
-.product-card img {
+.featured-card img {
   display: block !important;
 
   width: 250px !important;
@@ -1196,7 +1273,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT NAME
 ========================= */
 
-.product-card .product-name1 {
+.featured-card .product-name1 {
   display: block !important;
 
   width: 100%;
@@ -1220,7 +1297,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT PRICE
 ========================= */
 
-.product-card .product-price1 {
+.featured-card .product-price1 {
   display: block !important;
 
   width: 100%;
@@ -1351,7 +1428,6 @@ width: 100%;       /* Spans the full width of the container */
     font-size: 18px;
   }
 }
-
 
 /* =========================
 Coupon Section
