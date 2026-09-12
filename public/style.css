@@ -989,6 +989,25 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
+/* =========================
+   FEATURED PRODUCT CARD
+========================= */
+
+.featured-card {
+  flex: 0 0 280px !important;
+
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+
+  box-sizing: border-box;
+
+  display: block;
+
+  text-align: center;
+
+  z-index: 5;
+}
 
 /* =========================
    FEATURED PRODUCTS SECTION
@@ -1014,7 +1033,6 @@ width: 100%;       /* Spans the full width of the container */
   flex-direction: column;
   align-items: center;
 }
-
 
 /* =========================
    CATEGORY TABS
@@ -1065,84 +1083,6 @@ width: 100%;       /* Spans the full width of the container */
 .tab-link.active {
   color: black;
 }
-
-
-/* =========================
-   FEATURED PRODUCTS SECTION
-========================= */
-
-.product-section {
-  width: 100%;
-  box-sizing: border-box;
-
-  background: #fff;
-  background-image:
-    radial-gradient(#ffd5f2 10%, transparent 10%),
-    radial-gradient(#ffd5f2 10%, transparent 10%);
-  background-size: 39px 35px;
-  background-position: 0 0, -19px -19px;
-
-  padding: 80px 0 50px;
-
-  overflow: hidden;
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-
-/* =========================
-   CATEGORY TABS
-========================= */
-
-.category-tabs {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-
-  gap: 40px;
-
-  padding: 0 20px 15px;
-
-  box-sizing: border-box;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-
-  scroll-behavior: smooth;
-}
-
-.category-tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.tab-link {
-  flex: 0 0 auto;
-
-  text-decoration: none;
-  white-space: nowrap;
-
-  font-size: 40px;
-  font-weight: 500;
-
-  color: #b5b5b5;
-
-  transition: 0.3s;
-}
-
-.tab-link.active {
-  color: black;
-}
-
 
 /* =========================
    FEATURED PRODUCT SCROLLER
@@ -1193,11 +1133,11 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card {
-  flex: 0 0 280px !important;
+  flex: 0 0 280px;
 
-  width: 280px !important;
-  min-width: 280px !important;
-  max-width: 280px !important;
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px ;
 
   box-sizing: border-box;
 
@@ -1209,15 +1149,17 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
+
+
 /* =========================
    FEATURED PRODUCT LINK
 ========================= */
 
 .featured-card a {
-  display: block !important;
+  display: block;
 
-  width: 280px !important;
-  max-width: 280px !important;
+  width: 280px;
+  max-width: 280px;
 
   box-sizing: border-box;
 
@@ -1248,20 +1190,20 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card img {
-  display: block !important;
+  display: block;
 
-  width: 250px !important;
-  height: 250px !important;
+  width: 250px;
+  height: 250px;
 
-  min-width: 250px !important;
-  max-width: 250px !important;
+  min-width: 250px;
+  max-width: 250px;
 
-  min-height: 250px !important;
-  max-height: 250px !important;
+  min-height: 250px;
+  max-height: 250px;
 
-  object-fit: contain !important;
+  object-fit: contain;
 
-  margin: 0 auto !important;
+  margin: 0 auto;
 
   border-radius: 20px;
 
@@ -1274,7 +1216,7 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card .product-name1 {
-  display: block !important;
+  display: block;
 
   width: 100%;
 
@@ -1298,7 +1240,7 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card .product-price1 {
-  display: block !important;
+  display: block ;
 
   width: 100%;
 
@@ -1340,16 +1282,16 @@ width: 100%;       /* Spans the full width of the container */
   }
 
   .featured-card {
-    flex: 0 0 260px !important;
+    flex: 0 0 260px;
 
-    width: 260px !important;
-    min-width: 260px !important;
-    max-width: 260px !important;
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
   }
 
   .featured-card a {
-    width: 260px !important;
-    max-width: 260px !important;
+    width: 260px;
+    max-width: 260px;
   }
 
   .featured-card img {
