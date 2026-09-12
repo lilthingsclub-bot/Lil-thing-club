@@ -1115,7 +1115,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT CARD
 ========================= */
 
-.featured-card {
+.product-card {
   flex: 0 0 280px !important;
 
   width: 280px !important;
@@ -1136,7 +1136,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT LINK
 ========================= */
 
-.featured-card a {
+.product-card a {
   display: block !important;
 
   width: 280px !important;
@@ -1158,7 +1158,7 @@ width: 100%;       /* Spans the full width of the container */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.featured-card a:hover {
+.product-card a:hover {
   transform: translateY(-5px);
 
   box-shadow:
@@ -1170,7 +1170,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT IMAGE
 ========================= */
 
-.featured-card img {
+.product-card img {
   display: block !important;
 
   width: 250px !important;
@@ -1196,7 +1196,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT NAME
 ========================= */
 
-.featured-card .product-name1 {
+.product-card .product-name1 {
   display: block !important;
 
   width: 100%;
@@ -1220,7 +1220,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT PRICE
 ========================= */
 
-.featured-card .product-price1 {
+.product-card .product-price1 {
   display: block !important;
 
   width: 100%;
