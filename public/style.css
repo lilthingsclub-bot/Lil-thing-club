@@ -1067,9 +1067,8 @@ width: 100%;       /* Spans the full width of the container */
 
 
 .featured-products {
-  width: 200%;
-  max-width: 200%;
-  min-width: 0;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
