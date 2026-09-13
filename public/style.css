@@ -1072,9 +1072,14 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-products {
-  width: 100%;
+ width: 100%;
   max-width: 100%;
   min-width: 0;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+	gap: 40px;
 
   box-sizing: border-box;
 
@@ -1102,7 +1107,10 @@ width: 100%;       /* Spans the full width of the container */
   display: flex;
   flex-wrap: nowrap;
 
-  gap: 20px;
+  justify-content: flex-start;
+	
+
+  gap: 30px;
 
   width: max-content;
   min-width: 100%;
