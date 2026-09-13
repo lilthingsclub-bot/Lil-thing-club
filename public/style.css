@@ -1118,13 +1118,12 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT CARD
 ========================= */
 .featured-card {
-  width: 400px;
-  min-width: 400px;
-  max-width: 400px;
-  display: flex;
-  gap: 30px;
-  overflow-x: auto;
-  padding: 30px;
+ flex: 0 0 280px;
+	width: 288px;
+	max-width:280px;
+	box-sizing: border-box;
+	diaply: flex;
+	text-align: center;
 }
 
 
