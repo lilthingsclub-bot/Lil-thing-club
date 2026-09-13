@@ -1240,52 +1240,6 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width: 1024px) {
-
-  .category-tabs {
-    gap: 30px;
-
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .tab-link {
-    font-size: 32px;
-  }
-
-  .featured-products {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .featured-card {
-    flex: 0 0 260px !important;
-
-    width: 260px !important;
-    min-width: 260px !important;
-    max-width: 260px !important;
-  }
-
-  .featured-card a {
-    width: 260px !important;
-    max-width: 260px !important;
-  }
-
-  .featured-card img {
-    width: 230px !important;
-    height: 230px !important;
-
-    min-width: 230px !important;
-    max-width: 230px !important;
-
-    min-height: 230px !important;
-    max-height: 230px !important;
-  }
-}
 
 /* =========================
 Coupon Section
