@@ -2606,13 +2606,13 @@ line-height: 50px;
 .title-row h3{
 font-size: 60px;
 font-weight: 500px;
-line-height: 50px;
+line-height: 16px;
 
 }
 
 #price { 
 	font-size: 26px; color: var(--pink); 
-	   font-weight: 300px;
+	   font-weight: 500px;
 	   }
 
 
