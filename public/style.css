@@ -996,8 +996,6 @@ width: 100%;       /* Spans the full width of the container */
 
 .product-section {
   width: 100%;
-  box-sizing: border-box;
-
   background: #fff;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
@@ -1074,7 +1072,8 @@ width: 100%;       /* Spans the full width of the container */
 .featured-products {
   width: 100%;
   max-width: 100%;
-  min-width: 0;
+
+	
 	 justify-content: center;
   display: flex;
   box-sizing: border-box;
@@ -1107,8 +1106,6 @@ width: 100%;       /* Spans the full width of the container */
 
   width: max-content;
   min-width: 100%;
-
-  box-sizing: border-box;
 }
 
 
@@ -1117,6 +1114,8 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card {
+  flex: 0 0 280px;
+	
   width: 280px;
   min-width: 280px;
   max-width: 280px;
@@ -1152,7 +1151,7 @@ width: 100%;       /* Spans the full width of the container */
 
   border-radius: 10px;
 
-  overflow: hidden;
+  overflow: visible;
 
   transition: transform 0.2s, box-shadow 0.2s;
 }
