@@ -1239,7 +1239,15 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-
+@media (max-width: 600px) {
+ .featured-products {
+	 flex-direction: column;
+	}
+ .featured-card {
+  flex: 0 1 280px;
+  width: 280px;
+	}
+}
 
 
 
