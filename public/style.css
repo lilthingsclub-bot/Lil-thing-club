@@ -2559,7 +2559,7 @@ padding: 80px;
 padding-top: 70px;
 display: grid;
 grid-template-columns: 1fr 1.5fr;
-gap: 50px;
+gap: 100px;
  
 }
 
@@ -2617,7 +2617,7 @@ background-color: #fff6fc;
 cursor: pointer;
 border: 1.5px solid #ff66c4;
 width: auto;
-font-size: 26px;
+font-size: 18px;
 color: #ff66c4;
 }
 .sizes button.active { background: #ffebf9; color: #ff66c4; }
@@ -2645,7 +2645,7 @@ font-size: 26px;
 width: 100px; height: 100px;
 border-radius: 30%; border: 90px;
 background:  #fff6fc ; 
-font-size: 26px;
+font-size: 18px;
 color: #ff66c4;
 
 }
@@ -2664,7 +2664,7 @@ padding: 12px 24px;
 border-radius: 999px;
  cursor: pointer;
 border: 1.5px solid #ff66c4;
-font: 26px;
+font: 18px;
 }
 
 /* CAROUSEL */
