@@ -1070,10 +1070,20 @@ width: 100%;       /* Spans the full width of the container */
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   margin: 18px 0;
-	gap: 40px;
+  gap: 40px;
 
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-behavior: smooth;
+
+}
+
+
+
+.featured-products::-webkit-scrollbar {
+  display: none;
 }
 
 
