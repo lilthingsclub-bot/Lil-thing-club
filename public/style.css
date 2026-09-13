@@ -1287,66 +1287,6 @@ width: 100%;       /* Spans the full width of the container */
   }
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-  
-  .category-tabs {
-    gap: 30px;
-
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .tab-link {
-    font-size: 25px;
-  }
-
-  .featured-products {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .featured-products .product-row {
-    gap: 15px;
-  }
-
-  .featured-card {
-    flex: 0 0 220px !important;
-
-    width: 220px !important;
-    min-width: 220px !important;
-    max-width: 220px !important;
-  }
-
-  .featured-card a {
-    width: 220px !important;
-    max-width: 220px !important;
-  }
-
-  .featured-card img {
-    width: 200px !important;
-    height: 200px !important;
-
-    min-width: 200px !important;
-    max-width: 200px !important;
-
-    min-height: 200px !important;
-    max-height: 200px !important;
-  }
-
-  .featured-card .product-name1 {
-    font-size: 17px;
-  }
-
-  .featured-card .product-price1 {
-    font-size: 18px;
-  }
-}
 /* =========================
 Coupon Section
 ========================= */
