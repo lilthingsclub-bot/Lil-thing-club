@@ -996,6 +996,8 @@ width: 100%;       /* Spans the full width of the container */
 
 .product-section {
   width: 100%;
+  box-sizing: border-box;
+	
   background: #fff;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
@@ -1003,11 +1005,12 @@ width: 100%;       /* Spans the full width of the container */
   background-size: 39px 35px;
   background-position: 0 0, -19px -19px;
  padding: 80px 0 50px;
-
  position: relative;
-  text-align: center;
+	
   overflow: visible;
-	flex-direction: column;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
 }
 
 /* =========================
@@ -1066,11 +1069,19 @@ width: 100%;       /* Spans the full width of the container */
 
 
 .featured-products {
+
+   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+	
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 18px 0;
   gap: 40px;
+
+  padding: 0 20px 15px;
+
 
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -1090,7 +1101,17 @@ width: 100%;       /* Spans the full width of the container */
 /* =========================
    FEATURED PRODUCT ROW
 ========================= */
+.featured-products .product-row {
+  display: flex;
+  flex-wrap: nowrap;
 
+  gap: 20px;
+
+  width: max-content;
+  min-width: 100%;
+
+  box-sizing: border-box;
+}
 
 
 /* =========================
