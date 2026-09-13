@@ -1315,7 +1315,7 @@ width: 100%;       /* Spans the full width of the container */
   }
 
   .featured-products .product-row {
-    gap: 100px;
+    gap: 600px;
   }
 
   .featured-card {
