@@ -1072,9 +1072,8 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-products {
- flex: 0 0 280px;
-	width: 280px;
-	max-width: 280px;
+	width: 100%;
+	max-width: 100%;
 
   box-sizing: border-box;
 
