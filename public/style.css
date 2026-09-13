@@ -1074,7 +1074,7 @@ width: 100%;       /* Spans the full width of the container */
 .featured-products {
 	width: 100%;
 	max-width: 100%;
-
+    min-width: 0;
   box-sizing: border-box;
 
   overflow-x: auto;
@@ -1104,7 +1104,7 @@ width: 100%;       /* Spans the full width of the container */
   justify-content: flex-start;
 	
 
-  gap: 30px;
+  gap: 20px;
 
   width: max-content;
   min-width: 100%;
