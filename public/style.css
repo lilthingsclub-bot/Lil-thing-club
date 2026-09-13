@@ -989,15 +989,14 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-
 /* =========================
    FEATURED PRODUCTS SECTION
 ========================= */
 
 .product-section {
   width: 100%;
-	box-sizing: border-box;
-	
+  box-sizing: border-box;
+
   background: #fff;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
@@ -1011,7 +1010,7 @@ width: 100%;       /* Spans the full width of the container */
   position: relative;
 
   display: flex;
-	flex-direction: cloumn;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -1055,7 +1054,7 @@ width: 100%;       /* Spans the full width of the container */
   white-space: nowrap;
 
   font-size: 40px;
-  font-weight: 500px;
+  font-weight: 500;
 
   color: #b5b5b5;
 
@@ -1075,7 +1074,7 @@ width: 100%;       /* Spans the full width of the container */
   width: 100%;
   max-width: 100%;
   min-width: 0;
-	
+
   box-sizing: border-box;
 
   overflow-x: auto;
@@ -1106,7 +1105,8 @@ width: 100%;       /* Spans the full width of the container */
 
   width: max-content;
   min-width: 100%;
-	 box-sizing: border-box;
+
+  box-sizing: border-box;
 }
 
 
@@ -1116,7 +1116,7 @@ width: 100%;       /* Spans the full width of the container */
 
 .featured-card {
   flex: 0 0 280px;
-	
+
   width: 280px;
   min-width: 280px;
   max-width: 280px;
@@ -1238,6 +1238,118 @@ width: 100%;       /* Spans the full width of the container */
   color: #33A9FF;
 }
 
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+
+  .category-tabs {
+    gap: 30px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .tab-link {
+    font-size: 32px;
+  }
+
+  .featured-products {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .featured-card {
+    flex: 0 0 260px;
+
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+  }
+
+  .featured-card a {
+    width: 260px;
+    max-width: 260px;
+  }
+
+  .featured-card img {
+    width: 230px;
+    height: 230px;
+
+    min-width: 230px;
+    max-width: 230px;
+
+    min-height: 230px;
+    max-height: 230px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 767px) {
+
+  .product-section {
+    padding-top: 50px;
+    padding-bottom: 35px;
+  }
+
+  .category-tabs {
+    gap: 20px;
+
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .tab-link {
+    font-size: 25px;
+  }
+
+  .featured-products {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .featured-products .product-row {
+    gap: 30px;
+  }
+
+  .featured-card {
+    flex: 0 0 220px;
+
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+  }
+
+  .featured-card a {
+    width: 220px;
+    max-width: 220px;
+  }
+
+  .featured-card img {
+    width: 200px;
+    height: 200px;
+
+    min-width: 200px;
+    max-width: 200px;
+
+    min-height: 200px;
+    max-height: 200px;
+  }
+
+  .featured-card .product-name1 {
+    font-size: 17px;
+  }
+
+  .featured-card .product-price1 {
+    font-size: 18px;
+  }
+}
 
 /* =========================
    TABLET
