@@ -1007,6 +1007,7 @@ width: 100%;       /* Spans the full width of the container */
  position: relative;
   text-align: center;
   overflow: visible;
+	flex-direction: column;
 }
 
 /* =========================
