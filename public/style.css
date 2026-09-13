@@ -2596,14 +2596,22 @@ justify-content: space-between;
 align-items: center; 
 }
 
-.title-row h3{
-font-size: 50px;
-font-weight: 300px;
+.title-row h2{
+font-size: 45px;
+font-weight: 200px;
 line-height: 50px;
 
 }
 
-#price { font-size: 26px; color: var(--pink); 
+.title-row h3{
+font-size: 60px;
+font-weight: 500px;
+line-height: 50px;
+
+}
+
+#price { 
+	font-size: 26px; color: var(--pink); 
 	   font-weight: 300px;
 	   }
 
