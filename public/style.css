@@ -1083,7 +1083,7 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT CARD
 ========================= */
 
-.featured-card {
+.featured-cards {
   display: flex;
   gap: 150px;
   overflow-x: auto;
@@ -1092,7 +1092,11 @@ width: 100%;       /* Spans the full width of the container */
 
 
 
-
+.featured-card {
+ min-width: 260px;
+  display: flex;
+  justify-content: center
+}
 /* =========================
    FEATURED PRODUCT LINK
 ========================= */
@@ -1120,9 +1124,9 @@ width: 100%;       /* Spans the full width of the container */
 .featured-card img {
   width: 100%;
   max-width: 500px;
-  border-radius: 24px;
+  border-radius: 20px;
 
-  object-fit: contain;
+
 
 
 }
