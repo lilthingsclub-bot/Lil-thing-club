@@ -1017,7 +1017,6 @@ width: 100%;       /* Spans the full width of the container */
 .category-tabs {
   width: 100%;
   max-width: 100%;
-  min-width: 0;
 
   display: flex;
   flex-wrap: nowrap;
