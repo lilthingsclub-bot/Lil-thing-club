@@ -996,6 +996,8 @@ width: 100%;       /* Spans the full width of the container */
 
 .product-section {
   width: 100%;
+	box-sizing: border-box;
+	
   background: #fff;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
@@ -1009,6 +1011,7 @@ width: 100%;       /* Spans the full width of the container */
   position: relative;
 
   display: flex;
+	flex-direction: cloumn;
   align-items: center;
 }
 
@@ -1052,7 +1055,7 @@ width: 100%;       /* Spans the full width of the container */
   white-space: nowrap;
 
   font-size: 40px;
-  font-weight: 500;
+  font-weight: 500px;
 
   color: #b5b5b5;
 
@@ -1073,7 +1076,6 @@ width: 100%;       /* Spans the full width of the container */
   max-width: 100%;
   min-width: 0;
 	
-  display: flex;
   box-sizing: border-box;
 
   overflow-x: auto;
