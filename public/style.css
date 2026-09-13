@@ -1174,7 +1174,8 @@ width: 100%;       /* Spans the full width of the container */
   display: flex;
 
   width: 250px;
-  height: 250px;
+  max-width: 280px;
+  min-width: 280px;
 
 
   object-fit: contain;
