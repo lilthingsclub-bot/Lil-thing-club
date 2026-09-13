@@ -1115,11 +1115,11 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card {
-  flex: 0 0 300px;
+  flex: 0 0 280px;
 
-  width: 300px;
-  min-width: 300px;
-  max-width: 300px;
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px;
 
   box-sizing: border-box;
 
@@ -1138,8 +1138,8 @@ width: 100%;       /* Spans the full width of the container */
 .featured-card a {
   display: flex;
 
-  width: 300px;
-  max-width: 300px;
+  width: 280px;
+  max-width: 280px;
 
   box-sizing: border-box;
 
@@ -1172,14 +1172,14 @@ width: 100%;       /* Spans the full width of the container */
 .featured-card img {
   display: flex;
 
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
 
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 250px;
+  max-width: 250px;
 
-  min-height: 300px;
-  max-height: 300px;
+  min-height: 250px;
+  max-height: 250px;
 
   object-fit: contain;
 
@@ -1314,9 +1314,7 @@ width: 100%;       /* Spans the full width of the container */
     padding-right: 15px;
   }
 
-  .featured-products .product-row {
-    gap: 600px;
-  }
+ 
 
   .featured-card {
     flex: 0 0 220px;
