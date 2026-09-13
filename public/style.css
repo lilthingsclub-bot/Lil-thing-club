@@ -1069,6 +1069,8 @@ width: 100%;       /* Spans the full width of the container */
   justify-content: center;
   gap: 5px;
   margin: 18px 0;
+	gap: 40px;
+
 }
 
 
@@ -1083,19 +1085,27 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT CARD
 ========================= */
 
-.featured-cards {
-  display: flex;
-  gap: 150px;
-  overflow-x: auto;
-  padding: 30px;
-}
-
 
 
 .featured-card {
- min-width: 260px;
+	 width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
   display: flex;
-  justify-content: center
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+	 box-sizing: border-box;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-behavior: smooth;
+
 }
 /* =========================
    FEATURED PRODUCT LINK
