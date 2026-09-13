@@ -1176,11 +1176,6 @@ width: 100%;       /* Spans the full width of the container */
   width: 250px;
   height: 250px;
 
-  min-width: 250px;
-  max-width: 250px;
-
-  min-height: 250px;
-  max-height: 250px;
 
   object-fit: contain;
 
