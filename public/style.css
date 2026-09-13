@@ -1115,7 +1115,7 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card {
-  flex: 0 1 280px;
+  flex: 0 0 280px;
 
   width: 280px;
   min-width: 0px;
@@ -1124,7 +1124,7 @@ width: 100%;       /* Spans the full width of the container */
   box-sizing: border-box;
 
   display: flex;
-
+  flex-direction: column;
   text-align: center;
 
   z-index: 5;
@@ -1137,7 +1137,9 @@ width: 100%;       /* Spans the full width of the container */
 
 .featured-card a {
   display: flex;
-
+  flex-direction: column;
+  align-items: center;
+	
   width: 280px;
   max-width: 280px;
 
