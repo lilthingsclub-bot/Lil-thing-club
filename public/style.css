@@ -1007,7 +1007,7 @@ width: 100%;       /* Spans the full width of the container */
 
   padding: 80px 0 50px;
 
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 
   display: flex;
