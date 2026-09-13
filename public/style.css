@@ -1,4 +1,4 @@
-  /* =========================================
+   /* =========================================
    GLOBAL FONT SETTINGS
    ========================================= */
 
@@ -2108,6 +2108,11 @@ font-weight: 2000px;
 
 /* All Products Button */
 /* Responsive */
+@media ( max-width: 1024px) {
+	.product-row1 {
+	grid-template-columns: repeat(3, 1fr);
+	}
+}
 
 @media (max-width: 600px) {
 .sticker-products {
