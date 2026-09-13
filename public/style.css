@@ -2668,11 +2668,11 @@ border: 1.5px solid #ff66c4;
 background: #fff6fc; 
 color: #ff66c4;
 border: none; 
-padding: 12px 24px;
+padding: 12px 50px;
 border-radius: 999px;
  cursor: pointer;
 border: 1.5px solid #ff66c4;
-font: 18px;
+font: 26px;
 }
 
 /* CAROUSEL */
