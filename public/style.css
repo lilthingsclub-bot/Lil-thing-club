@@ -1064,6 +1064,8 @@ width: 100%;       /* Spans the full width of the container */
    FEATURED PRODUCT SCROLLER
 ========================= */
 
+
+
 .featured-products {
   display: flex;
   align-items: center;
@@ -1085,29 +1087,15 @@ width: 100%;       /* Spans the full width of the container */
 /* =========================
    FEATURED PRODUCT CARD
 ========================= */
-
-
-
 .featured-card {
-	 width: 100%;
-  max-width: 100%;
-  min-width: 0;
-
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-
-	 box-sizing: border-box;
-
+  gap: 30px;
   overflow-x: auto;
-  overflow-y: hidden;
-
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-
-  scroll-behavior: smooth;
-
+  padding: 30px;
 }
+
+
+
 /* =========================
    FEATURED PRODUCT LINK
 ========================= */
