@@ -1129,7 +1129,7 @@ width: 100%;       /* Spans the full width of the container */
 
   box-sizing: border-box;
 
-  display: block;
+  display: flex;
   position: static;
 }
 
@@ -1180,7 +1180,7 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card img {
-  display: block;
+  display: flex;
 
   flex: 0 0 auto;
 
@@ -1208,7 +1208,7 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card .product-name1 {
-  display: block;
+  display: flex;
   position: static;
 	
 
@@ -1242,7 +1242,7 @@ width: 100%;       /* Spans the full width of the container */
 ========================= */
 
 .featured-card .product-price1 {
-  display: block;
+  display: flex;
 	
   position: static;
   
