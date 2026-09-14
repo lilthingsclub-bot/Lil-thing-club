@@ -1309,7 +1309,7 @@ width: 100%;       /* Spans the full width of the container */
     flex-direction: row !important;
     flex-wrap: nowrap !important;
 
-    gap: 15px !important;
+    gap: 90px !important;
 
     width: max-content !important;
     min-width: max-content !important;
