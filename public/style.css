@@ -1124,7 +1124,7 @@ width: 100%;       /* Spans the full width of the container */
   box-sizing: border-box;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
 
   z-index: 5;
