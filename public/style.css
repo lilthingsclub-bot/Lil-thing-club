@@ -1074,7 +1074,7 @@ Featured Products Section
 
 .featured-card {
   z-index: 5; 
-  display: flex;
+  display: block;
   justify-content: center;
 	gap: 30px;
 }
