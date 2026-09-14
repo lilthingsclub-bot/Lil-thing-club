@@ -1050,6 +1050,7 @@ Featured Products Section
 
 
 .featured-products {
+	width: 100%;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -1057,7 +1058,7 @@ Featured Products Section
 	
 	 scroll-width: none;
 	-webkit-overflow-scrollinh: touch;
-  padding:0 20px 20px;
+scroll-behavior: smooth;
   
 }
 
