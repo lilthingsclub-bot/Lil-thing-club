@@ -1053,10 +1053,11 @@ Featured Products Section
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 50px;
-	  scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
-  padding-left: 15px ;
+	overflow-y: hidden;
+	
+	 scroll-width: none;
+	-webkit-overflow-scrollinh: touch;
+  padding:0 20px 20px;
   
 }
 
@@ -1069,6 +1070,7 @@ Featured Products Section
   z-index: 5; 
   display: flex;
   justify-content: center;
+	gap: 30px;
 }
 
 .featured-card a {
