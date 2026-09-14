@@ -1118,7 +1118,7 @@ width: 100%;       /* Spans the full width of the container */
   flex: 0 0 280px;
 
   width: 280px;
-  min-width: 0px;
+  min-width: 280px;
   max-width: 280px;
 
   box-sizing: border-box;
