@@ -1274,6 +1274,102 @@ width: 100%;       /* Spans the full width of the container */
 
 
 /* =========================
+   SMALL SCREEN / PHONE
+========================= */
+
+@media (max-width: 767px) {
+
+  .product-section {
+    padding: 50px 0 35px;
+  }
+
+  .category-tabs {
+    gap: 20px;
+
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .tab-link {
+    font-size: 25px;
+  }
+
+  .featured-products {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* KEEP PRODUCTS IN ONE ROW */
+  .featured-products .product-row {
+    display: flex !important;
+
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    gap: 15px !important;
+
+    width: max-content !important;
+    min-width: max-content !important;
+  }
+
+  /* SMALLER CARD */
+  .featured-card {
+    flex: 0 0 200px !important;
+
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+
+  .featured-card a {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+
+  /* SMALLER IMAGE */
+  .featured-card img {
+    width: 180px !important;
+    height: 180px !important;
+
+    min-width: 180px !important;
+    max-width: 180px !important;
+
+    min-height: 180px !important;
+    max-height: 180px !important;
+
+    object-fit: contain !important;
+
+    margin: 0 auto 8px !important;
+  }
+
+  /* SMALLER TEXT */
+  .featured-card .product-name1 {
+    width: 200px !important;
+    max-width: 200px !important;
+
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+
+    margin: 6px 0 4px !important;
+  }
+
+  .featured-card .product-price1 {
+    width: 200px !important;
+    max-width: 200px !important;
+
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+
+    margin: 0 0 10px !important;
+  }
+}
+
+
+/* =========================
 Coupon Section
 ========================= */
 
