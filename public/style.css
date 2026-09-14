@@ -1061,14 +1061,12 @@ Featured Products Section
   overflow-y: hidden;
 
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-
   scroll-behavior: smooth;
   
 }
 
 .featured-products::-webkit-scrollbar {
-  display: none;
+  display: display;
 }
 
 
