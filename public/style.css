@@ -1010,12 +1010,24 @@ Featured Products Section
 }
 
 .category-tabs{
-  display:flex;
-  gap:40px;
-  margin-bottom:40px;
-  overflow-x:auto;
-	scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
+	 width: 100%;
+     min-width: 0;
+	
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	
+    gap:40px;
+	padding: 0 20px 15px;
+	box-sizing: border-box;
+	
+	
+    overflow-x:auto;
+	overflow-y: hidden;
+	
+	
+	scroll-width: none;
+	-webkit-overflow-scrollinh: touch;
 }
 
  .category-tabs::-webkit-scrollbar {
@@ -1023,6 +1035,7 @@ Featured Products Section
   }
 
 .tab-link{
+	flex: 0 0 auto;
   text-decoration:none;
   font-size: 40px;
   font-weight:500;
