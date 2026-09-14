@@ -1124,7 +1124,7 @@ width: 100%;       /* Spans the full width of the container */
    PRODUCT ROW
 ================================= */
 
-.product-row {
+.featured-products .product-row {
   display: flex;
   flex-wrap: nowrap;
 
@@ -1299,7 +1299,7 @@ width: 100%;       /* Spans the full width of the container */
     padding-right: 5px;
   }
 
-  .product-row {
+  .featured-products .product-row {
     gap: 15px;
   }
 
