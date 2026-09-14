@@ -1051,6 +1051,7 @@ Featured Products Section
 
 .featured-products {
 	width: 100%;
+	min-width: 0;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
