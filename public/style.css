@@ -1073,9 +1073,15 @@ Featured Products Section
 
 
 .featured-card {
-	flex: 0 0 280px:
+	flex: 0 0 280px;
+		 width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+
+  height: auto !important;
   z-index: 5; 
   display: flex;
+	
   justify-content: center;
 	gap: 30px;
 }
