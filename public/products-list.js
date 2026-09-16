@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const CATEGORY_INFO = {
     "vinyl-sticker": ["Vinyl Stickers", "Cute vinyl stickers for laptops, water bottles, notebooks, and more!"],
      "junk-journal": ["Junk Journal", " "],
-     "oppsclub": ["Opps CLub", " "],
+     "oopsclub": ["Opps CLub", " "],
     "sticker-sheet": ["Sticker Sheets", "Cute sticker sheets in fun designs — collect them all!"],
     "sticker-pack": ["Sticker Packs", "A little bundle of cute stickers, packed with love."],
     "postcard": ["Postcards", "Cute postcards in fun designs — collect them all!"],
