@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "crochet-keychain": ["Crochet Keychains", "Handmade crochet keychains — soft, adorable, and full of personality."],
     "phone-charm": ["Phone Charms", "Decorate your phone with unique handmade charms."],
     "stationery": ["Stationery", "Shop all of our cute stationery items."],
-    "momo-pad": ["Memo Pads", "Cute memo pads in fun designs — collect them all!"],
+    "memo-pad": ["Memo Pads", "Cute memo pads in fun designs — collect them all!"],
     "washi-tape": ["Washi Tape", "Cute washi tape for decorating your journals, letters, and crafts."],
     "new": ["New Products", "Browse all our newest handmade items, packed with love!"],
     "all": ["All Products", "Browse all our handmade items — stickers, crochet keychains, stationery, and more!"]
