@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortMap = {
     "all": "",
     "sticker-sheet": "Sticker Sheet",
+    "junk-journal": "Junk Journal",
     "vinyl-sticker": "Vinyl Sticker",
     "sticker-pack": "Sticker Pack",
     "crochet-keychain": "Crochet Keychain",
