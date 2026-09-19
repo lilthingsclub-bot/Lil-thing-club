@@ -347,7 +347,7 @@ background-size: 100px 100px;
 }
 
 /* Each announcement message */
-.annoment-slide p {
+.annoment-slide h3 {
   margin: 12px 0;
   padding: 0;
   color: #33A9FF;
