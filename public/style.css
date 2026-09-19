@@ -1644,18 +1644,15 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-
-
-
-/* =========================================
+/* =========================
    EXPLORE OUR WORLDS
-   ========================================= */
+   ========================= */
 
 .brand-universe {
   width: 100%;
   box-sizing: border-box;
 
-  padding: 55px 0 50px;
+  padding: 55px 50px 50px;
 
   background: #fff;
 
@@ -1673,68 +1670,78 @@ width: 100%;       /* Spans the full width of the container */
 
 
 /* =========================
-   INTRO
+   DESKTOP LAYOUT
+   ========================= */
+
+.brand-universe {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+
+/* =========================
+   INTRO — LEFT SIDE
    ========================= */
 
 .brand-intro {
-  width: 100%;
-  max-width: 800px;
+  flex: 0 0 300px;
 
-  margin: 0 auto 35px;
+  width: 300px;
 
-  padding: 0 30px;
+  margin: 0;
+
+  padding: 0;
 
   box-sizing: border-box;
 
-  text-align: center;
+  text-align: left;
 }
 
 .brand-intro h2 {
-  margin: 0 0 15px;
+  margin: 0 0 18px;
 
-  font-size: 50px;
+  font-size: 48px;
 
-  line-height: 1.1;
+  line-height: 1.05;
 
   color: #ff66c4;
 }
 
 .brand-intro p {
-  margin: 0 auto;
-
-  max-width: 650px;
+  margin: 0;
 
   font-family: 'Nunito', sans-serif;
 
-  font-size: 18px;
+  font-size: 17px;
 
-  line-height: 1.6;
+  line-height: 1.5;
 
   color: #5c3f35;
 }
 
 
 /* =========================
-   BRAND SLIDER
+   BRAND CARDS — RIGHT SIDE
    ========================= */
 
 .brand-slider {
-  width: 100%;
+  flex: 1;
+
+  min-width: 0;
 
   display: flex;
 
-  gap: 25px;
+  gap: 20px;
 
   overflow-x: auto;
   overflow-y: hidden;
 
-  padding: 10px 50px 25px;
+  padding: 10px 5px 25px;
 
   box-sizing: border-box;
 
   scroll-behavior: smooth;
-
-  scroll-snap-type: x mandatory;
 
   scrollbar-width: none;
 
@@ -1745,17 +1752,12 @@ width: 100%;       /* Spans the full width of the container */
   display: none;
 }
 
-
-/* =========================
-   BRAND CARD
-   ========================= */
-
 .brand-card {
-  flex: 0 0 360px;
+  flex: 0 0 250px;
 
-  width: 360px;
+  width: 250px;
 
-  min-width: 360px;
+  min-width: 250px;
 
   box-sizing: border-box;
 
@@ -1769,8 +1771,6 @@ width: 100%;       /* Spans the full width of the container */
 
   color: #000;
 
-  scroll-snap-align: start;
-
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -1783,24 +1783,19 @@ width: 100%;       /* Spans the full width of the container */
     0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-
-/* =========================
-   BRAND IMAGE
-   ========================= */
-
 .brand-card img {
   display: block;
 
   width: 100%;
 
-  height: 250px;
+  height: 180px;
 
   object-fit: cover;
 }
 
 
 /* =========================
-   BRAND INFORMATION
+   BRAND INFO
    ========================= */
 
 .brand-info {
@@ -1810,17 +1805,17 @@ width: 100%;       /* Spans the full width of the container */
 
   justify-content: space-between;
 
-  gap: 15px;
+  gap: 10px;
 
-  padding: 18px 20px;
+  padding: 15px;
 }
 
 .brand-info h3 {
-  margin: 0 0 5px;
+  margin: 0 0 4px;
 
   font-family: 'Nunito', sans-serif;
 
-  font-size: 23px;
+  font-size: 19px;
 
   font-weight: 800;
 
@@ -1832,21 +1827,18 @@ width: 100%;       /* Spans the full width of the container */
 
   font-family: 'Nunito', sans-serif;
 
-  font-size: 14px;
+  font-size: 12px;
 
-  line-height: 1.4;
+  line-height: 1.35;
 
   color: #666;
 }
 
-
-/* ARROW */
-
 .brand-info span {
-  flex: 0 0 45px;
+  flex: 0 0 35px;
 
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
 
   border-radius: 50%;
 
@@ -1857,120 +1849,10 @@ width: 100%;       /* Spans the full width of the container */
   align-items: center;
   justify-content: center;
 
-  font-size: 22px;
+  font-size: 18px;
 
   color: #5c3f35;
 }
-
-
-/* =========================
-   TABLET
-   ========================= */
-
-@media (max-width: 1024px) {
-
-  .brand-universe {
-    padding: 50px 0 45px;
-  }
-
-  .brand-intro h2 {
-    font-size: 42px;
-  }
-
-  .brand-intro p {
-    font-size: 17px;
-  }
-
-  .brand-slider {
-    gap: 20px;
-
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-
-  .brand-card {
-    flex: 0 0 300px;
-
-    width: 300px;
-    min-width: 300px;
-  }
-
-  .brand-card img {
-    height: 210px;
-  }
-
-}
-
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media (max-width: 600px) {
-
-  .brand-universe {
-    padding: 40px 0;
-  }
-
-  .brand-intro {
-    padding: 0 20px;
-
-    margin-bottom: 25px;
-  }
-
-  .brand-intro h2 {
-    font-size: 34px;
-  }
-
-  .brand-intro p {
-    font-size: 15px;
-
-    line-height: 1.5;
-  }
-
-  .brand-slider {
-    gap: 16px;
-
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .brand-card {
-    flex: 0 0 260px;
-
-    width: 260px;
-    min-width: 260px;
-
-    border-radius: 20px;
-  }
-
-  .brand-card img {
-    height: 180px;
-  }
-
-  .brand-info {
-    padding: 14px;
-  }
-
-  .brand-info h3 {
-    font-size: 18px;
-  }
-
-  .brand-info p {
-    font-size: 12px;
-  }
-
-  .brand-info span {
-    flex-basis: 38px;
-
-    width: 38px;
-    height: 38px;
-
-    font-size: 18px;
-  }
-
-}
-
 
 
 
