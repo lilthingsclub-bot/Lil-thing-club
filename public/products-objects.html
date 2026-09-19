@@ -421,8 +421,9 @@
 
   }
 
-  let currentPage = 1;
+let currentPage = 1;
 const productsPerPage = 24;
+let currentAvailability = "all";
 
 
   // ==========================================
@@ -611,6 +612,7 @@ function renderCurrentPage() {
             name,
             label,
             price,
+            stock_quantity,
             weight,
             sort_order
           )
@@ -722,21 +724,68 @@ function renderCurrentPage() {
     // CATEGORY FILTER
     // ==========================================
 
-  if (category === "all") {
+ const allProducts =
+  products.map(product => {
 
-  filteredProducts =
-    allProducts;
+    const variants =
+      [...(product.product_variants || [])]
+        .sort(
+          (a, b) =>
+            (a.sort_order || 0) -
+            (b.sort_order || 0)
+        );
 
-} else {
+    const firstVariant =
+      variants[0];
 
-  filteredProducts =
-    allProducts.filter(product =>
+    return {
 
-      Array.isArray(product.categories) &&
+      ...product,
 
-      product.categories.includes(category)
+      image:
+        product.images?.[0] || "",
 
-    );
+      price:
+        firstVariant
+          ? `$${Number(firstVariant.price).toFixed(2)}`
+          : "",
+
+      variants
+
+    };
+
+  });
+
+
+// ==========================================
+// APPLY FILTERS
+// ==========================================
+
+applyFilters(allProducts);
+
+currentPage = 1;
+renderCurrentPage();
+    
+
+// ==========================================
+// AVAILABILITY FILTER
+// ==========================================
+
+if (currentAvailability === "in-stock") {
+
+  filteredProducts = filteredProducts.filter(product =>
+    (product.variants || []).some(
+      variant => Number(variant.stock_quantity) > 0
+    )
+  );
+
+} else if (currentAvailability === "out-of-stock") {
+
+  filteredProducts = filteredProducts.filter(product =>
+    (product.variants || []).every(
+      variant => Number(variant.stock_quantity) <= 0
+    )
+  );
 
 }
 
@@ -754,11 +803,10 @@ function renderCurrentPage() {
     );
 
 
-    // Render
+   // Render first page
 
-    renderProducts(
-      filteredProducts
-    );
+currentPage = 1;
+renderCurrentPage();
 
   }
 
@@ -928,14 +976,10 @@ function renderCurrentPage() {
             );
 
 
-            renderProducts(
-              filteredProducts
-            );
+          currentPage = 1;
+renderCurrentPage();
 
-
-            sortDropdown.classList.remove(
-              "show"
-            );
+sortDropdown.classList.remove("show");
 
           }
 
@@ -973,6 +1017,37 @@ function toggleAvailability() {
   }
 }
 
+  // ==========================================
+// AVAILABILITY OPTIONS
+// ==========================================
+
+const availabilityDropdown =
+  document.getElementById("availabilityDropdown");
+
+if (availabilityDropdown) {
+
+  availabilityDropdown
+    .querySelectorAll("div")
+    .forEach(item => {
+
+      item.addEventListener("click", () => {
+
+        currentAvailability =
+          item.getAttribute("data-availability");
+
+        applyFilters(allProducts);
+
+        currentPage = 1;
+
+        renderCurrentPage();
+
+        availabilityDropdown.classList.remove("show");
+
+      });
+
+    });
+
+}
   // ==========================================
   // START
   // ==========================================
