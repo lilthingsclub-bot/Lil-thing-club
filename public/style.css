@@ -2500,61 +2500,95 @@ color: #Fbff33;
 Sticker  Products Section
 ========================= */
 
+/* =========================
+   SHOP CATEGORY HEADER
+========================= */
+
 .category-header {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 35px 20px;
+  box-sizing: border-box;
+
   background: #fff;
-   background-image: 
-    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+  background-image:
+    radial-gradient(#ffd5f2 10%, transparent 10%),
     radial-gradient(#ffd5f2 10%, transparent 10%);
-   background-size: 39px 35px; /* Sets the spacing between dots */
-   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
- z-index: 1;
+  background-size: 39px 35px;
+  background-position: 0 0, -19px -19px;
 }
 
 .header-box {
-  background: #ffe6f7;               /* light pastel pink */
-  padding: 50px 40px;
-  max-width: 1100px;
   width: 100%;
-  border: 4px dashed #ff66c4;        /* pink dashed border */
-  border-radius: 60px;
+  max-width: 1050px;
+  padding: 38px 30px;
+  box-sizing: border-box;
+
   text-align: center;
+  background: #ffe6f7;
+  border: 4px dashed #ff66c4;
+  border-radius: 45px;
 }
 
-/* Title */
+/* Category title */
 .category-title {
-  font-size: 70px;
+  margin: 0 0 12px;
   color: #ff52b4;
-  margin-bottom: 20px;
-  font-weight: 700;
+  font-family: "Shrikhand", cursive;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.15;
 }
 
-/* Short message under title */
+/* Category description */
 .category-desc {
-  font-size: 24px;
-  color: #c84fb9;
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
-  line-height: 1.4;
+
+  color: #c84fb9;
+  font-family: "Nunito", sans-serif;
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.5;
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .category-title {
-    font-size: 42px;
+/* Tablet */
+@media (max-width: 900px) {
+  .category-header {
+    padding: 30px 18px;
   }
-  .category-desc {
-    font-size: 18px;
-    padding: 0 10px;
-  }
+
   .header-box {
-    padding: 35px 20px;
-    border-radius: 40px;
+    padding: 32px 24px;
+    border-radius: 38px;
   }
 }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .category-header {
+    padding: 22px 12px;
+  }
+
+  .header-box {
+    padding: 28px 16px;
+    border-width: 3px;
+    border-radius: 30px;
+  }
+
+  .category-title {
+    margin-bottom: 10px;
+  }
+
+  .category-desc {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+}
+
+
+
+
 
 .filter-sort-bar {
   display: flex;
