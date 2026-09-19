@@ -1668,6 +1668,32 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
+@media (max-width: 600px){
+	.brand-slider{
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+.brand-card{
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #000;
+  flex-shrink: 5;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
+	min-width: 250px;
+	  overflow: hidden; 
+}
+	.brand-card img{
+		display: block;
+	}
+
+}
+
 
 /* =========================
    BASIC INFO
