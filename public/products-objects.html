@@ -469,6 +469,7 @@
           brand,
           description,
           categories,
+          stock_quantity,
           tags,
           images,
           features,
@@ -593,23 +594,37 @@
     // CATEGORY FILTER
     // ==========================================
 
-    if (category === "all") {
+   if (category === "all") {
 
-      filteredProducts =
-        allProducts;
+  filteredProducts = allProducts;
 
-    } else {
+} else {
 
-      filteredProducts =
-        allProducts.filter(product =>
+  filteredProducts = allProducts.filter(product =>
+    Array.isArray(product.categories) &&
+    product.categories.includes(category)
+  );
 
-          Array.isArray(product.categories) &&
+}
 
-          product.categories.includes(category)
 
-        );
+// ==========================================
+// AVAILABILITY FILTER
+// ==========================================
 
-    }
+if (currentAvailability === "in-stock") {
+
+  filteredProducts = filteredProducts.filter(product =>
+    Number(product.stock_quantity) > 0
+  );
+
+} else if (currentAvailability === "out-of-stock") {
+
+  filteredProducts = filteredProducts.filter(product =>
+    Number(product.stock_quantity) <= 0
+  );
+
+}
 
 
     console.log(
