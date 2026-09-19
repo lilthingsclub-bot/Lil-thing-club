@@ -2,6 +2,14 @@
    GLOBAL FONT SETTINGS
    ========================================= */
 
+@font-face {
+  font-family: 'KN Yuanmo SC';
+  src: url('./fonts/KNYuanmo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Helps text render quickly while the font loads */
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -19,7 +27,7 @@ body {
 
 /* Headings: bold, tall, modern */
 h1, h2 {
-   font-family: 'Shrikhand' , sans-serif; 
+   font-family: 'KN Yuanmo SC', -apple-system, "SimHei", sans-serif;
   font-weight: 500;
   text-transform: none; /* remove if you want uppercase */
   color: #ff66c4; /* You can customize this */
