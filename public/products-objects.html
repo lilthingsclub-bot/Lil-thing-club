@@ -179,6 +179,18 @@
 <!-- Filter/Sort Bar (optional) -->
 <section class="filter-sort-bar">
 
+  <!-- Availability -->
+  <div class="dropdown1">
+    <button class="dropdown-btn1" onclick="toggleAvailability()">
+      Availability ▼
+    </button>
+
+    <div class="dropdown-content1" id="availabilityDropdown">
+      <div data-availability="all">All Products</div>
+      <div data-availability="in-stock">In Stock</div>
+      <div data-availability="out-of-stock">Out of Stock</div>
+    </div>
+  </div>
 
   <!-- Sort -->
   <div class="dropdown1">
@@ -594,6 +606,7 @@ function renderCurrentPage() {
           is_new,
           featured,
           created_at,
+          stock_quantity,
 
           product_variants (
             id,
@@ -728,6 +741,8 @@ function renderCurrentPage() {
     );
 
 }
+
+   
 
 
     console.log(
@@ -944,6 +959,53 @@ function toggleDropdown() {
   }
 }
 
+  // ==========================================
+// AVAILABILITY DROPDOWN
+// ==========================================
+
+
+   let filteredProducts = [...products];
+let currentAvailability = "all";
+let currentSort = null;
+
+
+    function applyAvailabilityFilter() {
+  if (currentAvailability === "all") {
+    filteredProducts = [...products];
+  } else if (currentAvailability === "in-stock") {
+    filteredProducts = products.filter(
+      product => Number(product.stock_quantity) > 0
+    );
+  } else if (currentAvailability === "out-of-stock") {
+    filteredProducts = products.filter(
+      product => Number(product.stock_quantity) <= 0
+    );
+  }
+
+  applyCurrentSort();
+  renderProducts(filteredProducts);
+}
+
+function toggleAvailability() {
+  const availabilityDropdown =
+    document.getElementById("availabilityDropdown");
+
+  if (availabilityDropdown) {
+    availabilityDropdown.classList.toggle("show");
+  }
+}
+
+document.querySelectorAll("#availabilityDropdown div").forEach(option => {
+  option.addEventListener("click", () => {
+    currentAvailability = option.dataset.availability;
+
+    applyAvailabilityFilter();
+
+    document
+      .getElementById("availabilityDropdown")
+      .classList.remove("show");
+  });
+});
 
  
   // ==========================================
