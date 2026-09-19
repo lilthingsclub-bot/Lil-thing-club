@@ -1668,69 +1668,6 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-/* =========================
-   BRAND INFO
-   ========================= */
-
-.brand-info {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 10px;
-
-  padding: 15px;
-}
-
-.brand-info h3 {
-  margin: 0 0 4px;
-
-  font-family: 'Nunito', sans-serif;
-
-  font-size: 19px;
-
-  font-weight: 800;
-
-  color: #ff66c4;
-}
-
-.brand-info p {
-  margin: 0;
-
-  font-family: 'Nunito', sans-serif;
-
-  font-size: 12px;
-
-  line-height: 1.35;
-
-  color: #666;
-}
-
-.brand-info span {
-  flex: 0 0 35px;
-
-  width: 35px;
-  height: 35px;
-
-  border-radius: 50%;
-
-  background: #fff5a5;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  font-size: 18px;
-
-  color: #5c3f35;
-}
-
-
-
-
 
 /* =========================
    BASIC INFO
