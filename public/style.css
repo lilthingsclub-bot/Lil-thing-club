@@ -1755,9 +1755,9 @@ width: 100%;       /* Spans the full width of the container */
 .brand-card {
   flex: 0 0 250px;
 
-  width: 250px;
+  width: 300px;
 
-  min-width: 250px;
+  min-width: 300px;
 
   box-sizing: border-box;
 
@@ -1788,7 +1788,7 @@ width: 100%;       /* Spans the full width of the container */
 
   width: 100%;
 
-  height: 180px;
+  height: 250px;
 
   object-fit: cover;
 }
