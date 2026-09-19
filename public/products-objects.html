@@ -606,8 +606,6 @@ function renderCurrentPage() {
           is_new,
           featured,
           created_at,
-          stock_quantity,
-
           product_variants (
             id,
             name,
@@ -959,32 +957,12 @@ function toggleDropdown() {
   }
 }
 
-  // ==========================================
+
+
+
+// ==========================================
 // AVAILABILITY DROPDOWN
 // ==========================================
-
-
-   let filteredProducts = [...products];
-let currentAvailability = "all";
-let currentSort = null;
-
-
-    function applyAvailabilityFilter() {
-  if (currentAvailability === "all") {
-    filteredProducts = [...products];
-  } else if (currentAvailability === "in-stock") {
-    filteredProducts = products.filter(
-      product => Number(product.stock_quantity) > 0
-    );
-  } else if (currentAvailability === "out-of-stock") {
-    filteredProducts = products.filter(
-      product => Number(product.stock_quantity) <= 0
-    );
-  }
-
-  applyCurrentSort();
-  renderProducts(filteredProducts);
-}
 
 function toggleAvailability() {
   const availabilityDropdown =
@@ -995,19 +973,6 @@ function toggleAvailability() {
   }
 }
 
-document.querySelectorAll("#availabilityDropdown div").forEach(option => {
-  option.addEventListener("click", () => {
-    currentAvailability = option.dataset.availability;
-
-    applyAvailabilityFilter();
-
-    document
-      .getElementById("availabilityDropdown")
-      .classList.remove("show");
-  });
-});
-
- 
   // ==========================================
   // START
   // ==========================================
