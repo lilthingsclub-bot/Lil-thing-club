@@ -330,31 +330,86 @@ background-size: 100px 100px;
 
 
 /* =========================
-   Announcement Banner
+   ANNOUNCEMENT MARQUEE
    ========================= */
 
 .annoment-slide {
-  background-color: #Fbff33;
+  width: 100%;
+  background-color: #FBFF33;
   color: #33A9FF;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 10px 20px;
- gap: 18px;
+  overflow: hidden;
+  padding: 10px 0;
   z-index: 3;
 }
 
-/* Each announcement message */
-.annoment-slide h3 {
-  margin: 12px 0;
-  padding: 0;
-  color: #33A9FF;
-  text-align: center;
-  line-height: 1.5;
+/* Window that hides the moving track */
+.announcement-window {
+  width: 100%;
+  overflow: hidden;
 }
 
+/* Moving track */
+.announcement-track {
+  display: flex;
+  width: max-content;
+  animation: announcement-scroll 24s linear infinite;
+  will-change: transform;
+}
+
+/* One complete set of announcements */
+.announcement-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Announcement text */
+.announcement-set h3 {
+  margin: 0;
+  padding: 0 35px;
+
+  color: #33A9FF;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* Little separator */
+.announcement-set span {
+  color: #33A9FF;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* Seamless infinite loop */
+@keyframes announcement-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  .annoment-slide {
+    padding: 8px 0;
+  }
+
+  .announcement-set h3 {
+    font-size: 14px;
+    padding: 0 22px;
+  }
+
+  .announcement-set span {
+    font-size: 13px;
+  }
+
+}
 
 
 /* ================================
