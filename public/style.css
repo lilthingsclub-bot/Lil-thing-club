@@ -525,6 +525,104 @@ width: 100%;
   }
 }
 
+/* =========================================
+   SHOPPING PERKS
+========================================= */
+
+.shopping-perks {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+
+  padding: 20px 5%;
+  box-sizing: border-box;
+
+  background: #fff5a5;
+}
+
+.shopping-perk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  text-align: left;
+}
+
+.perk-icon {
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.shopping-perk strong {
+  display: block;
+
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+
+  color: #5c3f35;
+}
+
+.shopping-perk span {
+  display: block;
+
+  margin-top: 3px;
+
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+
+  color: #5c3f35;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .shopping-perks {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .shopping-perk {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .shopping-perks {
+    padding: 18px 20px;
+  }
+
+  .shopping-perk {
+    gap: 10px;
+  }
+
+  .perk-icon {
+    font-size: 26px;
+  }
+
+  .shopping-perk strong {
+    font-size: 14px;
+  }
+
+  .shopping-perk span {
+    font-size: 12px;
+  }
+
+}
+
 
 
 /* =========================
@@ -1074,7 +1172,7 @@ Featured Products Section
 }
 
 .featured-products::-webkit-scrollbar {
-  display: display;
+  display:  none;
 }
 
 
@@ -1107,10 +1205,12 @@ Featured Products Section
 }
 
 .featured-card img {
-  width: 100%;
-  max-width: 100px;
-  height: auto;
+    width: 100%;
+  max-width: 240px;
+  height: 240px;
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 
 .featured-card .product-name {
