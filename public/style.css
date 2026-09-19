@@ -1351,17 +1351,12 @@ width: 100%;       /* Spans the full width of the container */
    ========================= */
 
 .featured-card img {
-  width: 100%;
-  max-width: 240px;
-
+ width: 100%;
+  max-width: 180px;
   height: auto;
-
   aspect-ratio: 1 / 1;
-
   object-fit: contain;
-
   display: block;
-
   margin: 0 auto;
 }
 
@@ -1519,8 +1514,7 @@ width: 100%;       /* Spans the full width of the container */
 
   .featured-card img {
     width: 100%;
-    max-width: none;
-
+    max-width: 145px;
     aspect-ratio: 1 / 1;
 
     object-fit: contain;
