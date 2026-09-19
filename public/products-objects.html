@@ -410,6 +410,125 @@
   }
 
 
+
+  // ==========================================
+// PRODUCT PAGINATION
+// ==========================================
+
+function renderPagination() {
+
+  const paginationNumbers =
+    document.getElementById("pagination-numbers");
+
+  const prevButton =
+    document.getElementById("prev-page");
+
+  const nextButton =
+    document.getElementById("next-page");
+
+  if (!paginationNumbers) return;
+
+  const totalPages =
+    Math.ceil(filteredProducts.length / productsPerPage);
+
+  paginationNumbers.innerHTML = "";
+
+  // Hide pagination if there is only one page
+  if (totalPages <= 1) {
+    document.getElementById("product-pagination").style.display = "none";
+    return;
+  }
+
+  document.getElementById("product-pagination").style.display = "flex";
+
+  // Create page numbers
+  for (let i = 1; i <= totalPages; i++) {
+
+    const button = document.createElement("button");
+
+    button.textContent = i;
+
+    if (i === currentPage) {
+      button.classList.add("active");
+    }
+
+    button.addEventListener("click", () => {
+
+      currentPage = i;
+
+      renderCurrentPage();
+
+      window.scrollTo({
+        top: document.querySelector(".sticker-products").offsetTop - 20,
+        behavior: "smooth"
+      });
+
+    });
+
+    paginationNumbers.appendChild(button);
+  }
+
+  // Previous
+  prevButton.disabled = currentPage === 1;
+
+  prevButton.onclick = () => {
+
+    if (currentPage > 1) {
+
+      currentPage--;
+
+      renderCurrentPage();
+
+      window.scrollTo({
+        top: document.querySelector(".sticker-products").offsetTop - 20,
+        behavior: "smooth"
+      });
+
+    }
+
+  };
+
+  // Next
+  nextButton.disabled = currentPage === totalPages;
+
+  nextButton.onclick = () => {
+
+    if (currentPage < totalPages) {
+
+      currentPage++;
+
+      renderCurrentPage();
+
+      window.scrollTo({
+        top: document.querySelector(".sticker-products").offsetTop - 20,
+        behavior: "smooth"
+      });
+
+    }
+
+  };
+}
+
+
+// ==========================================
+// SHOW CURRENT PRODUCT PAGE
+// ==========================================
+
+function renderCurrentPage() {
+
+  const start =
+    (currentPage - 1) * productsPerPage;
+
+  const end =
+    start + productsPerPage;
+
+  const productsToShow =
+    filteredProducts.slice(start, end);
+
+  renderProducts(productsToShow);
+
+  renderPagination();
+}
   // ==========================================
   // PRODUCT DATA
   // ==========================================
