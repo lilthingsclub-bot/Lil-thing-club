@@ -2587,79 +2587,142 @@ Sticker  Products Section
 }
 
 
-
-
+/* =========================
+   SHOP SORT BAR
+========================= */
 
 .filter-sort-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 25px 40px;
-  font-size: 20px;
-  color: #ff66c4;
-  flex-wrap: wrap;
-   background: #fff;
-   background-image: 
-    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+
+  width: 100%;
+  padding: 18px 50px;
+  box-sizing: border-box;
+
+  background: #fff;
+  background-image:
+    radial-gradient(#ffd5f2 10%, transparent 10%),
     radial-gradient(#ffd5f2 10%, transparent 10%);
-   background-size: 39px 35px; /* Sets the spacing between dots */
-   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+  background-size: 39px 35px;
+  background-position: 0 0, -19px -19px;
+
+  border-top: 1px solid #ffd5f2;
+  border-bottom: 1px solid #ffd5f2;
 }
 
-/* DROPDOWN BASE */
+/* Sort wrapper */
 .dropdown1 {
   position: relative;
-  margin-right: 20px;
 }
 
+/* Sort button */
 .dropdown-btn1 {
-  background: none;
-  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 20px;
+
+  background: #fff6fc;
   color: #ff66c4;
-  font-size: 22px;
+
+  border: 1.5px solid #ff66c4;
+  border-radius: 999px;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
   cursor: pointer;
-  font-weight: 600;
+  transition: 0.2s ease;
 }
 
-/* Dropdown content */
+.dropdown-btn1:hover {
+  background: #ffebf9;
+  transform: translateY(-1px);
+}
 
+/* Sort dropdown */
 .dropdown-content1 {
   display: none;
+
   position: absolute;
-  background: #ffe7ff;
-  border: 2px dashed #ff66c4;
-  padding: 10px;
-  border-radius: 12px;
-  margin-top: 10px;
-  width: 240px;
-  z-index: 100;
+  top: calc(100% + 8px);
+  right: 0;
+
+  min-width: 180px;
+
+  background: #fff;
+  border: 1.5px solid #ff66c4;
+  border-radius: 18px;
+
+  padding: 8px;
+
+  box-shadow: 0 8px 20px rgba(255, 102, 196, 0.15);
+
+  z-index: 50;
 }
 
+/* Individual sort options */
 .dropdown-content1 div {
-  padding: 10px;
+  padding: 10px 14px;
+
+  color: #5c3f35;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+
+  border-radius: 12px;
   cursor: pointer;
-  border-radius: 8px;
+
+  transition: 0.15s ease;
 }
 
 .dropdown-content1 div:hover {
-  background: #ffd6f7;
+  background: #ffe6f7;
+  color: #ff66c4;
 }
 
-/* Show menu */
- .dropdown-content1.show {
+/* Show dropdown */
+.dropdown-content1.show {
   display: block;
 }
 
-.dropdown1.show { 
 
-  display: block;
-}
+/* =========================
+   TABLET
+========================= */
 
-/* Mobile */
-@media (max-width: 650px) {
+@media (max-width: 900px) {
   .filter-sort-bar {
-    gap: 5px;
-    text-align: center;
+    padding: 16px 25px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .filter-sort-bar {
+    justify-content: flex-end;
+    padding: 14px 15px;
+  }
+
+  .dropdown-btn1 {
+    padding: 9px 16px;
+    font-size: 15px;
+  }
+
+  .dropdown-content1 {
+    min-width: 165px;
+  }
+
+  .dropdown-content1 div {
+    padding: 9px 12px;
+    font-size: 14px;
   }
 }
 
