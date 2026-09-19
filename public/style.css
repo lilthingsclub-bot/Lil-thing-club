@@ -1668,30 +1668,117 @@ width: 100%;       /* Spans the full width of the container */
 }
 
 
-@media (max-width: 600px){
-	.brand-slider{
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
-}
-.brand-card{
-  background: #fff;
-  border-radius: 30px;
-  overflow: hidden;
-  text-decoration: none;
-  color: #000;
-  flex-shrink: 5;
-  scroll-snap-align: start;
-  transition: transform 0.3s ease;
-	min-width: 250px;
-	  overflow: hidden; 
-}
-	.brand-card img{
-		display: block;
-	}
+@media (max-width: 1024px) {
 
+  .brand-universe {
+    display: block;
+
+    padding: 50px 0 45px;
+  }
+
+  .brand-intro {
+    width: 100%;
+
+    margin: 0 auto 35px;
+
+    padding: 0 30px;
+
+    text-align: center;
+  }
+
+  .brand-intro h2 {
+    font-size: 42px;
+  }
+
+  .brand-intro p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    font-size: 17px;
+  }
+
+  .brand-slider {
+    width: 100%;
+
+    gap: 20px;
+
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .brand-card {
+    flex: 0 0 300px;
+
+    width: 300px;
+
+    min-width: 300px;
+  }
+
+  .brand-card img {
+    height: 210px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .brand-universe {
+    padding: 40px 0;
+  }
+
+  .brand-intro {
+    margin-bottom: 25px;
+
+    padding: 0 20px;
+
+    text-align: center;
+  }
+
+  .brand-intro h2 {
+    font-size: 34px;
+  }
+
+  .brand-intro p {
+    max-width: 100%;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+  }
+
+  .brand-slider {
+    gap: 16px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .brand-card {
+    flex: 0 0 260px;
+
+    width: 260px;
+
+    min-width: 260px;
+
+    border-radius: 20px;
+  }
+
+  .brand-card img {
+    height: 180px;
+  }
+
+  .brand-info {
+    padding: 14px;
+  }
+
+  .brand-info h3 {
+    font-size: 18px;
+  }
+
+  .brand-info p {
+    font-size: 12px;
+  }
 }
 
 
