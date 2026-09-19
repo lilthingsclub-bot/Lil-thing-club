@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'KN Yuanmo SC';
-  src: url('./fonts/KNYuanmo-Regular.ttf') format('truetype');
+  src: url('./font/KNYuanmo-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap; /* Helps text render quickly while the font loads */
