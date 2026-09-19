@@ -199,27 +199,10 @@ color: #fff;
 
 
 /* =========================
-   Promo Banner
+   product-nav
    ========================= */
 /* ===== PRODUCT NAV CONTAINER ===== */
 
-.annoment-slide{
- background-color: #Fbff33;
-	align-items: left;
-	 padding: 10px;
-	z-index: 3;
-	display: flex;
-  flex-direction: column;
-  gap: 15.9rem; 
-color:#33A9FF;
-}
-
-.annoment-slide p{
-	display: flex;
-  flex-direction: column;
-  gap: 1.5rem; 
-color:#33A9FF ;
-}
 .product-nav {
   background:
 linear-gradient(324deg, #fff 4%,   transparent 4%) -70px 43px,
@@ -340,6 +323,39 @@ background-size: 100px 100px;
     gap: 15px;
   }
 }
+
+
+
+
+
+
+/* =========================
+   Announcement Banner
+   ========================= */
+
+.annoment-slide {
+  background-color: #Fbff33;
+  color: #33A9FF;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10px 20px;
+  gap: 0;
+  z-index: 3;
+}
+
+/* Each announcement message */
+.annoment-slide p {
+  margin: 12px 0;
+  padding: 0;
+  color: #33A9FF;
+  text-align: center;
+  line-height: 1.5;
+}
+
+
 
 /* ================================
    DESKTOP DEFAULT (BASE STYLES)
