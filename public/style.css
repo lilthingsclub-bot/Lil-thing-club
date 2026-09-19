@@ -2872,6 +2872,84 @@ font-weight: 2000px;
   }
 }
 
+
+/* =========================
+   PRODUCT PAGINATION
+========================= */
+
+.product-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 10px auto 40px;
+  padding: 10px;
+}
+
+.pagination-numbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-pagination button {
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid #ff66c4;
+  border-radius: 50%;
+  background: #fff6fc;
+  color: #ff66c4;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.product-pagination button:hover {
+  background: #ffe6f7;
+  transform: translateY(-2px);
+}
+
+.product-pagination button.active {
+  background: #ff66c4;
+  color: #fff;
+}
+
+.pagination-arrow {
+  font-size: 22px !important;
+}
+
+.product-pagination button:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  .product-pagination {
+    gap: 5px;
+    margin-bottom: 30px;
+  }
+
+  .pagination-numbers {
+    gap: 5px;
+  }
+
+  .product-pagination button {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .pagination-arrow {
+    font-size: 20px !important;
+  }
+}
+
 /* =========================
    About Us Section
    ========================= */
