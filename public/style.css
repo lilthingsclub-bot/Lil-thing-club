@@ -27,7 +27,7 @@ body {
 
 /* Headings: bold, tall, modern */
 h1, h2 {
-   font-family: 'KN Yuanmo SC', -apple-system, "SimHei", sans-serif;
+   font-family: 'KN Yuanmo SC', sans-serif;
   font-weight: 500;
   text-transform: none; /* remove if you want uppercase */
   color: #ff66c4; /* You can customize this */
