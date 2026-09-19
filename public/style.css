@@ -2595,18 +2595,16 @@ Sticker  Products Section
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
+  gap: 12px;
   width: 100%;
   padding: 18px 50px;
   box-sizing: border-box;
-
   background: #fff;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
     radial-gradient(#ffd5f2 10%, transparent 10%);
   background-size: 39px 35px;
   background-position: 0 0, -19px -19px;
-
   border-top: 1px solid #ffd5f2;
   border-bottom: 1px solid #ffd5f2;
 }
