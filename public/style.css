@@ -696,168 +696,6 @@ width: 100%;
 
 
 
-/* =========================
-Colletion
-========================= */
-
-.collections {
-  position: relative;
-  text-align: center;
-  background:   #FFE8F7;
-  overflow: visible;
- Padding: 50px 10px 10px; 
-  z-index: 2;
-}
-
-/* Title */
-.collections h2 {
-  font-size: 50px;
-  color: #ff66c4;
-  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
-}
-
-.collections h3 {
-font-size: 35px;
-color: #ff66c4;
-padding:-10px
-}
-
-/* Carousel */
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  
-}
-
-.cards {
-  display: flex;
-  gap: 150px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-left: 97px ;
-  scrollbar-width: auto;
- z-index: 5
-}
-
-.cards::-webkit-scrollbar {
-  display: flex;
-}
-
-.card {
-  min-width: 390px;
-  min-height: 100px;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
-}
-
-
-
-
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card img {
-  width: 130%;
-  height: 130%;
- box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
- border-radius: 70px;
-  
-}
-
-
-.collections.scallop-top::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-repeat: repeat-x;
-  background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 50px, #FFE2F6 25px, transparent 26px);
- overflow: visible;
-  z-index: 1;
-}
-
-.collections.scallop-bottom::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-repeat: repeat-x;
-  background-size: 50px 50px;
-  background-image: radial-gradient(circle at 25px 10px,  #FFE2F6 25px, transparent 26px);
- overflow: visible;
-  z-index: 1;
-}
-
-
-
-/* =========================
-Colletion 767px
-========================= */
-@media (max-width: 767px) {
-
-
-.collections h2 {
-  font-size: 40px;
-}
-  
-
-.cards {
-  gap: 120px;
-  padding-left: 70px ;
- 
-}
-
-
-.card img {
-  width: 120%;
-  height: 120%;
-  
-}
-
-
-}
-
-
-
-@media screen and (max-width: 500px) {
-/* start of phone styles */
-
-
-.collections h2 {
-  font-size: 35px;
-}
-
-.collections h3 {
-font-size: 25px;
-
-}
-
-
-.cards {
-  gap: 10px;
-  padding-left: 0px;
- 
-}
-
-
-.card img {
-  width: 85%;
-  height: 85%;
-  
-}
-}
 
 
 /* =========================================
@@ -1537,6 +1375,362 @@ width: 100%;       /* Spans the full width of the container */
     font-size: 15px;
   }
 }
+
+
+/* =========================
+   SHOP BY COLLECTION
+   ========================= */
+
+.collections {
+  position: relative;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background: #FFE8F7;
+
+  overflow: visible;
+
+  padding: 55px 0 45px;
+
+  z-index: 2;
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+.collections h2 {
+  margin: 0 0 35px;
+
+  font-size: 50px;
+  line-height: 1.1;
+
+  color: #ff66c4;
+
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+
+/* =========================
+   CAROUSEL
+   ========================= */
+
+.carousel {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   COLLECTION TRACK
+   ========================= */
+
+.cards {
+  width: 100%;
+
+  display: flex;
+
+  gap: 25px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+
+  padding: 10px 50px 25px;
+
+  box-sizing: border-box;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================
+   COLLECTION CARD
+   ========================= */
+
+.cards > div {
+  flex: 0 0 270px;
+
+  width: 270px;
+
+  min-width: 270px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+
+/* =========================
+   IMAGE LINK
+   ========================= */
+
+.card {
+  display: flex;
+
+  width: 270px;
+  height: 270px;
+
+  min-width: 270px;
+  min-height: 270px;
+
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  box-sizing: border-box;
+
+  text-decoration: none;
+
+  transition: transform 0.3s ease;
+}
+
+
+/* =========================
+   COLLECTION IMAGE
+   ========================= */
+
+.card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: 270px;
+  max-height: 270px;
+
+  object-fit: contain;
+
+  border-radius: 35px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================
+   HOVER
+   ========================= */
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card:hover img {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================
+   COLLECTION NAME
+   ========================= */
+
+.collections h3.product-name {
+  margin: 15px 0 0;
+
+  font-family: 'Nunito', sans-serif;
+
+  font-size: 23px;
+
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  color: #ff66c4;
+}
+
+
+/* =========================
+   SCALLOP TOP
+   ========================= */
+
+.collections.scallop-top::before {
+  content: "";
+
+  position: absolute;
+
+  top: -40px;
+  left: 0;
+
+  width: 100%;
+  height: 50px;
+
+  background-repeat: repeat-x;
+
+  background-size: 50px 50px;
+
+  background-image:
+    radial-gradient(
+      circle at 25px 50px,
+      #FFE2F6 25px,
+      transparent 26px
+    );
+
+  overflow: visible;
+
+  z-index: 1;
+}
+
+
+/* =========================
+   SCALLOP BOTTOM
+   ========================= */
+
+.collections.scallop-bottom::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -40px;
+  left: 0;
+
+  width: 100%;
+  height: 50px;
+
+  background-repeat: repeat-x;
+
+  background-size: 50px 50px;
+
+  background-image:
+    radial-gradient(
+      circle at 25px 10px,
+      #FFE2F6 25px,
+      transparent 26px
+    );
+
+  overflow: visible;
+
+  z-index: 1;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 1024px) {
+
+  .collections {
+    padding: 50px 0 40px;
+  }
+
+  .collections h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+  }
+
+  .cards {
+    gap: 22px;
+
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .cards > div {
+    flex: 0 0 230px;
+
+    width: 230px;
+    min-width: 230px;
+  }
+
+  .card {
+    width: 230px;
+    height: 230px;
+
+    min-width: 230px;
+    min-height: 230px;
+  }
+
+  .card img {
+    max-width: 230px;
+    max-height: 230px;
+
+    border-radius: 30px;
+  }
+
+  .collections h3.product-name {
+    font-size: 20px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .collections {
+    padding: 45px 0 40px;
+  }
+
+  .collections h2 {
+    font-size: 34px;
+
+    margin-bottom: 25px;
+
+    padding: 0 15px;
+  }
+
+  .cards {
+    gap: 16px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cards > div {
+    flex: 0 0 160px;
+
+    width: 160px;
+    min-width: 160px;
+  }
+
+  .card {
+    width: 160px;
+    height: 160px;
+
+    min-width: 160px;
+    min-height: 160px;
+  }
+
+  .card img {
+    max-width: 160px;
+    max-height: 160px;
+
+    border-radius: 22px;
+  }
+
+  .collections h3.product-name {
+    font-size: 16px;
+
+    margin-top: 10px;
+  }
+}
+
+
+
 
 /* =========================
 Coupon Section
