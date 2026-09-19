@@ -1796,66 +1796,29 @@ color: #666;
 }
 
 
-
 /* =========================
-Coupon Section
+   CUSTOMER LOVE / REVIEWS
 ========================= */
 
-
-/* 🌸 General Layout */
 .coupon {
-  text-align: center;
-  color: #FFEBF7;
-  background:#A9FF93;
-  background-image: 
-    radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 45px 50px;
+
+  background: #A9FF93;
+
+  background-image:
+    radial-gradient(#fff 10%, transparent 10%),
     radial-gradient(#fff 10%, transparent 10%);
-  background-size: 39px 35px; /* Sets the spacing between dots */
-  Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
-  padding: 50px 50px 50px;
-  overflow: visible;
-  position: relative;
 
-}
+  background-size: 39px 35px;
+  background-position: 0 0, -19px -19px;
 
-.coupon h1 {
-  font-family: 'Shrikhand' , sans-serif; 
-  color: #Fbff33;
-  font-size: 80px;
- -webkit-text-stroke: 1.0px #ff66c4;
-  
-}
-
-
-
-
-.coupon-btn {
-  background: #ffebf9;
-  color: #ff66c4;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  display: inline-block;
   text-align: center;
- border: 1.5px solid #ff66c4;
-}
 
-.coupon-btn a {
-  display: inline-block;
-  padding: 10px 24px;
- 
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.coupon-btn:hover {
-  background: #ffbde8; /* slightly darker on hover */
+  position: relative;
+  overflow: visible;
 }
 
 
@@ -1896,23 +1859,126 @@ Coupon Section
  
 }
 
-/* Responsive */
-@media (max-width: 780px) and (max-width: 1024px) {
 
-.coupon h1 {
-  font-size: auto;
-  
- }
+/* REVIEW GRID */
+
+.about-content {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  box-sizing: border-box;
 }
 
 
-@media (max-width: 767px) {
- 
+/* REVIEW CARD */
 
-.coupon h1 {
-  font-size: 60px;
-  
- }
+.about-box {
+  background: #ffebf9;
+
+  padding: 20px 16px;
+
+  border-radius: 16px;
+  border: 1.5px solid #ff66c4;
+
+  box-sizing: border-box;
+
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* REVIEW TEXT */
+
+.about-box p {
+  margin: 0 0 8px;
+
+  color: #ff66c4;
+
+  font-family: 'Nunito', sans-serif;
+
+  font-size: 13px;
+  line-height: 1.45;
+
+  text-align: center;
+}
+
+.about-box p:last-child {
+  margin-bottom: 0;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+
+  .coupon {
+    padding: 35px 25px;
+  }
+
+  .about-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .about-box {
+    min-height: 140px;
+    padding: 18px 14px;
+  }
+
+  .about-box p {
+    font-size: 12px;
+  }
+
+  .about-box p:last-child {
+    font-size: 10px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .coupon {
+    padding: 25px 12px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    max-width: 360px;
+  }
+
+  .about-box {
+    min-height: 120px;
+    padding: 16px 14px;
+  }
+
+  .about-box p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .about-box p:last-child {
+    font-size: 10px;
+  }
 }
 
 
