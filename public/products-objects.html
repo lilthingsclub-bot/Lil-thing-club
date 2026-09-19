@@ -469,7 +469,6 @@
           brand,
           description,
           categories,
-          stock_quantity,
           tags,
           images,
           features,
@@ -594,35 +593,21 @@
     // CATEGORY FILTER
     // ==========================================
 
-   if (category === "all") {
+  if (category === "all") {
 
-  filteredProducts = allProducts;
+  filteredProducts =
+    allProducts;
 
 } else {
 
-  filteredProducts = allProducts.filter(product =>
-    Array.isArray(product.categories) &&
-    product.categories.includes(category)
-  );
+  filteredProducts =
+    allProducts.filter(product =>
 
-}
+      Array.isArray(product.categories) &&
 
+      product.categories.includes(category)
 
-// ==========================================
-// AVAILABILITY FILTER
-// ==========================================
-
-if (currentAvailability === "in-stock") {
-
-  filteredProducts = filteredProducts.filter(product =>
-    Number(product.stock_quantity) > 0
-  );
-
-} else if (currentAvailability === "out-of-stock") {
-
-  filteredProducts = filteredProducts.filter(product =>
-    Number(product.stock_quantity) <= 0
-  );
+    );
 
 }
 
@@ -842,19 +827,7 @@ function toggleDropdown() {
 }
 
 
-  // ==========================================
-// AVAILABILITY DROPDOWN
-// ==========================================
-
-function toggleAvailability() {
-  const availabilityDropdown =
-    document.getElementById("availabilityDropdown");
-
-  if (availabilityDropdown) {
-    availabilityDropdown.classList.toggle("show");
-  }
-}
-  
+ 
   // ==========================================
   // START
   // ==========================================
