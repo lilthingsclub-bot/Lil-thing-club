@@ -329,33 +329,33 @@
   const CATEGORY_INFO = {
 
     "vinyl-sticker": {
-      title: "Vinyl-stickers",
-      desc: "Explore our cute vinyl sticker sheets, perfect for decorating your Laptop, Water Bottle, or any creative project!"
+      title: "Vinyl Stickers",
+      desc: "Explore our cute vinyl stickers, perfect for decorating your laptop, water bottle, notebook, or any creative project!"
     },
 
-     "oopsclub": {
+    "oopsclub": {
       title: "Oops Club",
-      desc: "workin"
+      desc: "Workin"
     },
 
-     "junk-jouranl": {
-      title: "junk-jouranl",
-      desc: "workin"
+    "junk-jouranl": {
+      title: "Junk Journal",
+      desc: "Workin"
     },
-    
+
     "sticker-sheet": {
       title: "Sticker Sheets",
-      desc: "Explore our cute vinyl sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
+      desc: "Explore our cute sticker sheets, perfect for decorating your planner, notebook, or any creative project!"
     },
 
     "postcard": {
-      title: "Postcard",
-      desc: "Explore our cute postcards, come in fun designs - collect them all!"
+      title: "Postcards",
+      desc: "Explore our cute postcards in fun designs — collect them all!"
     },
 
     "art-print": {
-      title: "Art Print",
-      desc: "Explore our cute Art Prints, come in fun designs - collect them all!"
+      title: "Art Prints",
+      desc: "Explore our cute art prints in fun designs — collect them all!"
     },
 
     "sticker": {
@@ -369,7 +369,7 @@
     },
 
     "crochet-keychain": {
-      title: "Crochet Keychain",
+      title: "Crochet Keychains",
       desc: "Handmade crochet keychains — soft, adorable, and full of personality."
     },
 
@@ -384,8 +384,8 @@
     },
 
     "memo-pad": {
-      title: "Memo Pad",
-      desc: "Explore our cute Memo Pads, come in fun designs — collect them all!"
+      title: "Memo Pads",
+      desc: "Explore our cute memo pads in fun designs — collect them all!"
     },
 
     "new": {
@@ -421,134 +421,290 @@
 
   }
 
-let currentPage = 1;
-const productsPerPage = 24;
-let currentAvailability = "all";
-
 
   // ==========================================
-// PRODUCT PAGINATION
-// ==========================================
-
-function renderPagination() {
-
-  const paginationNumbers =
-    document.getElementById("pagination-numbers");
-
-  const prevButton =
-    document.getElementById("prev-page");
-
-  const nextButton =
-    document.getElementById("next-page");
-
-  if (!paginationNumbers) return;
-
-  const totalPages =
-    Math.ceil(filteredProducts.length / productsPerPage);
-
-  paginationNumbers.innerHTML = "";
-
-  // Hide pagination if there is only one page
-  if (totalPages <= 1) {
-    document.getElementById("product-pagination").style.display = "none";
-    return;
-  }
-
-  document.getElementById("product-pagination").style.display = "flex";
-
-  // Create page numbers
-  for (let i = 1; i <= totalPages; i++) {
-
-    const button = document.createElement("button");
-
-    button.textContent = i;
-
-    if (i === currentPage) {
-      button.classList.add("active");
-    }
-
-    button.addEventListener("click", () => {
-
-      currentPage = i;
-
-      renderCurrentPage();
-
-      window.scrollTo({
-        top: document.querySelector(".sticker-products").offsetTop - 20,
-        behavior: "smooth"
-      });
-
-    });
-
-    paginationNumbers.appendChild(button);
-  }
-
-  // Previous
-  prevButton.disabled = currentPage === 1;
-
-  prevButton.onclick = () => {
-
-    if (currentPage > 1) {
-
-      currentPage--;
-
-      renderCurrentPage();
-
-      window.scrollTo({
-        top: document.querySelector(".sticker-products").offsetTop - 20,
-        behavior: "smooth"
-      });
-
-    }
-
-  };
-
-  // Next
-  nextButton.disabled = currentPage === totalPages;
-
-  nextButton.onclick = () => {
-
-    if (currentPage < totalPages) {
-
-      currentPage++;
-
-      renderCurrentPage();
-
-      window.scrollTo({
-        top: document.querySelector(".sticker-products").offsetTop - 20,
-        behavior: "smooth"
-      });
-
-    }
-
-  };
-}
-
-
-// ==========================================
-// SHOW CURRENT PRODUCT PAGE
-// ==========================================
-
-function renderCurrentPage() {
-
-  const start =
-    (currentPage - 1) * productsPerPage;
-
-  const end =
-    start + productsPerPage;
-
-  const productsToShow =
-    filteredProducts.slice(start, end);
-
-  renderProducts(productsToShow);
-
-  renderPagination();
-}
+  // PRODUCT STATE
   // ==========================================
-  // PRODUCT DATA
-  // ==========================================
+
+  let currentPage = 1;
+
+  const productsPerPage = 24;
+
+  let currentAvailability = "all";
+
+  let allProducts = [];
 
   let filteredProducts = [];
+
+
+  // ==========================================
+  // APPLY FILTERS
+  // ==========================================
+
+  function applyFilters() {
+
+    // ------------------------------
+    // CATEGORY FILTER
+    // ------------------------------
+
+    if (category === "all") {
+
+      filteredProducts = [...allProducts];
+
+    } else {
+
+      filteredProducts =
+        allProducts.filter(product =>
+          Array.isArray(product.categories) &&
+          product.categories.includes(category)
+        );
+
+    }
+
+
+    // ------------------------------
+    // AVAILABILITY FILTER
+    // ------------------------------
+
+    if (currentAvailability === "in-stock") {
+
+      filteredProducts =
+        filteredProducts.filter(product =>
+          (product.variants || []).some(
+            variant =>
+              Number(variant.stock_quantity) > 0
+          )
+        );
+
+    }
+
+
+    else if (currentAvailability === "out-of-stock") {
+
+      filteredProducts =
+        filteredProducts.filter(product => {
+
+          const variants =
+            product.variants || [];
+
+          return (
+            variants.length > 0 &&
+            variants.every(
+              variant =>
+                Number(variant.stock_quantity) <= 0
+            )
+          );
+
+        });
+
+    }
+
+  }
+
+
+  // ==========================================
+  // PRODUCT PAGINATION
+  // ==========================================
+
+  function renderPagination() {
+
+    const paginationNumbers =
+      document.getElementById(
+        "pagination-numbers"
+      );
+
+    const prevButton =
+      document.getElementById(
+        "prev-page"
+      );
+
+    const nextButton =
+      document.getElementById(
+        "next-page"
+      );
+
+    const pagination =
+      document.getElementById(
+        "product-pagination"
+      );
+
+
+    if (!paginationNumbers || !pagination) {
+      return;
+    }
+
+
+    const totalPages =
+      Math.ceil(
+        filteredProducts.length /
+        productsPerPage
+      );
+
+
+    paginationNumbers.innerHTML = "";
+
+
+    // ------------------------------
+    // ONE PAGE
+    // ------------------------------
+
+    if (totalPages <= 1) {
+
+      pagination.style.display = "none";
+
+      return;
+
+    }
+
+
+    pagination.style.display = "flex";
+
+
+    // ------------------------------
+    // PAGE NUMBERS
+    // ------------------------------
+
+    for (
+      let i = 1;
+      i <= totalPages;
+      i++
+    ) {
+
+      const button =
+        document.createElement("button");
+
+      button.textContent = i;
+
+
+      if (i === currentPage) {
+        button.classList.add("active");
+      }
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          currentPage = i;
+
+          renderCurrentPage();
+
+          window.scrollTo({
+
+            top:
+              document.querySelector(
+                ".sticker-products"
+              ).offsetTop - 20,
+
+            behavior: "smooth"
+
+          });
+
+        }
+      );
+
+
+      paginationNumbers.appendChild(
+        button
+      );
+
+    }
+
+
+    // ------------------------------
+    // PREVIOUS
+    // ------------------------------
+
+    prevButton.disabled =
+      currentPage === 1;
+
+
+    prevButton.onclick = () => {
+
+      if (currentPage > 1) {
+
+        currentPage--;
+
+        renderCurrentPage();
+
+        window.scrollTo({
+
+          top:
+            document.querySelector(
+              ".sticker-products"
+            ).offsetTop - 20,
+
+          behavior: "smooth"
+
+        });
+
+      }
+
+    };
+
+
+    // ------------------------------
+    // NEXT
+    // ------------------------------
+
+    nextButton.disabled =
+      currentPage === totalPages;
+
+
+    nextButton.onclick = () => {
+
+      if (currentPage < totalPages) {
+
+        currentPage++;
+
+        renderCurrentPage();
+
+        window.scrollTo({
+
+          top:
+            document.querySelector(
+              ".sticker-products"
+            ).offsetTop - 20,
+
+          behavior: "smooth"
+
+        });
+
+      }
+
+    };
+
+  }
+
+
+  // ==========================================
+  // SHOW CURRENT PRODUCT PAGE
+  // ==========================================
+
+  function renderCurrentPage() {
+
+    const start =
+      (currentPage - 1) *
+      productsPerPage;
+
+    const end =
+      start + productsPerPage;
+
+
+    const productsToShow =
+      filteredProducts.slice(
+        start,
+        end
+      );
+
+
+    renderProducts(
+      productsToShow
+    );
+
+    renderPagination();
+
+  }
 
 
   // ==========================================
@@ -558,17 +714,25 @@ function renderCurrentPage() {
   async function loadProducts() {
 
     const productContainer =
-      document.getElementById("product-list");
+      document.getElementById(
+        "product-list"
+      );
+
 
     if (!productContainer) {
+
       console.error(
         "Could not find #product-list"
       );
+
       return;
+
     }
 
 
-    // Show loading message
+    // ------------------------------
+    // LOADING MESSAGE
+    // ------------------------------
 
     productContainer.innerHTML = `
       <p style="
@@ -586,47 +750,59 @@ function renderCurrentPage() {
     );
 
 
-    // Get products
+    // ------------------------------
+    // GET PRODUCTS
+    // ------------------------------
 
-    const { data: products, error } =
-      await supabaseClient
+    const {
+      data: products,
+      error
+    } = await supabaseClient
 
-        .from("products")
+      .from("products")
 
-        .select(`
+      .select(`
+        id,
+        slug,
+        name,
+        brand,
+        description,
+        categories,
+        tags,
+        images,
+        features,
+        active,
+        is_new,
+        featured,
+        created_at,
+
+        product_variants (
           id,
-          slug,
           name,
-          brand,
-          description,
-          categories,
-          tags,
-          images,
-          features,
-          active,
-          is_new,
-          featured,
-          created_at,
-          product_variants (
-            id,
-            name,
-            label,
-            price,
-            stock_quantity,
-            weight,
-            sort_order
-          )
-        `)
+          label,
+          price,
+          stock_quantity,
+          weight,
+          sort_order
+        )
+      `)
 
-        .eq("active", true)
+      .eq(
+        "active",
+        true
+      )
 
-        .order(
-          "created_at",
-          { ascending: false }
-        );
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
 
 
-    // Database error
+    // ------------------------------
+    // DATABASE ERROR
+    // ------------------------------
 
     if (error) {
 
@@ -634,6 +810,7 @@ function renderCurrentPage() {
         "SUPABASE PRODUCT ERROR:",
         error
       );
+
 
       productContainer.innerHTML = `
         <p style="
@@ -646,6 +823,7 @@ function renderCurrentPage() {
       `;
 
       return;
+
     }
 
 
@@ -655,9 +833,14 @@ function renderCurrentPage() {
     );
 
 
-    // No products
+    // ------------------------------
+    // NO PRODUCTS
+    // ------------------------------
 
-    if (!products || products.length === 0) {
+    if (
+      !products ||
+      products.length === 0
+    ) {
 
       productContainer.innerHTML = `
         <p style="
@@ -670,6 +853,7 @@ function renderCurrentPage() {
       `;
 
       return;
+
     }
 
 
@@ -677,16 +861,17 @@ function renderCurrentPage() {
     // CONVERT DATABASE PRODUCTS
     // ==========================================
 
-    const allProducts =
+    allProducts =
       products.map(product => {
 
         const variants =
-          [...(product.product_variants || [])]
-            .sort(
-              (a, b) =>
-                (a.sort_order || 0) -
-                (b.sort_order || 0)
-            );
+          [
+            ...(product.product_variants || [])
+          ].sort(
+            (a, b) =>
+              (a.sort_order || 0) -
+              (b.sort_order || 0)
+          );
 
 
         const firstVariant =
@@ -721,75 +906,10 @@ function renderCurrentPage() {
 
 
     // ==========================================
-    // CATEGORY FILTER
+    // APPLY CATEGORY + AVAILABILITY FILTERS
     // ==========================================
 
- const allProducts =
-  products.map(product => {
-
-    const variants =
-      [...(product.product_variants || [])]
-        .sort(
-          (a, b) =>
-            (a.sort_order || 0) -
-            (b.sort_order || 0)
-        );
-
-    const firstVariant =
-      variants[0];
-
-    return {
-
-      ...product,
-
-      image:
-        product.images?.[0] || "",
-
-      price:
-        firstVariant
-          ? `$${Number(firstVariant.price).toFixed(2)}`
-          : "",
-
-      variants
-
-    };
-
-  });
-
-
-// ==========================================
-// APPLY FILTERS
-// ==========================================
-
-applyFilters(allProducts);
-
-currentPage = 1;
-renderCurrentPage();
-    
-
-// ==========================================
-// AVAILABILITY FILTER
-// ==========================================
-
-if (currentAvailability === "in-stock") {
-
-  filteredProducts = filteredProducts.filter(product =>
-    (product.variants || []).some(
-      variant => Number(variant.stock_quantity) > 0
-    )
-  );
-
-} else if (currentAvailability === "out-of-stock") {
-
-  filteredProducts = filteredProducts.filter(product =>
-    (product.variants || []).every(
-      variant => Number(variant.stock_quantity) <= 0
-    )
-  );
-
-}
-
-   
+    applyFilters();
 
 
     console.log(
@@ -797,16 +917,26 @@ if (currentAvailability === "in-stock") {
       category
     );
 
+
+    console.log(
+      "Current availability:",
+      currentAvailability
+    );
+
+
     console.log(
       "Filtered products:",
       filteredProducts
     );
 
 
-   // Render first page
+    // ==========================================
+    // SHOW FIRST PAGE
+    // ==========================================
 
-currentPage = 1;
-renderCurrentPage();
+    currentPage = 1;
+
+    renderCurrentPage();
 
   }
 
@@ -815,14 +945,27 @@ renderCurrentPage();
   // RENDER PRODUCTS
   // ==========================================
 
-  function renderProducts(productsArray) {
+  function renderProducts(
+    productsArray
+  ) {
 
     const productContainer =
-      document.getElementById("product-list");
+      document.getElementById(
+        "product-list"
+      );
+
+
+    if (!productContainer) {
+      return;
+    }
 
 
     productContainer.innerHTML = "";
 
+
+    // ------------------------------
+    // NO PRODUCTS
+    // ------------------------------
 
     if (
       !productsArray ||
@@ -834,53 +977,65 @@ renderCurrentPage();
           text-align:center;
           width:100%;
           padding:40px;
+          grid-column:1 / -1;
         ">
           No products found.
         </p>
       `;
 
       return;
+
     }
 
 
-    productsArray.forEach(product => {
+    // ------------------------------
+    // CREATE PRODUCT CARDS
+    // ------------------------------
 
-      const div =
-        document.createElement("div");
+    productsArray.forEach(
+      product => {
 
-
-      div.className =
-        "product-card1";
-
-
-      div.innerHTML = `
-
-        <a href="product.html?slug=${encodeURIComponent(
-          product.slug
-        )}">
-
-          <img
-            src="${product.image}"
-            alt="${product.name}"
-            loading="lazy"
-          >
-
-          <p class="product-name1">
-            ${product.name}
-          </p>
-
-          <p class="product-price1">
-            ${product.price}
-          </p>
-
-        </a>
-
-      `;
+        const div =
+          document.createElement(
+            "div"
+          );
 
 
-      productContainer.appendChild(div);
+        div.className =
+          "product-card1";
 
-    });
+
+        div.innerHTML = `
+
+          <a href="product.html?slug=${encodeURIComponent(
+            product.slug
+          )}">
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              loading="lazy"
+            >
+
+            <p class="product-name1">
+              ${product.name}
+            </p>
+
+            <p class="product-price1">
+              ${product.price}
+            </p>
+
+          </a>
+
+        `;
+
+
+        productContainer.appendChild(
+          div
+        );
+
+      }
+    );
 
   }
 
@@ -976,10 +1131,14 @@ renderCurrentPage();
             );
 
 
-          currentPage = 1;
-renderCurrentPage();
+            // Go back to page 1
+            currentPage = 1;
 
-sortDropdown.classList.remove("show");
+            renderCurrentPage();
+
+            sortDropdown.classList.remove(
+              "show"
+            );
 
           }
 
@@ -990,64 +1149,103 @@ sortDropdown.classList.remove("show");
   }
 
 
-   // ==========================================
-  // toggle sort dropdown 
   // ==========================================
-function toggleDropdown() {
-  const sortDropdown = document.getElementById("sortDropdown");
+  // TOGGLE SORT DROPDOWN
+  // ==========================================
 
-  if (sortDropdown) {
-    sortDropdown.classList.toggle("show");
+  function toggleDropdown() {
+
+    const sortDropdown =
+      document.getElementById(
+        "sortDropdown"
+      );
+
+
+    if (sortDropdown) {
+
+      sortDropdown.classList.toggle(
+        "show"
+      );
+
+    }
+
   }
-}
 
 
+  // ==========================================
+  // TOGGLE AVAILABILITY DROPDOWN
+  // ==========================================
+
+  function toggleAvailability() {
+
+    const availabilityDropdown =
+      document.getElementById(
+        "availabilityDropdown"
+      );
 
 
-// ==========================================
-// AVAILABILITY DROPDOWN
-// ==========================================
+    if (availabilityDropdown) {
 
-function toggleAvailability() {
+      availabilityDropdown.classList.toggle(
+        "show"
+      );
+
+    }
+
+  }
+
+
+  // ==========================================
+  // AVAILABILITY OPTIONS
+  // ==========================================
+
   const availabilityDropdown =
-    document.getElementById("availabilityDropdown");
+    document.getElementById(
+      "availabilityDropdown"
+    );
+
 
   if (availabilityDropdown) {
-    availabilityDropdown.classList.toggle("show");
-  }
-}
 
-  // ==========================================
-// AVAILABILITY OPTIONS
-// ==========================================
+    availabilityDropdown
+      .querySelectorAll("div")
+      .forEach(item => {
 
-const availabilityDropdown =
-  document.getElementById("availabilityDropdown");
+        item.addEventListener(
+          "click",
+          () => {
 
-if (availabilityDropdown) {
+            currentAvailability =
+              item.getAttribute(
+                "data-availability"
+              );
 
-  availabilityDropdown
-    .querySelectorAll("div")
-    .forEach(item => {
 
-      item.addEventListener("click", () => {
+            // Apply category + availability
+            applyFilters();
 
-        currentAvailability =
-          item.getAttribute("data-availability");
 
-        applyFilters(allProducts);
+            // Reset to page 1
+            currentPage = 1;
 
-        currentPage = 1;
 
-        renderCurrentPage();
+            // Show filtered products
+            renderCurrentPage();
 
-        availabilityDropdown.classList.remove("show");
+
+            // Close dropdown
+            availabilityDropdown.classList.remove(
+              "show"
+            );
+
+          }
+        );
 
       });
 
-    });
+  }
 
-}
+
   // ==========================================
   // START
   // ==========================================
@@ -1055,6 +1253,7 @@ if (availabilityDropdown) {
   loadProducts();
 
 </script>
+
   
 </body>
 </html>
