@@ -1029,16 +1029,15 @@ function updateCartCount() {
     ) || [];
 
 
-  const total =
-    cart.reduce(
-      (sum, item) =>
-        sum +
+ const total =
+  cart.reduce(
+    (sum, item) =>
+      sum +
         Number(
-          item.quantity || 0
+          item.qty || 0
         ),
-      0
-    );
-
+    0
+  );
 
   cartCount.textContent =
     total;
