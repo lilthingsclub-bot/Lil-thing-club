@@ -1275,11 +1275,25 @@ div.innerHTML = `
     class="product-card-link"
   >
 
-    <img
-      src="${product.image}"
-      alt="${product.name}"
-      loading="lazy"
-    >
+    <div class="product-image-wrap">
+
+      <img
+        src="${product.image}"
+        alt="${product.name}"
+        loading="lazy"
+      >
+
+      ${
+        isOutOfStock
+          ? `<span class="product-badge sold-out-badge">Sold Out</span>`
+          : product.is_new
+            ? `<span class="product-badge new-badge">New</span>`
+            : product.featured
+              ? `<span class="product-badge featured-badge">Featured</span>`
+              : ""
+      }
+
+    </div>
 
     <p class="product-name1">
       ${product.name}
