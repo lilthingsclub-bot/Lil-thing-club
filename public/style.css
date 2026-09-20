@@ -44,6 +44,73 @@ font-family: 'Baloo 2', sans-serif;
 
 
 /* ==========================================
+   PRODUCT BADGES
+   ========================================== */
+
+.product-image-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.product-image-wrap img {
+  width: 100%;
+  display: block;
+}
+
+/* Base badge */
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.10);
+}
+
+/* NEW */
+.new-badge {
+  background: #a9ff93;
+  color: #4d7f42;
+}
+
+/* FEATURED */
+.featured-badge {
+  background: #fff5a5;
+  color: #8b7130;
+}
+
+/* SOLD OUT */
+.sold-out-badge {
+  background: #ff66c4;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+
+  .product-badge {
+    top: 8px;
+    left: 8px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+}
+
+
+/* ==========================================
    SHOP PRODUCT CARD BUTTON
 ========================================== */
 
