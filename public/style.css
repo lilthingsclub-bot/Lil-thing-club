@@ -3547,13 +3547,10 @@ gap: 100px;
 .thumbs img {
   width: 70px;
   height: 70px;
-  object-fit: cover;
-  display: block;
   border: 2px solid transparent;
   border-radius: 16px;
   background: #fff9fd;
   cursor: pointer;
-  box-sizing: border-box;
   transition:
     border-color 0.2s ease,
     transform 0.2s ease,
@@ -3584,8 +3581,6 @@ gap: 100px;
 
 .main-img {
   width: 100%;
-  display: block;
-  cursor: zoom-in;
   transition: transform 0.35s ease;
 }
 
