@@ -162,67 +162,122 @@
   </div>
 </section>
   
-
 <section class="page-one">
 
-<div class="page">
-<!-- LEFT: Images + Shipping -->
-<div class="left">
-<div class="gallery">
-<div class="thumbs">
-<img src=" " class="active"/>
-<img src=" " />
-</div>
-<img id="mainImage" src=" " class="main-img"/>
-</div>
+  <div class="product-page">
 
-<details class="shipping">
-<summary>Shipping Info</summary>
-<ul>
-<li> All available shipping options will appear at checkout.</li>
-<li> Packed with care 💕</li>
-<li>for more info on shipping policy</li>
+    <!-- LEFT: PRODUCT GALLERY -->
+    <div class="product-gallery-section">
 
-</ul>
-</details>
-</div>
+      <div class="gallery">
+
+        <div class="thumbs"></div>
+
+        <div class="main-image-container">
+          <img
+            id="mainImage"
+            src=""
+            class="main-img"
+            alt=""
+          >
+        </div>
+
+      </div>
+
+      <details class="shipping">
+        <summary>Shipping Info</summary>
+
+        <ul>
+          <li>All available shipping options will appear at checkout.</li>
+          <li>Packed with care 💕</li>
+          <li>For more info, see our shipping policy.</li>
+        </ul>
+      </details>
+
+    </div>
 
 
-<!-- RIGHT: Product Info -->
-<div class="right">
-<p class="brand">Lil Things Club</p>
+    <!-- RIGHT: PRODUCT INFORMATION -->
+    <div class="product-info-section">
 
-<div class="title-row">
-<h2  id="productName"></h2>
-<span id="price"></span>
-</div>
+      <p class="brand">Lil Things Club</p>
 
-<section class="sizes-all">
-  <h3>Size</h3>
-  <div class="sizes" id="variantOptions"></div>
+      <h1 id="productName"></h1>
+
+      <div class="product-price-display">
+        <span id="price"></span>
+      </div>
+
+
+      <!-- VARIANTS -->
+      <section class="sizes-all">
+        <h3>Choose an option</h3>
+
+        <div
+          class="sizes"
+          id="variantOptions"
+        ></div>
+      </section>
+
+
+      <!-- DESCRIPTION -->
+      <section class="desc">
+        <h3>Description</h3>
+        <p></p>
+      </section>
+
+
+      <!-- FEATURES -->
+      <section class="features">
+        <h3>Features</h3>
+        <ul></ul>
+      </section>
+
+
+      <!-- BUY AREA -->
+      <div class="buy-area">
+
+        <div class="buy-row">
+
+          <div class="qty">
+
+            <button
+              id="minus"
+              type="button"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+
+            <span id="qty">1</span>
+
+            <button
+              id="plus"
+              type="button"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <button
+            class="add"
+            type="button"
+          >
+            Add To Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
-
-
-<section class="desc">
-<h3>Description</h3>
-<p> </p>
-</section>
-
-<section class="features" >
-<h3>Features</h3>
-<ul></ul>
-</section>
-
-<div class="buy-row">
-<div class="qty">
-<button id="minus">−</button>
-<span id="qty">1</span>
-<button id="plus">+</button>
-</div>
-<button class="add">Add To Cart</button>
-</div>
-</div>
-</div>
 
 
 <section class="might-like">
