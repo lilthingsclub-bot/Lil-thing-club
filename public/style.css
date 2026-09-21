@@ -3964,6 +3964,12 @@ border: 1.5px solid #ff66c4;
 /* CAROUSEL */
 
 .might-like {
+	 background: #fff;
+   background-image: 
+    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
+    radial-gradient(#ffd5f2 10%, transparent 10%);
+   background-size: 39px 35px; /* Sets the spacing between dots */
+   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
 
  position: relative;
   padding: 30px 20px 30px;
