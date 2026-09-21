@@ -3616,12 +3616,13 @@ gap: 100px;
    ========================================= */
 
 .shipping {
+	padding: 0  50px;
   margin-top: 18px;
   border: 2px solid #ffd5f2;
   border-radius: 18px;
   background: #fff9fd;
   overflow: hidden;
-	 width: 100px;
+	 width: 200px;
 }
 
 .shipping summary {
