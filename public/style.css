@@ -3532,7 +3532,13 @@ gap: 100px;
 }
 
 /* LEFT */
-.gallery { display: flex; gap: 12px; }
+.gallery { 
+	display: grid; 
+	gap: 12px; 
+	width: 100%; 
+	align-items: start;
+	grid-template-columns: 82px minmax (0, 1fr)
+ }
 
 .thumbs { display: flex; flex-direction: column; gap: 8px; }
 
