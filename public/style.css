@@ -3616,8 +3616,9 @@ gap: 100px;
    ========================================= */
 
 .shipping {
-	padding: 0  50px;
+	
   margin-top: 18px;
+   margin-left: 40px;
   border: 2px solid #ffd5f2;
   border-radius: 18px;
   background: #fff9fd;
@@ -3626,7 +3627,7 @@ gap: 100px;
 }
 
 .shipping summary {
-  padding: 14px 27px;
+  padding: 14px 16px;
   color: #ff66c4;
   font-family: "Nunito", sans-serif;
   font-size: 15px;
@@ -3853,7 +3854,7 @@ font-weight: 300px;
    MOBILE
    ========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 790px) {
 	.product-page { grid-template-columns: 1fr; }
 
   .gallery {
