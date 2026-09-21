@@ -3531,6 +3531,10 @@ gap: 100px;
  
 }
 
+
+.product-gallery-section{
+	width: 100%;
+}
 /* LEFT */
 .gallery { 
 	display: flex; 
