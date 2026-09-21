@@ -1049,127 +1049,293 @@ function updateCartCount() {
 // RECOMMENDATIONS
 // ======================================================
 
-async function loadRecommendations(
-  currentProduct
-) {
+async function loadRecommendations(currentProduct) {
+  const container = document.getElementById("recommendations");
 
-  const container =
-    document.getElementById(
-      "recommendations"
-    );
+  if (!container) return;
 
+  container.innerHTML = "";
 
-  if (!container) {
-    return;
-  }
-
-
-  const { data: products, error } =
-    await supabaseClient
-
+  try {
+    /*
+      Get active products other than the current product.
+      We include tags + categories so we can score
+      how relevant each product is.
+    */
+    const { data, error } = await supabaseClient
       .from("products")
-
       .select(`
         id,
         slug,
         name,
+        tags,
+        categories,
         images,
-
+        is_new,
+        featured,
         product_variants (
           price,
+          stock_quantity,
           sort_order
         )
       `)
-
       .eq("active", true)
+      .neq("id", currentProduct.id);
 
-      .neq(
-        "id",
-        currentProduct.id
-      )
+    if (error) {
+      console.error("Recommendation error:", error);
+      return;
+    }
 
-      .limit(6);
+    if (!data || data.length === 0) {
+      return;
+    }
 
+    /* -----------------------------------------
+       CURRENT PRODUCT TAGS / CATEGORIES
+    ----------------------------------------- */
 
-  if (error) {
+    const currentTags = Array.isArray(currentProduct.tags)
+      ? currentProduct.tags.map(tag => String(tag).toLowerCase().trim())
+      : [];
 
-    console.error(
-      "Recommendation error:",
-      error
-    );
-
-    return;
-  }
-
-
-  container.innerHTML = "";
-
-
-  products.forEach(product => {
-
-    const card =
-      document.createElement("div");
+    const currentCategories = Array.isArray(currentProduct.categories)
+      ? currentProduct.categories.map(category =>
+          String(category).toLowerCase().trim()
+        )
+      : [];
 
 
-    card.className =
-      "card1";
+    /* -----------------------------------------
+       SCORE PRODUCTS
+    ----------------------------------------- */
+
+    const scoredProducts = data.map(product => {
+
+      const productTags = Array.isArray(product.tags)
+        ? product.tags.map(tag =>
+            String(tag).toLowerCase().trim()
+          )
+        : [];
+
+      const productCategories = Array.isArray(product.categories)
+        ? product.categories.map(category =>
+            String(category).toLowerCase().trim()
+          )
+        : [];
 
 
-    const variants =
-      [...(
-        product.product_variants || []
-      )]
-        .sort(
-          (a, b) =>
-            (a.sort_order || 0) -
-            (b.sort_order || 0)
-        );
+      /* Find matching tags */
+      const matchingTags = productTags.filter(tag =>
+        currentTags.includes(tag)
+      );
+
+      /* Find matching categories */
+      const matchingCategories = productCategories.filter(category =>
+        currentCategories.includes(category)
+      );
 
 
-    const firstVariant =
-      variants[0];
+      /*
+        TAGS are the strongest signal.
+
+        +10 points for every matching tag
+        +4 points for every matching category
+      */
+      let score =
+        matchingTags.length * 10 +
+        matchingCategories.length * 4;
 
 
-    card.innerHTML = `
+      /* Small bonuses */
+      if (product.featured) {
+        score += 2;
+      }
 
-      <a href="product.html?slug=${encodeURIComponent(
-        product.slug
-      )}">
+      if (product.is_new) {
+        score += 1;
+      }
 
-        <img
-          src="${product.images?.[0] || ""}"
-          alt="${product.name}"
-          loading="lazy"
-        >
 
-        <p>
-          ${product.name}
-        </p>
+      return {
+        ...product,
+        score,
+        matchingTags,
+        matchingCategories
+      };
+    });
 
-        ${
-          firstVariant
-            ? `
-              <small>
-                $${Number(
-                  firstVariant.price
-                ).toFixed(2)}
-              </small>
-            `
-            : ""
+
+    /* -----------------------------------------
+       SORT BY RELEVANCE
+    ----------------------------------------- */
+
+    scoredProducts.sort((a, b) => {
+
+      /* Higher score first */
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+
+      /*
+        If products have the same score,
+        randomize them slightly so customers
+        don't always see the exact same order.
+      */
+      return Math.random() - 0.5;
+    });
+
+
+    /* -----------------------------------------
+       PICK PRODUCTS
+    ----------------------------------------- */
+
+    const selectedProducts = [];
+    const usedCategories = new Set();
+
+
+    /*
+      First pass:
+      prioritize relevant products while
+      trying not to show six products from
+      the exact same category.
+    */
+
+    for (const product of scoredProducts) {
+
+      if (selectedProducts.length >= 6) {
+        break;
+      }
+
+      const mainCategory =
+        productCategoriesForRecommendation(product)[0] || null;
+
+      /*
+        If this product has no meaningful
+        relationship to the current product,
+        save it for the fallback pass.
+      */
+      if (product.score <= 0) {
+        continue;
+      }
+
+      /*
+        Try to keep the recommendation row varied.
+      */
+      if (
+        mainCategory &&
+        usedCategories.has(mainCategory) &&
+        selectedProducts.length < 4
+      ) {
+        continue;
+      }
+
+      selectedProducts.push(product);
+
+      if (mainCategory) {
+        usedCategories.add(mainCategory);
+      }
+    }
+
+
+    /* -----------------------------------------
+       FALLBACK
+    ----------------------------------------- */
+
+    /*
+      If we don't have six relevant products,
+      fill the remaining spaces with the
+      highest-scoring products we haven't used.
+    */
+
+    if (selectedProducts.length < 6) {
+
+      for (const product of scoredProducts) {
+
+        if (selectedProducts.length >= 6) {
+          break;
         }
 
-      </a>
+        if (selectedProducts.includes(product)) {
+          continue;
+        }
 
-    `;
+        selectedProducts.push(product);
+      }
+    }
 
 
-    container.appendChild(card);
+    /* -----------------------------------------
+       CREATE CARDS
+    ----------------------------------------- */
 
-  });
+    selectedProducts.forEach(product => {
 
+      const card = document.createElement("div");
+
+      card.className = "card1";
+
+      const firstVariant = [...(product.product_variants || [])]
+        .sort(
+          (a, b) =>
+            Number(a.sort_order || 0) -
+            Number(b.sort_order || 0)
+        )[0];
+
+      const price = firstVariant
+        ? Number(firstVariant.price || 0).toFixed(2)
+        : "0.00";
+
+      const image =
+        Array.isArray(product.images) && product.images.length
+          ? product.images[0]
+          : "";
+
+      card.innerHTML = `
+        <a href="product.html?slug=${product.slug}">
+
+          <img
+            src="${image}"
+            alt="${product.name}"
+            loading="lazy"
+          >
+
+          <p class="recommendation-name">
+            ${product.name}
+          </p>
+
+          <p class="recommendation-price">
+            $${price}
+          </p>
+
+        </a>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error("Failed to load recommendations:", err);
+  }
 }
 
 
+/* -----------------------------------------
+   CATEGORY HELPER
+----------------------------------------- */
+
+function productCategoriesForRecommendation(product) {
+
+  if (!Array.isArray(product.categories)) {
+    return [];
+  }
+
+  return product.categories
+    .map(category =>
+      String(category).toLowerCase().trim()
+    )
+    .filter(category => category !== "all");
+}
 // ======================================================
 // ERROR
 // ======================================================
