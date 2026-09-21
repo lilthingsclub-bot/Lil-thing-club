@@ -3533,7 +3533,7 @@ gap: 100px;
 
 /* LEFT */
 .gallery { 
-	display: grid; 
+	display: flex; 
 	gap: 12px; 
 	width: 100%; 
 	align-items: start;
