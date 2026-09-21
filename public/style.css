@@ -3507,6 +3507,8 @@ margin-top: -20px;
 }
 
 
+
+
 /* =========================
    Product one page 
    ========================= */
@@ -3528,207 +3530,31 @@ grid-template-columns: 1fr 1.5fr;
 gap: 100px;
  
 }
-/* =========================================
-   PRODUCT IMAGE GALLERY
-   ========================================= */
 
-.gallery {
-  display: flex;
-  gap: 16px;
-}
+/* LEFT */
+.gallery { display: flex; gap: 12px; }
 
-/* Thumbnail column */
-.thumbs {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.thumbs { display: flex; flex-direction: column; gap: 8px; }
 
 .thumbs img {
-  width: 70px;
-  height: 70px;
-  border: 2px solid transparent;
-  border-radius: 16px;
-  background: #fff9fd;
-  cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    opacity 0.2s ease;
+width: 60px; height: 60px; border-radius: 12px;
+cursor: pointer; border: 2px solid transparent;
 }
 
-.thumbs img:hover {
-  border-color: #ffb8df;
-  transform: translateY(-2px);
-}
+.thumbs img.active { border-color: var(--pink); }
 
-.thumbs img.active {
-  border-color: #ff66c4;
-  box-shadow: 0 4px 12px rgba(255, 102, 196, 0.15);
-}
-
-/* Main image area */
-.main-image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #fff9fd;
-  border: 2px solid #ffd5f2;
-  border-radius: 28px;
-  box-sizing: border-box;
-}
-
-.main-img {
-  width: 100%;
-  transition: transform 0.35s ease;
-}
-
-/* Gentle zoom when hovering the product image */
-.main-image-container:hover .main-img {
-  transform: scale(1.035);
-}
-
-
-/* =========================================
-   SHIPPING INFO
-   ========================================= */
+.main-img { width: 100%; border-radius: 24px; }
 
 .shipping {
-  margin-top: 18px;
-  border: 2px solid #ffd5f2;
-  border-radius: 18px;
-  background: #fff9fd;
-  overflow: hidden;
+Margin-left: 73px ;
+Margin-top: 15px;
+background-color: #fff6fc;
+padding: 12px 20px;
+border-radius: 20px;
+ border: 1.5px solid #ff66c4;
+width: 100%;
+
 }
-
-.shipping summary {
-  padding: 14px 18px;
-  color: #ff66c4;
-  font-family: "Nunito", sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  list-style: none;
-}
-
-.shipping summary::-webkit-details-marker {
-  display: none;
-}
-
-.shipping summary::after {
-  content: "+";
-  float: right;
-  font-size: 20px;
-  line-height: 1;
-}
-
-.shipping[open] summary::after {
-  content: "−";
-}
-
-.shipping ul {
-  margin: 0;
-  padding: 0 18px 16px 36px;
-  color: #5c3f35;
-  font-family: "Nunito", sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.shipping li {
-  margin-bottom: 5px;
-}
-
-.shipping li:last-child {
-  margin-bottom: 0;
-}
-
-.shipping a {
-  color: #ff66c4;
-  font-weight: 700;
-}
-
-
-/* =========================================
-   TABLET
-   ========================================= */
-
-@media (max-width: 900px) {
-
-  .gallery {
-    grid-template-columns: 70px minmax(0, 1fr);
-    gap: 12px;
-  }
-
-  .thumbs {
-    width: 70px;
-    gap: 10px;
-  }
-
-  .thumbs img {
-    width: 70px;
-    height: 70px;
-    border-radius: 14px;
-  }
-
-  .main-image-container {
-    border-radius: 24px;
-  }
-}
-
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 600px) {
-
-  .gallery {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 12px;
-  }
-
-  /*
-    Main image stays large.
-    Thumbnails move underneath and scroll horizontally.
-  */
-  .main-image-container {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 22px;
-  }
-
-  .thumbs {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 2px 2px 6px;
-    box-sizing: border-box;
-
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .thumbs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .thumbs img {
-    flex: 0 0 68px;
-    width: 68px;
-    height: 68px;
-    border-radius: 13px;
-  }
-
-  .shipping {
-    margin-top: 14px;
-  }
-}
-
-
 
 /* RIGHT */
 .brand { font-weight: 600; }
