@@ -3622,7 +3622,7 @@ gap: 100px;
   border-radius: 18px;
   background: #fff9fd;
   overflow: hidden;
-	 width: 200px;
+	 width: 100%;
 }
 
 .shipping summary {
@@ -3673,83 +3673,8 @@ gap: 100px;
 }
 
 
-/* =========================================
-   TABLET
-   ========================================= */
-
-@media (max-width: 900px) {
-
-  .gallery {
-    grid-template-columns: 70px minmax(0, 1fr);
-    gap: 12px;
-  }
-
-  .thumbs {
-    width: 70px;
-    gap: 10px;
-  }
-
-  .thumbs img {
-    width: 70px;
-    height: 70px;
-    border-radius: 14px;
-  }
-
-  .main-image-container {
-    border-radius: 24px;
-  }
-}
 
 
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 600px) {
-
-  .gallery {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 12px;
-  }
-
-  /*
-    Main image stays large.
-    Thumbnails move underneath and scroll horizontally.
-  */
-  .main-image-container {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 22px;
-  }
-
-  .thumbs {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 2px 2px 6px;
-    box-sizing: border-box;
-
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .thumbs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .thumbs img {
-    flex: 0 0 68px;
-    width: 68px;
-    height: 68px;
-    border-radius: 13px;
-  }
-
-  .shipping {
-    margin-top: 14px;
-  }
-}
 /* RIGHT */
 .brand { font-weight: 600; }
 
@@ -3896,31 +3821,95 @@ font-weight: 300px;
 }
 
 
+/* =========================================
+   TABLET
+   ========================================= */
 
-/* MOBILE */
-@media (max-width: 768px) {
-.page { grid-template-columns: 1fr; }
-.main-img { width: 95%; border-radius: 24px; }
+@media (max-width: 1024px) {
 
-.buy-row { flex-direction: row; }
+  .gallery {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .thumbs {
+    width: 70px;
+    gap: 10px;
+  }
+
+  .thumbs img {
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+  }
+
+  .main-image-container {
+    border-radius: 24px;
+  }
 }
-  
-
-	.shipping {
-Margin-left: 35px ;
 
 
-padding: 12px 10px;
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+	.product-page { grid-template-columns: 1fr; }
+
+  .gallery {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  /*
+    Main image stays large.
+    Thumbnails move underneath and scroll horizontally.
+  */
+  .main-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 22px;
+  }
+
+  .thumbs {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 2px 2px 6px;
+    box-sizing: border-box;
+
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .thumbs img {
+    flex: 0 0 68px;
+    width: 68px;
+    height: 68px;
+    border-radius: 13px;
+  }
+
+  .shipping {
+    margin-top: 14px;
+	  padding: 12px 10px;
 
 width: 40%;
-	}
-
-   .title-row h2{
+  }
+	 .title-row h2{
 font-size: 40px;
 }
 
-   .might-like h2 { font-size:40px;}
+	 .might-like h2 { font-size:40px;}
    
+}
+.buy-row { flex-direction: row; }
+
 }
 
 
