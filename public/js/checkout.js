@@ -84,13 +84,13 @@ function resolveWeight(item) {
 
 function calculateShipping(country) {
 
-  if (subtotal >= 20) return 0;
+  if (subtotal >= 30) return 0;
 
   if (country !== "US") {
     return 15;
   }
 
-  if (totalWeight <= 3) return 0.75;
+  if (totalWeight <= 1) return 0.75;
   if (totalWeight <= 8) return 5.50;
 
   return 7.50;
