@@ -77,12 +77,111 @@ async function loadOrders() {
 
   allOrders = data || [];
 
+  // =====================================
+  // LOAD PRODUCT / VARIANT INFORMATION
+  // =====================================
+
+  const variantIds = [
+    ...new Set(
+      allOrders.flatMap(order => {
+
+        const items = Array.isArray(order.items)
+          ? order.items
+          : [];
+
+        return items
+          .map(item => item.variantId)
+          .filter(Boolean);
+
+      })
+    )
+  ];
+
+  if (variantIds.length) {
+
+    const {
+      data: variants,
+      error: variantError
+    } = await supabaseClient
+      .from("product_variants")
+      .select(`
+        id,
+        product_id,
+        name,
+        label,
+        price,
+        products (
+          name
+        )
+      `)
+      .in("id", variantIds);
+
+    if (variantError) {
+
+      console.error(
+        "❌ Failed to load product information:",
+        variantError
+      );
+
+    } else {
+
+      const variantMap = new Map(
+        (variants || []).map(variant => [
+          variant.id,
+          variant
+        ])
+      );
+
+      // Attach product information to each order item
+      allOrders = allOrders.map(order => {
+
+        const items = Array.isArray(order.items)
+          ? order.items
+          : [];
+
+        return {
+          ...order,
+
+          items: items.map(item => {
+
+            const variant =
+              variantMap.get(item.variantId);
+
+            if (!variant) {
+              return item;
+            }
+
+            return {
+              ...item,
+
+              name:
+                variant.products?.name ||
+                "Product",
+
+              label:
+                variant.label ||
+                variant.name ||
+                "",
+
+              price:
+                Number(variant.price || 0)
+
+            };
+
+          })
+
+        };
+
+      });
+
+    }
+
+  }
+
   updateSummary();
 
   renderOrders(allOrders);
 }
-
-
 // =====================================
 // SUMMARY
 // =====================================
