@@ -609,35 +609,39 @@ form.addEventListener(
       country:
         country.value
     };
+    
+localStorage.setItem(
+  "lastOrder",
+  JSON.stringify(orderData)
+);
 
-    localStorage.setItem(
-      "lastOrder",
-      JSON.stringify(orderData)
-    );
+// Also save a copy tied to the Stripe PaymentIntent
+if (paymentIntentId) {
+  localStorage.setItem(
+    `order_${paymentIntentId}`,
+    JSON.stringify(orderData)
+  );
+}
 
-    console.log(
-      "💾 saved lastOrder:",
-      orderData
-    );
+console.log("💾 Order saved before Stripe confirmation:", orderData);
 
 
     // =======================
     // CONFIRM STRIPE PAYMENT
     // =======================
+const { error } =
+  await stripe.confirmPayment({
 
-    const { error } =
-      await stripe.confirmPayment({
+    elements,
 
-        elements,
+    confirmParams: {
 
-        confirmParams: {
+      return_url:
+        `${window.location.origin}/success.html?order_id=${paymentIntentId}`
 
-          return_url:
-            `${window.location.origin}/success.html`
+    }
 
-        }
-
-      });
+  });
 
     if (error) {
 
