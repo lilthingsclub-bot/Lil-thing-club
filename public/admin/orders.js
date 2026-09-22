@@ -515,9 +515,7 @@ function renderOrders(orders) {
                 .eq("id", order.id)
                 .select()
                 .
-
-
-
+          }
 // =====================================
 // ORDER DETAILS
 // =====================================
