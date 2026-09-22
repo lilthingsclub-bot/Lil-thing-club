@@ -656,7 +656,6 @@ width: 100%;
 @media (max-width: 900px) {
 
   .shopping-perks {
-    grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -3527,7 +3526,7 @@ padding: 80px;
 padding-top: 70px;
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 100px;
+gap: 95px;
  
 }
 
@@ -3556,8 +3555,8 @@ gap: 100px;
 }
 
 .thumbs img {
-  width: 82px;
-  height: 82px;
+  width: 75px;
+  height: 75px;
   object-fit: cover;
   display: block;
   border: 2px solid transparent;
@@ -3618,12 +3617,12 @@ gap: 100px;
 .shipping {
 	
   margin-top: 18px;
-   margin-left: 40px;
+   margin-left: 50px;
   border: 2px solid #ffd5f2;
   border-radius: 18px;
   background: #fff9fd;
   overflow: hidden;
-	 width: 100%;
+	 width: 95%;
 }
 
 .shipping summary {
@@ -3676,7 +3675,8 @@ gap: 100px;
 /* RIGHT */
 .brand { font-weight: 600; }
 
-.title-row { display: flex; 
+.title-row { 
+display: flex; 
 justify-content: space-between; 
 align-items: center; 
 }
@@ -3697,7 +3697,7 @@ line-height: 16px;
 
 #price { 
 	font-size: 26px; color: var(--pink); 
-	   font-weight: 500px;
+	   font-weight: 800;
 	   }
 
 
@@ -3706,7 +3706,7 @@ line-height: 16px;
    ========================================= */
 
 .sizes-all {
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 .sizes-all h3 {
