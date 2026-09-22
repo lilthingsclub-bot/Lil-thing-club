@@ -89,12 +89,31 @@
     </section>
 
 <main class="checkout-container">
-  
- <form id="payment-form">
-  <div id="payment-element"></div>
-  <button id="submit" type="submit">Pay Now</button>
-  <p id="error-message"></p>
-</form>
+
+  <button
+    id="continue-to-payment"
+    type="button"
+    class="continue-payment-btn"
+  >
+    Continue to Payment 💕
+  </button>
+
+  <form id="payment-form" class="hidden-payment">
+
+    <div class="payment-heading">
+      <h3>Payment</h3>
+      <p>Almost there! Complete your payment below 💕</p>
+    </div>
+
+    <div id="payment-element"></div>
+
+    <button id="submit" type="submit">
+      Pay Now
+    </button>
+
+    <p id="error-message"></p>
+
+  </form>
 
 </main>
     
