@@ -235,7 +235,6 @@ function updateSummary() {
 }
 
 
-
 // =====================================
 // RENDER ORDERS
 // =====================================
@@ -514,8 +513,110 @@ function renderOrders(orders) {
                 })
                 .eq("id", order.id)
                 .select()
-                .
+                .single();
+
+
+            if (error) {
+
+              console.error(
+                "❌ Failed to update order:",
+                error
+              );
+
+              alert(
+                "Couldn't update the order. Please try again."
+              );
+
+              button.disabled = false;
+              button.textContent = "Mark Shipped";
+
+              return;
+            }
+
+
+            Object.assign(order, data);
+
           }
+
+
+          // --------------------------------
+          // Processing / Delivered
+          // --------------------------------
+
+          else {
+
+            const updateData = {
+              status: nextStatus
+            };
+
+
+            if (nextStatus === "delivered") {
+
+              updateData.delivered_at =
+                order.delivered_at ||
+                new Date().toISOString();
+
+            }
+
+
+            button.disabled = true;
+            button.textContent = "Saving...";
+
+
+            const { data, error } =
+              await supabaseClient
+                .from("orders")
+                .update(updateData)
+                .eq("id", order.id)
+                .select()
+                .single();
+
+
+            if (error) {
+
+              console.error(
+                "❌ Failed to update order:",
+                error
+              );
+
+              alert(
+                "Couldn't update the order. Please try again."
+              );
+
+              button.disabled = false;
+
+              button.textContent =
+                nextStatus === "processing"
+                  ? "Start Processing"
+                  : "Mark Delivered";
+
+              return;
+            }
+
+
+            Object.assign(order, data);
+
+          }
+
+
+          // --------------------------------
+          // Refresh admin UI
+          // --------------------------------
+
+          updateSummary();
+
+          renderOrders(
+            getCurrentlyFilteredOrders()
+          );
+
+        }
+      );
+
+    });
+
+}
+
+            
 // =====================================
 // ORDER DETAILS
 // =====================================
