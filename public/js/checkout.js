@@ -3,7 +3,7 @@ console.log("✅ checkout.js loaded");
 let stripe;
 let elements;
 let paymentElement;
-let paymentIntentId;
+let paymentIntentId = null;
 
 let subtotal = 0;
 let shipping = 0;
@@ -16,52 +16,41 @@ const cart = JSON.parse(localStorage.getItem("cart")) || [];
 // =======================
 // STRIPE INIT
 // =======================
-stripe = Stripe("pk_live_51RlDSnAwiQXA8rArpM7tGeciUvTB9eCuTXQsSARiDt8d0vDE96AfxEAoyQZFnCNVJ67c2IBBH9R0DBRZRCxm7AMr00BulSGmwF");
+
+stripe = Stripe(
+  "pk_live_51RlDSnAwiQXA8rArpM7tGeciUvTB9eCuTXQsSARiDt8d0vDE96AfxEAoyQZFnCNVJ67c2IBBH9R0DBRZRCxm7AMr00BulSGmwF"
+);
 
 // =======================
 // DOM ELEMENTS
 // =======================
+
 const itemsEl = document.getElementById("order-items");
 const totalEl = document.getElementById("order-total");
 const shippingEl = document.getElementById("shipping-cost");
 const taxEl = document.getElementById("tax-amount");
 const errorEl = document.getElementById("error-message");
 const form = document.getElementById("payment-form");
-const promoMessageRow = document.getElementById("promo-message");
-const promoMessageText = promoMessageRow.querySelector(".note-text");
+
 const emailInput = document.getElementById("email");
 
-
-
-// Address fields
 const firstName = document.getElementById("first-name");
 const lastName = document.getElementById("last-name");
 const address1 = document.getElementById("address-line1");
+const apartment = document.getElementById("apartment");
 const city = document.getElementById("city");
 const stateInput = document.getElementById("state");
 const zip = document.getElementById("zip");
 const country = document.getElementById("country");
 
+const discountInput = document.getElementById("discount-input");
+const applyDiscountBtn = document.getElementById("apply-discount");
+
 
 // =======================
-// Render Cart + Calculate Totals
+// CATEGORY WEIGHTS
 // =======================
 
-function calculateTotals() {
-
-  subtotal = 0;
-  totalWeight = 0;
-
-  cart.forEach(item => {
-    subtotal += item.price * item.qty;
-    totalWeight += (item.weight || 1) * item.qty;
-  });
-
-}
-
-// =======================
-// CATEGORY WEIGHTS (oz)
-// =======================
 const CATEGORY_WEIGHTS = {
   "sticker": 0.2,
   "sticker-sheet": 0.3,
@@ -72,39 +61,130 @@ const CATEGORY_WEIGHTS = {
   "crochet-plush": 10.0
 };
 
+
+// =======================
+// WEIGHT
+// =======================
+
 function resolveWeight(item) {
-  return item.weight || CATEGORY_WEIGHTS[item.category] || 1;
+  return Number(
+    item.weight ||
+    CATEGORY_WEIGHTS[item.category] ||
+    1
+  );
 }
 
 
 // =======================
-// shipping logic
+// CALCULATE CART
 // =======================
 
+function calculateTotals() {
 
-function calculateShipping(country) {
+  subtotal = 0;
+  totalWeight = 0;
 
-  if (subtotal >= 30) return 0;
+  cart.forEach(item => {
 
-  if (country !== "US") {
+    const price = Number(item.price) || 0;
+    const qty = Number(item.qty) || 0;
+
+    subtotal += price * qty;
+
+    totalWeight += resolveWeight(item) * qty;
+  });
+
+}
+
+
+// =======================
+// RENDER ORDER ITEMS
+// =======================
+
+function renderOrderItems() {
+
+  if (!itemsEl) return;
+
+  itemsEl.innerHTML = "";
+
+  cart.forEach(item => {
+
+    const itemTotal =
+      (Number(item.price) || 0) *
+      (Number(item.qty) || 0);
+
+    const row = document.createElement("div");
+
+    row.className = "checkout-order-item";
+
+    row.innerHTML = `
+      <div class="checkout-item-info">
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+          class="checkout-item-image"
+        >
+
+        <div>
+          <strong>${item.name}</strong>
+          <small>
+            ${item.option || "Standard"} × ${item.qty}
+          </small>
+        </div>
+      </div>
+
+      <span>$${itemTotal.toFixed(2)}</span>
+    `;
+
+    itemsEl.appendChild(row);
+  });
+}
+
+
+// =======================
+// SHIPPING
+// =======================
+
+function calculateShipping(countryCode) {
+
+  if (subtotal >= 30) {
+    return 0;
+  }
+
+  if (countryCode !== "US") {
     return 15;
   }
 
-  if (totalWeight <= 1) return 0.95;
-  if (totalWeight <= 2) return 1.95;
-  if (totalWeight <= 4) return 7.95;
+  if (totalWeight <= 1) {
+    return 0.95;
+  }
+
+  if (totalWeight <= 2) {
+    return 1.95;
+  }
+
+  if (totalWeight <= 4) {
+    return 7.95;
+  }
 
   return 9.55;
 }
 
 
 // =======================
-// discounts
+// DISCOUNTS
 // =======================
 
 const DISCOUNTS = {
-  WELCOME10: { type: "percent", value: 0.10 },
-  LIL5: { type: "fixed", value: 5 }
+  WELCOME10: {
+    type: "percent",
+    value: 0.10
+  },
+
+  LIL5: {
+    type: "fixed",
+    value: 5
+  }
 };
 
 function applyDiscount(code) {
@@ -112,29 +192,31 @@ function applyDiscount(code) {
   const rule = DISCOUNTS[code];
 
   if (!rule) {
-    alert("Invalid discount code");
+    errorEl.textContent = "Invalid discount code 💔";
     return;
   }
 
   if (rule.type === "percent") {
     discount = subtotal * rule.value;
   } else {
-    discount = rule.value;
+    discount = Math.min(rule.value, subtotal);
   }
 
   updateTotals();
-  rebuildStripe();
 
+  rebuildStripe();
 }
 
+
 // =======================
-// DISCOUNT UI HANDLER
+// DISCOUNT BUTTON
 // =======================
-const discountInput = document.getElementById("discount-input");
-const applyDiscountBtn = document.getElementById("apply-discount");
 
 applyDiscountBtn.addEventListener("click", () => {
-  const code = discountInput.value.trim().toUpperCase();
+
+  const code = discountInput.value
+    .trim()
+    .toUpperCase();
 
   if (!DISCOUNTS[code]) {
     errorEl.textContent = "Invalid discount code 💔";
@@ -142,6 +224,7 @@ applyDiscountBtn.addEventListener("click", () => {
   }
 
   errorEl.textContent = "";
+
   applyDiscount(code);
 });
 
@@ -150,214 +233,421 @@ discountInput.addEventListener("input", () => {
 });
 
 
+// =======================
+// ADDRESS VALIDATION
+// =======================
+
+function isAddressComplete() {
+
+  const fields = [
+    emailInput,
+    firstName,
+    lastName,
+    address1,
+    city,
+    stateInput,
+    zip,
+    country
+  ];
+
+  return fields.every(
+    field =>
+      field &&
+      field.value.trim() !== ""
+  );
+}
 
 
 // =======================
 // TAX
 // =======================
-const TAX_RATES = {
-  CA: 0.075,
-  NY: 0.04,
-  TX: 0.0625,
-  FL: 0.06,
-  default: 0.05
-};
 
+function calculateTax() {
 
-
-
-// =======================
-// ADDRESS VALIDATION
-// =======================
-function isAddressComplete() {
-  const fields = [firstName, lastName, address1, city, stateInput, zip, country];
-  return fields.every(f => f && f.value.trim() !== "");
+  // Keep your current 5% tax logic.
+  return subtotal * 0.05;
 }
 
-["change", "blur"].forEach(evt => {
-  country.addEventListener(evt, updateTotals);
-  stateInput.addEventListener(evt, updateTotals);
-});
-
 
 // =======================
-// update totals
+// UPDATE TOTALS
 // =======================
+
 function updateTotals() {
 
-  const country = document.getElementById("country").value || "US";
+  const countryCode =
+    country.value || "US";
 
-  shipping = calculateShipping(country);
+  shipping =
+    calculateShipping(countryCode);
 
-  tax = subtotal * 0.05;
+  tax =
+    calculateTax();
 
-  const total = subtotal - discount + shipping + tax;
+  const total =
+    subtotal -
+    discount +
+    shipping +
+    tax;
 
-  localStorage.setItem("cartTotal", Math.round(total * 100));
-totalEl.textContent = `$${total.toFixed(2)}`;
-shippingEl.textContent = `$${shipping.toFixed(2)}`;
-taxEl.textContent = `$${tax.toFixed(2)}`;
+  localStorage.setItem(
+    "cartTotal",
+    Math.round(total * 100)
+  );
+
+  totalEl.textContent =
+    `$${total.toFixed(2)}`;
+
+  shippingEl.textContent =
+    `$${shipping.toFixed(2)}`;
+
+  taxEl.textContent =
+    `$${tax.toFixed(2)}`;
+
+  const discountRow =
+    document.getElementById("discount-row");
+
+  const discountAmount =
+    document.getElementById("discount-amount");
+
+  if (discount > 0) {
+
+    if (discountRow) {
+      discountRow.style.display = "flex";
+    }
+
+    if (discountAmount) {
+      discountAmount.textContent =
+        `-$${discount.toFixed(2)}`;
+    }
+
+  } else {
+
+    if (discountRow) {
+      discountRow.style.display = "none";
+    }
+  }
 }
 
 
+// =======================
+// CREATE PAYMENT INTENT
+// =======================
 
 async function createPaymentIntent() {
 
-  const customerEmail = emailInput.value; // ✅ FIX HERE
+  const customerEmail =
+    emailInput.value.trim();
 
-  const res = await fetch("/api/create-payment-intent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      cart,
-      shipping,
-      tax,
-      discount,
-      customerEmail,
+  const res = await fetch(
+    "/api/create-payment-intent",
+    {
+      method: "POST",
 
-      // ✅ FIX FIELD IDS (you had wrong ones too)
-      firstName: firstName.value,
-      lastName: lastName.value,
-      address: address1.value,
-      apartment: document.getElementById("apartment")?.value || "",
-      city: city.value,
-      state: stateInput.value,
-      zip: zip.value,
-      country: country.value
-    })
-  });
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+
+        cart,
+
+        shipping,
+        tax,
+        discount,
+
+        customerEmail,
+
+        firstName: firstName.value,
+        lastName: lastName.value,
+
+        address: address1.value,
+
+        apartment:
+          apartment?.value || "",
+
+        city: city.value,
+        state: stateInput.value,
+        zip: zip.value,
+        country: country.value
+
+      })
+    }
+  );
 
   const data = await res.json();
 
-  paymentIntentId = data.paymentIntentId;
+  if (!res.ok) {
+    throw new Error(
+      data.error ||
+      "Unable to create payment."
+    );
+  }
+
+  paymentIntentId =
+    data.paymentIntentId;
 
   return data.clientSecret;
 }
 
 
-
 // =======================
-// SUBMIT
+// MOUNT STRIPE
 // =======================
-
-async function ensureStripeMounted() {
-  if (elements) return; // already mounted
-}
-
-
-form.addEventListener("submit", async e => {
-  e.preventDefault();
- 
-
-  if (!isAddressComplete()) {
-    errorEl.textContent = "Please complete your delivery address 💕";
-    return;
-  }
-  
-  
-  
-  // Make sure totals are updated
-  const finalShipping = shipping;
-  const finalTax = tax;
-  const finalDiscount = discount;
-  const finalSubtotal = subtotal;
-  const finalTotal = subtotal - discount + tax + shipping;
- let finalShippingType = "USPS First-Class";
-
-if (shipping === 0) finalShippingType = "Free Shipping";
-if (country.value !== "US") finalShippingType = "USPS International";
-
-  // Build order object
-  const orderData = {
-    items: cart,
-    subtotal: finalSubtotal,
-    shipping: finalShipping,
-    discount: finalDiscount,
-    tax: finalTax,
-    total: finalTotal,
-    shippingType: finalShippingType,
-    address: address1.value,
-    city: city.value,
-    state: stateInput.value,
-    zip: zip.value,
-    country: country.value
-  };
-
-  // Save order to localStorage
-  localStorage.setItem("lastOrder", JSON.stringify(orderData));
-  console.log("💾 saved lastOrder:", localStorage.getItem("lastOrder"));
-
-  // Slight delay to ensure save completes
-  await new Promise(resolve => setTimeout(resolve, 200));  // 200ms
-
-  // Send shipping to Stripe 
-  await fetch("/api/update-shipping", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      paymentIntentId: window.paymentIntentId,
-      address: {
-        name: `${firstName.value} ${lastName.value}`,
-        line1: address1.value,
-        city: city.value,
-        state: stateInput.value,
-        zip: zip.value,
-        country: country.value
-      }
-    })
-  });
-  
-
-  
-  // Now confirm payment and let Stripe redirect
-  const { error } = await stripe.confirmPayment({
-    elements,
-    confirmParams: {
-      return_url: `${window.location.origin}/success.html`
-    }
-  });
-
-  if (error) {
-    errorEl.textContent = error.message;
-    console.error(error);
-  }
-});
-
-
-// =======================
-// mount stripe element
-// =======================
-
-
 
 async function mountStripe() {
 
-  const clientSecret = await createPaymentIntent();
+  try {
 
-  const container = document.getElementById("payment-element");
-  container.innerHTML = "";
+    if (!isAddressComplete()) {
 
-  elements = stripe.elements({ clientSecret });
+      errorEl.textContent =
+        "Please complete your contact and delivery information first 💕";
 
-  paymentElement = elements.create("payment");
+      return;
+    }
 
-  paymentElement.mount("#payment-element");
+    calculateTotals();
+    updateTotals();
 
+    const clientSecret =
+      await createPaymentIntent();
+
+    const container =
+      document.getElementById(
+        "payment-element"
+      );
+
+    container.innerHTML = "";
+
+    elements =
+      stripe.elements({
+        clientSecret
+      });
+
+    paymentElement =
+      elements.create("payment");
+
+    paymentElement.mount(
+      "#payment-element"
+    );
+
+    errorEl.textContent = "";
+
+  } catch (error) {
+
+    console.error(
+      "❌ Stripe mount error:",
+      error
+    );
+
+    errorEl.textContent =
+      error.message ||
+      "Unable to load payment form.";
+  }
 }
 
 
+// =======================
+// REBUILD STRIPE
+// =======================
+
 async function rebuildStripe() {
+
+  if (!isAddressComplete()) {
+    return;
+  }
+
   await mountStripe();
 }
 
 
+// =======================
+// SUBMIT PAYMENT
+// =======================
+
+form.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    errorEl.textContent = "";
+
+    // Make sure customer information exists
+    if (!isAddressComplete()) {
+
+      errorEl.textContent =
+        "Please complete your contact and delivery information 💕";
+
+      return;
+    }
+
+    // Make sure Stripe has been mounted
+    if (!elements) {
+
+      await mountStripe();
+
+      if (!elements) {
+        return;
+      }
+    }
+
+    // Recalculate everything before payment
+    calculateTotals();
+    updateTotals();
+
+    const finalTotal =
+      subtotal -
+      discount +
+      shipping +
+      tax;
+
+    const finalShippingType =
+      shipping === 0
+        ? "Free Shipping"
+        : country.value !== "US"
+          ? "USPS International"
+          : "USPS First-Class";
 
 
+    // =======================
+    // SAVE ORDER INFO
+    // =======================
 
+    const orderData = {
+
+      items: cart,
+
+      subtotal,
+
+      shipping,
+
+      discount,
+
+      tax,
+
+      total: finalTotal,
+
+      shippingType:
+        finalShippingType,
+
+      email:
+        emailInput.value,
+
+      firstName:
+        firstName.value,
+
+      lastName:
+        lastName.value,
+
+      address:
+        address1.value,
+
+      apartment:
+        apartment?.value || "",
+
+      city:
+        city.value,
+
+      state:
+        stateInput.value,
+
+      zip:
+        zip.value,
+
+      country:
+        country.value
+    };
+
+    localStorage.setItem(
+      "lastOrder",
+      JSON.stringify(orderData)
+    );
+
+    console.log(
+      "💾 saved lastOrder:",
+      orderData
+    );
+
+
+    // =======================
+    // CONFIRM STRIPE PAYMENT
+    // =======================
+
+    const {
+      error
+    } =
+      await stripe.confirmPayment({
+
+        elements,
+
+        confirmParams: {
+
+          return_url:
+            `${window.location.origin}/success.html`
+
+        }
+      });
+
+    if (error) {
+
+      errorEl.textContent =
+        error.message;
+
+      console.error(
+        "❌ Stripe payment error:",
+        error
+      );
+    }
+
+  }
+);
+
+
+// =======================
+// COUNTRY / ADDRESS CHANGES
+// =======================
+
+[
+  country,
+  stateInput
+].forEach(field => {
+
+  field.addEventListener(
+    "change",
+    () => {
+
+      calculateTotals();
+      updateTotals();
+
+    }
+  );
+
+});
+
+
+// =======================
+// INITIALIZE
+// =======================
 
 calculateTotals();
+
+renderOrderItems();
+
 updateTotals();
-mountStripe();
 
+console.log(
+  "🛒 Cart:",
+  cart
+);
 
+console.log(
+  "💰 Subtotal:",
+  subtotal
+);
 
+console.log(
+  "⚖️ Weight:",
+  totalWeight
+);
