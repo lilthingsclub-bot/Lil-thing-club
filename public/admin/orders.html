@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lil Things Club | Orders</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Pacifico&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="products.css">
+</head>
+
+<body class="admin-page">
+
+<header class="admin-header">
+  <div>
+    <div class="admin-logo">Lil Things Club ♡</div>
+    <h1>Orders</h1>
+  </div>
+
+  <div class="header-actions">
+    <a href="products.html">Products</a>
+    <a href="../products-objects.html" target="_blank">View Shop</a>
+    <button id="logoutBtn" class="ghost-btn">Log out</button>
+  </div>
+</header>
+
+<main class="admin-shell">
+
+  <!-- =========================
+       ORDER SUMMARY
+  ========================== -->
+
+  <section class="orders-summary">
+
+    <div class="summary-card">
+      <span class="summary-label">Total Orders</span>
+      <strong id="totalOrders">—</strong>
+    </div>
+
+    <div class="summary-card">
+      <span class="summary-label">Revenue</span>
+      <strong id="totalRevenue">$0.00</strong>
+    </div>
+
+    <div class="summary-card">
+      <span class="summary-label">Needs Fulfillment</span>
+      <strong id="needsFulfillment">—</strong>
+    </div>
+
+    <div class="summary-card">
+      <span class="summary-label">Shipped</span>
+      <strong id="shippedOrders">—</strong>
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ORDERS LIST
+  ========================== -->
+
+  <section class="products-card">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="eyebrow">DATABASE</span>
+        <h2>Your Orders</h2>
+      </div>
+
+      <div class="orders-controls">
+
+        <input
+          id="searchOrders"
+          class="search"
+          type="search"
+          placeholder="Search orders..."
+        >
+
+        <select id="statusFilter" class="search">
+          <option value="all">All statuses</option>
+          <option value="paid">Paid</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+          <option value="refunded">Refunded</option>
+          <option value="pending">Pending</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div id="ordersTable">
+      <p class="muted">Loading orders...</p>
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ORDER DETAILS
+  ========================== -->
+
+  <section id="orderDetailsCard" class="products-card hidden">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="eyebrow">ORDER DETAILS</span>
+        <h2 id="orderDetailsTitle">Order</h2>
+      </div>
+
+      <button
+        id="closeOrderBtn"
+        class="ghost-btn"
+        type="button"
+      >
+        Close
+      </button>
+
+    </div>
+
+    <div id="orderDetails"></div>
+
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/supabase.js"></script>
+
+<script src="orders.js"></script>
+
+</body>
+</html>
