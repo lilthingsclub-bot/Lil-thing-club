@@ -469,75 +469,162 @@ function renderOrders(orders) {
 
           const nextStatus =
             button.dataset.nextStatus;
+// --------------------------------
+// Shipped — tracking optional
+// --------------------------------
 
-          // --------------------------------
-          // Shipped requires tracking number
-          // --------------------------------
+if (nextStatus === "shipped") {
 
-          if (nextStatus === "shipped") {
+  const shippingChoice = prompt(
+    "How was this order shipped?\n\n" +
+    "Type 1 for USPS with tracking\n" +
+    "Type 2 for USPS First-Class Mail with no tracking"
+  );
 
-            const trackingNumber =
-              prompt(
-                "Enter the USPS tracking number:"
-              );
+  if (shippingChoice === null) {
+    return;
+  }
 
-            if (trackingNumber === null) {
-              return;
-            }
+  const choice = shippingChoice.trim();
 
-            const trimmedTracking =
-              trackingNumber.trim();
+  // -------------------------------
+  // USPS WITH TRACKING
+  // -------------------------------
 
-            if (!trimmedTracking) {
+  if (choice === "1") {
 
-              alert(
-                "Please enter a tracking number before marking this order as shipped."
-              );
+    const trackingNumber =
+      prompt("Enter the USPS tracking number:");
 
-              return;
-            }
+    if (trackingNumber === null) {
+      return;
+    }
 
-            button.disabled = true;
-            button.textContent = "Saving...";
+    const trimmedTracking =
+      trackingNumber.trim();
 
+    if (!trimmedTracking) {
 
-            const { data, error } =
-              await supabaseClient
-                .from("orders")
-                .update({
-                  status: "shipped",
-                  tracking_number: trimmedTracking,
-                  shipped_at:
-                    order.shipped_at ||
-                    new Date().toISOString()
-                })
-                .eq("id", order.id)
-                .select()
-                .single();
+      alert(
+        "Please enter a tracking number."
+      );
 
+      return;
+    }
 
-            if (error) {
-
-              console.error(
-                "❌ Failed to update order:",
-                error
-              );
-
-              alert(
-                "Couldn't update the order. Please try again."
-              );
-
-              button.disabled = false;
-              button.textContent = "Mark Shipped";
-
-              return;
-            }
+    button.disabled = true;
+    button.textContent = "Saving...";
 
 
-            Object.assign(order, data);
+    const { data, error } =
+      await supabaseClient
+        .from("orders")
+        .update({
+          status: "shipped",
+          tracking_number: trimmedTracking,
+          shipped_at:
+            order.shipped_at ||
+            new Date().toISOString()
+        })
+        .eq("id", order.id)
+        .select()
+        .single();
 
-          }
 
+    if (error) {
+
+      console.error(
+        "❌ Failed to update order:",
+        error
+      );
+
+      alert(
+        "Couldn't update the order. Please try again."
+      );
+
+      button.disabled = false;
+      button.textContent = "Mark Shipped";
+
+      return;
+    }
+
+
+    Object.assign(order, data);
+
+  }
+
+
+  // -------------------------------
+  // USPS WITHOUT TRACKING
+  // -------------------------------
+
+  else if (choice === "2") {
+
+    const confirmed =
+      confirm(
+        "Mark this order as shipped without a tracking number?"
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+
+    const { data, error } =
+      await supabaseClient
+        .from("orders")
+        .update({
+          status: "shipped",
+          tracking_number: null,
+          shipped_at:
+            order.shipped_at ||
+            new Date().toISOString()
+        })
+        .eq("id", order.id)
+        .select()
+        .single();
+
+
+    if (error) {
+
+      console.error(
+        "❌ Failed to update order:",
+        error
+      );
+
+      alert(
+        "Couldn't update the order. Please try again."
+      );
+
+      button.disabled = false;
+      button.textContent = "Mark Shipped";
+
+      return;
+    }
+
+
+    Object.assign(order, data);
+
+  }
+
+
+  // -------------------------------
+  // INVALID CHOICE
+  // -------------------------------
+
+  else {
+
+    alert(
+      "Please enter 1 for tracking or 2 for no tracking."
+    );
+
+    return;
+  }
+
+}
 
           // --------------------------------
           // Processing / Delivered
