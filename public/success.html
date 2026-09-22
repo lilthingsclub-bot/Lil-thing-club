@@ -139,106 +139,17 @@
 
     try {
 
-      // ============================
-      // GET CUSTOMER EMAIL
-      // ============================
-
-      /*
-        We saved the order locally during checkout
-        so we can use the email for verification.
-
-        The actual order itself will now come
-        from Supabase through our secure API.
-      */
-
-      let customerEmail = "";
-
-      const savedOrder =
-        localStorage.getItem(
-          `order_${paymentIntentId}`
-        );
-
-      if (savedOrder) {
-
-        try {
-
-          const parsedOrder =
-            JSON.parse(savedOrder);
-
-          customerEmail =
-            parsedOrder.email || "";
-
-        } catch (error) {
-
-          console.error(
-            "❌ Could not read saved email:",
-            error
-          );
-
-        }
-
-      }
-
-
-      // ============================
-      // FALLBACK TO LAST ORDER
-      // ============================
-
-      if (!customerEmail) {
-
-        const lastOrder =
-          localStorage.getItem("lastOrder");
-
-        if (lastOrder) {
-
-          try {
-
-            const parsedOrder =
-              JSON.parse(lastOrder);
-
-            customerEmail =
-              parsedOrder.email || "";
-
-          } catch (error) {
-
-            console.error(
-              "❌ Could not read lastOrder:",
-              error
-            );
-
-          }
-
-        }
-
-      }
-
-
-      // ============================
-      // EMAIL REQUIRED
-      // ============================
-
-      if (!customerEmail) {
-
-        throw new Error(
-          "We could not verify the email for this order."
-        );
-
-      }
-
+     
 
       // ============================
       // CALL SECURE ORDER API
       // ============================
-
-      const response =
-        await fetch(
-          `/api/get-order?payment_intent_id=${encodeURIComponent(
-            paymentIntentId
-          )}&email=${encodeURIComponent(
-            customerEmail
-          )}`
-        );
-
+const response =
+  await fetch(
+    `/api/get-order?payment_intent_id=${encodeURIComponent(
+      paymentIntentId
+    )}`
+  );
 
       const data =
         await response.json();
