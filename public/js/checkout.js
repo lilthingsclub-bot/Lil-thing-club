@@ -90,10 +90,11 @@ function calculateShipping(country) {
     return 15;
   }
 
-  if (totalWeight <= 1) return 0.75;
-  if (totalWeight <= 8) return 5.50;
+  if (totalWeight <= 1) return 0.95;
+  if (totalWeight <= 2) return 1.95;
+  if (totalWeight <= 4) return 7.95;
 
-  return 7.50;
+  return 9.55;
 }
 
 
