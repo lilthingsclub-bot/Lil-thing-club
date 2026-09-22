@@ -604,18 +604,84 @@ function showOrderDetails(order) {
 
     </div>
 
+    <div class="detail-box order-management-box">
 
-    <div class="detail-box">
+      <h3>Order Management</h3>
 
-      <h3>Tracking</h3>
+      <div class="order-management-fields">
 
-      <p>
-        ${
-          order.tracking_number
-            ? escapeHtml(order.tracking_number)
-            : "No tracking number yet."
-        }
-      </p>
+        <label for="orderStatus">
+          Order Status
+        </label>
+
+        <select id="orderStatus">
+
+          <option value="pending"
+            ${order.status === "pending" ? "selected" : ""}>
+            Pending
+          </option>
+
+          <option value="paid"
+            ${order.status === "paid" ? "selected" : ""}>
+            Paid
+          </option>
+
+          <option value="processing"
+            ${order.status === "processing" ? "selected" : ""}>
+            Processing
+          </option>
+
+          <option value="shipped"
+            ${order.status === "shipped" ? "selected" : ""}>
+            Shipped
+          </option>
+
+          <option value="delivered"
+            ${order.status === "delivered" ? "selected" : ""}>
+            Delivered
+          </option>
+
+          <option value="cancelled"
+            ${order.status === "cancelled" ? "selected" : ""}>
+            Cancelled
+          </option>
+
+          <option value="refunded"
+            ${order.status === "refunded" ? "selected" : ""}>
+            Refunded
+          </option>
+
+        </select>
+
+
+        <label for="trackingNumber">
+          Tracking Number
+        </label>
+
+        <input
+          type="text"
+          id="trackingNumber"
+          value="${escapeHtml(order.tracking_number || "")}"
+          placeholder="Enter USPS tracking number"
+          autocomplete="off"
+        />
+
+
+        <button
+          type="button"
+          id="saveOrderChanges"
+          class="small-btn"
+        >
+          Save Changes
+        </button>
+
+        <p
+          id="orderSaveMessage"
+          class="muted"
+          style="display:none;"
+        ></p>
+
+      </div>
 
     </div>
 
@@ -623,11 +689,148 @@ function showOrderDetails(order) {
 
 
   card.classList.remove("hidden");
+    document
+    .getElementById("saveOrderChanges")
+    .addEventListener(
+      "click",
+      () => saveOrderChanges(order)
+    );
 
   card.scrollIntoView({
     behavior: "smooth",
     block: "start"
   });
+}
+
+// =====================================
+// SAVE ORDER STATUS + TRACKING
+// =====================================
+
+async function saveOrderChanges(order) {
+
+  const statusSelect =
+    document.getElementById("orderStatus");
+
+  const trackingInput =
+    document.getElementById("trackingNumber");
+
+  const saveButton =
+    document.getElementById("saveOrderChanges");
+
+  const message =
+    document.getElementById("orderSaveMessage");
+
+
+  if (!statusSelect || !trackingInput) {
+    return;
+  }
+
+
+  const newStatus =
+    statusSelect.value;
+
+  const newTracking =
+    trackingInput.value.trim();
+
+
+  saveButton.disabled = true;
+  saveButton.textContent = "Saving...";
+
+
+  message.style.display = "none";
+
+
+  const updateData = {
+    status: newStatus,
+    tracking_number:
+      newTracking || null
+  };
+
+
+  // Automatically record shipping/delivery timestamps
+  if (newStatus === "shipped") {
+
+    updateData.shipped_at =
+      order.shipped_at ||
+      new Date().toISOString();
+
+  }
+
+  if (newStatus === "delivered") {
+
+    updateData.delivered_at =
+      order.delivered_at ||
+      new Date().toISOString();
+
+  }
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("orders")
+    .update(updateData)
+    .eq("id", order.id)
+    .select()
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "❌ Failed to update order:",
+      error
+    );
+
+    message.textContent =
+      "Couldn't save changes. Please try again.";
+
+    message.style.display = "block";
+
+    saveButton.disabled = false;
+    saveButton.textContent = "Save Changes";
+
+    return;
+  }
+
+
+  // Update local order data
+  const index =
+    allOrders.findIndex(
+      item => item.id === order.id
+    );
+
+
+  if (index !== -1) {
+
+    allOrders[index] = data;
+
+  }
+
+
+  // Update the object currently being displayed
+  Object.assign(order, data);
+
+
+  updateSummary();
+
+
+  message.textContent =
+    "Order updated successfully 💕";
+
+  message.style.display = "block";
+
+
+  saveButton.disabled = false;
+  saveButton.textContent = "Save Changes";
+
+
+  // Refresh the order list so the badge changes immediately
+  renderOrders(
+    getCurrentlyFilteredOrders()
+  );
+
 }
 
 
@@ -714,6 +917,63 @@ function filterOrders() {
   renderOrders(filtered);
 }
 
+
+
+// =====================================
+// GET CURRENTLY FILTERED ORDERS
+// =====================================
+
+function getCurrentlyFilteredOrders() {
+
+  const search =
+    document
+      .getElementById("searchOrders")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const status =
+    document
+      .getElementById("statusFilter")
+      .value;
+
+
+  return allOrders.filter(order => {
+
+    const customer =
+      [
+        order.first_name,
+        order.last_name,
+        order.customer_email
+      ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+
+    const payment =
+      String(
+        order.stripe_payment_id || ""
+      ).toLowerCase();
+
+
+    const matchesSearch =
+      !search ||
+      customer.includes(search) ||
+      payment.includes(search) ||
+      order.id.toLowerCase().includes(search);
+
+
+    const matchesStatus =
+      status === "all" ||
+      (order.status || "").toLowerCase() === status;
+
+
+    return matchesSearch && matchesStatus;
+
+  });
+
+}
 
 // =====================================
 // HELPERS
