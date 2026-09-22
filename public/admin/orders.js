@@ -604,6 +604,42 @@ function showOrderDetails(order) {
 
     </div>
 
+    <div class="detail-box">
+  <h3>Shipping</h3>
+
+  <div class="detail-row">
+    <span>Status</span>
+    <strong>${escapeHtml(order.status || "—")}</strong>
+  </div>
+
+  <div class="detail-row">
+    <span>Tracking Number</span>
+    <strong>${escapeHtml(order.tracking_number || "Not added")}</strong>
+  </div>
+
+  <div class="detail-row">
+    <span>Shipped At</span>
+    <strong>
+      ${
+        order.shipped_at
+          ? new Date(order.shipped_at).toLocaleString()
+          : "Not shipped"
+      }
+    </strong>
+  </div>
+
+  <div class="detail-row">
+    <span>Delivered At</span>
+    <strong>
+      ${
+        order.delivered_at
+          ? new Date(order.delivered_at).toLocaleString()
+          : "Not delivered"
+      }
+    </strong>
+  </div>
+</div>
+
     <div class="detail-box order-management-box">
 
       <h3>Order Management</h3>
