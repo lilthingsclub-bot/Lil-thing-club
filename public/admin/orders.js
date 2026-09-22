@@ -235,6 +235,7 @@ function updateSummary() {
 }
 
 
+```js
 // =====================================
 // RENDER ORDERS
 // =====================================
@@ -274,7 +275,7 @@ function renderOrders(orders) {
             <th>Items</th>
             <th>Total</th>
             <th>Status</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
 
         </thead>
@@ -302,6 +303,51 @@ function renderOrders(orders) {
                 .join(" ") ||
               order.customer_email ||
               "Guest";
+
+
+            // -------------------------------
+            // QUICK STATUS ACTION
+            // -------------------------------
+
+            let quickAction = "";
+
+            if (order.status === "paid") {
+
+              quickAction = `
+                <button
+                  class="small-btn quick-status-btn"
+                  data-order-id="${order.id}"
+                  data-next-status="processing"
+                >
+                  Start Processing
+                </button>
+              `;
+
+            } else if (order.status === "processing") {
+
+              quickAction = `
+                <button
+                  class="small-btn quick-status-btn"
+                  data-order-id="${order.id}"
+                  data-next-status="shipped"
+                >
+                  Mark Shipped
+                </button>
+              `;
+
+            } else if (order.status === "shipped") {
+
+              quickAction = `
+                <button
+                  class="small-btn quick-status-btn"
+                  data-order-id="${order.id}"
+                  data-next-status="delivered"
+                >
+                  Mark Delivered
+                </button>
+              `;
+
+            }
 
 
             return `
@@ -347,12 +393,18 @@ function renderOrders(orders) {
                 </td>
 
                 <td>
-                  <button
-                    class="small-btn view-order-btn"
-                    data-order-id="${order.id}"
-                  >
-                    View
-                  </button>
+                  <div class="order-actions">
+
+                    <button
+                      class="small-btn view-order-btn"
+                      data-order-id="${order.id}"
+                    >
+                      View
+                    </button>
+
+                    ${quickAction}
+
+                  </div>
                 </td>
 
               </tr>
@@ -369,6 +421,10 @@ function renderOrders(orders) {
 
   `;
 
+
+  // =====================================
+  // VIEW ORDER BUTTONS
+  // =====================================
 
   document
     .querySelectorAll(".view-order-btn")
@@ -391,7 +447,75 @@ function renderOrders(orders) {
       );
 
     });
-}
+
+
+  // =====================================
+  // QUICK STATUS BUTTONS
+  // =====================================
+
+  document
+    .querySelectorAll(".quick-status-btn")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        async () => {
+
+          const order = allOrders.find(
+            item =>
+              item.id === button.dataset.orderId
+          );
+
+          if (!order) return;
+
+          const nextStatus =
+            button.dataset.nextStatus;
+
+          // --------------------------------
+          // Shipped requires tracking number
+          // --------------------------------
+
+          if (nextStatus === "shipped") {
+
+            const trackingNumber =
+              prompt(
+                "Enter the USPS tracking number:"
+              );
+
+            if (trackingNumber === null) {
+              return;
+            }
+
+            const trimmedTracking =
+              trackingNumber.trim();
+
+            if (!trimmedTracking) {
+
+              alert(
+                "Please enter a tracking number before marking this order as shipped."
+              );
+
+              return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Saving...";
+
+
+            const { data, error } =
+              await supabaseClient
+                .from("orders")
+                .update({
+                  status: "shipped",
+                  tracking_number: trimmedTracking,
+                  shipped_at:
+                    order.shipped_at ||
+                    new Date().toISOString()
+                })
+                .eq("id", order.id)
+                .select()
+                .
+```
 
 
 // =====================================
