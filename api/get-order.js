@@ -1,7 +1,9 @@
 const Stripe = require("stripe");
 const { createClient } = require("@supabase/supabase-js");
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(
+  process.env.STRIPE_SECRET_KEY
+);
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -9,6 +11,7 @@ const supabase = createClient(
 );
 
 module.exports = async function handler(req, res) {
+
   // =========================
   // ONLY ALLOW GET
   // =========================
@@ -20,26 +23,24 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+
     const {
-      payment_intent_id,
-      email
+      payment_intent_id
     } = req.query;
 
+
     // =========================
-    // VALIDATE REQUEST
+    // VALIDATE PAYMENT INTENT
     // =========================
 
     if (!payment_intent_id) {
+
       return res.status(400).json({
         error: "Missing payment intent ID"
       });
+
     }
 
-    if (!email) {
-      return res.status(400).json({
-        error: "Missing email"
-      });
-    }
 
     // =========================
     // VERIFY PAYMENT WITH STRIPE
@@ -50,38 +51,21 @@ module.exports = async function handler(req, res) {
         payment_intent_id
       );
 
+
     if (
       paymentIntent.status !==
       "succeeded"
     ) {
+
       return res.status(400).json({
         error: "Payment has not been completed"
       });
+
     }
 
-    // =========================
-    // VERIFY EMAIL
-    // =========================
-
-    const stripeEmail =
-      paymentIntent.receipt_email
-        ?.trim()
-        .toLowerCase();
-
-    const requestedEmail =
-      email.trim().toLowerCase();
-
-    if (
-      !stripeEmail ||
-      stripeEmail !== requestedEmail
-    ) {
-      return res.status(403).json({
-        error: "Order verification failed"
-      });
-    }
 
     // =========================
-    // FIND ORDER
+    // FIND ORDER IN SUPABASE
     // =========================
 
     const {
@@ -96,7 +80,9 @@ module.exports = async function handler(req, res) {
       )
       .single();
 
+
     if (orderError) {
+
       console.error(
         "❌ Order lookup failed:",
         orderError
@@ -105,17 +91,23 @@ module.exports = async function handler(req, res) {
       return res.status(404).json({
         error: "Order not found"
       });
+
     }
 
+
     // =========================
-    // RETURN SAFE ORDER DATA
+    // RETURN ORDER
     // =========================
 
     return res.status(200).json({
+
       success: true,
 
       order: {
-        id: order.id,
+
+        id:
+          order.id,
+
         stripe_payment_id:
           order.stripe_payment_id,
 
@@ -169,17 +161,24 @@ module.exports = async function handler(req, res) {
 
         created_at:
           order.created_at
+
       }
+
     });
 
+
   } catch (error) {
+
     console.error(
       "❌ Get order error:",
       error
     );
 
     return res.status(500).json({
-      error: "Unable to retrieve order"
+      error:
+        "Unable to retrieve order"
     });
+
   }
+
 };
