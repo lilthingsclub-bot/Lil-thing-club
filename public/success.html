@@ -87,51 +87,186 @@
   Thank you for visiting Lil Things Club.  
   Hope your snail mail brings warmth to your heart — can’t wait to see you again 💕
 </section>
-
+  
 
 <script>
-  const order = JSON.parse(localStorage.getItem("lastOrder"));
+
+  // ============================
+  // GET ORDER ID FROM URL
+  // ============================
+
+  const params = new URLSearchParams(window.location.search);
+
+  const orderId =
+    params.get("order_id");
+
+
+  // ============================
+  // FIND SAVED ORDER
+  // ============================
+
+  let order = null;
+
+
+  // First try the Stripe PaymentIntent-specific order
+  if (orderId) {
+
+    const savedOrder =
+      localStorage.getItem(`order_${orderId}`);
+
+    if (savedOrder) {
+
+      try {
+        order = JSON.parse(savedOrder);
+      } catch (error) {
+        console.error(
+          "❌ Could not read saved order:",
+          error
+        );
+      }
+
+    }
+
+  }
+
+
+  // Fall back to normal lastOrder
+  if (!order) {
+
+    const lastOrder =
+      localStorage.getItem("lastOrder");
+
+    if (lastOrder) {
+
+      try {
+        order = JSON.parse(lastOrder);
+      } catch (error) {
+        console.error(
+          "❌ Could not read lastOrder:",
+          error
+        );
+      }
+
+    }
+
+  }
+
+
+  // ============================
+  // NO ORDER
+  // ============================
 
   if (!order) {
-    document.querySelector(".receipt-card").innerHTML =
-      "<p>No order found. Please return to the shop.</p>";
+
+    document.querySelector(".receipt-card").innerHTML = `
+      <p>
+        No order found. Please return to the shop.
+      </p>
+    `;
+
   } else {
 
-    const itemsEl = document.getElementById("items");
+    // ============================
+    // ITEMS
+    // ============================
+
+    const itemsEl =
+      document.getElementById("items");
 
     order.items.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "summary-item";
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "summary-item";
+
+      const itemTotal =
+        (Number(item.price) || 0) *
+        (Number(item.qty) || 0);
+
       div.innerHTML = `
-        <span>${item.name} × ${item.qty}</span>
-        <span>$${(item.price * item.qty).toFixed(2)}</span>
+        <span>
+          ${item.name} × ${item.qty}
+          ${item.option ? `<small> (${item.option})</small>` : ""}
+        </span>
+
+        <span>
+          $${itemTotal.toFixed(2)}
+        </span>
       `;
+
       itemsEl.appendChild(div);
+
     });
 
-    // Shipping
+
+    // ============================
+    // SHIPPING
+    // ============================
+
     document.getElementById("shipping").textContent =
-      order.shipping === 0 ? "FREE 💕" : `$${order.shipping.toFixed(2)}`;
+      Number(order.shipping) === 0
+        ? "FREE 💕"
+        : `$${Number(order.shipping).toFixed(2)}`;
 
-    // Discount
+
+    // ============================
+    // DISCOUNT
+    // ============================
+
     document.getElementById("discount").textContent =
-      order.discount ? `-$${order.discount.toFixed(2)}` : "$0.00";
+      Number(order.discount) > 0
+        ? `-$${Number(order.discount).toFixed(2)}`
+        : "$0.00";
 
-    // Tax (simple version — safer)
+
+    // ============================
+    // TAX
+    // ============================
+
     document.getElementById("tax").textContent =
-      `$${order.tax ? order.tax.toFixed(2) : "0.00"}`;
+      `$${Number(order.tax || 0).toFixed(2)}`;
 
-    // Total
+
+    // ============================
+    // TOTAL
+    // ============================
+
     document.getElementById("total").textContent =
-      `$${order.total.toFixed(2)}`;
+      `$${Number(order.total || 0).toFixed(2)}`;
 
-    // Shipping type
+
+    // ============================
+    // SHIPPING METHOD
+    // ============================
+
     document.getElementById("shipping-method").textContent =
       order.shippingType || "Standard";
 
-    // Destination
+
+    // ============================
+    // DESTINATION
+    // ============================
+
     document.getElementById("destination").textContent =
-      `${order.address || ""} ${order.state || ""}, ${order.country || ""}`;
+      `${order.address || ""}, ${order.city || ""}, ${order.state || ""}, ${order.zip || ""}, ${order.country || ""}`;
+
+
+    // ============================
+    // CLEAR CART
+    // ============================
+
+    localStorage.removeItem("cart");
+
+    // Update cart count if the header has one
+    const cartCount =
+      document.getElementById("cartCount");
+
+    if (cartCount) {
+      cartCount.textContent = "0";
+    }
+
   }
 
 </script>
