@@ -558,7 +558,7 @@ form.addEventListener(
 
   return;
 }
-    }
+
 
     // Recalculate everything before payment
     calculateTotals();
