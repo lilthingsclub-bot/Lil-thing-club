@@ -1,0 +1,685 @@
+console.log("✅ orders.js loaded");
+
+let allOrders = [];
+
+
+// =====================================
+// ADMIN AUTH
+// =====================================
+
+async function requireAdmin() {
+  const {
+    data: { session },
+  } = await supabaseClient.auth.getSession();
+
+  if (!session) {
+    location.href = "login.html";
+    return false;
+  }
+
+  const { data, error } =
+    await supabaseClient.rpc("is_lil_things_admin");
+
+  if (error || data !== true) {
+    console.error("Admin verification failed:", error);
+
+    await supabaseClient.auth.signOut();
+
+    location.href = "login.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener("click", async () => {
+
+    await supabaseClient.auth.signOut();
+
+    location.href = "login.html";
+
+  });
+
+
+// =====================================
+// LOAD ORDERS
+// =====================================
+
+async function loadOrders() {
+
+  const { data, error } = await supabaseClient
+    .from("orders")
+    .select("*")
+    .order("created_at", {
+      ascending: false
+    });
+
+  if (error) {
+
+    console.error("❌ Failed to load orders:", error);
+
+    document.getElementById("ordersTable").innerHTML = `
+      <p class="message">
+        We couldn't load your orders.
+      </p>
+    `;
+
+    return;
+  }
+
+  allOrders = data || [];
+
+  updateSummary();
+
+  renderOrders(allOrders);
+}
+
+
+// =====================================
+// SUMMARY
+// =====================================
+
+function updateSummary() {
+
+  const totalOrders = allOrders.length;
+
+  const totalRevenue = allOrders.reduce(
+    (sum, order) => {
+
+      if (
+        order.status === "paid" ||
+        order.status === "processing" ||
+        order.status === "shipped" ||
+        order.status === "delivered"
+      ) {
+        return sum + Number(order.total || 0);
+      }
+
+      return sum;
+
+    },
+    0
+  );
+
+  const needsFulfillment = allOrders.filter(
+    order =>
+      order.status === "paid" ||
+      order.status === "processing"
+  ).length;
+
+  const shippedOrders = allOrders.filter(
+    order =>
+      order.status === "shipped" ||
+      order.status === "delivered"
+  ).length;
+
+
+  document.getElementById("totalOrders").textContent =
+    totalOrders;
+
+  document.getElementById("totalRevenue").textContent =
+    `$${totalRevenue.toFixed(2)}`;
+
+  document.getElementById("needsFulfillment").textContent =
+    needsFulfillment;
+
+  document.getElementById("shippedOrders").textContent =
+    shippedOrders;
+}
+
+
+// =====================================
+// RENDER ORDERS
+// =====================================
+
+function renderOrders(orders) {
+
+  const container =
+    document.getElementById("ordersTable");
+
+  if (!orders.length) {
+
+    container.innerHTML = `
+      <div class="empty-state">
+        <h3>No orders found 💕</h3>
+        <p class="muted">
+          Try changing your search or status filter.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML = `
+
+    <div class="orders-table-wrapper">
+
+      <table class="orders-table">
+
+        <thead>
+
+          <tr>
+            <th>Order</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${orders.map(order => {
+
+            const items = Array.isArray(order.items)
+              ? order.items
+              : [];
+
+            const itemCount = items.reduce(
+              (sum, item) =>
+                sum + Number(item.qty || 0),
+              0
+            );
+
+            const customer =
+              [
+                order.first_name,
+                order.last_name
+              ]
+                .filter(Boolean)
+                .join(" ") ||
+              order.customer_email ||
+              "Guest";
+
+
+            return `
+
+              <tr>
+
+                <td>
+                  <strong>
+                    #${shortOrderId(order.id)}
+                  </strong>
+                </td>
+
+                <td>
+                  ${formatDate(order.created_at)}
+                </td>
+
+                <td>
+                  <div class="customer-cell">
+                    <strong>${escapeHtml(customer)}</strong>
+                    <small>
+                      ${escapeHtml(order.customer_email || "")}
+                    </small>
+                  </div>
+                </td>
+
+                <td>
+                  ${itemCount}
+                  ${itemCount === 1 ? "item" : "items"}
+                </td>
+
+                <td>
+                  <strong>
+                    $${Number(order.total || 0).toFixed(2)}
+                  </strong>
+                </td>
+
+                <td>
+                  <span class="status-badge status-${escapeHtml(
+                    order.status || "unknown"
+                  )}">
+                    ${formatStatus(order.status)}
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    class="small-btn view-order-btn"
+                    data-order-id="${order.id}"
+                  >
+                    View
+                  </button>
+                </td>
+
+              </tr>
+
+            `;
+
+          }).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+
+  document
+    .querySelectorAll(".view-order-btn")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const order = allOrders.find(
+            item =>
+              item.id === button.dataset.orderId
+          );
+
+          if (order) {
+            showOrderDetails(order);
+          }
+
+        }
+      );
+
+    });
+}
+
+
+// =====================================
+// ORDER DETAILS
+// =====================================
+
+function showOrderDetails(order) {
+
+  const card =
+    document.getElementById("orderDetailsCard");
+
+  const details =
+    document.getElementById("orderDetails");
+
+  document.getElementById(
+    "orderDetailsTitle"
+  ).textContent =
+    `#${shortOrderId(order.id)}`;
+
+
+  const items = Array.isArray(order.items)
+    ? order.items
+    : [];
+
+
+  details.innerHTML = `
+
+    <div class="order-detail-grid">
+
+      <div class="detail-box">
+
+        <h3>Customer</h3>
+
+        <p>
+          <strong>
+            ${escapeHtml(
+              [
+                order.first_name,
+                order.last_name
+              ]
+              .filter(Boolean)
+              .join(" ") || "Guest"
+            )}
+          </strong>
+        </p>
+
+        <p>
+          ${escapeHtml(
+            order.customer_email || "No email"
+          )}
+        </p>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <h3>Shipping Address</h3>
+
+        <p>
+          ${escapeHtml(order.address || "")}
+          ${
+            order.apartment
+              ? `<br>${escapeHtml(order.apartment)}`
+              : ""
+          }
+          <br>
+          ${escapeHtml(order.city || "")},
+          ${escapeHtml(order.state || "")}
+          ${escapeHtml(order.zip || "")}
+          <br>
+          ${escapeHtml(order.country || "")}
+        </p>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <h3>Payment</h3>
+
+        <p>
+          Status:
+          <strong>
+            ${formatStatus(order.status)}
+          </strong>
+        </p>
+
+        <p>
+          Stripe:
+          <br>
+          <small>
+            ${escapeHtml(
+              order.stripe_payment_id || "—"
+            )}
+          </small>
+        </p>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <h3>Order Date</h3>
+
+        <p>
+          ${formatDate(order.created_at)}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-box order-items-box">
+
+      <h3>Items</h3>
+
+      <div class="order-items">
+
+        ${
+          items.length
+            ? items.map(item => `
+
+                <div class="order-item">
+
+                  <div>
+
+                    <strong>
+                      ${escapeHtml(
+                        item.name ||
+                        item.label ||
+                        "Product"
+                      )}
+                    </strong>
+
+                    ${
+                      item.option
+                        ? `
+                          <small>
+                            ${escapeHtml(item.option)}
+                          </small>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                  <div>
+                    × ${Number(item.qty || 0)}
+                  </div>
+
+                  <strong>
+                    $${(
+                      Number(item.price || 0) *
+                      Number(item.qty || 0)
+                    ).toFixed(2)}
+                  </strong>
+
+                </div>
+
+              `).join("")
+            : `<p class="muted">No item details available.</p>`
+        }
+
+      </div>
+
+    </div>
+
+
+    <div class="order-totals">
+
+      <div>
+        <span>Subtotal</span>
+        <strong>
+          $${Number(order.subtotal || 0).toFixed(2)}
+        </strong>
+      </div>
+
+      <div>
+        <span>Shipping</span>
+        <strong>
+          $${Number(order.shipping || 0).toFixed(2)}
+        </strong>
+      </div>
+
+      <div>
+        <span>Discount</span>
+        <strong>
+          -$${Number(order.discount || 0).toFixed(2)}
+        </strong>
+      </div>
+
+      <div>
+        <span>Tax</span>
+        <strong>
+          $${Number(order.tax || 0).toFixed(2)}
+        </strong>
+      </div>
+
+      <div class="order-total">
+
+        <span>Total</span>
+
+        <strong>
+          $${Number(order.total || 0).toFixed(2)}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-box">
+
+      <h3>Tracking</h3>
+
+      <p>
+        ${
+          order.tracking_number
+            ? escapeHtml(order.tracking_number)
+            : "No tracking number yet."
+        }
+      </p>
+
+    </div>
+
+  `;
+
+
+  card.classList.remove("hidden");
+
+  card.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+
+// =====================================
+// CLOSE DETAILS
+// =====================================
+
+document
+  .getElementById("closeOrderBtn")
+  .addEventListener("click", () => {
+
+    document
+      .getElementById("orderDetailsCard")
+      .classList.add("hidden");
+
+  });
+
+
+// =====================================
+// SEARCH
+// =====================================
+
+document
+  .getElementById("searchOrders")
+  .addEventListener("input", filterOrders);
+
+
+document
+  .getElementById("statusFilter")
+  .addEventListener("change", filterOrders);
+
+
+function filterOrders() {
+
+  const search =
+    document
+      .getElementById("searchOrders")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const status =
+    document
+      .getElementById("statusFilter")
+      .value;
+
+
+  const filtered = allOrders.filter(order => {
+
+    const customer =
+      [
+        order.first_name,
+        order.last_name,
+        order.customer_email
+      ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+
+    const payment =
+      String(
+        order.stripe_payment_id || ""
+      ).toLowerCase();
+
+
+    const matchesSearch =
+      !search ||
+      customer.includes(search) ||
+      payment.includes(search) ||
+      order.id.toLowerCase().includes(search);
+
+
+    const matchesStatus =
+      status === "all" ||
+      (order.status || "").toLowerCase() === status;
+
+
+    return matchesSearch && matchesStatus;
+
+  });
+
+
+  renderOrders(filtered);
+}
+
+
+// =====================================
+// HELPERS
+// =====================================
+
+function shortOrderId(id) {
+
+  if (!id) return "—";
+
+  return id.slice(0, 8).toUpperCase();
+
+}
+
+
+function formatDate(date) {
+
+  if (!date) return "—";
+
+  return new Date(date).toLocaleDateString(
+    "en-US",
+    {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    }
+  );
+
+}
+
+
+function formatStatus(status) {
+
+  if (!status) return "Unknown";
+
+  return status
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, letter =>
+      letter.toUpperCase()
+    );
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+// =====================================
+// INIT
+// =====================================
+
+(async function init() {
+
+  const isAdmin = await requireAdmin();
+
+  if (!isAdmin) return;
+
+  await loadOrders();
+
+})();
