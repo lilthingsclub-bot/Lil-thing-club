@@ -45,7 +45,8 @@ const country = document.getElementById("country");
 
 const discountInput = document.getElementById("discount-input");
 const applyDiscountBtn = document.getElementById("apply-discount");
-
+const continuePaymentBtn =
+  document.getElementById("continue-to-payment");
 
 // =======================
 // CATEGORY WEIGHTS
@@ -410,27 +411,32 @@ async function mountStripe() {
     calculateTotals();
     updateTotals();
 
-    const clientSecret =
-      await createPaymentIntent();
 
-    const container =
-      document.getElementById(
-        "payment-element"
-      );
+  const clientSecret =
+    await createPaymentIntent();
 
-    container.innerHTML = "";
-
-    elements =
-      stripe.elements({
-        clientSecret
-      });
-
-    paymentElement =
-      elements.create("payment");
-
-    paymentElement.mount(
-      "#payment-element"
+  if (!clientSecret) {
+    throw new Error(
+      "Stripe did not return a payment client secret."
     );
+  }
+
+  const container =
+    document.getElementById("payment-element");
+
+  container.innerHTML = "";
+
+  elements =
+    stripe.elements({
+      clientSecret
+    });
+
+  paymentElement =
+    elements.create("payment");
+
+  paymentElement.mount(
+    "#payment-element"
+  );
 
     errorEl.textContent = "";
 
@@ -463,6 +469,67 @@ async function rebuildStripe() {
 
 
 // =======================
+// CONTINUE TO PAYMENT
+// =======================
+
+continuePaymentBtn.addEventListener("click", async () => {
+
+  errorEl.textContent = "";
+
+  // Make sure customer information is complete
+  if (!isAddressComplete()) {
+
+    errorEl.textContent =
+      "Please complete your contact and delivery information 💕";
+
+    return;
+  }
+
+  continuePaymentBtn.disabled = true;
+  continuePaymentBtn.textContent =
+    "Loading payment... 💕";
+
+  try {
+
+    calculateTotals();
+    updateTotals();
+
+    await mountStripe();
+
+    // Only show payment if Stripe mounted successfully
+    if (elements) {
+
+      continuePaymentBtn.style.display = "none";
+
+      form.classList.remove("hidden-payment");
+
+      form.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "❌ Payment setup error:",
+      error
+    );
+
+    errorEl.textContent =
+      error.message ||
+      "Unable to load payment. Please try again.";
+
+    continuePaymentBtn.disabled = false;
+
+    continuePaymentBtn.textContent =
+      "Continue to Payment 💕";
+  }
+
+});
+
+// =======================
 // SUBMIT PAYMENT
 // =======================
 
@@ -484,13 +551,13 @@ form.addEventListener(
     }
 
     // Make sure Stripe has been mounted
-    if (!elements) {
+   if (!elements) {
 
-      await mountStripe();
+  errorEl.textContent =
+    "Please continue to payment first 💕";
 
-      if (!elements) {
-        return;
-      }
+  return;
+}
     }
 
     // Recalculate everything before payment
