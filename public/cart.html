@@ -110,8 +110,9 @@
 
     <p class="note">Discount,Shipping & taxes <br>calculated at checkout</p>
 
-    <a href="checkout.html"><button class="checkout">Check Out</button>
-  </div></a>
+ <button type="button" id="checkoutBtn" class="checkout">
+  Check Out
+</button>
 
 </div>
 
@@ -187,22 +188,6 @@
 
 <script src="cart.js"></script>
 
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-const stripe = Stripe("pk_test_51RlDSnAwiQXA8rArN1XBgh1V3E2gQR8yG1WkChVpaPwWr5hi2E0nMrGmBCAEamvX9flDIo6BoItg3jCEYkUbaosi00fVHDWx90");
-
-document.getElementById("checkoutBtn").addEventListener("click", async () => {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const res = await fetch("/.netlify/functions/create-checkout", {
-    method: "POST",
-    body: JSON.stringify({ cart })
-  });
-
-  const data = await res.json();
-  stripe.redirectToCheckout({ sessionId: data.id });
-});
-</script>
 </body>
 </html>
 
