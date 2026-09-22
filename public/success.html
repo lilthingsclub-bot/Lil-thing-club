@@ -105,401 +105,479 @@
   // LOAD ORDER FROM SERVER
   // ============================
 
-  async function loadOrder() {
+ async function loadOrder() {
 
-    const receiptCard =
-      document.querySelector(".receipt-card");
+  const receiptCard =
+    document.querySelector(".receipt-card");
 
-    // No PaymentIntent ID
-    if (!paymentIntentId) {
+  // ============================
+  // NO PAYMENT INTENT ID
+  // ============================
 
-      receiptCard.innerHTML = `
-        <p>
-          No order information was found.
-          Please return to the shop.
-        </p>
-      `;
-
-      return;
-    }
-
-
-    // ============================
-    // SHOW LOADING
-    // ============================
+  if (!paymentIntentId) {
 
     receiptCard.innerHTML = `
-      <h2 class="receipt-title">RECEIPT</h2>
-
       <p style="text-align:center;">
-        Loading your order... 💕
+        No order information was found.
+        Please return to the shop.
       </p>
     `;
 
+    return;
+  }
+
+
+  // ============================
+  // RETRY SETTINGS
+  // ============================
+
+  const maxAttempts = 10;
+
+  const retryDelays = [
+    1000,  // 1 second
+    1500,  // 1.5 seconds
+    2000,  // 2 seconds
+    2500,  // 2.5 seconds
+    3000,  // 3 seconds
+    3000,
+    3000,
+    3000,
+    3000
+  ];
+
+
+  // ============================
+  // SHOW LOADING
+  // ============================
+
+  receiptCard.innerHTML = `
+    <h2 class="receipt-title">RECEIPT</h2>
+
+    <p
+      id="order-loading-message"
+      style="text-align:center;"
+    >
+      Confirming your order... 💕
+    </p>
+  `;
+
+
+  // ============================
+  // RETRY LOOP
+  // ============================
+
+  for (
+    let attempt = 1;
+    attempt <= maxAttempts;
+    attempt++
+  ) {
 
     try {
 
-     
+      console.log(
+        `🔄 Checking order (attempt ${attempt}/${maxAttempts})...`
+      );
+
 
       // ============================
       // CALL SECURE ORDER API
       // ============================
-const response =
-  await fetch(
-    `/api/get-order?payment_intent_id=${encodeURIComponent(
-      paymentIntentId
-    )}`
-  );
+
+      const response =
+        await fetch(
+          `/api/get-order?payment_intent_id=${encodeURIComponent(
+            paymentIntentId
+          )}`,
+          {
+            cache: "no-store"
+          }
+        );
+
 
       const data =
         await response.json();
 
 
       // ============================
-      // API ERROR
+      // ORDER FOUND
       // ============================
 
-      if (!response.ok) {
+      if (response.ok && data.order) {
 
-        throw new Error(
-          data.error ||
-          "Unable to retrieve your order."
+        const order =
+          data.order;
+
+
+        console.log(
+          "✅ Verified order loaded:",
+          order
         );
 
-      }
 
+        // ============================
+        // RESTORE RECEIPT HTML
+        // ============================
 
-      // ============================
-      // GET VERIFIED ORDER
-      // ============================
+        receiptCard.innerHTML = `
 
-      const order =
-        data.order;
+          <h2 class="receipt-title">RECEIPT</h2>
 
+          <div id="items"></div>
 
-      if (!order) {
-
-        throw new Error(
-          "Order information was not found."
-        );
-
-      }
-
-
-      // ============================
-      // RESTORE RECEIPT HTML
-      // ============================
-
-      receiptCard.innerHTML = `
-
-        <h2 class="receipt-title">RECEIPT</h2>
-
-        <div id="items"></div>
-
-        <div class="summary-line">
-          <span>Shipping</span>
-          <span id="shipping"></span>
-        </div>
-
-        <div class="summary-line">
-          <span>Discount</span>
-          <span id="discount"></span>
-        </div>
-
-        <div class="summary-line">
-          <span>Tax</span>
-          <span id="tax"></span>
-        </div>
-
-        <div class="summary-line total">
-          <span>Total</span>
-          <span id="total"></span>
-        </div>
-
-        <div class="shipping-meta">
-
-          <div>
-            <span>Shipping Method</span>
-            <span id="shipping-method"></span>
+          <div class="summary-line">
+            <span>Shipping</span>
+            <span id="shipping"></span>
           </div>
 
-          <div>
-            <span>Destination</span>
-            <span id="destination"></span>
+          <div class="summary-line">
+            <span>Discount</span>
+            <span id="discount"></span>
           </div>
 
-        </div>
+          <div class="summary-line">
+            <span>Tax</span>
+            <span id="tax"></span>
+          </div>
 
-        <div class="receipt-actions">
+          <div class="summary-line total">
+            <span>Total</span>
+            <span id="total"></span>
+          </div>
 
-          <a
-            href="index.html"
-            class="btn-outline small"
-          >
-            HOME
-          </a>
+          <div class="shipping-meta">
 
-          <a
-            href="shop.html"
-            class="btn-outline small"
-          >
-            CONTINUE SHOPPING
-          </a>
+            <div>
+              <span>Shipping Method</span>
+              <span id="shipping-method"></span>
+            </div>
 
-        </div>
+            <div>
+              <span>Destination</span>
+              <span id="destination"></span>
+            </div>
 
-      `;
+          </div>
 
+          <div class="receipt-actions">
 
-      // ============================
-      // ITEMS
-      // ============================
+            <a
+              href="index.html"
+              class="btn-outline small"
+            >
+              HOME
+            </a>
 
-      const itemsEl =
-        document.getElementById("items");
+            <a
+              href="shop.html"
+              class="btn-outline small"
+            >
+              CONTINUE SHOPPING
+            </a>
 
+          </div>
 
-      if (
-        Array.isArray(order.items) &&
-        order.items.length > 0
-      ) {
-
-        order.items.forEach(item => {
-
-          const div =
-            document.createElement("div");
-
-          div.className =
-            "summary-item";
-
-
-          /*
-            Your database currently stores:
-
-            {
-              variantId: "...",
-              qty: 1
-            }
-
-            So for now we display the
-            variant ID until we connect
-            product_variants + Products.
-          */
-
-          const itemName =
-            item.name ||
-            item.label ||
-            "Product";
-
-
-          const itemPrice =
-            Number(item.price) || 0;
-
-
-          const itemQty =
-            Number(item.qty) || 0;
-
-
-          const itemTotal =
-            itemPrice * itemQty;
-
-
-          div.innerHTML = `
-
-            <span>
-              ${itemName} × ${itemQty}
-
-              ${
-                item.option
-                  ? `<small> (${item.option})</small>`
-                  : ""
-              }
-            </span>
-
-            <span>
-              ${
-                itemPrice > 0
-                  ? `$${itemTotal.toFixed(2)}`
-                  : ""
-              }
-            </span>
-
-          `;
-
-
-          itemsEl.appendChild(div);
-
-        });
-
-      } else {
-
-        itemsEl.innerHTML = `
-          <p>
-            No items found for this order.
-          </p>
         `;
 
-      }
+
+        // ============================
+        // ITEMS
+        // ============================
+
+        const itemsEl =
+          document.getElementById("items");
 
 
-      // ============================
-      // SHIPPING
-      // ============================
+        if (
+          Array.isArray(order.items) &&
+          order.items.length > 0
+        ) {
 
-      document.getElementById(
-        "shipping"
-      ).textContent =
+          order.items.forEach(item => {
 
-        Number(order.shipping) === 0
-          ? "FREE 💕"
-          : `$${Number(
-              order.shipping || 0
-            ).toFixed(2)}`;
+            const div =
+              document.createElement("div");
 
-
-      // ============================
-      // DISCOUNT
-      // ============================
-
-      document.getElementById(
-        "discount"
-      ).textContent =
-
-        Number(order.discount) > 0
-          ? `-$${Number(
-              order.discount
-            ).toFixed(2)}`
-          : "$0.00";
+            div.className =
+              "summary-item";
 
 
-      // ============================
-      // TAX
-      // ============================
-
-      document.getElementById(
-        "tax"
-      ).textContent =
-
-        `$${Number(
-          order.tax || 0
-        ).toFixed(2)}`;
+            const itemName =
+              item.name ||
+              item.label ||
+              "Product";
 
 
-      // ============================
-      // TOTAL
-      // ============================
-
-      document.getElementById(
-        "total"
-      ).textContent =
-
-        `$${Number(
-          order.total || 0
-        ).toFixed(2)}`;
+            const itemPrice =
+              Number(item.price) || 0;
 
 
-      // ============================
-      // SHIPPING METHOD
-      // ============================
-
-      document.getElementById(
-        "shipping-method"
-      ).textContent =
-
-        order.shippingType ||
-        "Standard";
+            const itemQty =
+              Number(item.qty) || 0;
 
 
-      // ============================
-      // DESTINATION
-      // ============================
-
-      document.getElementById(
-        "destination"
-      ).textContent =
-
-        [
-          order.address,
-          order.city,
-          order.state,
-          order.zip,
-          order.country
-        ]
-          .filter(Boolean)
-          .join(", ");
+            const itemTotal =
+              itemPrice * itemQty;
 
 
-      // ============================
-      // CLEAR CART
-      // ============================
+            div.innerHTML = `
 
-      localStorage.removeItem("cart");
+              <span>
+                ${itemName} × ${itemQty}
+
+                ${
+                  item.option
+                    ? `<small> (${item.option})</small>`
+                    : ""
+                }
+
+              </span>
+
+              <span>
+                ${
+                  itemPrice > 0
+                    ? `$${itemTotal.toFixed(2)}`
+                    : ""
+                }
+              </span>
+
+            `;
 
 
-      const cartCount =
+            itemsEl.appendChild(div);
+
+          });
+
+        } else {
+
+          itemsEl.innerHTML = `
+            <p>
+              No items found for this order.
+            </p>
+          `;
+
+        }
+
+
+        // ============================
+        // SHIPPING
+        // ============================
+
         document.getElementById(
-          "cartCount"
+          "shipping"
+        ).textContent =
+
+          Number(order.shipping) === 0
+            ? "FREE 💕"
+            : `$${Number(
+                order.shipping || 0
+              ).toFixed(2)}`;
+
+
+        // ============================
+        // DISCOUNT
+        // ============================
+
+        document.getElementById(
+          "discount"
+        ).textContent =
+
+          Number(order.discount) > 0
+            ? `-$${Number(
+                order.discount
+              ).toFixed(2)}`
+            : "$0.00";
+
+
+        // ============================
+        // TAX
+        // ============================
+
+        document.getElementById(
+          "tax"
+        ).textContent =
+
+          `$${Number(
+            order.tax || 0
+          ).toFixed(2)}`;
+
+
+        // ============================
+        // TOTAL
+        // ============================
+
+        document.getElementById(
+          "total"
+        ).textContent =
+
+          `$${Number(
+            order.total || 0
+          ).toFixed(2)}`;
+
+
+        // ============================
+        // SHIPPING METHOD
+        // ============================
+
+        document.getElementById(
+          "shipping-method"
+        ).textContent =
+
+          order.shippingType ||
+          "Standard";
+
+
+        // ============================
+        // DESTINATION
+        // ============================
+
+        document.getElementById(
+          "destination"
+        ).textContent =
+
+          [
+            order.address,
+            order.city,
+            order.state,
+            order.zip,
+            order.country
+          ]
+            .filter(Boolean)
+            .join(", ");
+
+
+        // ============================
+        // CLEAR CART
+        // ============================
+
+        localStorage.removeItem("cart");
+
+
+        const cartCount =
+          document.getElementById(
+            "cartCount"
+          );
+
+
+        if (cartCount) {
+
+          cartCount.textContent = "0";
+
+        }
+
+
+        // ============================
+        // DONE
+        // ============================
+
+        console.log(
+          "🎉 Order successfully confirmed."
         );
 
-
-      if (cartCount) {
-
-        cartCount.textContent = "0";
+        return;
 
       }
 
 
+      // ============================
+      // ORDER NOT FOUND YET
+      // ============================
+
       console.log(
-        "✅ Verified order loaded:",
-        order
+        `⏳ Order not ready yet. Attempt ${attempt}/${maxAttempts}`,
+        data
       );
 
 
     } catch (error) {
 
       console.error(
-        "❌ Order loading error:",
+        `⚠️ Order check failed on attempt ${attempt}:`,
         error
       );
 
+    }
 
-      receiptCard.innerHTML = `
 
-        <h2 class="receipt-title">
-          OOPS 💕
-        </h2>
+    // ============================
+    // WAIT BEFORE NEXT ATTEMPT
+    // ============================
 
-        <p style="text-align:center;">
-          We couldn't load your order
-          right now.
-        </p>
+    if (attempt < maxAttempts) {
 
-        <p style="text-align:center;">
-          Your payment may still have gone through.
-          Please contact us if you need help.
-        </p>
+      const delay =
+        retryDelays[attempt - 1] ||
+        3000;
 
-        <div class="receipt-actions">
 
-          <a
-            href="index.html"
-            class="btn-outline small"
-          >
-            HOME
-          </a>
+      const loadingMessage =
+        document.getElementById(
+          "order-loading-message"
+        );
 
-          <a
-            href="shop.html"
-            class="btn-outline small"
-          >
-            CONTINUE SHOPPING
-          </a>
 
-        </div>
+      if (loadingMessage) {
 
-      `;
+        loadingMessage.textContent =
+          `Confirming your order... 💕 (${attempt}/${maxAttempts})`;
+
+      }
+
+
+      await new Promise(resolve =>
+        setTimeout(resolve, delay)
+      );
 
     }
+
+  }
+
+
+  // ============================
+  // ALL RETRIES FAILED
+  // ============================
+
+  console.error(
+    "❌ Order could not be confirmed after all retry attempts."
+  );
+
+
+  receiptCard.innerHTML = `
+
+    <h2 class="receipt-title">
+      OOPS 💕
+    </h2>
+
+    <p style="text-align:center;">
+      We couldn't load your order
+      right now.
+    </p>
+
+    <p style="text-align:center;">
+      Your payment may still have gone through.
+      Please contact us if you need help.
+    </p>
+
+    <div class="receipt-actions">
+
+      <a
+        href="index.html"
+        class="btn-outline small"
+      >
+        HOME
+      </a>
+
+      <a
+        href="shop.html"
+        class="btn-outline small"
+      >
+        CONTINUE SHOPPING
+      </a>
+
+    </div>
+
+  `;
+
+}
 
   }
 
