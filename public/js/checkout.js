@@ -398,19 +398,16 @@ async function createPaymentIntent() {
 
 async function mountStripe() {
 
-  try {
+  if (!isAddressComplete()) {
 
-    if (!isAddressComplete()) {
+    errorEl.textContent =
+      "Please complete your contact and delivery information first 💕";
 
-      errorEl.textContent =
-        "Please complete your contact and delivery information first 💕";
+    return false;
+  }
 
-      return;
-    }
-
-    calculateTotals();
-    updateTotals();
-
+  calculateTotals();
+  updateTotals();
 
   const clientSecret =
     await createPaymentIntent();
@@ -423,6 +420,12 @@ async function mountStripe() {
 
   const container =
     document.getElementById("payment-element");
+
+  if (!container) {
+    throw new Error(
+      "Payment element container was not found."
+    );
+  }
 
   container.innerHTML = "";
 
@@ -438,21 +441,10 @@ async function mountStripe() {
     "#payment-element"
   );
 
-    errorEl.textContent = "";
+  errorEl.textContent = "";
 
-  } catch (error) {
-
-    console.error(
-      "❌ Stripe mount error:",
-      error
-    );
-
-    errorEl.textContent =
-      error.message ||
-      "Unable to load payment form.";
-  }
+  return true;
 }
-
 
 // =======================
 // REBUILD STRIPE
@@ -494,10 +486,11 @@ continuePaymentBtn.addEventListener("click", async () => {
     calculateTotals();
     updateTotals();
 
-    await mountStripe();
+    const mounted =
+  await mountStripe();
 
-    // Only show payment if Stripe mounted successfully
-    if (elements) {
+// Only show payment if Stripe mounted successfully
+if (mounted && elements) {
 
       continuePaymentBtn.style.display = "none";
 
@@ -541,24 +534,14 @@ form.addEventListener(
 
     errorEl.textContent = "";
 
-    // Make sure customer information exists
-    if (!isAddressComplete()) {
+    // Make sure Stripe has been mounted
+    if (!elements) {
 
       errorEl.textContent =
-        "Please complete your contact and delivery information 💕";
+        "Please continue to payment first 💕";
 
       return;
     }
-
-    // Make sure Stripe has been mounted
-   if (!elements) {
-
-  errorEl.textContent =
-    "Please continue to payment first 💕";
-
-  return;
-}
-
 
     // Recalculate everything before payment
     calculateTotals();
@@ -642,9 +625,7 @@ form.addEventListener(
     // CONFIRM STRIPE PAYMENT
     // =======================
 
-    const {
-      error
-    } =
+    const { error } =
       await stripe.confirmPayment({
 
         elements,
@@ -655,6 +636,7 @@ form.addEventListener(
             `${window.location.origin}/success.html`
 
         }
+
       });
 
     if (error) {
