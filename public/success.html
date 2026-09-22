@@ -90,187 +90,516 @@
   
 
 <script>
-
   // ============================
-  // GET ORDER ID FROM URL
+  // GET PAYMENT INTENT ID
   // ============================
 
-  const params = new URLSearchParams(window.location.search);
+  const params =
+    new URLSearchParams(window.location.search);
 
-  const orderId =
+  const paymentIntentId =
     params.get("order_id");
 
 
   // ============================
-  // FIND SAVED ORDER
+  // LOAD ORDER FROM SERVER
   // ============================
 
-  let order = null;
+  async function loadOrder() {
 
+    const receiptCard =
+      document.querySelector(".receipt-card");
 
-  // First try the Stripe PaymentIntent-specific order
-  if (orderId) {
+    // No PaymentIntent ID
+    if (!paymentIntentId) {
 
-    const savedOrder =
-      localStorage.getItem(`order_${orderId}`);
+      receiptCard.innerHTML = `
+        <p>
+          No order information was found.
+          Please return to the shop.
+        </p>
+      `;
 
-    if (savedOrder) {
-
-      try {
-        order = JSON.parse(savedOrder);
-      } catch (error) {
-        console.error(
-          "❌ Could not read saved order:",
-          error
-        );
-      }
-
+      return;
     }
 
-  }
 
+    // ============================
+    // SHOW LOADING
+    // ============================
 
-  // Fall back to normal lastOrder
-  if (!order) {
+    receiptCard.innerHTML = `
+      <h2 class="receipt-title">RECEIPT</h2>
 
-    const lastOrder =
-      localStorage.getItem("lastOrder");
-
-    if (lastOrder) {
-
-      try {
-        order = JSON.parse(lastOrder);
-      } catch (error) {
-        console.error(
-          "❌ Could not read lastOrder:",
-          error
-        );
-      }
-
-    }
-
-  }
-
-
-  // ============================
-  // NO ORDER
-  // ============================
-
-  if (!order) {
-
-    document.querySelector(".receipt-card").innerHTML = `
-      <p>
-        No order found. Please return to the shop.
+      <p style="text-align:center;">
+        Loading your order... 💕
       </p>
     `;
 
-  } else {
 
-    // ============================
-    // ITEMS
-    // ============================
+    try {
 
-    const itemsEl =
-      document.getElementById("items");
+      // ============================
+      // GET CUSTOMER EMAIL
+      // ============================
 
-    order.items.forEach(item => {
+      /*
+        We saved the order locally during checkout
+        so we can use the email for verification.
 
-      const div =
-        document.createElement("div");
+        The actual order itself will now come
+        from Supabase through our secure API.
+      */
 
-      div.className =
-        "summary-item";
+      let customerEmail = "";
 
-      const itemTotal =
-        (Number(item.price) || 0) *
-        (Number(item.qty) || 0);
+      const savedOrder =
+        localStorage.getItem(
+          `order_${paymentIntentId}`
+        );
 
-      div.innerHTML = `
-        <span>
-          ${item.name} × ${item.qty}
-          ${item.option ? `<small> (${item.option})</small>` : ""}
-        </span>
+      if (savedOrder) {
 
-        <span>
-          $${itemTotal.toFixed(2)}
-        </span>
+        try {
+
+          const parsedOrder =
+            JSON.parse(savedOrder);
+
+          customerEmail =
+            parsedOrder.email || "";
+
+        } catch (error) {
+
+          console.error(
+            "❌ Could not read saved email:",
+            error
+          );
+
+        }
+
+      }
+
+
+      // ============================
+      // FALLBACK TO LAST ORDER
+      // ============================
+
+      if (!customerEmail) {
+
+        const lastOrder =
+          localStorage.getItem("lastOrder");
+
+        if (lastOrder) {
+
+          try {
+
+            const parsedOrder =
+              JSON.parse(lastOrder);
+
+            customerEmail =
+              parsedOrder.email || "";
+
+          } catch (error) {
+
+            console.error(
+              "❌ Could not read lastOrder:",
+              error
+            );
+
+          }
+
+        }
+
+      }
+
+
+      // ============================
+      // EMAIL REQUIRED
+      // ============================
+
+      if (!customerEmail) {
+
+        throw new Error(
+          "We could not verify the email for this order."
+        );
+
+      }
+
+
+      // ============================
+      // CALL SECURE ORDER API
+      // ============================
+
+      const response =
+        await fetch(
+          `/api/get-order?payment_intent_id=${encodeURIComponent(
+            paymentIntentId
+          )}&email=${encodeURIComponent(
+            customerEmail
+          )}`
+        );
+
+
+      const data =
+        await response.json();
+
+
+      // ============================
+      // API ERROR
+      // ============================
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.error ||
+          "Unable to retrieve your order."
+        );
+
+      }
+
+
+      // ============================
+      // GET VERIFIED ORDER
+      // ============================
+
+      const order =
+        data.order;
+
+
+      if (!order) {
+
+        throw new Error(
+          "Order information was not found."
+        );
+
+      }
+
+
+      // ============================
+      // RESTORE RECEIPT HTML
+      // ============================
+
+      receiptCard.innerHTML = `
+
+        <h2 class="receipt-title">RECEIPT</h2>
+
+        <div id="items"></div>
+
+        <div class="summary-line">
+          <span>Shipping</span>
+          <span id="shipping"></span>
+        </div>
+
+        <div class="summary-line">
+          <span>Discount</span>
+          <span id="discount"></span>
+        </div>
+
+        <div class="summary-line">
+          <span>Tax</span>
+          <span id="tax"></span>
+        </div>
+
+        <div class="summary-line total">
+          <span>Total</span>
+          <span id="total"></span>
+        </div>
+
+        <div class="shipping-meta">
+
+          <div>
+            <span>Shipping Method</span>
+            <span id="shipping-method"></span>
+          </div>
+
+          <div>
+            <span>Destination</span>
+            <span id="destination"></span>
+          </div>
+
+        </div>
+
+        <div class="receipt-actions">
+
+          <a
+            href="index.html"
+            class="btn-outline small"
+          >
+            HOME
+          </a>
+
+          <a
+            href="shop.html"
+            class="btn-outline small"
+          >
+            CONTINUE SHOPPING
+          </a>
+
+        </div>
+
       `;
 
-      itemsEl.appendChild(div);
 
-    });
+      // ============================
+      // ITEMS
+      // ============================
 
-
-    // ============================
-    // SHIPPING
-    // ============================
-
-    document.getElementById("shipping").textContent =
-      Number(order.shipping) === 0
-        ? "FREE 💕"
-        : `$${Number(order.shipping).toFixed(2)}`;
+      const itemsEl =
+        document.getElementById("items");
 
 
-    // ============================
-    // DISCOUNT
-    // ============================
+      if (
+        Array.isArray(order.items) &&
+        order.items.length > 0
+      ) {
 
-    document.getElementById("discount").textContent =
-      Number(order.discount) > 0
-        ? `-$${Number(order.discount).toFixed(2)}`
-        : "$0.00";
+        order.items.forEach(item => {
 
+          const div =
+            document.createElement("div");
 
-    // ============================
-    // TAX
-    // ============================
-
-    document.getElementById("tax").textContent =
-      `$${Number(order.tax || 0).toFixed(2)}`;
+          div.className =
+            "summary-item";
 
 
-    // ============================
-    // TOTAL
-    // ============================
+          /*
+            Your database currently stores:
 
-    document.getElementById("total").textContent =
-      `$${Number(order.total || 0).toFixed(2)}`;
+            {
+              variantId: "...",
+              qty: 1
+            }
 
+            So for now we display the
+            variant ID until we connect
+            product_variants + Products.
+          */
 
-    // ============================
-    // SHIPPING METHOD
-    // ============================
-
-    document.getElementById("shipping-method").textContent =
-      order.shippingType || "Standard";
-
-
-    // ============================
-    // DESTINATION
-    // ============================
-
-    document.getElementById("destination").textContent =
-      `${order.address || ""}, ${order.city || ""}, ${order.state || ""}, ${order.zip || ""}, ${order.country || ""}`;
+          const itemName =
+            item.name ||
+            item.label ||
+            "Product";
 
 
-    // ============================
-    // CLEAR CART
-    // ============================
+          const itemPrice =
+            Number(item.price) || 0;
 
-    localStorage.removeItem("cart");
 
-    // Update cart count if the header has one
-    const cartCount =
-      document.getElementById("cartCount");
+          const itemQty =
+            Number(item.qty) || 0;
 
-    if (cartCount) {
-      cartCount.textContent = "0";
+
+          const itemTotal =
+            itemPrice * itemQty;
+
+
+          div.innerHTML = `
+
+            <span>
+              ${itemName} × ${itemQty}
+
+              ${
+                item.option
+                  ? `<small> (${item.option})</small>`
+                  : ""
+              }
+            </span>
+
+            <span>
+              ${
+                itemPrice > 0
+                  ? `$${itemTotal.toFixed(2)}`
+                  : ""
+              }
+            </span>
+
+          `;
+
+
+          itemsEl.appendChild(div);
+
+        });
+
+      } else {
+
+        itemsEl.innerHTML = `
+          <p>
+            No items found for this order.
+          </p>
+        `;
+
+      }
+
+
+      // ============================
+      // SHIPPING
+      // ============================
+
+      document.getElementById(
+        "shipping"
+      ).textContent =
+
+        Number(order.shipping) === 0
+          ? "FREE 💕"
+          : `$${Number(
+              order.shipping || 0
+            ).toFixed(2)}`;
+
+
+      // ============================
+      // DISCOUNT
+      // ============================
+
+      document.getElementById(
+        "discount"
+      ).textContent =
+
+        Number(order.discount) > 0
+          ? `-$${Number(
+              order.discount
+            ).toFixed(2)}`
+          : "$0.00";
+
+
+      // ============================
+      // TAX
+      // ============================
+
+      document.getElementById(
+        "tax"
+      ).textContent =
+
+        `$${Number(
+          order.tax || 0
+        ).toFixed(2)}`;
+
+
+      // ============================
+      // TOTAL
+      // ============================
+
+      document.getElementById(
+        "total"
+      ).textContent =
+
+        `$${Number(
+          order.total || 0
+        ).toFixed(2)}`;
+
+
+      // ============================
+      // SHIPPING METHOD
+      // ============================
+
+      document.getElementById(
+        "shipping-method"
+      ).textContent =
+
+        order.shippingType ||
+        "Standard";
+
+
+      // ============================
+      // DESTINATION
+      // ============================
+
+      document.getElementById(
+        "destination"
+      ).textContent =
+
+        [
+          order.address,
+          order.city,
+          order.state,
+          order.zip,
+          order.country
+        ]
+          .filter(Boolean)
+          .join(", ");
+
+
+      // ============================
+      // CLEAR CART
+      // ============================
+
+      localStorage.removeItem("cart");
+
+
+      const cartCount =
+        document.getElementById(
+          "cartCount"
+        );
+
+
+      if (cartCount) {
+
+        cartCount.textContent = "0";
+
+      }
+
+
+      console.log(
+        "✅ Verified order loaded:",
+        order
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "❌ Order loading error:",
+        error
+      );
+
+
+      receiptCard.innerHTML = `
+
+        <h2 class="receipt-title">
+          OOPS 💕
+        </h2>
+
+        <p style="text-align:center;">
+          We couldn't load your order
+          right now.
+        </p>
+
+        <p style="text-align:center;">
+          Your payment may still have gone through.
+          Please contact us if you need help.
+        </p>
+
+        <div class="receipt-actions">
+
+          <a
+            href="index.html"
+            class="btn-outline small"
+          >
+            HOME
+          </a>
+
+          <a
+            href="shop.html"
+            class="btn-outline small"
+          >
+            CONTINUE SHOPPING
+          </a>
+
+        </div>
+
+      `;
+
     }
 
   }
 
-</script>
 
+  // ============================
+  // START
+  // ============================
+
+  loadOrder();
+
+</script>
 
 </body>
 </html>
