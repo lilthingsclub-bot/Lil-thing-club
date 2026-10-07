@@ -284,48 +284,7 @@
         // ============================
 
 
-        ${order.items.map(item => `
-  <div class="receipt-product">
-
-    ${
-      item.image
-        ? `
-          <img
-            src="${item.image}"
-            alt="${item.name || "Product"}"
-            class="receipt-product-image"
-          >
-        `
-        : ""
-    }
-
-    <div class="receipt-product-info">
-
-      <div class="receipt-product-name">
-        ${item.name || "Product"}
-      </div>
-
-      ${
-        item.variant
-          ? `
-            <div class="receipt-product-variant">
-              ${item.variant}
-            </div>
-          `
-          : ""
-      }
-
-      <div class="receipt-product-quantity">
-        × ${item.qty}
-      </div>
-
-    </div>
-
-  </div>
-`).join("")}
-
-        /*
-
+        
         const itemsEl =
           document.getElementById("items");
 
@@ -399,7 +358,7 @@
           `;
 
         }
-        */
+        
 
 
         // ============================
