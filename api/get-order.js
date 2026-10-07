@@ -233,7 +233,12 @@ module.exports = async function handler(req, res) {
     // RETURN ORDER
     // =========================
 
-    return res.status(200).json({
+  console.log(
+  "🖼️ Enriched order items:",
+  JSON.stringify(enrichedItems, null, 2)
+);
+
+return res.status(200).json({
 
       success: true,
 
