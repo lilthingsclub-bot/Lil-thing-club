@@ -281,6 +281,90 @@ module.exports = async function handler(req, res) {
       data
     );
 
+
+    // ==================================================
+// GET PRODUCT DETAILS FOR CONFIRMATION EMAIL
+// ==================================================
+
+let emailItems = [];
+
+try {
+
+  const variantIds = inventoryItems
+    .map(item => item.variantId)
+    .filter(Boolean);
+
+  if (variantIds.length > 0) {
+
+    const { data: variants, error: variantsError } =
+      await supabase
+        .from("product_variants")
+        .select(`
+          id,
+          name,
+          label,
+          price,
+          products (
+            name,
+            images
+          )
+        `)
+        .in("id", variantIds);
+
+    if (variantsError) {
+      throw variantsError;
+    }
+
+    emailItems = inventoryItems.map(item => {
+
+      const variant =
+        variants?.find(
+          v => v.id === item.variantId
+        );
+
+      const product =
+        variant?.products;
+
+      return {
+        name:
+          product?.name ||
+          "Product",
+
+        image:
+          Array.isArray(product?.images)
+            ? product.images[0]
+            : product?.images || null,
+
+        variant:
+          variant?.label ||
+          variant?.name ||
+          "",
+
+        price:
+          Number(variant?.price || 0),
+
+        qty:
+          Number(item.qty || 0)
+      };
+
+    });
+
+  }
+
+  console.log(
+    "📧 Email items:",
+    JSON.stringify(emailItems, null, 2)
+  );
+
+} catch (emailProductError) {
+
+  console.error(
+    "❌ Failed to get product details for email:",
+    emailProductError
+  );
+
+}
+
     // ==================================================
 // SEND ORDER CONFIRMATION EMAIL
 // ==================================================
