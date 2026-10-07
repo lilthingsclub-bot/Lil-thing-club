@@ -285,80 +285,106 @@
 
 
         
-        const itemsEl =
-          document.getElementById("items");
+    // ============================
+// ITEMS
+// ============================
+
+const itemsEl =
+  document.getElementById("items");
 
 
-        if (
-          Array.isArray(order.items) &&
-          order.items.length > 0
-        ) {
+if (
+  Array.isArray(order.items) &&
+  order.items.length > 0
+) {
 
-          order.items.forEach(item => {
+  order.items.forEach(item => {
 
-            const div =
-              document.createElement("div");
+    const div =
+      document.createElement("div");
 
-            div.className =
-              "summary-item";
-
-
-            const itemName =
-              item.name ||
-              item.label ||
-              "Product";
+    div.className =
+      "summary-item receipt-product";
 
 
-            const itemPrice =
-              Number(item.price) || 0;
+    const itemName =
+      item.name ||
+      item.label ||
+      "Product";
 
 
-            const itemQty =
-              Number(item.qty) || 0;
+    const itemPrice =
+      Number(item.price) || 0;
 
 
-            const itemTotal =
-              itemPrice * itemQty;
+    const itemQty =
+      Number(item.qty) || 0;
 
 
-            div.innerHTML = `
-
-              <span>
-                ${itemName} × ${itemQty}
-
-                ${
-                  item.option
-                    ? `<small> (${item.option})</small>`
-                    : ""
-                }
-
-              </span>
-
-              <span>
-                ${
-                  itemPrice > 0
-                    ? `$${itemTotal.toFixed(2)}`
-                    : ""
-                }
-              </span>
-
-            `;
+    const itemTotal =
+      itemPrice * itemQty;
 
 
-            itemsEl.appendChild(div);
+    div.innerHTML = `
 
-          });
+      ${
+        item.image
+          ? `
+            <img
+              src="${item.image}"
+              alt="${itemName}"
+              class="receipt-product-image"
+            >
+          `
+          : ""
+      }
 
-        } else {
+      <div class="receipt-product-info">
 
-          itemsEl.innerHTML = `
-            <p>
-              No items found for this order.
-            </p>
-          `;
+        <div class="receipt-product-name">
+          ${itemName}
+        </div>
 
+        ${
+          item.variant
+            ? `
+              <div class="receipt-product-variant">
+                ${item.variant}
+              </div>
+            `
+            : ""
         }
-        
+
+        <div class="receipt-product-quantity">
+          × ${itemQty}
+        </div>
+
+      </div>
+
+      <div class="receipt-product-price">
+        ${
+          itemPrice > 0
+            ? `$${itemTotal.toFixed(2)}`
+            : ""
+        }
+      </div>
+
+    `;
+
+
+    itemsEl.appendChild(div);
+
+  });
+
+} else {
+
+  itemsEl.innerHTML = `
+    <p>
+      No items found for this order.
+    </p>
+  `;
+
+}
 
 
         // ============================
