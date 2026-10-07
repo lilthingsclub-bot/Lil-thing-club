@@ -96,6 +96,140 @@ module.exports = async function handler(req, res) {
 
 
     // =========================
+    // GET ORDER ITEMS
+    // =========================
+
+    const orderItems =
+      Array.isArray(order.items)
+        ? order.items
+        : [];
+
+
+    // Get all variant IDs from the order
+
+    const variantIds =
+      orderItems
+        .map(item => item.variantId)
+        .filter(Boolean);
+
+
+    let enrichedItems = [];
+
+
+    if (variantIds.length > 0) {
+
+      // =========================
+      // LOOK UP VARIANTS + PRODUCTS
+      // =========================
+
+      const {
+        data: variants,
+        error: variantsError
+      } = await supabase
+        .from("product_variants")
+        .select(`
+          id,
+          product_id,
+          name,
+          label,
+          price,
+          products (
+            name,
+            images
+          )
+        `)
+        .in("id", variantIds);
+
+
+      if (variantsError) {
+
+        console.error(
+          "❌ Product lookup failed:",
+          variantsError
+        );
+
+        return res.status(500).json({
+          error: "Unable to load product information"
+        });
+
+      }
+
+
+      // =========================
+      // COMBINE ORDER + PRODUCT DATA
+      // =========================
+
+      enrichedItems =
+        orderItems.map(item => {
+
+          const variant =
+            variants.find(
+              v =>
+                v.id === item.variantId
+            );
+
+
+          if (!variant) {
+
+            return {
+              variantId:
+                item.variantId,
+
+              qty:
+                item.qty,
+
+              name:
+                "Product",
+
+              image:
+                null,
+
+              price:
+                0
+            };
+
+          }
+
+
+          const product =
+            Array.isArray(variant.products)
+              ? variant.products[0]
+              : variant.products;
+
+
+          return {
+
+            variantId:
+              item.variantId,
+
+            qty:
+              item.qty,
+
+            name:
+              product?.name ||
+              "Product",
+
+            image:
+              Array.isArray(product?.images)
+                ? product.images[0]
+                : product?.images || null,
+
+            variant:
+              variant.label ||
+              variant.name ||
+              "",
+
+            price:
+              Number(variant.price || 0)
+
+          };
+
+        });
+
+    }
+
+
+    // =========================
     // RETURN ORDER
     // =========================
 
@@ -139,7 +273,7 @@ module.exports = async function handler(req, res) {
           order.country,
 
         items:
-          order.items,
+          enrichedItems,
 
         subtotal:
           order.subtotal,
