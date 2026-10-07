@@ -281,6 +281,102 @@ module.exports = async function handler(req, res) {
       data
     );
 
+    // ==================================================
+// SEND ORDER CONFIRMATION EMAIL
+// ==================================================
+
+if (paymentIntent.receipt_email) {
+
+  try {
+
+    await resend.emails.send({
+
+      from:
+        "Lil Things Club <orders@lilthingsclubs.com>",
+
+      to: [
+        paymentIntent.receipt_email
+      ],
+
+      subject:
+        "💗 Your Lil Things Club order is confirmed!",
+
+      html: `
+        <div style="
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 30px;
+          color: #5c3f35;
+        ">
+
+          <h1 style="text-align:center;">
+            💗 Thank you for your order!
+          </h1>
+
+          <p>
+            Hi ${paymentIntent.metadata.first_name || "there"}!
+          </p>
+
+          <p>
+            Your Lil Things Club order has been confirmed.
+            We're so excited to pack your goodies with love! 🥰
+          </p>
+
+          <div style="
+            background:#fff5f9;
+            border-radius:12px;
+            padding:20px;
+            margin:20px 0;
+          ">
+
+            <h2>Order Details</h2>
+
+            <p>
+              <strong>Order total:</strong>
+              $${(paymentIntent.amount / 100).toFixed(2)}
+            </p>
+
+            <p>
+              <strong>Payment:</strong>
+              Paid 💗
+            </p>
+
+          </div>
+
+          <p>
+            We'll let you know when your order ships!
+          </p>
+
+          <p>
+            Handmade and packed with love to comfort your inner child. 🌷
+          </p>
+
+          <p>
+            — Lil Things Club 💕
+          </p>
+
+        </div>
+      `
+
+    });
+
+    console.log(
+      "📧 Order confirmation email sent:",
+      paymentIntent.receipt_email
+    );
+
+  } catch (emailError) {
+
+    console.error(
+      "❌ Failed to send order confirmation email:",
+      emailError
+    );
+
+  }
+
+}
+
   }
 
 
