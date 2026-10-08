@@ -1561,15 +1561,7 @@ width: 100%;       /* Spans the full width of the container */
 
   padding: 55px 50px 50px;
 
-  background: #fff;
-
-  background-image:
-    radial-gradient(#ffd5f2 10%, transparent 10%),
-    radial-gradient(#ffd5f2 10%, transparent 10%);
-
-  background-size: 39px 35px;
-  background-position: 0 0, -19px -19px;
-
+  background: #fffdf3;
   overflow: hidden;
 
   position: relative;
@@ -1612,7 +1604,7 @@ width: 100%;       /* Spans the full width of the container */
 
   line-height: 1.05;
 
-  color: #ff66c4;
+  color: #5c3f35;
 }
 
 .brand-intro p {
