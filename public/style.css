@@ -375,7 +375,7 @@ background-size: 100px 100px;
 
 .annoment-slide {
   width: 100%;
-  background-color: #FBFF33;
+  background-color: #fff5a5;
   color: #33A9FF;
   overflow: hidden;
   padding: 10px 0;
@@ -839,8 +839,8 @@ width: 100%;       /* Spans the full width of the container */
   width: 100%;
   box-sizing: border-box;
 
-  background: #fff;
-  padding: 70px 0 50px;
+  background: #fffdf3;
+  padding: 95px 0 50px;
 
   overflow: hidden;
 
@@ -1559,7 +1559,7 @@ width: 100%;       /* Spans the full width of the container */
   width: 100%;
   box-sizing: border-box;
 
-  padding: 55px 50px 50px;
+  padding: 85px 50px 50px;
 
   background: #fffdf3;
   overflow: hidden;
@@ -1660,7 +1660,7 @@ width: 100%;       /* Spans the full width of the container */
 
   box-sizing: border-box;
 
-  background: #fff;
+  background: #fffdf3;
 
   border-radius: 25px;
 
@@ -1840,7 +1840,7 @@ width: 100%;       /* Spans the full width of the container */
 
 
 .basic-info{
-  background: #BEFFAB;
+  background: #fff5a5;
   align-items: center;
 	  overflow: visible;
  Padding: 50px 10px 10px; 
@@ -1944,14 +1944,7 @@ color: #666;
 
   padding: 45px 50px;
 
-  background: #A9FF93;
-
-  background-image:
-    radial-gradient(#fff 10%, transparent 10%),
-    radial-gradient(#fff 10%, transparent 10%);
-
-  background-size: 39px 35px;
-  background-position: 0 0, -19px -19px;
+  background: #5cbbfe;
 
   text-align: center;
 
@@ -2129,7 +2122,7 @@ Friends Section
 
 .meet-my-friends {
     background: #fffdf3;
-   padding: 95px 50px 50px;  /* top padding pushes content down */
+   padding: 100px 50px 50px;  /* top padding pushes content down */
   text-align: center;
   padding: 50px 1px 50px;
   overflow: visible;
@@ -2232,7 +2225,7 @@ position: relative;
 /* --- GENERAL FOOTER SECTION --- */
 .new-signup {
 	
-	background: #33A9FF;
+	background: #ffe9f6;
 	background-image: 
     radial-gradient(#fff 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#fff 10%, transparent 10%);
