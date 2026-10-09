@@ -22,6 +22,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color:  #5c3f35; /* Change if needed */
+	background: #fffdf3;
   
 }
 
@@ -114,7 +115,7 @@ font-family: 'Baloo 2', sans-serif;
   margin-right: 20px;
   text-decoration: none;
   font-size: 16px ;
- color: #ff66c4;
+ color: #5c3f35;
   font-weight: 700;
 }
 
@@ -175,7 +176,7 @@ color: #fff;
 .hamburger {
   font-size: 28px;
   background: none;
-  color: #ff66c4;
+  color:  #5c3f35;
   border: none;
   cursor: pointer;
   display: none;
@@ -201,7 +202,7 @@ color: #fff;
   margin: 15px 0;
   font-size: 18px;
   text-decoration: none;
-  color: #ff66c4;
+  color:  #5c3f35;
   
 }
 
@@ -258,7 +259,7 @@ linear-gradient( 72deg, #33A9FF 8.5%, transparent 8.5%) 80px 93px,
 linear-gradient(288deg, #33A9FF 8.5%, transparent 8.5%) -20px 93px,
 linear-gradient(216deg, #33A9FF 7.5%, transparent 7.5%) -20px 73px,
 linear-gradient(144deg, #33A9FF 7.5%, transparent 7.5%) 80px 73px;
-background-color: #fff;
+background-color: #fffdf3;
 background-size: 100px 100px;
 	
 
@@ -302,12 +303,12 @@ background-size: 100px 100px;
 .dropbtn {
 	
 	
-  background: white;
-  border: 2px solid #4da6ff;
+  background: #fffdf3;
+  border: 2px solid #5c3f35;
   border-radius: 30px;
   padding: 10px 22px;
   font-size: 20px;
-  color: #7b4cff;
+  color: #5c3f35;
   cursor: pointer;
   transition: all 0.2s ease;
   
@@ -323,8 +324,8 @@ background-size: 100px 100px;
 .dropdown-content {
   display: none;
   
-   background-color: white ;
-  border: 2px solid #4da6ff;
+   background-color: #fffdf3 ;
+  border: 2px solid #5c3f35;
   border-radius: 20px;
   padding: 10px;
   
@@ -337,7 +338,7 @@ background-size: 100px 100px;
   display: block;
   padding: 10px;
   text-align: center;
-  color: #7b4cff;
+  color: #5c3f35;
   text-decoration: none;
   border-radius: 15px;
   transition: 0.2s;
@@ -457,7 +458,7 @@ background-size: 100px 100px;
    ================================ */
 /* HERO SECTION */
 .hero {
-    background: #fff;
+    background: #fffdf3;
   background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -492,7 +493,7 @@ background-size: 100px 100px;
 
 .hero-text h1 {
   font-size: 50.3px;
-  color: #33A9FF;
+  color: #5c3f35;
   line-height: 1.2;
   font-weight: 800;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
@@ -501,22 +502,22 @@ background-size: 100px 100px;
 .hero-text p {
   margin: 15px 0;
   font-size: 22px;
-  color: #33A9FF;
+  color: #5c3f35;
 }
 
 .hero-btn {
   display: inline-block;
   padding: 12px 24px;
-  border: 2px solid #4aa3df;
+  border: 2px solid #5c3f35;
   border-radius: 25px;
-  color: #4aa3df;
+  color: #5c3f35;
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
 }
 
 .hero-btn:hover {
-  background: #4aa3df;
+  background: #5c3f35;
   color: white;
 }
 
@@ -840,7 +841,7 @@ width: 100%;       /* Spans the full width of the container */
   box-sizing: border-box;
 
   background: #fffdf3;
-  padding: 95px 0 50px;
+  padding: 120px 0 50px;
 
   overflow: hidden;
 
@@ -1230,7 +1231,7 @@ width: 100%;       /* Spans the full width of the container */
   font-size: 50px;
   line-height: 1.1;
 
-  color: #ff66c4;
+  color: #5c3f35;
 
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
 }
@@ -1378,7 +1379,7 @@ width: 100%;       /* Spans the full width of the container */
 
   line-height: 1.25;
 
-  color: #ff66c4;
+  color: #5c3f35;
 }
 
 
@@ -1698,7 +1699,7 @@ width: 100%;       /* Spans the full width of the container */
   .brand-universe {
     display: block;
 
-    padding: 50px 0 45px;
+    padding: 95px 0 45px;
   }
 
   .brand-intro {
@@ -1749,7 +1750,7 @@ width: 100%;       /* Spans the full width of the container */
 @media (max-width: 600px) {
 
   .brand-universe {
-    padding: 40px 0;
+    padding: 95px 0;
   }
 
   .brand-intro {
@@ -1843,7 +1844,7 @@ width: 100%;       /* Spans the full width of the container */
   background: #fff5a5;
   align-items: center;
 	  overflow: visible;
- Padding: 50px 10px 10px; 
+ Padding: 55px 10px 10px; 
   z-index: 200;
 	position: relative;
 }
@@ -1942,7 +1943,7 @@ color: #666;
   width: 100%;
   box-sizing: border-box;
 
-  padding: 45px 50px;
+  padding: 95px 50px;
 
   background: #5cbbfe;
 
@@ -2208,8 +2209,11 @@ position: relative;
 
 
 @media screen and (max-width: 479px) {
+	
 /* start of phone styles */
-
+,meet-my-friends{
+	 padding: 95px 50px 50px;
+}
 
 .meet-my-friends h2 {
   font-size: 35px;
@@ -2236,7 +2240,7 @@ position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  color:  #ff67c4;
+  color:   #5c3f35;
   text-align: left;
 }
 
@@ -2249,8 +2253,8 @@ position: relative;
 }
 
 .left-sector a {
-	color:  #ff67c4;
- -webkit-text-stroke: 0.5px #ff67c4;
+	color:  #5c3f35;
+ -webkit-text-stroke: 0.5px  #5c3f35;
   text-decoration: none;
   font-size: 25px;
   font-weight: 900;
@@ -2269,8 +2273,8 @@ position: relative;
 
 .middle-sector h4 {
   font-size: 30px;
-  color:  #ff67c4;
- -webkit-text-stroke: 0.5px #ff66c4;
+  color:   #5c3f35;
+ -webkit-text-stroke: 0.5px  #5c3f35;
   line-height: 1.4;
   font-weight: 600;
 }
@@ -2284,8 +2288,8 @@ position: relative;
 
 .right-sector h2 {
   font-size: 35px;
-  color: #ff67c4;
- -webkit-text-stroke: 0.5px #ff67c4;
+  color:  #5c3f35;
+ -webkit-text-stroke: 0.5px  #5c3f35;
   margin-bottom: 15px;
 }
 
@@ -2293,7 +2297,7 @@ position: relative;
   width: 80%;
   padding: 10px 14px;
   border-radius: 25px;
-  border: 2px solid #ff66c4;
+  border: 2px solid  #5c3f35;
   background:#ffebf9;
   font-size: 1.1rem;
   margin-bottom: 12px;
@@ -2303,10 +2307,10 @@ position: relative;
   width: 80%;
   padding: 10px 10px;
   border-radius: 25px;
-  border: 2px solid #ff66c4;
+  border: 2px solid  #5c3f35;
   background: #ffebf9; /* bright yellow */
-  color: #Fbff33;
- -webkit-text-stroke: 1.0px #ff66c4;
+  color:  #5c3f35;
+ -webkit-text-stroke: 1.0px  #5c3f35;
   font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
@@ -2318,7 +2322,7 @@ position: relative;
 
 #thanks-message {
   margin-top: 15px;
-  color: #FEFDE5;           /* white text stays visible */
+  color:  #5c3f35;           /* white text stays visible */
   font-weight: bold;
 }
 
@@ -2332,15 +2336,15 @@ position: relative;
 
 .bottom-line h2 {
   font-size: 2rem;
-  color: #ff67c4;
- -webkit-text-stroke: 1.0px #ff66c4;
+  color:  #5c3f35;
+ -webkit-text-stroke: 1.0px  #5c3f35;
   margin-bottom: 15px;
 }
 
 .bottom-line a {
   font-size: 35px;
-  color: #ff67c4;
- -webkit-text-stroke: 1.0px #ff66c4;
+  color:  #5c3f35;
+ -webkit-text-stroke: 1.0px  #5c3f35;
   margin: 0 15px;
 }
 
@@ -2351,13 +2355,13 @@ position: relative;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-color: #ff67c4;
- -webkit-text-stroke: 1.0px #ff66c4;
+color:  #5c3f35;
+ -webkit-text-stroke: 1.0px  #5c3f35;
 }
 
 .footer-links a {
-  color: #ff67c4;
- -webkit-text-stroke: 1.0px #ff66c4;
+  color:  #5c3f35;
+ -webkit-text-stroke: 1.0px  #5c3f35;
   font-weight: 600;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
@@ -2365,7 +2369,7 @@ color: #ff67c4;
 }
 
 .footer-links a:hover {
-  color: #FEFDE5;  /* pink hover */
+  color:  #5c3f35;  /* pink hover */
 }
 
 
@@ -2383,7 +2387,7 @@ color: #ff67c4;
 }
 
 .thank-you p {
-  color: #ff66c4;
+  color:  #5c3f35;
   font-size: 1.6rem;
   font-weight: bold;
   line-height: 1.5;
