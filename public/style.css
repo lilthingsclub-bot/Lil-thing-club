@@ -115,7 +115,7 @@ font-family: 'Baloo 2', sans-serif;
   margin-right: 20px;
   text-decoration: none;
   font-size: 16px ;
- color: #5c3f35;
+ color: #ff66c4;
   font-weight: 700;
 }
 
@@ -176,7 +176,7 @@ color: #fff;
 .hamburger {
   font-size: 28px;
   background: none;
-  color:  #5c3f35;
+  color: #ff66c4;
   border: none;
   cursor: pointer;
   display: none;
@@ -202,7 +202,7 @@ color: #fff;
   margin: 15px 0;
   font-size: 18px;
   text-decoration: none;
-  color:  #5c3f35;
+  color: #ff66c4;
   
 }
 
@@ -2240,7 +2240,7 @@ position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  color:   #5c3f35;
+  color:   #ff66c4;
   text-align: left;
 }
 
@@ -2253,8 +2253,8 @@ position: relative;
 }
 
 .left-sector a {
-	color:  #5c3f35;
- -webkit-text-stroke: 0.5px  #5c3f35;
+	color:  #ff66c4;
+
   text-decoration: none;
   font-size: 25px;
   font-weight: 900;
@@ -2273,8 +2273,8 @@ position: relative;
 
 .middle-sector h4 {
   font-size: 30px;
-  color:   #5c3f35;
- -webkit-text-stroke: 0.5px  #5c3f35;
+  color:  #ff66c4;
+
   line-height: 1.4;
   font-weight: 600;
 }
@@ -2288,8 +2288,8 @@ position: relative;
 
 .right-sector h2 {
   font-size: 35px;
-  color:  #5c3f35;
- -webkit-text-stroke: 0.5px  #5c3f35;
+  color:  #ff66c4;
+
   margin-bottom: 15px;
 }
 
@@ -2297,7 +2297,7 @@ position: relative;
   width: 80%;
   padding: 10px 14px;
   border-radius: 25px;
-  border: 2px solid  #5c3f35;
+  border: 2px solid  #ff66c4;
   background:#ffebf9;
   font-size: 1.1rem;
   margin-bottom: 12px;
@@ -2309,8 +2309,8 @@ position: relative;
   border-radius: 25px;
   border: 2px solid  #5c3f35;
   background: #ffebf9; /* bright yellow */
-  color:  #5c3f35;
- -webkit-text-stroke: 1.0px  #5c3f35;
+  color: #ff66c4;
+ -webkit-text-stroke: 1.0px #ff66c4;
   font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
@@ -2322,7 +2322,7 @@ position: relative;
 
 #thanks-message {
   margin-top: 15px;
-  color:  #5c3f35;           /* white text stays visible */
+  color:  #ff66c4;           /* white text stays visible */
   font-weight: bold;
 }
 
@@ -2336,15 +2336,14 @@ position: relative;
 
 .bottom-line h2 {
   font-size: 2rem;
-  color:  #5c3f35;
- -webkit-text-stroke: 1.0px  #5c3f35;
+  color:  #ff66c4;
   margin-bottom: 15px;
 }
 
 .bottom-line a {
   font-size: 35px;
-  color:  #5c3f35;
- -webkit-text-stroke: 1.0px  #5c3f35;
+  color: #ff66c4;
+ -webkit-text-stroke: 1.0px #ff66c4;
   margin: 0 15px;
 }
 
@@ -2355,12 +2354,12 @@ position: relative;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-color:  #5c3f35;
+color:  #ff66c4;
  -webkit-text-stroke: 1.0px  #5c3f35;
 }
 
 .footer-links a {
-  color:  #5c3f35;
+  color:  #ff66c4;
  -webkit-text-stroke: 1.0px  #5c3f35;
   font-weight: 600;
   text-decoration: none;
@@ -2369,7 +2368,7 @@ color:  #5c3f35;
 }
 
 .footer-links a:hover {
-  color:  #5c3f35;  /* pink hover */
+  color: #ff66c4;  /* pink hover */
 }
 
 
