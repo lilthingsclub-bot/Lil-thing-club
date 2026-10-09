@@ -2304,6 +2304,7 @@ position: relative;
   border-radius: 25px;
   border: 2px solid  #ff66c4;
  -webkit-text-stroke: 1.0px #ff66c4;
+	background: #fffefa;
   font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
@@ -2608,6 +2609,7 @@ Sticker  Products Section
 
 /* Sort wrapper */
 .dropdown1 {
+	  background: #fffefa;
   position: relative;
 }
 
@@ -2618,8 +2620,9 @@ Sticker  Products Section
   gap: 8px;
 
   padding: 10px 20px;
-
+  background: #fffefa;
   color: #ff66c4;
+	
 
   border: 1.5px solid #ff66c4;
   border-radius: 999px;
@@ -2646,7 +2649,7 @@ Sticker  Products Section
   right: 0;
 
   min-width: 180px;
-
+background: #fffefa;
  
   border: 1.5px solid #ff66c4;
   border-radius: 18px;
@@ -2722,7 +2725,7 @@ Sticker  Products Section
 
 
 .sticker-products  {
-  padding: 15px 30px 40px; /* top padding pushes content down */
+  padding: 15px 40px 40px; /* top padding pushes content down */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2733,7 +2736,7 @@ Sticker  Products Section
 .sticker-products h1{
   text-align: center;
   font-size: 70px;
-  color: #5c3f35;
+  color: #ff66c4;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
  margin: 50px auto 502px auto;
 }
@@ -2742,7 +2745,7 @@ Sticker  Products Section
 .sticker-products h2{
   text-align: center;
   font-size: 50px;
-  color: #5c3f35;
+  color: #ff66c4;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
  margin: 0 auto 30px auto;
 }
@@ -2961,11 +2964,11 @@ font-weight:600px;
 
   min-width: 150px;
   padding: 10px 20px;
-
+background: #fffefa;
   border: 1.5px solid #ff66c4;
   border-radius: 999px;
 
-  color: #5c3f35;
+  color: #ff66c4;
 
   font-family: "Nunito", sans-serif;
   font-size: 15px;
@@ -3717,8 +3720,8 @@ line-height: 16px;
   border: 2px solid #ff66c4;
   border-radius: 999px;
 
-  background: #fff;
-  color: #5c3f35;
+  background: #fffefa;
+  color: #ff66c4;
 
   font-family: "Nunito", sans-serif;
   font-size: 15px;
@@ -3735,7 +3738,7 @@ line-height: 16px;
 
 .variant-button:hover:not(:disabled) {
   border-color: #ff66c4;
-  color: #5c3f35 ;
+  color: #ff66c4 ;
   transform: translateY(-2px);
 }
 
@@ -3838,7 +3841,7 @@ line-height: 16px;
   border: none;
   background: transparent;
 
-  color: #5c3f35;
+  color: #ff66c4;
 
   font-family: "Nunito", sans-serif;
   font-size: 22px;
@@ -3856,7 +3859,7 @@ line-height: 16px;
 }
 
 .qty button:disabled {
-  color: #5c3f35;
+  color: #ff66c4;
   cursor: not-allowed;
 }
 
@@ -3867,7 +3870,7 @@ line-height: 16px;
   align-items: center;
   justify-content: center;
 
-  color: #5c3f35;
+  color: #ff66c4;
 
   font-family: "Nunito", sans-serif;
   font-size: 16px;
@@ -3904,8 +3907,8 @@ line-height: 16px;
   border: 2px solid #ff66c4;
   border-radius: 999px;
 
-
-  color: #5c3f35;
+background: #fffefa;
+  color: #ff66c4;
 
   font-family: "Nunito", sans-serif;
   font-size: 16px;
@@ -4231,7 +4234,7 @@ width: 50%;
   
   font-size: 0.9rem;
   margin-bottom: 12px;
- color: #5c3f35;
+ color:  #ff66c4;
 }
 
 
