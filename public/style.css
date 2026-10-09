@@ -506,6 +506,7 @@ background-size: 100px 100px;
   display: inline-block;
   padding: 12px 24px;
   border: 2px solid #ff66c4;
+	color: ##ff66c4;
   border-radius: 25px;
   text-decoration: none;
   font-weight: bold;
@@ -837,7 +838,7 @@ width: 100%;       /* Spans the full width of the container */
   box-sizing: border-box;
 
   background: #fffefa;
-  padding: 120px 0 50px;
+  padding: 95px 0 50px;
 
   overflow: hidden;
 
@@ -888,7 +889,7 @@ width: 100%;       /* Spans the full width of the container */
   font-size: 32px;
   font-weight: 600;
 
-  color: #b5b5b5;
+  color: #ffc4e8;
 
   white-space: nowrap;
 
@@ -1601,7 +1602,7 @@ width: 100%;       /* Spans the full width of the container */
 
   line-height: 1.05;
 
-  color: #5c3f35;
+  color: #ff66c4;
 }
 
 .brand-intro p {
@@ -1613,7 +1614,7 @@ width: 100%;       /* Spans the full width of the container */
 
   line-height: 1.5;
 
-  color: #5c3f35;
+  color: #ff66c4;
 }
 
 
@@ -2235,7 +2236,7 @@ position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  color:   #5c3f35;
+  color:   #ff66c4;
   text-align: left;
 }
 
@@ -2248,7 +2249,7 @@ position: relative;
 }
 
 .left-sector a {
-	color:  #5c3f35;
+	color:  #ff66c4;
 
   text-decoration: none;
   font-size: 25px;
@@ -2268,7 +2269,7 @@ position: relative;
 
 .middle-sector h4 {
   font-size: 30px;
-  color:  #5c3f35;
+  color:  #ff66c4;
 
   line-height: 1.4;
   font-weight: 600;
@@ -2283,7 +2284,7 @@ position: relative;
 
 .right-sector h2 {
   font-size: 35px;
-  color:   #5c3f35;
+  color:   #ff66c4;
 
   margin-bottom: 15px;
 }
@@ -2327,12 +2328,13 @@ position: relative;
 
 .bottom-line h2 {
   font-size: 2rem;
-  
+  color: #ff66c4;
   margin-bottom: 15px;
 }
 
 .bottom-line a {
   font-size: 35px;
+	color: #ff66c4;
  -webkit-text-stroke: 1.0px ;
   margin: 0 15px;
 }
@@ -2344,13 +2346,14 @@ position: relative;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-color: #5c3f35;
- -webkit-text-stroke: 1.0px  #5c3f35;
+color: #ff66c4;
+ -webkit-text-stroke: 1.0px  #ff66c4;
 }
 
 .footer-links a {
-  color: #5c3f35;
- -webkit-text-stroke: 1.0px  #5c3f35;
+  color: #ff66c4;
+ -webkit-text-stroke: 1.0px #ff66c4;
+	background: #ff66c4;
   font-weight: 600;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
@@ -2358,7 +2361,7 @@ color: #5c3f35;
 }
 
 .footer-links a:hover {
-  color: #5c3f35;  /* pink hover */
+  color: #ff66c4;  /* pink hover */
 }
 
 
@@ -2376,7 +2379,7 @@ color: #5c3f35;
 }
 
 .thank-you p {
-  color:  #5c3f35;
+  color: #ff66c4;
   font-size: 1.6rem;
   font-weight: bold;
   line-height: 1.5;
