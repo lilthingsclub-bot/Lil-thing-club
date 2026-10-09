@@ -2527,7 +2527,7 @@ Sticker  Products Section
   padding: 35px 20px;
   box-sizing: border-box;
 
-  background: #fff;
+  background: #fffdf3;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -2615,7 +2615,7 @@ Sticker  Products Section
   width: 100%;
   padding: 18px 50px;
   box-sizing: border-box;
-  background: #fff;
+  background: #fffdf3;
   background-image:
     radial-gradient(#ffd5f2 10%, transparent 10%),
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -2638,7 +2638,7 @@ Sticker  Products Section
 
   padding: 10px 20px;
 
-  background: #fff6fc;
+  background: #fffdf3;
   color: #ff66c4;
 
   border: 1.5px solid #ff66c4;
@@ -2667,7 +2667,7 @@ Sticker  Products Section
 
   min-width: 180px;
 
-  background: #fff;
+  background: #fffdf3;
   border: 1.5px solid #ff66c4;
   border-radius: 18px;
 
@@ -2742,7 +2742,7 @@ Sticker  Products Section
 
 
 .sticker-products  {
-    background: #fff;
+    background: #fffdf3;
    background-image: 
     radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
     radial-gradient(#ffd5f2 10%, transparent 10%);
@@ -2759,7 +2759,7 @@ Sticker  Products Section
 .sticker-products h1{
   text-align: center;
   font-size: 70px;
-  color: #ff66c4;
+  color: #5c3f35;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
  margin: 50px auto 502px auto;
 }
@@ -2768,7 +2768,7 @@ Sticker  Products Section
 .sticker-products h2{
   text-align: center;
   font-size: 50px;
-  color: #ff66c4;
+  color: #5c3f35;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.03);
  margin: 0 auto 30px auto;
 }
@@ -2830,7 +2830,7 @@ font-weight:600px;
 .product-name1 {
   margin: 14px 14px 4px;
 
-  color: #ff66c4;
+  color: #5c3f35;
 
   font-family: "Nunito", sans-serif;
   font-size: 18px;
@@ -2843,7 +2843,7 @@ font-weight:600px;
 .product-price1 {
   margin: 0 14px 13px;
 
-  color: #33a9ff;
+  color: #5c3f35;
 
   font-family: "Nunito", sans-serif;
   font-size: 17px;
@@ -3528,12 +3528,8 @@ margin-top: -20px;
    Product one page 
    ========================= */
 .page-one {
- background: #fff;
-   background-image: 
-    radial-gradient(#ffd5f2 10%, transparent 10%), /* Creates a single dot */
-    radial-gradient(#ffd5f2 10%, transparent 10%);
-   background-size: 39px 35px; /* Sets the spacing between dots */
-   Background-position:0 0, -19px -19px; /* Adjusts the position to create a grid */
+ background: #fffdf3;
+  
 }
 
 
