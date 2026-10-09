@@ -2250,7 +2250,7 @@ position: relative;
 
 .left-sector a {
 	color:  #ff67c4;
- -webkit-text-stroke: 0.5px #ff66c4;
+ -webkit-text-stroke: 0.5px #ff67c4;
   text-decoration: none;
   font-size: 25px;
   font-weight: 900;
@@ -2284,8 +2284,8 @@ position: relative;
 
 .right-sector h2 {
   font-size: 35px;
-  color: #Fbff33;
- -webkit-text-stroke: 0.5px #ff66c4;
+  color: #ff67c4;
+ -webkit-text-stroke: 0.5px #ff67c4;
   margin-bottom: 15px;
 }
 
@@ -2327,19 +2327,19 @@ position: relative;
   width: 100%;
   text-align: center;
   margin-top: 40px;
-	backgroun: #Fbff33;
+	
 }
 
 .bottom-line h2 {
   font-size: 2rem;
-  color: #Fbff33;
+  color: #ff67c4;
  -webkit-text-stroke: 1.0px #ff66c4;
   margin-bottom: 15px;
 }
 
 .bottom-line a {
   font-size: 35px;
-  color: #Fbff33;
+  color: #ff67c4;
  -webkit-text-stroke: 1.0px #ff66c4;
   margin: 0 15px;
 }
@@ -2351,12 +2351,12 @@ position: relative;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-color: #Fbff33;
+color: #ff67c4;
  -webkit-text-stroke: 1.0px #ff66c4;
 }
 
 .footer-links a {
-  color: #Fbff33;
+  color: #ff67c4;
  -webkit-text-stroke: 1.0px #ff66c4;
   font-weight: 600;
   text-decoration: none;
