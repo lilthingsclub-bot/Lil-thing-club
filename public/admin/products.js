@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "all", "new", "featured", "popular",
     "sticker", "vinyl-sticker", "sticker-sheet", "sticker-pack",
     "postcard", "art-print", "stationery", "momo-pad", "washi-tape",
-    "crochet", "crochet-keychain", "phone-charm", "surprise-pack"
+    "crochet", "crochet-keychain", "phone-charm", "surprise-pack", "fall"
   ];
 
   function slugify(value) {
