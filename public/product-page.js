@@ -1078,7 +1078,7 @@ function setupProductSharing(product) {
     `${productName} 💕 Shop at Lil Things Club — cute treasures made with love.`;
 
   const pinterestUrl = new URL(
-    "https://www.pinterest.com/pin/create/button/"
+    "https://www.pinterest.com/pin-creation-tool/"
   );
 
   pinterestUrl.searchParams.set("url", shareUrl.toString());
