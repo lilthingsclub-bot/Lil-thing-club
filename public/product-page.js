@@ -1006,6 +1006,9 @@ if (
 }
 
 
+
+
+
 // ======================================================
 // CART COUNT
 // ======================================================
@@ -1042,6 +1045,93 @@ function updateCartCount() {
   cartCount.textContent =
     total;
 
+}
+
+// ====================================================
+// SHARE PRODUCT
+// ====================================================
+
+
+
+
+function setupProductSharing(product) {
+  const pinterestLink = document.getElementById("sharePinterest");
+  const copyButton = document.getElementById("copyProductLink");
+  const moreButton = document.getElementById("shareProductMore");
+  const status = document.getElementById("shareProductStatus");
+
+  if (!pinterestLink || !copyButton || !moreButton || !status) return;
+
+  const productUrl = new URL(window.location.pathname, window.location.origin);
+  productUrl.searchParams.set("slug", product.slug);
+  const shareUrl = productUrl.toString();
+
+  const productName = product.name || "Cute finds from Lil Things Club";
+  const imageUrl = Array.isArray(product.images) && product.images.length
+    ? new URL(product.images[0], window.location.href).toString()
+    : "";
+
+  const description =
+    `${productName} from Lil Things Club 💕 Handmade and packed with love to comfort your inner child.`;
+
+  const pinterestUrl = new URL(
+    "https://www.pinterest.com/pin/create/button/"
+  );
+
+  pinterestUrl.searchParams.set("url", shareUrl);
+
+  if (imageUrl) {
+    pinterestUrl.searchParams.set("media", imageUrl);
+  }
+
+  pinterestUrl.searchParams.set("description", description);
+  pinterestLink.href = pinterestUrl.toString();
+
+  copyButton.addEventListener("click", async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const input = document.createElement("textarea");
+        input.value = shareUrl;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+
+        const copied = document.execCommand("copy");
+        input.remove();
+
+        if (!copied) throw new Error("Copy failed");
+      }
+
+      status.textContent =
+        "Product link copied! Share it with a friend 💌";
+    } catch (error) {
+      status.textContent =
+        "Copy didn't work. Please copy this link: " + shareUrl;
+    }
+  });
+
+  moreButton.addEventListener("click", async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: productName,
+          text: description,
+          url: shareUrl
+        });
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          status.textContent =
+            "Try Pinterest or Copy link to share this product.";
+        }
+      }
+    } else {
+      status.textContent =
+        "Use Pinterest or Copy link to share this product.";
+    }
+  });
 }
 
 
